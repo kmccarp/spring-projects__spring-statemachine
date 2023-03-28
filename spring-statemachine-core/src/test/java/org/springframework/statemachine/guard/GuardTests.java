@@ -207,23 +207,15 @@ public class GuardTests {
 
 		@Bean
 		public Guard<TestStates, TestEvents> testGuard1() {
-			return new Guard<TestStates, TestEvents>() {
-
-				@Override
-				public boolean evaluate(StateContext<TestStates, TestEvents> context) {
-					throw new RuntimeException();
-				}
+			return context -> {
+				throw new RuntimeException();
 			};
 		}
 
 		@Bean
 		public Guard<TestStates, TestEvents> testGuard2() {
-			return new Guard<TestStates, TestEvents>() {
-
-				@Override
-				public boolean evaluate(StateContext<TestStates, TestEvents> context) {
-					throw new Error();
-				}
+			return context -> {
+				throw new Error();
 			};
 		}
 	}

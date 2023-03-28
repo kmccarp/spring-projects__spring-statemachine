@@ -96,11 +96,7 @@ public abstract class StateMachineUtils {
 			return false;
 		}
 		PseudoStateKind kind = pseudoState.getKind();
-		if (kind == PseudoStateKind.INITIAL || kind == PseudoStateKind.END) {
-			return false;
-		} else {
-			return true;
-		}
+		return !(kind == PseudoStateKind.INITIAL || kind == PseudoStateKind.END);
 	}
 
 	/**
@@ -122,14 +118,10 @@ public abstract class StateMachineUtils {
 			return false;
 		}
 		PseudoStateKind kind = pseudoState.getKind();
-		if (kind == PseudoStateKind.CHOICE || kind == PseudoStateKind.JUNCTION || kind == PseudoStateKind.ENTRY
+		return kind == PseudoStateKind.CHOICE || kind == PseudoStateKind.JUNCTION || kind == PseudoStateKind.ENTRY
 				|| kind == PseudoStateKind.EXIT || kind == PseudoStateKind.HISTORY_DEEP
 				|| kind == PseudoStateKind.HISTORY_SHALLOW || kind == PseudoStateKind.FORK
-				|| kind == PseudoStateKind.JOIN) {
-			return true;
-		} else {
-			return false;
-		}
+				|| kind == PseudoStateKind.JOIN;
 	}
 
 	public static <S, E> boolean isPseudoState(State<S, E> state, PseudoStateKind kind) {
@@ -141,7 +133,7 @@ public abstract class StateMachineUtils {
 	}
 
 	public static <S> Collection<String> toStringCollection(Collection<S> collection) {
-		Collection<String> c = new ArrayList<String>();
+		Collection<String> c = new ArrayList<>();
 		for (S item : collection) {
 			c.add(item.toString());
 		}
@@ -149,7 +141,7 @@ public abstract class StateMachineUtils {
 	}
 
 	public static Collection<String> toStringCollection(Object object) {
-		Collection<String> c = new ArrayList<String>();
+		Collection<String> c = new ArrayList<>();
 		if (ObjectUtils.isArray(object)) {
 			for (Object o : ObjectUtils.toObjectArray(object)) {
 				c.add(o.toString());
@@ -161,7 +153,7 @@ public abstract class StateMachineUtils {
 	}
 
 	public static boolean containsAtleastOneEqualString(Collection<String> left, String right) {
-		Collection<String> r = new ArrayList<String>(1);
+		Collection<String> r = new ArrayList<>(1);
 		r.add(right);
 		return containsAtleastOneEqualString(left, r);
 	}

@@ -44,13 +44,13 @@ public class DistributedStateMachineTests extends AbstractStateMachineTests {
 		StateMachine<String, String> machine2 =
 				context.getBean("sm2", StateMachine.class);
 
-		StateMachineEnsemble<String, String> ensemble = new InMemoryStateMachineEnsemble<String, String>();
+		StateMachineEnsemble<String, String> ensemble = new InMemoryStateMachineEnsemble<>();
 
 		DistributedStateMachine<String, String> machine1s =
-				new DistributedStateMachine<String, String>(ensemble, machine1);
+				new DistributedStateMachine<>(ensemble, machine1);
 
 		DistributedStateMachine<String, String> machine2s =
-				new DistributedStateMachine<String, String>(ensemble, machine2);
+				new DistributedStateMachine<>(ensemble, machine2);
 
 		machine1s.afterPropertiesSet();
 		machine2s.afterPropertiesSet();
@@ -77,10 +77,10 @@ public class DistributedStateMachineTests extends AbstractStateMachineTests {
 		StateMachine<String, String> machine2 =
 				context.getBean("sm2", StateMachine.class);
 
-		StateMachineEnsemble<String, String> ensemble = new InMemoryStateMachineEnsemble<String, String>();
+		StateMachineEnsemble<String, String> ensemble = new InMemoryStateMachineEnsemble<>();
 
 		DistributedStateMachine<String, String> machine1s =
-				new DistributedStateMachine<String, String>(ensemble, machine1);
+				new DistributedStateMachine<>(ensemble, machine1);
 		machine1s.afterPropertiesSet();
 		machine1s.start();
 
@@ -88,7 +88,7 @@ public class DistributedStateMachineTests extends AbstractStateMachineTests {
 		assertThat(machine1.getState().getIds()).containsOnly("S1");
 
 		DistributedStateMachine<String, String> machine2s =
-				new DistributedStateMachine<String, String>(ensemble, machine2);
+				new DistributedStateMachine<>(ensemble, machine2);
 		machine2s.afterPropertiesSet();
 		machine2s.start();
 

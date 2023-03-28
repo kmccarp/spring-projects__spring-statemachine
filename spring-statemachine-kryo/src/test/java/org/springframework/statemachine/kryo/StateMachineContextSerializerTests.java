@@ -52,11 +52,11 @@ public class StateMachineContextSerializerTests {
 		StateMachineContextSerializer<String, String> serializer = new StateMachineContextSerializer<>();
 		kryo.addDefaultSerializer(StateMachineContext.class, serializer);
 
-		StateMachineContext<String, String> child = new DefaultStateMachineContext<String, String>(new ArrayList<>(), "child", "event1",
+		StateMachineContext<String, String> child = new DefaultStateMachineContext<>(new ArrayList<>(), "child", "event1",
 				new HashMap<String, Object>(), new DefaultExtendedState());
 		List<StateMachineContext<String, String>> childs = new ArrayList<>();
 		childs.add(child);
-		StateMachineContext<String, String> root = new DefaultStateMachineContext<String, String>(childs, "root", "event2",
+		StateMachineContext<String, String> root = new DefaultStateMachineContext<>(childs, "root", "event2",
 				new HashMap<String, Object>(), new DefaultExtendedState());
 
 		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
@@ -80,11 +80,11 @@ public class StateMachineContextSerializerTests {
 		StateMachineContextSerializerV1<String, String> serializerV1 = new StateMachineContextSerializerV1<>();
 		kryoFrom.addDefaultSerializer(StateMachineContext.class, serializerV1);
 
-		StateMachineContext<String, String> childFrom = new DefaultStateMachineContext<String, String>("child", "event1",
+		StateMachineContext<String, String> childFrom = new DefaultStateMachineContext<>("child", "event1",
 				new HashMap<String, Object>(), new DefaultExtendedState());
 		List<StateMachineContext<String, String>> childsFrom = new ArrayList<>();
 		childsFrom.add(childFrom);
-		StateMachineContext<String, String> rootFrom = new DefaultStateMachineContext<String, String>("root", "event2",
+		StateMachineContext<String, String> rootFrom = new DefaultStateMachineContext<>("root", "event2",
 				new HashMap<String, Object>(), new DefaultExtendedState());
 
 		ByteArrayOutputStream outStreamFrom = new ByteArrayOutputStream();
@@ -127,7 +127,7 @@ public class StateMachineContextSerializerTests {
 			List<StateMachineContext<S, E>> childs = (List<StateMachineContext<S, E>>) kryo.readClassAndObject(input);
 			Map<S, S> historyStates = (Map<S, S>) kryo.readClassAndObject(input);
 			String id = (String) kryo.readClassAndObject(input);
-			return new DefaultStateMachineContext<S, E>(childs, state, event, eventHeaders,
+			return new DefaultStateMachineContext<>(childs, state, event, eventHeaders,
 					new DefaultExtendedState(variables), historyStates, id);
 		}
 	}

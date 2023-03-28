@@ -78,22 +78,12 @@ public class DocsUmlSampleTests1 {
 		}
 
 		public Action<String, String> myAction() {
-			return new Action<String, String>() {
-
-				@Override
-				public void execute(StateContext<String, String> context) {
-				}
+			return context -> {
 			};
 		}
 
 		public Guard<String, String> myGuard() {
-			return new Guard<String, String>() {
-
-				@Override
-				public boolean evaluate(StateContext<String, String> context) {
-					return false;
-				}
-			};
+			return context -> false;
 		}
 	}
 // end::snippetB[]

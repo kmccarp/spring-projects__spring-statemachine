@@ -57,7 +57,7 @@ public class StateContextTests extends AbstractStateMachineTests {
 		doStartAndAssert(machine);
 		assertThat(machine.getState().getIds()).containsOnly(States.S0, States.S1, States.S11);
 		assertThat(listener.contexts).hasSize(19);
-		assertThat(listener.contexts.stream().map(c -> c.getStage()).collect(Collectors.toList())).containsExactly(
+		assertThat(listener.contexts.stream().map(StateContext::getStage).collect(Collectors.toList())).containsExactly(
 			Arrays.asList(
 				Stage.TRANSITION_START,
 				Stage.EXTENDED_STATE_CHANGED,
@@ -161,7 +161,7 @@ public class StateContextTests extends AbstractStateMachineTests {
 		doSendEventAndConsumeAll(machine, Events.J);
 
 		// all nested machines sends these
-		assertThat(listener.contexts.stream().map(c -> c.getStage()).collect(Collectors.toList())).containsExactly(
+		assertThat(listener.contexts.stream().map(StateContext::getStage).collect(Collectors.toList())).containsExactly(
 			Arrays.asList(
 				Stage.EVENT_NOT_ACCEPTED,
 				Stage.EVENT_NOT_ACCEPTED,
@@ -311,11 +311,11 @@ public class StateContextTests extends AbstractStateMachineTests {
 
 	}
 
-	public static enum States {
+	public enum States {
 		S0, S1, S11, S12, S2, S21, S211, S212
 	}
 
-	public static enum Events {
+	public enum Events {
 		A, B, C, D, E, F, G, H, I, J
 	}
 

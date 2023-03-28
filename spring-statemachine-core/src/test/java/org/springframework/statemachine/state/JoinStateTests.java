@@ -628,8 +628,8 @@ public class JoinStateTests extends AbstractStateMachineTests {
 
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
-		volatile int stateChangedCount = 0;
-		final List<Transition<TestStates, TestEvents>> transitions = new ArrayList<Transition<TestStates,TestEvents>>();
+		volatile int stateChangedCount;
+		final List<Transition<TestStates, TestEvents>> transitions = new ArrayList<>();
 
 		@Override
 		public void stateChanged(State<TestStates, TestEvents> from, State<TestStates, TestEvents> to) {

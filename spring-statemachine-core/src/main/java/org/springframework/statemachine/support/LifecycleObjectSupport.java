@@ -44,8 +44,8 @@ public abstract class LifecycleObjectSupport
 	private static final Log log = LogFactory.getLog(LifecycleObjectSupport.class);
 
 	// fields for lifecycle
-	private volatile boolean autoStartup = false;
-	private volatile int phase = 0;
+	private volatile boolean autoStartup;
+	private volatile int phase;
 
 	// to access bean factory
 	private volatile BeanFactory beanFactory;
@@ -57,10 +57,10 @@ public abstract class LifecycleObjectSupport
 
 	public LifecycleObjectSupport() {
 		this.reactiveLifecycleManager = new ReactiveLifecycleManager(
-				() -> doPreStartReactively(),
-				() -> doPreStopReactively(),
-				() -> doPostStartReactively(),
-				() -> doPostStopReactively()
+				this::doPreStartReactively,
+				this::doPreStopReactively,
+				this::doPostStartReactively,
+				this::doPostStopReactively
 				);
 		this.reactiveLifecycleManager.setOwner(this);
 	}

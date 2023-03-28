@@ -162,7 +162,7 @@ public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends
 		ExtendedState extendedState = new DefaultExtendedState();
 		extendedState.getVariables().putAll(extendedStateVariablesFunction.apply(stateMachine));
 
-		List<StateMachineContext<S, E>> childs = new ArrayList<StateMachineContext<S, E>>();
+		List<StateMachineContext<S, E>> childs = new ArrayList<>();
 		List<String> childRefs = new ArrayList<>();
 		S id = null;
 		if (state.isSubmachineState()) {
@@ -182,7 +182,7 @@ public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends
 		}
 
 		// building history state mappings
-		Map<S, S> historyStates = new HashMap<S, S>();
+		Map<S, S> historyStates = new HashMap<>();
 		PseudoState<S, E> historyState = ((AbstractStateMachine<S, E>) stateMachine).getHistoryState();
 		if (historyState != null) {
 			historyStates.put(null, ((HistoryPseudoState<S, E>)historyState).getState().getId());
@@ -202,7 +202,7 @@ public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends
 		}
 		E event = message != null ? message.getPayload() : null;
 		Map<String, Object> eventHeaders = message != null ? message.getHeaders() : null;
-		return new DefaultStateMachineContext<S, E>(childRefs, childs, id, event, eventHeaders, extendedState,
+		return new DefaultStateMachineContext<>(childRefs, childs, id, event, eventHeaders, extendedState,
 				historyStates, stateMachine.getId());
 	}
 

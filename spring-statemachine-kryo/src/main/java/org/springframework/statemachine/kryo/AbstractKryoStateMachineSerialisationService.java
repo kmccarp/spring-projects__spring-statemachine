@@ -28,7 +28,6 @@ import org.springframework.util.ClassUtils;
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
 import com.esotericsoftware.kryo.io.Output;
-import com.esotericsoftware.kryo.pool.KryoCallback;
 import com.esotericsoftware.kryo.pool.KryoFactory;
 import com.esotericsoftware.kryo.pool.KryoPool;
 
@@ -45,18 +44,14 @@ public abstract class AbstractKryoStateMachineSerialisationService<S, E> impleme
 	protected final KryoPool pool;
 
 	protected AbstractKryoStateMachineSerialisationService() {
-		KryoFactory factory = new KryoFactory() {
-
-			@Override
-			public Kryo create() {
-				Kryo kryo = new Kryo();
-				// kryo is really getting trouble checking things if class loaders
-				// doesn't match. for now just use below trick before we try
-				// to go fully on beans and get a bean class loader.
-				kryo.setClassLoader(ClassUtils.getDefaultClassLoader());
-				configureKryoInstance(kryo);
-				return kryo;
-			}
+		KryoFactory factory = () -> {
+			Kryo kryo = new Kryo();
+			// kryo is really getting trouble checking things if class loaders
+			// doesn't match. for now just use below trick before we try
+			// to go fully on beans and get a bean class loader.
+			kryo.setClassLoader(ClassUtils.getDefaultClassLoader());
+			configureKryoInstance(kryo);
+			return kryo;
 		};
 		this.pool = new KryoPool.Builder(factory).softReferences().build();
 	}
@@ -111,14 +106,10 @@ public abstract class AbstractKryoStateMachineSerialisationService<S, E> impleme
 	private void encode(final Object object, OutputStream outputStream) throws IOException {
 		Assert.notNull(object, "cannot encode a null object");
 		Assert.notNull(outputStream, "'outputSteam' cannot be null");
-		final Output output = (outputStream instanceof Output ? (Output) outputStream : new Output(outputStream));
-		this.pool.run(new KryoCallback<Void>() {
-
-			@Override
-			public Void execute(Kryo kryo) {
-				doEncode(kryo, object, output);
-				return null;
-			}
+		final Output output = outputStream instanceof Output ? (Output) outputStream : new Output(outputStream);
+		this.pool.run(kryo -> {
+			doEncode(kryo, object, output);
+			return null;
 		});
 		output.close();
 	}
@@ -137,16 +128,10 @@ public abstract class AbstractKryoStateMachineSerialisationService<S, E> impleme
 	private <T> T decode(InputStream inputStream, final Class<T> type) throws IOException {
 		Assert.notNull(inputStream, "'inputStream' cannot be null");
 		Assert.notNull(type, "'type' cannot be null");
-		final Input input = (inputStream instanceof Input ? (Input) inputStream : new Input(inputStream));
+		final Input input = inputStream instanceof Input ? (Input) inputStream : new Input(inputStream);
 		T result = null;
 		try {
-			result = this.pool.run(new KryoCallback<T>(){
-
-				@Override
-				public T execute(Kryo kryo) {
-					return doDecode(kryo, input, type);
-				}
-			});
+			result = this.pool.run(kryo -> doDecode(kryo, input, type));
 		}
 		finally {
 			input.close();

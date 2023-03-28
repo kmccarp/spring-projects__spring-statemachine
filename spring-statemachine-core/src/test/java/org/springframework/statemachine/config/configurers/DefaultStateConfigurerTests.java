@@ -37,7 +37,7 @@ public class DefaultStateConfigurerTests {
 
 	@Test
 	public void testInitialWithoutState() throws Exception {
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.initial(TestStates.SI);
 		configurer.configure(builder);
@@ -48,7 +48,7 @@ public class DefaultStateConfigurerTests {
 
 	@Test
 	public void testInitialWithState() throws Exception {
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.initial(TestStates.SI);
 		configurer.state(TestStates.SI);
@@ -60,7 +60,7 @@ public class DefaultStateConfigurerTests {
 
 	@Test
 	public void testSameStateShouldResultOneState() throws Exception {
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.state(TestStates.SI);
 		configurer.state(TestStates.SI);
@@ -72,7 +72,7 @@ public class DefaultStateConfigurerTests {
 
 	@Test
 	public void testParentSet() throws Exception {
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.parent(TestStates.SI);
 		configurer.state(TestStates.S1);
@@ -87,7 +87,7 @@ public class DefaultStateConfigurerTests {
 	public void testActionsInitialFirst() throws Exception {
 		Collection<Action<TestStates, TestEvents>> exitActions = Arrays.asList(testExitAction());
 
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.initial(TestStates.S1);
 		configurer.state(TestStates.S1, null, exitActions);
@@ -105,7 +105,7 @@ public class DefaultStateConfigurerTests {
 	public void testActionsJustState() throws Exception {
 		Collection<Action<TestStates, TestEvents>> entryActions = Arrays.asList(testEntryAction());
 
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.state(TestStates.S2, entryActions, null);
 		configurer.configure(builder);
@@ -122,7 +122,7 @@ public class DefaultStateConfigurerTests {
 	public void testStateActions() throws Exception {
 		Collection<Action<TestStates, TestEvents>> stateActions = Arrays.asList(testStateAction());
 
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.state(TestStates.S2, stateActions);
 		configurer.configure(builder);
@@ -137,7 +137,7 @@ public class DefaultStateConfigurerTests {
 
 	@Test
 	public void testStateActionFunctions() throws Exception {
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.stateDoFunction(TestStates.S2, context -> Mono.empty());
 		configurer.stateEntryFunction(TestStates.S2, context -> Mono.empty());
@@ -157,7 +157,7 @@ public class DefaultStateConfigurerTests {
 
 	@Test
 	public void testEndStateNoState() throws Exception {
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.end(TestStates.SF);
 		configurer.configure(builder);
@@ -168,7 +168,7 @@ public class DefaultStateConfigurerTests {
 
 	@Test
 	public void testEndStateAsState() throws Exception {
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.state(TestStates.SF);
 		configurer.end(TestStates.SF);
@@ -180,7 +180,7 @@ public class DefaultStateConfigurerTests {
 
 	@Test
 	public void testChoiceStateNoState() throws Exception {
-		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<TestStates, TestEvents>();
+		DefaultStateConfigurer<TestStates, TestEvents> configurer = new DefaultStateConfigurer<>();
 		TestStateMachineStateBuilder builder = new TestStateMachineStateBuilder();
 		configurer.choice(TestStates.S1);
 		configurer.configure(builder);

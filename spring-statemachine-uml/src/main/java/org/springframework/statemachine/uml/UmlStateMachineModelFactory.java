@@ -142,6 +142,6 @@ public class UmlStateMachineModelFactory extends AbstractStateMachineModelFactor
 		}
 
 		// we don't set configurationData here, so assume null
-		return new DefaultStateMachineModel<String, String>(null, dataHolder.getStatesData(), dataHolder.getTransitionsData());
+		return new DefaultStateMachineModel<>(null, dataHolder.getStatesData(), dataHolder.getTransitionsData());
 	}
 }

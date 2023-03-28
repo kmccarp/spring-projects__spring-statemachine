@@ -42,7 +42,7 @@ public class MongoDbPersistingStateMachineInterceptor<S, E, T> extends AbstractP
 	 */
 	public MongoDbPersistingStateMachineInterceptor(MongoDbStateMachineRepository mongodbStateMachineRepository) {
 		Assert.notNull(mongodbStateMachineRepository, "'mongodbStateMachineRepository' must be set");
-		this.persist = new MongoDbRepositoryStateMachinePersist<S, E>(mongodbStateMachineRepository);
+		this.persist = new MongoDbRepositoryStateMachinePersist<>(mongodbStateMachineRepository);
 	}
 
 	/**

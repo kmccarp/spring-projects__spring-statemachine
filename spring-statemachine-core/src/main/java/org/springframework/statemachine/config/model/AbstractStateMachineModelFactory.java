@@ -45,7 +45,7 @@ public abstract class AbstractStateMachineModelFactory<S, E>
 	private BeanFactory beanFactory;
 	private ResourceLoader resourceLoader = new DefaultResourceLoader();
 	private StateMachineComponentResolver<S, E> stateMachineComponentResolver;
-	private final DefaultStateMachineComponentResolver<S, E> internalResolver = new DefaultStateMachineComponentResolver<S, E>();
+	private final DefaultStateMachineComponentResolver<S, E> internalResolver = new DefaultStateMachineComponentResolver<>();
 
 	/**
 	 * Instantiates a new abstract state machine model factory.

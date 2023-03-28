@@ -373,14 +373,14 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		CountDownLatch onTransitionStartLatch = new CountDownLatch(1);
 		CountDownLatch onStateMachineStartLatch = new CountDownLatch(1);
 		CountDownLatch onStateMachineStopLatch = new CountDownLatch(1);
-		int onTransitionFromS1ToS2Count = 0;
-		int onTransitionCount = 0;
-		int onStateChangedFromS1ToS2Count = 0;
-		int onStateChangedCount = 0;
-		int onTransitionEndCount = 0;
-		int onTransitionStartCount = 0;
-		int onStateMachineStartCount = 0;
-		int onStateMachineStopCount = 0;
+		int onTransitionFromS1ToS2Count;
+		int onTransitionCount;
+		int onStateChangedFromS1ToS2Count;
+		int onStateChangedCount;
+		int onTransitionEndCount;
+		int onTransitionStartCount;
+		int onStateMachineStartCount;
+		int onStateMachineStopCount;
 
 		@OnTransition(source = "S1", target = "S2")
 		public void onTransitionFromS1ToS2() {
@@ -517,8 +517,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 
 		CountDownLatch onStateEntryLatch = new CountDownLatch(1);
 		CountDownLatch onStateExitLatch = new CountDownLatch(1);
-		int onStateEntryCount = 0;
-		int onStateExitCount = 0;
+		int onStateEntryCount;
+		int onStateExitCount;
 
 		@OnStateEntry
 		public void onStateEntry() {
@@ -548,11 +548,11 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		CountDownLatch onExtendedStateChanged2Latch = new CountDownLatch(1);
 		CountDownLatch onExtendedStateChangedKeyV1Latch = new CountDownLatch(1);
 		CountDownLatch onExtendedStateChangedKeyV2Latch = new CountDownLatch(1);
-		int onExtendedStateChanged1Count = 0;
-		int onExtendedStateChanged2Count = 0;
-		Object onExtendedStateChanged2Value = null;
-		int onExtendedStateChangedKeyV1Count = 0;
-		int onExtendedStateChangedKeyV2Count = 0;
+		int onExtendedStateChanged1Count;
+		int onExtendedStateChanged2Count;
+		Object onExtendedStateChanged2Value;
+		int onExtendedStateChangedKeyV1Count;
+		int onExtendedStateChangedKeyV2Count;
 
 		@OnExtendedStateChanged
 		public void onExtendedStateChanged1() {
@@ -706,8 +706,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 	static class Bean11 {
 		CountDownLatch OnTransition1Latch = new CountDownLatch(1);
 		CountDownLatch OnTransition2Latch = new CountDownLatch(1);
-		volatile int count1 = 0;
-		volatile int count2 = 0;
+		volatile int count1;
+		volatile int count2;
 
 		@OnTransition(target = "S1")
 		public void OnTransition1() {
@@ -884,14 +884,10 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 
 		@Bean
 		public Action<TestStates, TestEvents> extendedStateAction() {
-			return new Action<TestStates, TestEvents>() {
-
-				@Override
-				public void execute(StateContext<TestStates, TestEvents> context) {
-					String e1 = context.getMessageHeaders().get("V1", String.class);
-					if (e1 != null) {
-						context.getExtendedState().getVariables().put("V1", e1);
-					}
+			return context -> {
+				String e1 = context.getMessageHeaders().get("V1", String.class);
+				if (e1 != null) {
+					context.getExtendedState().getVariables().put("V1", e1);
 				}
 			};
 		}

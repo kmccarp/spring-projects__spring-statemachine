@@ -82,7 +82,7 @@ public class MethodAnnotationWithDefaultsWithFactoryTests extends AbstractStateM
 	@WithStateMachine
 	static class Bean1 {
 
-		int counter = 0;
+		int counter;
 
 		@OnStateChanged (source = "S1", target = "S2")
 		public void onStateChanged() {

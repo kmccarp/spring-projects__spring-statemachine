@@ -72,8 +72,8 @@ public class ComplexAnnotationConfigurationTests {
 		String fileName1 = iterator.next().getFilename();
 		String fileName2 = iterator.next().getFilename();
 		String[] fileNames = new String[2];
-		fileNames[0] = fileName1.equals("complexResourceA1") ? fileName1 : fileName2;
-		fileNames[1] = fileName2.equals("complexResourceA2") ? fileName2 : fileName1;
+		fileNames[0] = "complexResourceA1".equals(fileName1) ? fileName1 : fileName2;
+		fileNames[1] = "complexResourceA2".equals(fileName2) ? fileName2 : fileName1;
 		assertThat(fileNames[0]).isEqualTo("complexResourceA1");
 		assertThat(fileNames[1]).isEqualTo("complexResourceA2");
 
