@@ -92,18 +92,18 @@ public class TransitionSecurityExpressionTests extends AbstractStateMachineTests
 	public static class Config {
 	}
 
-	public static enum States {
-		S0, S1;
+	public enum States {
+		S0, S1
 	}
 
-	public static enum Events {
-		A;
+	public enum Events {
+		A
 	}
 
 	private static class TestListener extends StateMachineListenerAdapter<States, Events> {
 
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 
 		@Override
 		public void stateChanged(State<States, Events> from, State<States, Events> to) {
@@ -119,7 +119,7 @@ public class TransitionSecurityExpressionTests extends AbstractStateMachineTests
 	}
 
 	private static StateMachine<States, Events> buildMachine(TestListener listener, String attributes, ComparisonType match, String expression) throws Exception {
-		Builder<States, Events> builder = StateMachineBuilder.<States, Events>builder();
+		Builder<States, Events> builder = StateMachineBuilder.builder();
 
 		builder.configureConfiguration()
 			.withConfiguration()

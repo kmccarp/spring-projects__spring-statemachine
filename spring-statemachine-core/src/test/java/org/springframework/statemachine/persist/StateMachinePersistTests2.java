@@ -70,7 +70,7 @@ public class StateMachinePersistTests2 extends AbstractStateMachineTests {
 		context.register(Config1.class);
 		context.refresh();
 		StateMachinePersist<String, String, String> stateMachinePersist = new InMemoryStateMachinePersist();
-		StateMachinePersister<String, String, String> persister = new DefaultStateMachinePersister<String, String, String>(
+		StateMachinePersister<String, String, String> persister = new DefaultStateMachinePersister<>(
 				stateMachinePersist);
 
 		StateMachineFactory<String, String> factory = resolveFactory("LOG_RECORD", context);

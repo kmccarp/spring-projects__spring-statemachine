@@ -189,7 +189,7 @@ public class ContextEventTests extends AbstractStateMachineTests {
 	static class StateMachineApplicationEventListener implements ApplicationListener<StateMachineEvent> {
 
 		volatile CountDownLatch latch = new CountDownLatch(1);
-		volatile int count = 0;
+		volatile int count;
 
 	    @Override
 	    public void onApplicationEvent(StateMachineEvent event) {

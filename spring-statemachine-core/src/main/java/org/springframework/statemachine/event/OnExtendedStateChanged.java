@@ -24,6 +24,8 @@ package org.springframework.statemachine.event;
 @SuppressWarnings("serial")
 public class OnExtendedStateChanged extends StateMachineEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final Object key;
 	private final Object value;
 

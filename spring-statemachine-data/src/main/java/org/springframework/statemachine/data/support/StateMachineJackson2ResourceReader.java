@@ -91,7 +91,7 @@ public class StateMachineJackson2ResourceReader implements ResourceReader {
 		objectReader = mapper.readerFor(BaseRepositoryEntity[].class);
 
 		if (node.isArray()) {
-			List<Object> result = new ArrayList<Object>();
+			List<Object> result = new ArrayList<>();
 			BaseRepositoryEntity[] entitys = objectReader.readValue(node);
 			result.addAll(Arrays.asList(entitys));
 			return result;

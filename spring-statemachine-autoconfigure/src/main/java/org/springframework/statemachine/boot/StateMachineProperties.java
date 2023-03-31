@@ -40,7 +40,7 @@ public class StateMachineProperties {
 	 * Config props for "spring.statemachine.monitor".
 	 */
 	public static class StateMachineMonitoringProperties {
-		private boolean enabled = false;
+		private boolean enabled;
 
 		public boolean isEnabled() {
 			return enabled;

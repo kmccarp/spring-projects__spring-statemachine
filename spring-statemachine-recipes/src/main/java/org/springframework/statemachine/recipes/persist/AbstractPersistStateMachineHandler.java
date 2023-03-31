@@ -64,7 +64,7 @@ public abstract class AbstractPersistStateMachineHandler<S, E> extends Lifecycle
         stateMachine.stopReactively().block();
         List<StateMachineAccess<S, E>> withAllRegions = stateMachine.getStateMachineAccessor().withAllRegions();
         for (StateMachineAccess<S, E> a : withAllRegions) {
-            a.resetStateMachineReactively(new DefaultStateMachineContext<S, E>(state, null, null, null)).block();
+            a.resetStateMachineReactively(new DefaultStateMachineContext<>(state, null, null, null)).block();
         }
         stateMachine.startReactively().block();
         return stateMachine.sendEvent(event);
@@ -84,7 +84,7 @@ public abstract class AbstractPersistStateMachineHandler<S, E> extends Lifecycle
             return Mono.from(stateMachine.stopReactively())
                     .thenEmpty(
                             Flux.fromIterable(stateMachine.getStateMachineAccessor().withAllRegions())
-                                    .flatMap(region -> region.resetStateMachineReactively(new DefaultStateMachineContext<S, E>(state, null, null, null)))
+                                    .flatMap(region -> region.resetStateMachineReactively(new DefaultStateMachineContext<>(state, null, null, null)))
                     )
                     .then(stateMachine.startReactively())
                     .thenMany(stateMachine.sendEvent(Mono.just(event)))

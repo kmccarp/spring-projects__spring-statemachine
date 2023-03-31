@@ -277,7 +277,7 @@ public class StateMachineErrorTests extends AbstractStateMachineTests {
 	static class TestStateMachineListener extends StateMachineListenerAdapter<TestStates, TestEvents> {
 
 		CountDownLatch latch = new CountDownLatch(1);
-		int count = 0;
+		int count;
 
 		@Override
 		public void stateMachineError(StateMachine<TestStates, TestEvents> stateMachine, Exception exception) {
@@ -289,7 +289,7 @@ public class StateMachineErrorTests extends AbstractStateMachineTests {
 	static class TestApplicationEventListener1 implements ApplicationListener<StateMachineEvent> {
 
 		CountDownLatch latch = new CountDownLatch(1);
-		int count = 0;
+		int count;
 
 		@Override
 		public void onApplicationEvent(StateMachineEvent event) {
@@ -303,7 +303,7 @@ public class StateMachineErrorTests extends AbstractStateMachineTests {
 	static class TestApplicationEventListener2 implements ApplicationListener<OnStateMachineError> {
 
 		CountDownLatch latch = new CountDownLatch(1);
-		int count = 0;
+		int count;
 
 		@Override
 		public void onApplicationEvent(OnStateMachineError event) {
@@ -494,7 +494,7 @@ public class StateMachineErrorTests extends AbstractStateMachineTests {
 				.withStates()
 					.initial("SI")
 					.state("S1")
-					.stateEntry("S2", (context) -> {
+					.stateEntry("S2", context -> {
 						throw new RuntimeException("error");
 					});
 		}
@@ -543,7 +543,7 @@ public class StateMachineErrorTests extends AbstractStateMachineTests {
 			states
 				.withStates()
 					.initial("SI")
-					.stateEntry("S1", (context) -> {
+					.stateEntry("S1", context -> {
 						throw new RuntimeException("error");
 					});
 		}

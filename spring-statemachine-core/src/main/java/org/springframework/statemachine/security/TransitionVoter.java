@@ -44,12 +44,8 @@ public class TransitionVoter<S, E> implements AccessDecisionVoter<Transition<S, 
 
 	@Override
 	public boolean supports(ConfigAttribute attribute) {
-		if ((attribute.getAttribute() != null) && (attribute.getAttribute().startsWith(getTransitionSourcePrefix())
-				|| attribute.getAttribute().startsWith(getTransitionTargetPrefix()))) {
-			return true;
-		} else {
-			return false;
-		}
+		return (attribute.getAttribute() != null) && (attribute.getAttribute().startsWith(getTransitionSourcePrefix())
+				|| attribute.getAttribute().startsWith(getTransitionTargetPrefix()));
 	}
 
 	@Override

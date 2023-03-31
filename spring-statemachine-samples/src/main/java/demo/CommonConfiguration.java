@@ -34,7 +34,7 @@ import org.springframework.statemachine.transition.TransitionKind;
 @Configuration
 public class CommonConfiguration {
 
-	private final static Log log = LogFactory.getLog(CommonConfiguration.class);
+	private static final Log log = LogFactory.getLog(CommonConfiguration.class);
 
 	@Configuration
 	static class ApplicationConfig {

@@ -112,39 +112,30 @@ public class StateMachineMonitorTests extends AbstractStateMachineTests {
 
 		@Bean
 		public Action<String, String> taction() {
-			return new Action<String, String>() {
-				@Override
-				public void execute(StateContext<String, String> context) {
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-					}
+			return context -> {
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
 				}
 			};
 		}
 
 		@Bean
 		public Action<String, String> enaction() {
-			return new Action<String, String>() {
-				@Override
-				public void execute(StateContext<String, String> context) {
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-					}
+			return context -> {
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
 				}
 			};
 		}
 
 		@Bean
 		public Action<String, String> exaction() {
-			return new Action<String, String>() {
-				@Override
-				public void execute(StateContext<String, String> context) {
-					try {
-						Thread.sleep(10);
-					} catch (InterruptedException e) {
-					}
+			return context -> {
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
 				}
 			};
 		}

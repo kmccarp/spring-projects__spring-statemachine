@@ -46,11 +46,8 @@ public final class Actions {
 	 * @return an empty (Noop) Action.
 	 */
 	public static <S, E> Action<S, E> emptyAction() {
-		return new Action<S, E>() {
-			@Override
-			public void execute(final StateContext<S, E> context) {
-				// Nothing to do;
-			}
+		return context -> {
+			// Nothing to do;
 		};
 	}
 
@@ -64,23 +61,20 @@ public final class Actions {
 	 * @return the error calling action
 	 */
 	public static <S, E> Action<S, E> errorCallingAction(final Action<S, E> action, final Action<S, E> errorAction) {
-		return new Action<S, E>() {
-			@Override
-			public void execute(final StateContext<S, E> context) {
+		return context -> {
+			try {
+				action.execute(context);
+			}
+			catch (Exception exception) {
+				// notify something wrong is happening in actions execution.
 				try {
-					action.execute(context);
+					errorAction.execute(new DefaultStateContext<>(context.getStage(), context.getMessage(), context.getMessageHeaders(),
+							context.getExtendedState(), context.getTransition(), context.getStateMachine(), context.getSource(),
+							context.getTarget(), context.getSources(), context.getTargets(), exception));
+				} catch (Exception e) {
+					// not interested
 				}
-				catch (Exception exception) {
-					// notify something wrong is happening in actions execution.
-					try {
-						errorAction.execute(new DefaultStateContext<>(context.getStage(), context.getMessage(), context.getMessageHeaders(),
-								context.getExtendedState(), context.getTransition(), context.getStateMachine(), context.getSource(),
-								context.getTarget(), context.getSources(), context.getTargets(), exception));
-					} catch (Exception e) {
-						// not interested
-					}
-					throw exception;
-				}
+				throw exception;
 			}
 		};
 	}
@@ -112,7 +106,7 @@ public final class Actions {
 	 */
 	public static <S, E> Collection<Function<StateContext<S, E>, Mono<Void>>> from(Collection<Action<S, E>> actions) {
 		if (actions != null) {
-			return actions.stream().map(action -> from(action)).collect(Collectors.toList());
+			return actions.stream().map(Actions::from).collect(Collectors.toList());
 		} else {
 			return Collections.emptyList();
 		}

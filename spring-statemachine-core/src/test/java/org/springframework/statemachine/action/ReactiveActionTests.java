@@ -125,7 +125,7 @@ public class ReactiveActionTests extends AbstractStateMachineTests {
 
 	private static class TestCountAction implements ReactiveAction<TestStates, TestEvents> {
 
-		int count = 0;
+		int count;
 		CountDownLatch latch = new CountDownLatch(1);
 
 		@Override

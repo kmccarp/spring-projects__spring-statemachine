@@ -37,9 +37,9 @@ import reactor.core.publisher.Mono;
 @Controller
 public class StateMachineController {
 
-	public final static String MACHINE_ID_1 = "datajpapersist1";
-	public final static String MACHINE_ID_2 = "datajpapersist2";
-	private final static String[] MACHINES = new String[] { MACHINE_ID_1, MACHINE_ID_2 };
+	public static final String MACHINE_ID_1 = "datajpapersist1";
+	public static final String MACHINE_ID_2 = "datajpapersist2";
+	private static final String[] MACHINES = new String[] { MACHINE_ID_1, MACHINE_ID_2 };
 
 	private final StateMachineLogListener listener = new StateMachineLogListener();
 	private StateMachine<States, Events> currentStateMachine;
