@@ -72,10 +72,10 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		context.refresh();
 		StateMachine<States, Events> machine = resolveMachine(context);
 
-		Map<Object, Object> variables = new HashMap<Object, Object>();
+		Map<Object, Object> variables = new HashMap<>();
 		variables.put("foo", 1);
 		ExtendedState extendedState = new DefaultExtendedState(variables);
-		DefaultStateMachineContext<States,Events> stateMachineContext = new DefaultStateMachineContext<States, Events>(States.S12, Events.I, null, extendedState);
+		DefaultStateMachineContext<States,Events> stateMachineContext = new DefaultStateMachineContext<>(States.S12, Events.I, null, extendedState);
 
 		machine.getStateMachineAccessor().doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
 
@@ -90,10 +90,10 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		context.refresh();
 		StateMachine<States, Events> machine = resolveMachine(context);
 
-		Map<Object, Object> variables = new HashMap<Object, Object>();
+		Map<Object, Object> variables = new HashMap<>();
 		variables.put("foo", 1);
 		ExtendedState extendedState = new DefaultExtendedState(variables);
-		DefaultStateMachineContext<States,Events> stateMachineContext = new DefaultStateMachineContext<States, Events>(States.S211, Events.C, null, extendedState);
+		DefaultStateMachineContext<States,Events> stateMachineContext = new DefaultStateMachineContext<>(States.S211, Events.C, null, extendedState);
 
 		machine.getStateMachineAccessor().doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
 
@@ -108,10 +108,10 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		context.refresh();
 		StateMachine<States, Events> machine = resolveMachine(context);
 
-		Map<Object, Object> variables = new HashMap<Object, Object>();
+		Map<Object, Object> variables = new HashMap<>();
 		variables.put("foo", 1);
 		ExtendedState extendedState = new DefaultExtendedState(variables);
-		DefaultStateMachineContext<States,Events> stateMachineContext = new DefaultStateMachineContext<States, Events>(States.S2, Events.C, null, extendedState);
+		DefaultStateMachineContext<States,Events> stateMachineContext = new DefaultStateMachineContext<>(States.S2, Events.C, null, extendedState);
 
 		machine.getStateMachineAccessor().doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
 
@@ -127,16 +127,16 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		StateMachine<TestStates, TestEvents> machine = resolveMachine(context);
 
 		DefaultStateMachineContext<TestStates, TestEvents> stateMachineContext1 =
-				new DefaultStateMachineContext<TestStates, TestEvents>(TestStates.S21, TestEvents.E2, null, null);
+				new DefaultStateMachineContext<>(TestStates.S21, TestEvents.E2, null, null);
 		DefaultStateMachineContext<TestStates, TestEvents> stateMachineContext2 =
-				new DefaultStateMachineContext<TestStates, TestEvents>(TestStates.S31, TestEvents.E3, null, null);
+				new DefaultStateMachineContext<>(TestStates.S31, TestEvents.E3, null, null);
 
-		List<StateMachineContext<TestStates, TestEvents>> childs = new ArrayList<StateMachineContext<TestStates,TestEvents>>();
+		List<StateMachineContext<TestStates, TestEvents>> childs = new ArrayList<>();
 		childs.add(stateMachineContext1);
 		childs.add(stateMachineContext2);
 
 		DefaultStateMachineContext<TestStates, TestEvents> stateMachineContext =
-				new DefaultStateMachineContext<TestStates, TestEvents>(childs, TestStates.S2, TestEvents.E1, null, null);
+				new DefaultStateMachineContext<>(childs, TestStates.S2, TestEvents.E1, null, null);
 
 		machine.getStateMachineAccessor().doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
 
@@ -151,16 +151,16 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		StateMachine<TestStates, TestEvents> machine = resolveMachine(context);
 
 		DefaultStateMachineContext<TestStates, TestEvents> stateMachineContext1 =
-				new DefaultStateMachineContext<TestStates, TestEvents>(TestStates.S21, null, null, null);
+				new DefaultStateMachineContext<>(TestStates.S21, null, null, null);
 		DefaultStateMachineContext<TestStates, TestEvents> stateMachineContext2 =
-				new DefaultStateMachineContext<TestStates, TestEvents>(TestStates.S31, null, null, null);
+				new DefaultStateMachineContext<>(TestStates.S31, null, null, null);
 
-		List<StateMachineContext<TestStates, TestEvents>> childs = new ArrayList<StateMachineContext<TestStates,TestEvents>>();
+		List<StateMachineContext<TestStates, TestEvents>> childs = new ArrayList<>();
 		childs.add(stateMachineContext1);
 		childs.add(stateMachineContext2);
 
 		DefaultStateMachineContext<TestStates, TestEvents> stateMachineContext =
-				new DefaultStateMachineContext<TestStates, TestEvents>(childs, TestStates.S2, null, null, null);
+				new DefaultStateMachineContext<>(childs, TestStates.S2, null, null, null);
 
 		machine.getStateMachineAccessor().doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
 
@@ -179,10 +179,10 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		assertThat((Integer)machine.getExtendedState().getVariables().get("count")).isEqualTo(1);
 
 		doStopAndAssert(machine);
-		Map<Object, Object> variables = new HashMap<Object, Object>();
+		Map<Object, Object> variables = new HashMap<>();
 		variables.putAll(machine.getExtendedState().getVariables());
 		ExtendedState extendedState = new DefaultExtendedState(variables);
-		DefaultStateMachineContext<States,Events> stateMachineContext = new DefaultStateMachineContext<States, Events>(States.S0, null, null, extendedState);
+		DefaultStateMachineContext<States,Events> stateMachineContext = new DefaultStateMachineContext<>(States.S0, null, null, extendedState);
 
 		machine.getStateMachineAccessor().doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
 
@@ -226,7 +226,7 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		assertThat(machine.getState().getIds()).containsOnly(States.S0, States.S1, States.S12);
 
 		doStopAndAssert(machine);
-		DefaultStateMachineContext<States, Events> stateMachineContext = new DefaultStateMachineContext<States, Events>(
+		DefaultStateMachineContext<States, Events> stateMachineContext = new DefaultStateMachineContext<>(
 				States.S11, null, null, null);
 		machine.getStateMachineAccessor()
 				.doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
@@ -244,7 +244,7 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		StateMachineFactory<States, Events> factory = resolveFactory(context);
 		StateMachine<States, Events> machine = factory.getStateMachine();
 
-		DefaultStateMachineContext<States, Events> stateMachineContext = new DefaultStateMachineContext<States, Events>(States.S1, null,
+		DefaultStateMachineContext<States, Events> stateMachineContext = new DefaultStateMachineContext<>(States.S1, null,
 				null, null);
 		machine.getStateMachineAccessor().doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
 
@@ -285,10 +285,10 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		assertThat(listener.count2).isEqualTo(1);
 
 		doStopAndAssert(machine);
-		Map<Object, Object> variables = new HashMap<Object, Object>();
+		Map<Object, Object> variables = new HashMap<>();
 		variables.putAll(machine.getExtendedState().getVariables());
 		ExtendedState extendedState = new DefaultExtendedState(variables);
-		DefaultStateMachineContext<States,Events> stateMachineContext = new DefaultStateMachineContext<States, Events>(States.S0, null, null, extendedState);
+		DefaultStateMachineContext<States,Events> stateMachineContext = new DefaultStateMachineContext<>(States.S0, null, null, extendedState);
 
 		machine.getStateMachineAccessor().doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
 		doStartAndAssert(machine);
@@ -318,7 +318,7 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 
 		StateMachine<MyState, MyEvent> machine = resolveMachine(context);
 
-		DefaultStateMachineContext<MyState, MyEvent> stateMachineContext = new DefaultStateMachineContext<MyState, MyEvent>(
+		DefaultStateMachineContext<MyState, MyEvent> stateMachineContext = new DefaultStateMachineContext<>(
 				SubState.SUB_NEXT, null, null, null);
 
 		machine.getStateMachineAccessor().doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
@@ -334,7 +334,7 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 
 		StateMachine<MyState, MyEvent> machine = resolveMachine(context);
 
-		DefaultStateMachineContext<MyState, MyEvent> stateMachineContext = new DefaultStateMachineContext<MyState, MyEvent>(
+		DefaultStateMachineContext<MyState, MyEvent> stateMachineContext = new DefaultStateMachineContext<>(
 				SuperState.INITIAL, null, null, null);
 
 		machine.getStateMachineAccessor().doWithAllRegions(function -> function.resetStateMachineReactively(stateMachineContext).block());
@@ -496,16 +496,12 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 
 		@Bean
 		public Action<States, Events> updateAction() {
-			return new Action<States, Events>() {
-
-				@Override
-				public void execute(StateContext<States, Events> context) {
-					Integer count = context.getExtendedState().get("count", Integer.class);
-					if (count == null) {
-						context.getExtendedState().getVariables().put("count", 1);
-					} else {
-						context.getExtendedState().getVariables().put("count", (count + 1));
-					}
+			return context -> {
+				Integer count = context.getExtendedState().get("count", Integer.class);
+				if (count == null) {
+					context.getExtendedState().getVariables().put("count", 1);
+				} else {
+					context.getExtendedState().getVariables().put("count", (count + 1));
 				}
 			};
 		}
@@ -590,32 +586,24 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 
 		@Bean
 		public Action<States, Events> updateAction1() {
-			return new Action<States, Events>() {
-
-				@Override
-				public void execute(StateContext<States, Events> context) {
-					Integer count = context.getExtendedState().get("count1", Integer.class);
-					if (count == null) {
-						context.getExtendedState().getVariables().put("count1", 1);
-					} else {
-						context.getExtendedState().getVariables().put("count1", (count + 1));
-					}
+			return context -> {
+				Integer count = context.getExtendedState().get("count1", Integer.class);
+				if (count == null) {
+					context.getExtendedState().getVariables().put("count1", 1);
+				} else {
+					context.getExtendedState().getVariables().put("count1", (count + 1));
 				}
 			};
 		}
 
 		@Bean
 		public Action<States, Events> updateAction2() {
-			return new Action<States, Events>() {
-
-				@Override
-				public void execute(StateContext<States, Events> context) {
-					Integer count = context.getExtendedState().get("count2", Integer.class);
-					if (count == null) {
-						context.getExtendedState().getVariables().put("count2", 1);
-					} else {
-						context.getExtendedState().getVariables().put("count2", (count + 1));
-					}
+			return context -> {
+				Integer count = context.getExtendedState().get("count2", Integer.class);
+				if (count == null) {
+					context.getExtendedState().getVariables().put("count2", 1);
+				} else {
+					context.getExtendedState().getVariables().put("count2", (count + 1));
 				}
 			};
 		}
@@ -636,11 +624,11 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		}
 	}
 
-	public static enum States {
+	public enum States {
 		S0, S1, S11, S12, S2, S21, S211, S212
 	}
 
-	public static enum Events {
+	public enum Events {
 		A, B, C, D, E, F, G, H, I
 	}
 
@@ -769,20 +757,20 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 	public enum SubState implements MyState {
 		SUB_INITIAL,
 		SUB_NEXT,
-		SUB_END;
+		SUB_END
 	}
 
 	public enum SuperState implements MyState {
 		INITIAL,
 		PARENT,
-		END;
+		END
 	}
 
 	public interface MyState {
 	}
 
 	public enum MyEvent {
-		GO;
+		GO
 	}
 
 	@Test
@@ -792,7 +780,7 @@ public class StateMachineResetTests extends AbstractStateMachineTests {
 		StateMachine<TestStates, TestEvents> machine = resolveMachine(context);
 
 		DefaultStateMachineContext<TestStates, TestEvents> stateMachineContext =
-				new DefaultStateMachineContext<TestStates, TestEvents>(TestStates.S1, null, null, null);
+				new DefaultStateMachineContext<>(TestStates.S1, null, null, null);
 
 		Stream<Mono<Void>> monos = machine.getStateMachineAccessor().withAllRegions().stream()
 				.map(a -> a.resetStateMachineReactively(stateMachineContext));

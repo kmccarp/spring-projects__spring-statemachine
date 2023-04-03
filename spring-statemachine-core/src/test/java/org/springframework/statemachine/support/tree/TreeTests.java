@@ -22,7 +22,7 @@ public class TreeTests {
 
 	@Test
 	public void testTree1() {
-		Tree<String> tree = new Tree<String>();
+		Tree<String> tree = new Tree<>();
 		tree.add("S", "S", null);
 		tree.add("S1", "S1", "S");
 		tree.add("S2", "S2", "S");
@@ -45,7 +45,7 @@ public class TreeTests {
 
 	@Test
 	public void testTree2() {
-		Tree<String> tree = new Tree<String>();
+		Tree<String> tree = new Tree<>();
 		tree.add("S2", "S2", "S");
 		tree.add("S13", "S13", "S1");
 		tree.add("S11", "S11", "S1");
@@ -68,7 +68,7 @@ public class TreeTests {
 
 	@Test
 	public void testTree3() {
-		Tree<String> tree = new Tree<String>();
+		Tree<String> tree = new Tree<>();
 		tree.add("S1", "S1", null);
 		tree.add("S2", "S2", null);
 

@@ -61,7 +61,7 @@ public class RunnableAction implements Action<String, String> {
 			return;
 		}
 		StopWatch watch = new StopWatch();
-		String logId = (id == null ? "" : (" id=" + id));
+		String logId = id == null ? "" : (" id=" + id);
 		log.info("Executing runnable" + logId);
 		if (log.isDebugEnabled()) {
 			watch.start();

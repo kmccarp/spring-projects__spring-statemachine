@@ -550,8 +550,8 @@ public class EventDeferTests extends AbstractStateMachineTests {
 		volatile CountDownLatch stateMachineStartedLatch = new CountDownLatch(1);
 		volatile CountDownLatch readyStateEnteredLatch = new CountDownLatch(1);
 		volatile CountDownLatch sub3readyStateEnteredLatch = new CountDownLatch(1);
-		volatile int readyStateEnteredCount = 0;
-		volatile int sub3readyStateEnteredCount = 0;
+		volatile int readyStateEnteredCount;
+		volatile int sub3readyStateEnteredCount;
 
 		@Override
 		public void stateChanged(State<String, String> from, State<String, String> to) {
@@ -560,10 +560,10 @@ public class EventDeferTests extends AbstractStateMachineTests {
 
 		@Override
 		public void stateEntered(State<String, String> state) {
-			if (state.getId().equals("READY")) {
+			if ("READY".equals(state.getId())) {
 				readyStateEnteredCount++;
 				readyStateEnteredLatch.countDown();
-			} else if (state.getId().equals("SUB3READY")) {
+			} else if ("SUB3READY".equals(state.getId())) {
 				sub3readyStateEnteredCount++;
 				sub3readyStateEnteredLatch.countDown();
 			}

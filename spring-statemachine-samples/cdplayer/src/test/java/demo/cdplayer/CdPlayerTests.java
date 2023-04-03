@@ -322,11 +322,11 @@ public class CdPlayerTests {
 		volatile CountDownLatch stateExitedLatch = new CountDownLatch(0);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
 		volatile CountDownLatch transitionTimerLatch = new CountDownLatch(0);
-		volatile int stateChangedCount = 0;
-		volatile int transitionCount = 0;
-		volatile int transitionTimerCount = 0;
-		List<State<States, Events>> statesEntered = new ArrayList<State<States,Events>>();
-		List<State<States, Events>> statesExited = new ArrayList<State<States,Events>>();
+		volatile int stateChangedCount;
+		volatile int transitionCount;
+		volatile int transitionTimerCount;
+		List<State<States, Events>> statesEntered = new ArrayList<>();
+		List<State<States, Events>> statesExited = new ArrayList<>();
 
 		@Override
 		public void stateMachineStarted(StateMachine<States, Events> stateMachine) {

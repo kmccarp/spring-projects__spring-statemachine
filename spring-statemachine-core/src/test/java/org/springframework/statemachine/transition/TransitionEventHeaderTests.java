@@ -435,7 +435,7 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 
 	private static class EventCheckGuard implements Guard<TestStates, TestEvents> {
 
-		boolean ret = false;
+		boolean ret;
 		StateContext<TestStates, TestEvents> context;
 
 		public EventCheckGuard(boolean ret) {
@@ -463,7 +463,7 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 
 		volatile CountDownLatch stateMachineStartedLatch = new CountDownLatch(1);
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 
 		@Override
 		public void stateMachineStarted(StateMachine<TestStates, TestEvents> stateMachine) {

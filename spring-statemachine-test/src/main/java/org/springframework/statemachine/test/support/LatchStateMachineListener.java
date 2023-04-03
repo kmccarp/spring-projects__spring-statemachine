@@ -50,16 +50,16 @@ public class LatchStateMachineListener<S, E> extends StateMachineListenerAdapter
 	private volatile CountDownLatch stateMachineStoppedLatch = new CountDownLatch(1);
 	private volatile CountDownLatch extendedStateChangedLatch = new CountDownLatch(1);
 
-	private final List<StateChangedWrapper<S, E>> stateChanged = new ArrayList<StateChangedWrapper<S, E>>();
-	private final List<State<S, E>> stateEntered = new ArrayList<State<S, E>>();
-	private final List<State<S, E>> stateExited = new ArrayList<State<S, E>>();
-	private final List<Message<E>> eventNotAccepted = new ArrayList<Message<E>>();
-	private final List<Transition<S, E>> transition = new ArrayList<Transition<S, E>>();
-	private final List<Transition<S, E>> transitionStarted = new ArrayList<Transition<S, E>>();
-	private final List<Transition<S, E>> transitionEnded = new ArrayList<Transition<S, E>>();
-	private final List<StateMachine<S, E>> stateMachineStarted = new ArrayList<StateMachine<S, E>>();
-	private final List<StateMachine<S, E>> stateMachineStopped = new ArrayList<StateMachine<S, E>>();
-	private final List<ExtendedStateChangedWrapper> extendedStateChanged = new ArrayList<ExtendedStateChangedWrapper>();
+	private final List<StateChangedWrapper<S, E>> stateChanged = new ArrayList<>();
+	private final List<State<S, E>> stateEntered = new ArrayList<>();
+	private final List<State<S, E>> stateExited = new ArrayList<>();
+	private final List<Message<E>> eventNotAccepted = new ArrayList<>();
+	private final List<Transition<S, E>> transition = new ArrayList<>();
+	private final List<Transition<S, E>> transitionStarted = new ArrayList<>();
+	private final List<Transition<S, E>> transitionEnded = new ArrayList<>();
+	private final List<StateMachine<S, E>> stateMachineStarted = new ArrayList<>();
+	private final List<StateMachine<S, E>> stateMachineStopped = new ArrayList<>();
+	private final List<ExtendedStateChangedWrapper> extendedStateChanged = new ArrayList<>();
 
 	@Override
 	public void stateChanged(State<S, E> from, State<S, E> to) {

@@ -143,15 +143,11 @@ public class Application  {
 //tag::snippetAC[]
 		@Bean
 		public Guard<States, Events> tasksChoiceGuard() {
-			return new Guard<States, Events>() {
-
-				@Override
-				public boolean evaluate(StateContext<States, Events> context) {
-					Map<Object, Object> variables = context.getExtendedState().getVariables();
-					return !(ObjectUtils.nullSafeEquals(variables.get("T1"), true)
-							&& ObjectUtils.nullSafeEquals(variables.get("T2"), true)
-							&& ObjectUtils.nullSafeEquals(variables.get("T3"), true));
-				}
+			return context -> {
+				Map<Object, Object> variables = context.getExtendedState().getVariables();
+				return !(ObjectUtils.nullSafeEquals(variables.get("T1"), true)
+			&& ObjectUtils.nullSafeEquals(variables.get("T2"), true)
+			&& ObjectUtils.nullSafeEquals(variables.get("T3"), true));
 			};
 		}
 //end::snippetAC[]
@@ -159,43 +155,35 @@ public class Application  {
 //tag::snippetAD[]
 		@Bean
 		public Action<States, Events> automaticAction() {
-			return new Action<States, Events>() {
-
-				@Override
-				public void execute(StateContext<States, Events> context) {
-					Map<Object, Object> variables = context.getExtendedState().getVariables();
-					if (ObjectUtils.nullSafeEquals(variables.get("T1"), true)
-							&& ObjectUtils.nullSafeEquals(variables.get("T2"), true)
-							&& ObjectUtils.nullSafeEquals(variables.get("T3"), true)) {
-						context.getStateMachine()
-							.sendEvent(Mono.just(MessageBuilder
-								.withPayload(Events.CONTINUE).build()))
-							.subscribe();
-					} else {
-						context.getStateMachine()
-							.sendEvent(Mono.just(MessageBuilder
-								.withPayload(Events.FALLBACK).build()))
-							.subscribe();
-					}
+			return context -> {
+				Map<Object, Object> variables = context.getExtendedState().getVariables();
+				if (ObjectUtils.nullSafeEquals(variables.get("T1"), true)
+			&& ObjectUtils.nullSafeEquals(variables.get("T2"), true)
+			&& ObjectUtils.nullSafeEquals(variables.get("T3"), true)) {
+					context.getStateMachine()
+				.sendEvent(Mono.just(MessageBuilder
+		.withPayload(Events.CONTINUE).build()))
+				.subscribe();
+				} else {
+					context.getStateMachine()
+				.sendEvent(Mono.just(MessageBuilder
+		.withPayload(Events.FALLBACK).build()))
+				.subscribe();
 				}
 			};
 		}
 
 		@Bean
 		public Action<States, Events> fixAction() {
-			return new Action<States, Events>() {
-
-				@Override
-				public void execute(StateContext<States, Events> context) {
-					Map<Object, Object> variables = context.getExtendedState().getVariables();
-					variables.put("T1", true);
-					variables.put("T2", true);
-					variables.put("T3", true);
-					context.getStateMachine()
-						.sendEvent(Mono.just(MessageBuilder
-							.withPayload(Events.CONTINUE).build()))
-						.subscribe();
-				}
+			return context -> {
+				Map<Object, Object> variables = context.getExtendedState().getVariables();
+				variables.put("T1", true);
+				variables.put("T2", true);
+				variables.put("T3", true);
+				context.getStateMachine()
+			.sendEvent(Mono.just(MessageBuilder
+	.withPayload(Events.CONTINUE).build()))
+			.subscribe();
 			};
 		}
 //end::snippetAD[]
@@ -217,7 +205,7 @@ public class Application  {
 
 //tag::snippetC[]
 	public enum Events {
-	    RUN, FALLBACK, CONTINUE, FIX;
+	    RUN, FALLBACK, CONTINUE, FIX
 	}
 //end::snippetC[]
 

@@ -28,7 +28,7 @@ import org.springframework.statemachine.config.model.StateMachineModelFactory;
  */
 public class ModelData<S, E> {
 
-	private StateMachineModelFactory<S, E> factory;
+	private final StateMachineModelFactory<S, E> factory;
 
 	/**
 	 * Instantiates a new model data.

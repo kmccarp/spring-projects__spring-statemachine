@@ -86,14 +86,10 @@ public class DocsTasksSampleTests {
 
 // tag::snippetAA[]
 	private Runnable sleepRunnable() {
-		return new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-				}
+		return () -> {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
 			}
 		};
 	}

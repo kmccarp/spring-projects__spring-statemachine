@@ -440,7 +440,7 @@ public class CompletionEventTests extends AbstractStateMachineTests {
 
 	private static class TestCountAction implements Action<String, String> {
 
-		int count = 0;
+		int count;
 		StateContext<String, String> context;
 		CountDownLatch latch = new CountDownLatch(1);
 

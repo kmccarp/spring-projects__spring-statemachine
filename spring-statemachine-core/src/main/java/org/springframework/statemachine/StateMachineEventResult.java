@@ -108,7 +108,7 @@ public interface StateMachineEventResult<S, E> {
 		private final Region<S, E> region;
 		private final Message<E> message;
 		private final ResultType resultType;
-		private Mono<Void> complete;
+		private final Mono<Void> complete;
 
 		DefaultStateMachineEventResult(Region<S, E> region, Message<E> message, ResultType resultType,
 				Mono<Void> complete) {

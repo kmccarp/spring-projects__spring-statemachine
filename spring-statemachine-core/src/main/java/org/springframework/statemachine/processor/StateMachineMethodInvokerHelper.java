@@ -115,7 +115,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 	}
 
 	public T process(StateMachineRuntime<S, E> stateMachineRuntime) throws Exception {
-		ParametersWrapper<S, E> wrapper = new ParametersWrapper<S, E>(stateMachineRuntime.getStateContext());
+		ParametersWrapper<S, E> wrapper = new ParametersWrapper<>(stateMachineRuntime.getStateContext());
 		return processInternal(wrapper);
 	}
 
@@ -171,7 +171,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 			this.handlerMethod = null;
 			this.handlerMethods = handlerMethods;
 			this.handlerMessageMethods = handlerMessageMethods;
-			this.handlerMethodsList = new LinkedList<Map<Class<?>, HandlerMethod>>();
+			this.handlerMethodsList = new LinkedList<>();
 
 			// TODO Consider to use global option to determine a precedence of
 			// methods
@@ -189,9 +189,9 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 	private void setDisplayString(Object targetObject, Object targetMethod) {
 		StringBuilder sb = new StringBuilder(targetObject.getClass().getName());
 		if (targetMethod instanceof Method) {
-			sb.append("." + ((Method) targetMethod).getName());
+			sb.append(".").append(((Method) targetMethod).getName());
 		} else if (targetMethod instanceof String) {
-			sb.append("." + targetMethod);
+			sb.append(".").append(targetMethod);
 		}
 		this.displayString = sb.toString() + "]";
 	}
@@ -261,10 +261,10 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 	private Map<String, Map<Class<?>, HandlerMethod>> findHandlerMethodsForTarget(final Object targetObject,
 			final Class<? extends Annotation> annotationType, final String methodName, final boolean requiresReply) {
 
-		Map<String, Map<Class<?>, HandlerMethod>> handlerMethods = new HashMap<String, Map<Class<?>, HandlerMethod>>();
+		Map<String, Map<Class<?>, HandlerMethod>> handlerMethods = new HashMap<>();
 
-		final Map<Class<?>, HandlerMethod> candidateMethods = new HashMap<Class<?>, HandlerMethod>();
-		final Map<Class<?>, HandlerMethod> candidateMessageMethods = new HashMap<Class<?>, HandlerMethod>();
+		final Map<Class<?>, HandlerMethod> candidateMethods = new HashMap<>();
+		final Map<Class<?>, HandlerMethod> candidateMessageMethods = new HashMap<>();
 		final Class<?> targetClass = this.getTargetClass(targetObject);
 		MethodFilter methodFilter = new UniqueMethodFilter(targetClass);
 		ReflectionUtils.doWithMethods(targetClass, new MethodCallback() {
@@ -385,7 +385,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 				|| ReflectionUtils.isToStringMethod(method) || AopUtils.isFinalizeMethod(method)) {
 			return true;
 		}
-		return (method.getName().equals("clone") && method.getParameterTypes().length == 0);
+		return "clone".equals(method.getName()) && method.getParameterTypes().length == 0;
 	}
 
 
@@ -455,7 +455,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 						AnnotationAttributes annotationAttributes = AnnotationAttributes
 								.fromMap(AnnotationUtils.getAnnotationAttributes(mappingAnnotation));
 						String key = annotationAttributes.getString("value");
-						sb.append("variables.get('" + key + "')");
+						sb.append("variables.get('").append(key).append("')");
 					}
 
 				} else if (StateContext.class.isAssignableFrom(parameterType)) {
@@ -537,7 +537,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 			String headerRetrievalExpression = "headers['" + headerName + "']";
 			String fullHeaderExpression = headerRetrievalExpression + relativeExpression;
 			if (annotationAttributes.getBoolean("required")
-					&& !methodParameter.getParameterType().getName().equals("java.util.Optional")) {
+					&& !"java.util.Optional".equals(methodParameter.getParameterType().getName())) {
 				return "#requiredHeader(headers, '" + headerName + "')" + relativeExpression;
 			} else if (!StringUtils.hasLength(relativeExpression)) {
 				return headerRetrievalExpression + " ?: null";

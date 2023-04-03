@@ -29,5 +29,5 @@ public final class StateMachineMessageHeaders {
 	 * Header value defining state do action timeout. Format is a number
 	 * defining timeout as {@code millis}.
 	 */
-	public final static String HEADER_DO_ACTION_TIMEOUT = "STATEMACHINE_DO_ACTION_TIMEOUT";
+	public static final String HEADER_DO_ACTION_TIMEOUT = "STATEMACHINE_DO_ACTION_TIMEOUT";
 }
