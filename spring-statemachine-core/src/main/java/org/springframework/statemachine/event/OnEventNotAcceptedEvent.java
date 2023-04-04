@@ -27,6 +27,8 @@ import org.springframework.messaging.Message;
 @SuppressWarnings("serial")
 public class OnEventNotAcceptedEvent extends StateMachineEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final Message<?> event;
 
 	/**

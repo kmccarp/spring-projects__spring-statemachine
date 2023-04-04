@@ -47,6 +47,6 @@ public interface PseudoStateContext<S, E> {
 		/**
 		 * Indication that states has been joined.
 		 */
-		JOIN_COMPLETED;
+		JOIN_COMPLETED
 	}
 }

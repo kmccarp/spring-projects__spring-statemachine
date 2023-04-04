@@ -26,6 +26,8 @@ import org.springframework.statemachine.StateMachine;
 @SuppressWarnings("serial")
 public class OnStateMachineStop extends StateMachineEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final StateMachine<?, ?> stateMachine;
 
 	/**

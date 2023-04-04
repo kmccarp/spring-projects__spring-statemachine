@@ -69,7 +69,7 @@ public class StateMachineConfig {
 
 		@Bean
 		public Action<String, String> entryReceiveOrder() {
-			return (context) -> {
+			return context -> {
 				String customer = context.getMessageHeaders().get("customer", String.class);
 				if (StringUtils.hasText(customer)) {
 					context.getExtendedState().getVariables().put("customer", customer);
@@ -83,14 +83,14 @@ public class StateMachineConfig {
 
 		@Bean
 		public Action<String, String> entrySendReminder() {
-			return (context) -> {
+			return context -> {
 				System.out.println("REMIND");
 			};
 		}
 
 		@Bean
 		public Action<String, String> entryHandleOrder() {
-			return (context) -> {
+			return context -> {
 				if (context.getMessageHeaders().containsKey("makeProdPlan")) {
 					context.getExtendedState().getVariables().put("makeProdPlan", true);
 				}
@@ -102,7 +102,7 @@ public class StateMachineConfig {
 
 		@Bean
 		public Guard<String, String> orderOk() {
-			return (context) -> {
+			return context -> {
 				Map<Object, Object> variables = context.getExtendedState().getVariables();
 				return variables.containsKey("customer") && variables.containsKey("order");
 			};
@@ -110,23 +110,17 @@ public class StateMachineConfig {
 
 		@Bean
 		public Guard<String, String> paymentOk() {
-			return (context) -> {
-				return context.getMessageHeaders().containsKey("payment");
-			};
+			return context -> context.getMessageHeaders().containsKey("payment");
 		}
 
 		@Bean
 		public Guard<String, String> makeProdPlan() {
-			return (context) -> {
-				return context.getExtendedState().getVariables().containsKey("makeProdPlan");
-			};
+			return context -> context.getExtendedState().getVariables().containsKey("makeProdPlan");
 		}
 
 		@Bean
 		public Guard<String, String> produce() {
-			return (context) -> {
-				return context.getExtendedState().getVariables().containsKey("produce");
-			};
+			return context -> context.getExtendedState().getVariables().containsKey("produce");
 		}
 	}
 }

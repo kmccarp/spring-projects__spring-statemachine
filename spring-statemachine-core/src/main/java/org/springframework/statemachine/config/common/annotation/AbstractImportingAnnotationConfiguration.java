@@ -184,7 +184,7 @@ public abstract class AbstractImportingAnnotationConfiguration<B extends Annotat
 
 		private BeanFactory beanFactory;
 
-		private Class<T> clazz;
+		private final Class<T> clazz;
 
 		public BeanDelegatingFactoryBean(B builder, Class<T> clazz) {
 			this.builder = builder;

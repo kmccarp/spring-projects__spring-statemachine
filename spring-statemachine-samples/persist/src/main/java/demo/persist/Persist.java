@@ -16,12 +16,10 @@
 package demo.persist;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
@@ -51,11 +49,7 @@ public class Persist {
 	public String listDbEntries() {
 		List<Order> orders = jdbcTemplate.query(
 		        "select id, state from orders",
-		        new RowMapper<Order>() {
-		            public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
-		            	return new Order(rs.getInt("id"), rs.getString("state"));
-		            }
-		        });
+	(rs, rowNum) -> new Order(rs.getInt("id"), rs.getString("state")));
 		StringBuilder buf = new StringBuilder();
 		for (Order order : orders) {
 			buf.append(order);
@@ -67,11 +61,7 @@ public class Persist {
 //tag::snippetB[]
 	public void change(int order, String event) {
 		Order o = jdbcTemplate.queryForObject("select id, state from orders where id = ?",
-				new RowMapper<Order>() {
-					public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
-						return new Order(rs.getInt("id"), rs.getString("state"));
-					}
-				}, new Object[] { order });
+	(rs, rowNum) -> new Order(rs.getInt("id"), rs.getString("state")), new Object[] { order });
 		handler.handleEventWithStateReactively(MessageBuilder
 				.withPayload(event).setHeader("order", order).build(), o.state)
 			.subscribe();

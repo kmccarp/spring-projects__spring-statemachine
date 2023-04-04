@@ -29,7 +29,7 @@ import org.springframework.statemachine.test.StateMachineTestPlanBuilder;
 
 public class TimerSmokeTests {
 
-	private static ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+	private static final ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
 	{
 		taskExecutor.initialize();
 	}

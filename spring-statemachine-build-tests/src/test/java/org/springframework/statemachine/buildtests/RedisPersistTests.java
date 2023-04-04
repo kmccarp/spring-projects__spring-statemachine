@@ -110,7 +110,7 @@ public class RedisPersistTests extends AbstractBuildTests {
 		@Bean
 		public StateMachinePersist<TestStates, TestEvents, String> stateMachinePersist(RedisConnectionFactory connectionFactory) {
 			RedisStateMachineContextRepository<TestStates, TestEvents> repository =
-					new RedisStateMachineContextRepository<TestStates, TestEvents>(connectionFactory);
+					new RedisStateMachineContextRepository<>(connectionFactory);
 			return new RepositoryStateMachinePersist<TestStates, TestEvents>(repository);
 		}
 

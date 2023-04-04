@@ -91,15 +91,11 @@ public class RelayTests extends AbstractStateMachineTests {
 
 		@Bean
 		public Action<TestStates, TestEvents> action1() {
-			return new Action<TestStates, TestEvents>() {
-
-				@Override
-				public void execute(StateContext<TestStates, TestEvents> context) {
-					context.getStateMachine()
-						.sendEvent(Mono.just(MessageBuilder
-							.withPayload(TestEvents.E2).build()))
-						.subscribe();
-				}
+			return context -> {
+				context.getStateMachine()
+			.sendEvent(Mono.just(MessageBuilder
+	.withPayload(TestEvents.E2).build()))
+			.subscribe();
 			};
 		}
 	}

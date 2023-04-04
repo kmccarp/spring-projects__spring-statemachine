@@ -26,6 +26,8 @@ import org.springframework.statemachine.transition.Transition;
 @SuppressWarnings("serial")
 public abstract class TransitionEvent extends StateMachineEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final Transition<?, ?> transition;
 
 	/**

@@ -37,15 +37,11 @@ import org.springframework.security.core.Authentication;
  */
 public class EventVoter<T> implements AccessDecisionVoter<Message<T>>{
 
-	private String eventPrefix = "EVENT_";
+	private final String eventPrefix = "EVENT_";
 
 	@Override
 	public boolean supports(ConfigAttribute attribute) {
-		if ((attribute.getAttribute() != null) && attribute.getAttribute().startsWith(getEventPrefix())) {
-			return true;
-		} else {
-			return false;
-		}
+		return (attribute.getAttribute() != null) && attribute.getAttribute().startsWith(getEventPrefix());
 	}
 
 	@Override

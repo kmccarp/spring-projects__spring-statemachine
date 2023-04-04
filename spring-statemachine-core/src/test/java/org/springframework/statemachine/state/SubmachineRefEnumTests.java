@@ -184,7 +184,7 @@ public class SubmachineRefEnumTests extends AbstractStateMachineTests {
 	}
 
 	enum States1 {
-		S1, S2;
+		S1, S2
 	}
 
 	enum Events1 {
@@ -192,10 +192,10 @@ public class SubmachineRefEnumTests extends AbstractStateMachineTests {
 	}
 
 	enum States2 {
-		S20, S21, S30, S31;
+		S20, S21, S30, S31
 	}
 
 	enum Events2 {
-		E2, E3;
+		E2, E3
 	}
 }
