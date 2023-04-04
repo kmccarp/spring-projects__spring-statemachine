@@ -85,7 +85,7 @@ public class WaitErrorConceptTests extends AbstractBuildTests {
 
 		@Bean
 		public Action<String, String> waitSetKey() {
-			return (context) -> {
+			return context -> {
 				Long time = context.getExtendedState().get("time", Long.class);
 				if ((time + 5000) < System.currentTimeMillis()) {
 					context.getExtendedState().getVariables().put("key", "value");
@@ -95,14 +95,14 @@ public class WaitErrorConceptTests extends AbstractBuildTests {
 
 		@Bean
 		public Action<String, String> step1Entry() {
-			return (context) -> {
+			return context -> {
 				context.getExtendedState().getVariables().put("time", System.currentTimeMillis());
 			};
 		}
 
 		@Bean
 		public Action<String, String> step2Entry() {
-			return (context) -> {
+			return context -> {
 				if (context.getMessageHeaders().containsKey("step2error")) {
 					context.getExtendedState().getVariables().put("error", "step2error");
 				}
@@ -111,16 +111,12 @@ public class WaitErrorConceptTests extends AbstractBuildTests {
 
 		@Bean
 		public Guard<String, String> hasError() {
-			return (context) -> {
-				return context.getExtendedState().getVariables().containsKey("error");
-			};
+			return context -> context.getExtendedState().getVariables().containsKey("error");
 		}
 
 		@Bean
 		public Guard<String, String> hasKey() {
-			return (context) -> {
-				return context.getExtendedState().getVariables().containsKey("key");
-			};
+			return context -> context.getExtendedState().getVariables().containsKey("key");
 		}
 	}
 

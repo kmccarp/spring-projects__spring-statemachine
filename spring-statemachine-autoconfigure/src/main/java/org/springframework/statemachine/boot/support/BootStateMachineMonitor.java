@@ -86,10 +86,9 @@ public class BootStateMachineMonitor<S, E> extends AbstractStateMachineMonitor<S
 
 	private Counter.Builder getTransitionCounterBuilder(Transition<S, E> transition) {
 		String transitionName = transitionToName(transition);
-		Counter.Builder builder = Counter.builder("ssm.transition.transit")
+		return Counter.builder("ssm.transition.transit")
 				.tags("transitionName", transitionName)
 				.description("Counter of Transition");
-		return builder;
 	}
 
 	private Timer.Builder getTransitionTimerBuilder(Transition<S, E> transition) {
@@ -103,10 +102,9 @@ public class BootStateMachineMonitor<S, E> extends AbstractStateMachineMonitor<S
 
 	private Counter.Builder getActionCounterBuilder(Function<StateContext<S, E>, Mono<Void>> action) {
 		String actionName = actionToName(action);
-		Counter.Builder builder = Counter.builder("ssm.action.execute")
+		return Counter.builder("ssm.action.execute")
 				.tags("actionName", actionName)
 				.description("Counter of Action");
-		return builder;
 	}
 
 	private Timer.Builder getActionTimerBuilder(Function<StateContext<S, E>, Mono<Void>> action) {

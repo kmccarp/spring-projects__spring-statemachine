@@ -59,7 +59,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		ensemble.afterPropertiesSet();
 
@@ -78,17 +78,17 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		ensemble.afterPropertiesSet();
 
 		assertThat(curatorClient.checkExists().forPath("/foo/data/current")).isNotNull();
 		assertThat(curatorClient.getData().forPath("/foo/data/current")).isEmpty();
 
-		ensemble.setState(new DefaultStateMachineContext<String, String>("S1","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
+		ensemble.setState(new DefaultStateMachineContext<>("S1","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
 		assertThat(curatorClient.getData().forPath("/foo/data/current").length).isGreaterThan(0);
 
-		ensemble.setState(new DefaultStateMachineContext<String, String>("S2","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
+		ensemble.setState(new DefaultStateMachineContext<>("S2","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
 	}
 
 	@Test
@@ -100,9 +100,9 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		ensemble1.afterPropertiesSet();
 		ensemble2.afterPropertiesSet();
@@ -112,7 +112,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		assertThat(curatorClient.checkExists().forPath("/foo/data/current")).isNotNull();
 		assertThat(curatorClient.getData().forPath("/foo/data/current")).isEmpty();
 
-		ensemble1.setState(new DefaultStateMachineContext<String, String>("S1","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
+		ensemble1.setState(new DefaultStateMachineContext<>("S1","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
 		assertThat(curatorClient.getData().forPath("/foo/data/current").length).isGreaterThan(0);
 
 		StateMachineContext<String, String> context = ensemble2.getState();
@@ -130,9 +130,9 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		TestEnsembleListener listener1 = new TestEnsembleListener();
 		TestEnsembleListener listener2 = new TestEnsembleListener();
@@ -152,7 +152,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		assertThat(listener1.joinedLatch.await(2, TimeUnit.SECONDS)).isTrue();
 		assertThat(listener2.joinedLatch.await(2, TimeUnit.SECONDS)).isTrue();
 
-		ensemble1.setState(new DefaultStateMachineContext<String, String>("S1", "E1", new HashMap<String, Object>(), new DefaultExtendedState()));
+		ensemble1.setState(new DefaultStateMachineContext<>("S1", "E1", new HashMap<String, Object>(), new DefaultExtendedState()));
 		assertThat(listener2.eventLatch.await(2, TimeUnit.SECONDS)).isTrue();
 	}
 
@@ -169,7 +169,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		curatorClient.create().creatingParentsIfNeeded().forPath("/foo/data/log", new byte[10]);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ensemble1.afterPropertiesSet();
 		ensemble1.start();
 
@@ -186,7 +186,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo", true, 4);
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo", true, 4);
 
 		ensemble.afterPropertiesSet();
 		ensemble.start();
@@ -202,25 +202,25 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		assertThat(curatorClient.getData().forPath("/foo/data/log/2")).isEmpty();
 		assertThat(curatorClient.getData().forPath("/foo/data/log/3")).isEmpty();
 
-		ensemble.setState(new DefaultStateMachineContext<String, String>("S1","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
+		ensemble.setState(new DefaultStateMachineContext<>("S1","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
 		assertThat(curatorClient.getData().forPath("/foo/data/log/0").length).isGreaterThan(0);
 		assertThat(curatorClient.getData().forPath("/foo/data/log/1")).isEmpty();
 		assertThat(curatorClient.getData().forPath("/foo/data/log/2")).isEmpty();
 		assertThat(curatorClient.getData().forPath("/foo/data/log/3")).isEmpty();
 
-		ensemble.setState(new DefaultStateMachineContext<String, String>("S2","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
+		ensemble.setState(new DefaultStateMachineContext<>("S2","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
 		assertThat(curatorClient.getData().forPath("/foo/data/log/0").length).isGreaterThan(0);
 		assertThat(curatorClient.getData().forPath("/foo/data/log/1").length).isGreaterThan(0);
 		assertThat(curatorClient.getData().forPath("/foo/data/log/2")).isEmpty();
 		assertThat(curatorClient.getData().forPath("/foo/data/log/3")).isEmpty();
 
-		ensemble.setState(new DefaultStateMachineContext<String, String>("S3","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
+		ensemble.setState(new DefaultStateMachineContext<>("S3","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
 		assertThat(curatorClient.getData().forPath("/foo/data/log/0").length).isGreaterThan(0);
 		assertThat(curatorClient.getData().forPath("/foo/data/log/1").length).isGreaterThan(0);
 		assertThat(curatorClient.getData().forPath("/foo/data/log/2").length).isGreaterThan(0);
 		assertThat(curatorClient.getData().forPath("/foo/data/log/3")).isEmpty();
 
-		ensemble.setState(new DefaultStateMachineContext<String, String>("S4","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
+		ensemble.setState(new DefaultStateMachineContext<>("S4","E1", new HashMap<String, Object>(), new DefaultExtendedState()));
 		assertThat(curatorClient.getData().forPath("/foo/data/log/0").length).isGreaterThan(0);
 		assertThat(curatorClient.getData().forPath("/foo/data/log/1").length).isGreaterThan(0);
 		assertThat(curatorClient.getData().forPath("/foo/data/log/2").length).isGreaterThan(0);
@@ -243,7 +243,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		TestEnsembleListener listener = new TestEnsembleListener();
 		ensemble.addEnsembleListener(listener);
@@ -255,7 +255,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		listener.reset(0, 10);
 
 		for (int i = 0; i < 10; i++) {
-			ensemble.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+			ensemble.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 					new HashMap<String, Object>(), new DefaultExtendedState()));
 		}
 
@@ -276,9 +276,9 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		TestEnsembleListener listener1 = new TestEnsembleListener();
 		ensemble1.addEnsembleListener(listener1);
@@ -299,7 +299,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		listener2.reset(0, 10);
 
 		for (int i = 0; i < 10; i++) {
-			ensemble1.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+			ensemble1.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 					new HashMap<String, Object>(), new DefaultExtendedState()));
 		}
 
@@ -323,9 +323,9 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		TestEnsembleListener listener1 = new TestEnsembleListener();
 		ensemble1.addEnsembleListener(listener1);
@@ -349,10 +349,10 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		try {
 			for (int i = 0; i < 10; i++) {
 				if (((i % 2) == 0)) {
-					ensemble1.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+					ensemble1.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 							new HashMap<String, Object>(), new DefaultExtendedState()));
 				} else {
-					ensemble2.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+					ensemble2.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 							new HashMap<String, Object>(), new DefaultExtendedState()));
 				}
 			}
@@ -386,9 +386,9 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		TestEnsembleListener listener1 = new TestEnsembleListener();
 		ensemble1.addEnsembleListener(listener1);
@@ -409,10 +409,10 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 			listener1.reset(0, 1);
 			listener2.reset(0, 1);
 			if (((i % 2) == 0)) {
-				ensemble1.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+				ensemble1.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 						new HashMap<String, Object>(), new DefaultExtendedState()));
 			} else {
-				ensemble2.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+				ensemble2.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 						new HashMap<String, Object>(), new DefaultExtendedState()));
 			}
 			assertThat(listener1.eventLatch.await(10, TimeUnit.SECONDS)).isTrue();
@@ -431,7 +431,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		TestEnsembleListener listener = new TestEnsembleListener();
 		ensemble.addEnsembleListener(listener);
@@ -445,7 +445,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		listener.reset(0, 10);
 
 		for (int i = 0; i < 10; i++) {
-			ensemble.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+			ensemble.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 					new HashMap<String, Object>(), new DefaultExtendedState()));
 			Thread.sleep(500);
 		}
@@ -467,9 +467,9 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		TestEnsembleListener listener1 = new TestEnsembleListener();
 		TestEnsembleListener listener2 = new TestEnsembleListener();
@@ -490,7 +490,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		listener2.reset(0, 10);
 
 		for (int i = 0; i < 10; i++) {
-			ensemble1.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+			ensemble1.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 					new HashMap<String, Object>(), new DefaultExtendedState()));
 			Thread.sleep(500);
 		}
@@ -515,9 +515,9 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		TestEnsembleListener listener1 = new TestEnsembleListener();
 		TestEnsembleListener listener2 = new TestEnsembleListener();
@@ -538,7 +538,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		listener2.reset(0, 9);
 
 		for (int i = 0; i < 9; i++) {
-			ensemble1.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+			ensemble1.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 					new HashMap<String, Object>(), new DefaultExtendedState()));
 		}
 
@@ -557,7 +557,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 
 		// should not throw BadVersionException when we immediately
 		for (int i = 9; i < 10; i++) {
-			ensemble2.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+			ensemble2.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 					new HashMap<String, Object>(), new DefaultExtendedState()));
 		}
 
@@ -598,7 +598,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		// should not get any errors until it's re-enabled and
 		// we write again
 		for (int i = 0; i < 10; i++) {
-			ensemble.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+			ensemble.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 					new HashMap<String, Object>(), new DefaultExtendedState()));
 		}
 		assertThat(listener.errorLatch.await(2, TimeUnit.SECONDS)).isFalse();
@@ -608,14 +608,14 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		// logging error if this fails
 		TestUtils.callMethod("registerWatcherForStatePath", ensemble);
 		String reason = "";
-		if (listener.errors.size() > 0) {
+		if (!listener.errors.isEmpty()) {
 			reason = listener.errors.get(0).toString();
 		}
 		assertThat(listener.errors).withFailMessage(reason).isEmpty();
 
 		// this should actually cause ensemble to fail
 		for (int i = 10; i < 11; i++) {
-			ensemble.setState(new DefaultStateMachineContext<String, String>("S" + i, "E" + i,
+			ensemble.setState(new DefaultStateMachineContext<>("S" + i, "E" + i,
 					new HashMap<String, Object>(), new DefaultExtendedState()));
 		}
 		assertThat(listener.errorLatch.await(2, TimeUnit.SECONDS)).isTrue();
@@ -623,7 +623,7 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 
 	private class OverflowControlZookeeperStateMachineEnsemble extends ZookeeperStateMachineEnsemble<String, String> {
 
-		boolean enabled = false;
+		boolean enabled;
 
 		public OverflowControlZookeeperStateMachineEnsemble(CuratorFramework curatorClient, String basePath,
 				boolean cleanState, int logSize) {
@@ -649,8 +649,8 @@ public class ZookeeperStateMachineEnsembleTests extends AbstractZookeeperTests {
 		volatile CountDownLatch joinedLatch = new CountDownLatch(1);
 		volatile CountDownLatch eventLatch = new CountDownLatch(1);
 		volatile CountDownLatch errorLatch = new CountDownLatch(1);
-		volatile List<Exception> errors = new ArrayList<Exception>();
-		volatile List<StateMachineContext<String, String>> events = new ArrayList<StateMachineContext<String,String>>();
+		volatile List<Exception> errors = new ArrayList<>();
+		volatile List<StateMachineContext<String, String>> events = new ArrayList<>();
 
 		@Override
 		public void stateMachineJoined(StateMachine<String, String> stateMachine, StateMachineContext<String, String> context) {

@@ -167,9 +167,7 @@ public class ObjectStateTests {
 			// 	countAfter.incrementAndGet();
 			// });
 
-			return Mono.fromRunnable(() -> {
-				sleep();
-			});
+			return Mono.fromRunnable(this::sleep);
 		}
 
 		private void sleep() {

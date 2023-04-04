@@ -38,7 +38,7 @@ import reactor.core.publisher.Mono;
  */
 public class JunctionPseudoState<S, E> implements PseudoState<S, E> {
 
-	private final static Log log = LogFactory.getLog(JunctionPseudoState.class);
+	private static final Log log = LogFactory.getLog(JunctionPseudoState.class);
 	private final List<JunctionStateData<S, E>> junctions;
 
 	/**
@@ -67,11 +67,9 @@ public class JunctionPseudoState<S, E> implements PseudoState<S, E> {
 			}
 			return Mono.justOrEmpty(jsd);
 		})
-		.flatMap(jsd -> {
-			return Flux.fromIterable(jsd.getActions())
+		.flatMap(jsd -> Flux.fromIterable(jsd.getActions())
 				.flatMap(a -> a.apply(context))
-				.then(Mono.just(jsd.getState()));
-		});
+				.then(Mono.just(jsd.getState())));
 	}
 
 

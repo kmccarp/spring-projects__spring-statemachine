@@ -49,7 +49,7 @@ import demo.tasks.Application.States;
 
 public class TasksTests {
 
-	private final static Log log = LogFactory.getLog(TasksTests.class);
+	private static final Log log = LogFactory.getLog(TasksTests.class);
 
 	private AnnotationConfigApplicationContext context;
 
@@ -184,10 +184,10 @@ public class TasksTests {
 		volatile CountDownLatch stateEnteredLatch = new CountDownLatch(2);
 		volatile CountDownLatch stateExitedLatch = new CountDownLatch(0);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
-		volatile int stateChangedCount = 0;
-		volatile int transitionCount = 0;
-		List<State<States, Events>> statesEntered = new ArrayList<State<States,Events>>();
-		List<State<States, Events>> statesExited = new ArrayList<State<States,Events>>();
+		volatile int stateChangedCount;
+		volatile int transitionCount;
+		List<State<States, Events>> statesEntered = new ArrayList<>();
+		List<State<States, Events>> statesExited = new ArrayList<>();
 
 		@Override
 		public void stateChanged(State<States, Events> from, State<States, Events> to) {

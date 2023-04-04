@@ -72,7 +72,7 @@ public class StateMachineContextSerializer<S, E> extends Serializer<StateMachine
 			childRefs = (List<String>) kryo.readClassAndObject(input);
 		}
 
-		return new DefaultStateMachineContext<S, E>(childRefs, childs, state, event, eventHeaders,
+		return new DefaultStateMachineContext<>(childRefs, childs, state, event, eventHeaders,
 				new DefaultExtendedState(variables), historyStates, id);
 	}
 }

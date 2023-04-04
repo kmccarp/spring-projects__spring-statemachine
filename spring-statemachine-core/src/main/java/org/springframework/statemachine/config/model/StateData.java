@@ -49,9 +49,9 @@ public class StateData<S, E> {
 	private Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions;
 	private Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions;
 	private Collection<Function<StateContext<S, E>, Mono<Void>>> stateActions;
-	private boolean initial = false;
+	private boolean initial;
 	private Action<S, E> initialAction;
-	private boolean end = false;
+	private boolean end;
 	private PseudoStateKind pseudoStateKind;
 
 	/**

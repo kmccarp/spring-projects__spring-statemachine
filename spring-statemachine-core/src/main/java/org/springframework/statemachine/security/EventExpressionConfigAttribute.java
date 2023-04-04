@@ -28,6 +28,7 @@ import org.springframework.util.Assert;
  */
 @SuppressWarnings("serial")
 class EventExpressionConfigAttribute implements ConfigAttribute {
+	private static final long serialVersionUID = 1;
 	private final Expression authorizeExpression;
 
 	/**

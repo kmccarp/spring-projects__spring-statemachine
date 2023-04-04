@@ -332,7 +332,7 @@ public class JpaRepositoryTests extends AbstractRepositoryTests {
 		assertThat(stateMachineRepository.count()).isEqualTo(3l);
 
 		List<String> ids = StreamSupport.stream(stateMachineRepository.findAll().spliterator(), false)
-				.map(jrsm -> jrsm.getMachineId()).collect(Collectors.toList());
+				.map(JpaRepositoryStateMachine::getMachineId).collect(Collectors.toList());
 		assertThat(ids).hasSize(3);
 
 		// [null#238e8cc0-a932-4583-b696-2c057e5ebefe, null#486e20be-853e-4e4d-9a68-c62c061469ef, testid]
@@ -462,11 +462,11 @@ public class JpaRepositoryTests extends AbstractRepositoryTests {
 	}
 
 	public enum PersistTestStates {
-		S1, S2;
+		S1, S2
 	}
 
 	public enum PersistTestEvents {
-		E1, E2;
+		E1, E2
 	}
 
 	@Configuration

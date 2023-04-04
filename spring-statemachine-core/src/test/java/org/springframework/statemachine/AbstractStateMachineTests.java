@@ -38,7 +38,7 @@ import org.springframework.statemachine.state.State;
  */
 public abstract class AbstractStateMachineTests {
 
-	private final static Log log = LogFactory.getLog(AbstractStateMachineTests.class);
+	private static final Log log = LogFactory.getLog(AbstractStateMachineTests.class);
 
 	protected AnnotationConfigApplicationContext context;
 
@@ -70,24 +70,24 @@ public abstract class AbstractStateMachineTests {
 		E1,E2,E3,E4,E5,EF,EH
 	}
 
-	public static enum TestStates2 {
+	public enum TestStates2 {
 		BUSY, PLAYING, PAUSED,
 		IDLE, CLOSED, OPEN,
 		PAUSED1, PAUSED2
 	}
 
-	public static enum TestStates3 {
+	public enum TestStates3 {
 		READY,
 		FORK, JOIN,
 		TASKS, T1, T1E, T2, T2E, T3, T3E
 	}
 
-	public static enum TestStates4 {
+	public enum TestStates4 {
 		READY, DONE,
 		TASKS, T1, T1E, T2, T2E
 	}
 
-	public static enum TestEvents2 {
+	public enum TestEvents2 {
 		PLAY, STOP, PAUSE, EJECT, LOAD
 	}
 
@@ -196,9 +196,9 @@ public abstract class AbstractStateMachineTests {
 
 	protected static class AbstractTestAction implements Action<TestStates, TestEvents> {
 
-		protected String message = null;
+		protected String message;
 		public CountDownLatch onExecuteLatch = new CountDownLatch(1);
-		public List<StateContext<TestStates, TestEvents>> stateContexts = new ArrayList<StateContext<TestStates, TestEvents>>();
+		public List<StateContext<TestStates, TestEvents>> stateContexts = new ArrayList<>();
 
 		public AbstractTestAction() {
 		}
