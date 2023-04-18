@@ -36,7 +36,7 @@ import org.springframework.statemachine.transition.Transition;
 public class CompositeStateMachineListener<S, E> extends AbstractCompositeListener<StateMachineListener<S, E>>
 		implements StateMachineListener<S, E> {
 
-	private final static Log log = LogFactory.getLog(CompositeStateMachineListener.class);
+	private static final Log log = LogFactory.getLog(CompositeStateMachineListener.class);
 
 	@Override
 	public void stateChanged(State<S, E> from, State<S, E> to) {

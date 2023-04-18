@@ -143,16 +143,16 @@ public class StateMachineConfig {
 		public StateMachineService<States, Events> stateMachineService(
 				StateMachineFactory<States, Events> stateMachineFactory,
 				StateMachineRuntimePersister<States, Events, String> stateMachineRuntimePersister) {
-			return new DefaultStateMachineService<States, Events>(stateMachineFactory, stateMachineRuntimePersister);
+			return new DefaultStateMachineService<>(stateMachineFactory, stateMachineRuntimePersister);
 		}
 //end::snippetE[]
 	}
 
 	public enum States {
-		S1, S2, S3, S4, S5, S6;
+		S1, S2, S3, S4, S5, S6
 	}
 
 	public enum Events {
-		E1, E2, E3, E4, E5, E6;
+		E1, E2, E3, E4, E5, E6
 	}
 }

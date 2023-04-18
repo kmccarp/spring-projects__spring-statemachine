@@ -34,8 +34,8 @@ import reactor.core.publisher.Mono;
 @Controller
 public class StateMachineController {
 
-	private final static String[] EVENTS = new String[] { "DEPLOY", "UNDEPLOY" };
-	private final static String[] FAILS = new String[] { "isInstalled", "installedOk", "isRunning", "hasError" };
+	private static final String[] EVENTS = new String[] { "DEPLOY", "UNDEPLOY" };
+	private static final String[] FAILS = new String[] { "isInstalled", "installedOk", "isRunning", "hasError" };
 
 	@Autowired
 	private StateMachine<String, String> stateMachine;

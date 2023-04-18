@@ -32,7 +32,7 @@ public class InMemoryStateMachineTraceRepository implements StateMachineTraceRep
 
 	private int capacity = 100;
 	private boolean reverse = true;
-	private final List<StateMachineTrace> traces = new LinkedList<StateMachineTrace>();
+	private final List<StateMachineTrace> traces = new LinkedList<>();
 
 	/**
 	 * Flag to say that the repository lists traces in reverse order.

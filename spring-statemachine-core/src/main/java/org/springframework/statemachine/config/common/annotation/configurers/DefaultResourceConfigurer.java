@@ -38,7 +38,7 @@ import org.springframework.statemachine.config.common.annotation.AnnotationConfi
 public class DefaultResourceConfigurer<O,I,B extends AnnotationBuilder<O>>
 		extends AnnotationConfigurerAdapter<O,I,B> implements ResourceConfigurer<I> {
 
-	private Set<Resource> resources = new HashSet<Resource>();
+	private final Set<Resource> resources = new HashSet<>();
 	private final DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
 
 	@Override

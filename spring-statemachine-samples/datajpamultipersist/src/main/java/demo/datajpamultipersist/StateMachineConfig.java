@@ -54,7 +54,7 @@ public class StateMachineConfig {
 	public StateMachineService<String, String> stateMachineService(
 			StateMachineFactory<String, String> stateMachineFactory,
 			StateMachineRuntimePersister<String, String, String> stateMachineRuntimePersister) {
-		return new DefaultStateMachineService<String, String>(stateMachineFactory, stateMachineRuntimePersister);
+		return new DefaultStateMachineService<>(stateMachineFactory, stateMachineRuntimePersister);
 	}
 //end::snippetB[]
 

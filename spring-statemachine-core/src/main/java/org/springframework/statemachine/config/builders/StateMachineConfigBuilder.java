@@ -49,6 +49,6 @@ public class StateMachineConfigBuilder<S, E>
 		transitionBuilder.setSharedObject(ConfigurationData.class, stateMachineConfigurationConfig);
 		TransitionsData<S, E> transitions = (TransitionsData<S, E>) transitionBuilder.build();
 		StatesData<S, E> states = (StatesData<S, E>) stateBuilder.build();
-		return new StateMachineConfig<S, E>(stateMachineConfigurationConfig, transitions, states, model);
+		return new StateMachineConfig<>(stateMachineConfigurationConfig, transitions, states, model);
 	}
 }

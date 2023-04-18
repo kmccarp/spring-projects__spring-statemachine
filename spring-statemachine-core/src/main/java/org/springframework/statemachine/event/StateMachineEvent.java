@@ -27,6 +27,8 @@ import org.springframework.context.ApplicationEvent;
 @SuppressWarnings("serial")
 public abstract class StateMachineEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	/**
 	 * Create a new ApplicationEvent.
 	 *

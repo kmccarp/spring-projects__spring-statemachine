@@ -155,11 +155,8 @@ public class Gh737Tests extends AbstractBuildTests {
 		}
 
 		private Guard<Status, Event> toggledVarTrue() {
-			return context -> {
-				boolean guard = String.valueOf(context.getExtendedState().get("toggle_status", String.class))
-						.equalsIgnoreCase("1");
-				return guard;
-			};
+			return context -> "1"
+						.equalsIgnoreCase(context.getExtendedState().get("toggle_status", String.class));
 		}
 
 	}
@@ -173,7 +170,7 @@ public class Gh737Tests extends AbstractBuildTests {
 		S22I, S22_IN_PROGRESS, S22_PASSED, S22E,
 		S23I, S23_IN_PROGRESS, S23_PASSED, S23E,
 		S24I, S24_PASSED, S24_IN_PROGRESS, S24_NOT_REQUIRED, S24E, CHOICE_S24,
-		S4, S5, S3;
+		S4, S5, S3
 	}
 
 	public enum Event {

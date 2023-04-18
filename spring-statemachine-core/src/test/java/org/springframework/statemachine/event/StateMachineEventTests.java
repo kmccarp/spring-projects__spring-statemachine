@@ -434,8 +434,8 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 
 		volatile CountDownLatch onEventLatch = new CountDownLatch(6);
 
-		volatile ArrayList<StateMachineEvent> stateChangedEvents = new ArrayList<StateMachineEvent>();
-		volatile ArrayList<StateMachineEvent> eventNotAcceptedEvents = new ArrayList<StateMachineEvent>();
+		volatile ArrayList<StateMachineEvent> stateChangedEvents = new ArrayList<>();
+		volatile ArrayList<StateMachineEvent> eventNotAcceptedEvents = new ArrayList<>();
 
 		@Override
 		public void onApplicationEvent(StateMachineEvent event) {
@@ -450,7 +450,7 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 
 		public void reset(int c1,int c2) {
 			onEventLatch = new CountDownLatch(c1);
-			eventNotAcceptedEvents = new ArrayList<StateMachineEvent>();
+			eventNotAcceptedEvents = new ArrayList<>();
 			stateChangedEvents.clear();
 			eventNotAcceptedEvents.clear();
 		}
@@ -460,7 +460,7 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 	static class TestListener extends StateMachineListenerAdapter<TestStates, TestEvents> {
 
 		volatile CountDownLatch eventNotAcceptedLatch = new CountDownLatch(1);
-		volatile ArrayList<Message<TestEvents>> eventNotAccepted = new ArrayList<Message<TestEvents>>();
+		volatile ArrayList<Message<TestEvents>> eventNotAccepted = new ArrayList<>();
 
 		@Override
 		public void eventNotAccepted(Message<TestEvents> event) {

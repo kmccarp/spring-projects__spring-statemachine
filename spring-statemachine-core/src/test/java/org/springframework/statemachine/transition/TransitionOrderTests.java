@@ -534,7 +534,7 @@ public class TransitionOrderTests extends AbstractStateMachineTests {
 	static class TestListener extends StateMachineListenerAdapter<TestStates, TestEvents> {
 
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 		volatile CountDownLatch statesEnteredLatch = new CountDownLatch(1);
 		final ArrayList<TestStates> statesEntered = new ArrayList<>();
 

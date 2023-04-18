@@ -599,7 +599,7 @@ public class EventHeaderTests extends AbstractStateMachineTests {
 
 	private static class HeaderTestAction implements Action<String, String> {
 
-		String testHeader = null;
+		String testHeader;
 
 		@Override
 		public void execute(StateContext<String, String> context) {
@@ -611,7 +611,7 @@ public class EventHeaderTests extends AbstractStateMachineTests {
 	private static class TestListener extends StateMachineListenerAdapter<String, String> {
 
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 		volatile CountDownLatch stateMachineStartedLatch = new CountDownLatch(1);
 
 		@Override

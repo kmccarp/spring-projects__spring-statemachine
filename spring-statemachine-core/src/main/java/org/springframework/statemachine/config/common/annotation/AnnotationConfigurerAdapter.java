@@ -38,7 +38,7 @@ public abstract class AnnotationConfigurerAdapter<O,I,B extends AnnotationBuilde
 
 	private B builder;
 
-	private CompositeObjectPostProcessor objectPostProcessor = new CompositeObjectPostProcessor();
+	private final CompositeObjectPostProcessor objectPostProcessor = new CompositeObjectPostProcessor();
 
 	@Override
 	public void init(B builder) throws Exception {}
@@ -99,7 +99,7 @@ public abstract class AnnotationConfigurerAdapter<O,I,B extends AnnotationBuilde
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static final class CompositeObjectPostProcessor implements ObjectPostProcessor<Object> {
 
-		private List<ObjectPostProcessor<? extends Object>> postProcessors = new ArrayList<ObjectPostProcessor<?>>();
+		private List<ObjectPostProcessor<? extends Object>> postProcessors = new ArrayList<>();
 
 		@Override
 		public Object postProcess(Object object) {

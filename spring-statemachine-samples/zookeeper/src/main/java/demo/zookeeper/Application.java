@@ -73,7 +73,7 @@ public class Application  {
 //tag::snippetB[]
 		@Bean
 		public StateMachineEnsemble<String, String> stateMachineEnsemble() throws Exception {
-			return new ZookeeperStateMachineEnsemble<String, String>(curatorClient(), "/foo");
+			return new ZookeeperStateMachineEnsemble<>(curatorClient(), "/foo");
 		}
 
 		@Bean

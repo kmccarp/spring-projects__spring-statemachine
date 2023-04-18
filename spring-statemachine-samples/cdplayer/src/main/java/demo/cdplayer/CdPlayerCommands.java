@@ -59,9 +59,9 @@ public class CdPlayerCommands implements CommandMarker {
 		try {
 			Cd cd = library.getCollection().get(index);
 			cdPlayer.load(cd);
-			buf.append("Loading cd " + cd);
+			buf.append("Loading cd ").append(cd);
 		} catch (Exception e) {
-			buf.append("Cd with index " + index + " not found, check library");
+			buf.append("Cd with index ").append(index).append(" not found, check library");
 		}
 		return buf.toString();
 	}

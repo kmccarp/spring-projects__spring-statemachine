@@ -74,10 +74,10 @@ public class AbstractStateMachineCommands<S, E> implements CommandMarker {
 		StringBuilder buf = new StringBuilder();
 		Set<Entry<Object, Object>> entrySet = stateMachine.getExtendedState().getVariables().entrySet();
 		Iterator<Entry<Object, Object>> iterator = entrySet.iterator();
-		if (entrySet.size() > 0) {
+		if (!entrySet.isEmpty()) {
 			while (iterator.hasNext()) {
 				Entry<Object, Object> e = iterator.next();
-				buf.append(e.getKey() + "=" + e.getValue());
+				buf.append(e.getKey()).append("=").append(e.getValue());
 				if (iterator.hasNext()) {
 					buf.append("\n");
 				}
