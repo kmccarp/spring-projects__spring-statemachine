@@ -40,8 +40,7 @@ public class BaseStructureVerifier<S, E> implements StateMachineModelVerifier<S,
 	public void verify(StateMachineModel<S, E> model) {
 		// verify that we have transitions
 		if (model.getTransitionsData().getTransitions().isEmpty()) {
-			MalformedConfigurationException exception = new MalformedConfigurationException("Must have at least one transition");
-			throw exception;
+			throw new MalformedConfigurationException("Must have at least one transition");
 		}
 		// verify that we have initial state
 		Iterator<Node<StateData<S, E>>> iterator = buildStateDataIterator(model.getStatesData());
@@ -67,7 +66,7 @@ public class BaseStructureVerifier<S, E> implements StateMachineModelVerifier<S,
 	}
 
 	private Iterator<Node<StateData<S, E>>> buildStateDataIterator(StatesData<S, E> stateMachineStates) {
-		Tree<StateData<S, E>> tree = new Tree<StateData<S, E>>();
+		Tree<StateData<S, E>> tree = new Tree<>();
 
 		for (StateData<S, E> stateData : stateMachineStates.getStateData()) {
 			Object id = stateData.getState();
@@ -83,7 +82,6 @@ public class BaseStructureVerifier<S, E> implements StateMachineModelVerifier<S,
 		};
 
 		Iterable<Node<StateData<S, E>>> postOrderTraversal = traverser.postOrderTraversal(tree.getRoot());
-		Iterator<Node<StateData<S, E>>> iterator = postOrderTraversal.iterator();
-		return iterator;
+		return postOrderTraversal.iterator();
 	}
 }

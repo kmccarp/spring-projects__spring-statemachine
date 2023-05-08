@@ -51,7 +51,6 @@ import org.springframework.statemachine.trigger.DefaultTriggerContext;
 import org.springframework.statemachine.trigger.TriggerContext;
 import org.springframework.statemachine.trigger.TimerTrigger;
 import org.springframework.statemachine.trigger.Trigger;
-import org.springframework.statemachine.trigger.TriggerListener;
 
 import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
@@ -84,11 +83,11 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 	private final Message<E> initialEvent;
 	private final TransitionComparator<S, E> transitionComparator;
 	private final TransitionConflictPolicy transitionConflictPolicy;
-	private final Queue<Message<E>> deferList = new ConcurrentLinkedQueue<Message<E>>();
+	private final Queue<Message<E>> deferList = new ConcurrentLinkedQueue<>();
 	private final AtomicBoolean initialHandled = new AtomicBoolean(false);
-	private final StateMachineInterceptorList<S, E> interceptors = new StateMachineInterceptorList<S, E>();
+	private final StateMachineInterceptorList<S, E> interceptors = new StateMachineInterceptorList<>();
 	private volatile Message<E> forwardedInitialEvent;
-	private volatile Message<E> queuedMessage = null;
+	private volatile Message<E> queuedMessage;
 	private StateMachineExecutorTransit<S, E> stateMachineExecutorTransit;
 	private Many<TriggerQueueItem> triggerSink;
 	private Flux<Void> triggerFlux;
@@ -105,7 +104,7 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 		this.transitions = transitions;
 		this.initialTransition = initialTransition;
 		this.initialEvent = initialEvent;
-		this.transitionComparator = new TransitionComparator<S, E>(transitionConflictPolicy);
+		this.transitionComparator = new TransitionComparator<>(transitionConflictPolicy);
 		this.transitionConflictPolicy = transitionConflictPolicy;
 		// anonymous transitions are fixed, sort those now
 		this.triggerlessTransitions.sort(transitionComparator);
@@ -116,7 +115,7 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 	protected void onInit() throws Exception {
 		triggerSink = Sinks.many().multicast().onBackpressureBuffer(Queues.SMALL_BUFFER_SIZE, false);
 		// limit concurrency so that we get one by one handling
-		triggerFlux = triggerSink.asFlux().flatMap(trigger -> handleTrigger(trigger), 1);
+		triggerFlux = triggerSink.asFlux().flatMap(this::handleTrigger, 1);
 	}
 
 	@Override
@@ -129,7 +128,7 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 			}
 
 			if (!initialHandled.getAndSet(true)) {
-				ArrayList<Transition<S, E>> trans = new ArrayList<Transition<S, E>>();
+				ArrayList<Transition<S, E>> trans = new ArrayList<>();
 				trans.add(initialTransition);
 				// TODO: should we merge if initial event is actually used?
 				if (initialEvent != null) {
@@ -217,25 +216,23 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 		}
 		return Mono.defer(() -> {
 			State<S,E> currentState = stateMachine.getState();
-			if ((currentState != null && currentState.shouldDefer(queuedEvent))) {
+			if (currentState != null && currentState.shouldDefer(queuedEvent)) {
 				log.info("Current state " + currentState + " deferred event " + queuedEvent);
 				return Mono.just(new TriggerQueueItem(null, queuedEvent, callback, triggerCallback));
 			}
-			TriggerContext<S, E> triggerContext = new DefaultTriggerContext<S, E>(queuedEvent.getPayload());
+			TriggerContext<S, E> triggerContext = new DefaultTriggerContext<>(queuedEvent.getPayload());
 			return Flux.fromIterable(transitions)
 				.filter(transition -> transition.getTrigger() != null)
 				.filter(transition -> StateMachineUtils.containsAtleastOne(transition.getSource().getIds(),
 						currentState.getIds()))
-				.flatMap(transition -> {
-					return Mono.from(transition.getTrigger().evaluate(triggerContext))
+				.flatMap(transition -> Mono.from(transition.getTrigger().evaluate(triggerContext))
 						.flatMap(e -> {
 							if (e) {
 								return Mono.just(transition.getTrigger());
 							} else {
 								return Mono.empty();
 							}
-						});
-				})
+						}))
 				.next()
 				.doOnNext(trigger -> deferList.remove(queuedEvent))
 				.map(trigger -> new TriggerQueueItem(trigger, queuedEvent, callback, triggerCallback));
@@ -345,7 +342,7 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 	}
 
 	private Mono<Void> handleTriggerlessTransitions(StateContext<S, E> context, State<S, E> state) {
-		Flux<Mono<Boolean>> monoFlux = Flux.generate((sink) -> {
+		Flux<Mono<Boolean>> monoFlux = Flux.generate(sink -> {
 			sink.next(handleTriggerTrans(triggerlessTransitions, context != null ? context.getMessage() : null, state));
 		});
 		Flux<Boolean> flux = Flux.concat(monoFlux);
@@ -438,32 +435,29 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 		// see who initiated this transition
 		MessageHeaders messageHeaders = message != null ? message.getHeaders() : new MessageHeaders(
 				new HashMap<String, Object>());
-		Map<String, Object> map = new HashMap<String, Object>(messageHeaders);
+		Map<String, Object> map = new HashMap<>(messageHeaders);
 		if (!map.containsKey(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER)) {
 			// don't set sm id if it's already present because
 			// we want to keep the originating sm id
 			map.put(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER, stateMachine.getUuid());
 		}
-		return new DefaultStateContext<S, E>(Stage.TRANSITION, message, new MessageHeaders(map), stateMachine.getExtendedState(), transition, stateMachine, null, null, null);
+		return new DefaultStateContext<>(Stage.TRANSITION, message, new MessageHeaders(map), stateMachine.getExtendedState(), transition, stateMachine, null, null, null);
 	}
 
 	private void registerTriggerListener() {
 		for (final Trigger<S, E> trigger : triggerToTransitionMap.keySet()) {
 			if (trigger instanceof TimerTrigger) {
-				((TimerTrigger<?, ?>) trigger).addTriggerListener(new TriggerListener() {
-					@Override
-					public void triggered() {
-						if (log.isDebugEnabled()) {
-							log.debug("TimedTrigger triggered " + trigger);
-						}
-						Mono.just(new TriggerQueueItem(trigger, null, null, null))
-							.flatMap(tqi -> Mono.fromCallable(() -> {
-									triggerSink.emitNext(tqi, EmitFailureHandler.FAIL_FAST);
-									return null;
-								})
-								.retryWhen(Retry.fixedDelay(10, Duration.ofNanos(10))))
-							.subscribe();
+				((TimerTrigger<?, ?>) trigger).addTriggerListener(() -> {
+					if (log.isDebugEnabled()) {
+						log.debug("TimedTrigger triggered " + trigger);
 					}
+					Mono.just(new TriggerQueueItem(trigger, null, null, null))
+				.flatMap(tqi -> Mono.fromCallable(() -> {
+					triggerSink.emitNext(tqi, EmitFailureHandler.FAIL_FAST);
+					return null;
+				})
+		.retryWhen(Retry.fixedDelay(10, Duration.ofNanos(10))))
+				.subscribe();
 				});
 			}
 		}

@@ -62,7 +62,7 @@ public class EndSmokeTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine;
 		boolean ok = true;
 		boolean runWhile = true;
-		Exception e = null;
+		Exception e;
 
 		public TestThread(StateMachine<String, String> stateMachine) {
 			this.stateMachine = stateMachine;

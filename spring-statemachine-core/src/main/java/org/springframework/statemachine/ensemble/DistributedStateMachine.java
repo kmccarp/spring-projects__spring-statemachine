@@ -59,7 +59,7 @@ import reactor.core.publisher.Mono;
  */
 public class DistributedStateMachine<S, E> extends LifecycleObjectSupport implements StateMachine<S, E> {
 
-	private final static Log log = LogFactory.getLog(DistributedStateMachine.class);
+	private static final Log log = LogFactory.getLog(DistributedStateMachine.class);
 	private final StateMachineEnsemble<S, E> ensemble;
 	private final StateMachine<S, E> delegate;
 	private final LocalEnsembleListener listener = new LocalEnsembleListener();
@@ -230,7 +230,7 @@ public class DistributedStateMachine<S, E> extends LifecycleObjectSupport implem
 			if (message != null
 					&& ObjectUtils.nullSafeEquals(delegate.getUuid(),
 							message.getHeaders().get(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER))) {
-				ensemble.setState(new DefaultStateMachineContext<S, E>(transition.getTarget().getId(), message
+				ensemble.setState(new DefaultStateMachineContext<>(transition.getTarget().getId(), message
 						.getPayload(), message.getHeaders(), stateMachine.getExtendedState()));
 			}
 		}
@@ -254,12 +254,12 @@ public class DistributedStateMachine<S, E> extends LifecycleObjectSupport implem
 							stateContext.getMessageHeader(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER))) {
 				StateMachineContext<S, E> current = ensemble.getState();
 				if (current != null) {
-					ensemble.setState(new DefaultStateMachineContext<S, E>(
+					ensemble.setState(new DefaultStateMachineContext<>(
 							current.getState(), stateContext.getEvent(), stateContext
 									.getMessageHeaders(), stateContext.getStateMachine().getExtendedState()));
 				} else if (stateContext.getStateMachine().getState() != null) {
 					// if current ensemble state is null, get it from sm itself
-					ensemble.setState(new DefaultStateMachineContext<S, E>(stateContext.getStateMachine().getState()
+					ensemble.setState(new DefaultStateMachineContext<>(stateContext.getStateMachine().getState()
 							.getId(), stateContext.getEvent(), stateContext.getMessageHeaders(), stateContext
 							.getStateMachine().getExtendedState()));
 				}

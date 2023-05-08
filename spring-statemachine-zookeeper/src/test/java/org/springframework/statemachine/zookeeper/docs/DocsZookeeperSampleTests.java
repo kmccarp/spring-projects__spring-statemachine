@@ -64,7 +64,7 @@ public class DocsZookeeperSampleTests {
 		@Bean
 		public StateMachineEnsemble<String, String> stateMachineEnsemble()
 				throws Exception {
-			return new ZookeeperStateMachineEnsemble<String, String>(curatorClient(), "/zkpath");
+			return new ZookeeperStateMachineEnsemble<>(curatorClient(), "/zkpath");
 		}
 
 		@Bean

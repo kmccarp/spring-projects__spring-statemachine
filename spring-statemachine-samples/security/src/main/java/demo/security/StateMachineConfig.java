@@ -28,12 +28,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
@@ -131,13 +129,8 @@ public class StateMachineConfig {
 		@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 		@Bean
 		public Action<States, Events> adminAction() {
-			return new Action<States, Events>() {
-
-				@Secured("ROLE_ADMIN")
-				@Override
-				public void execute(StateContext<States, Events> context) {
-					log.info("Executed only for admin role");
-				}
+			return context -> {
+				log.info("Executed only for admin role");
 			};
 		}
 //end::snippetC[]
@@ -145,12 +138,8 @@ public class StateMachineConfig {
 //tag::snippetD[]
 		@Bean
 		public Action<States, Events> transitionAction() {
-			return new Action<States, Events>() {
-
-				@Override
-				public void execute(StateContext<States, Events> context) {
-					log.info("Executed only for admin role");
-				}
+			return context -> {
+				log.info("Executed only for admin role");
 			};
 		}
 //end::snippetD[]
@@ -167,11 +156,11 @@ public class StateMachineConfig {
 	}
 
 	public enum States {
-		S0, S1, S2, S3;
+		S0, S1, S2, S3
 	}
 
 	public enum Events {
-		A, B, C, D, E, F;
+		A, B, C, D, E, F
 	}
 
 }

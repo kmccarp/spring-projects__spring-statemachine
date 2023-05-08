@@ -686,8 +686,8 @@ public class StateMachinePersistTests4 extends AbstractStateMachineTests {
 
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
-		volatile int stateChangedCount = 0;
-		final List<Transition<TestStates, TestEvents>> transitions = new ArrayList<Transition<TestStates,TestEvents>>();
+		volatile int stateChangedCount;
+		final List<Transition<TestStates, TestEvents>> transitions = new ArrayList<>();
 		final List<State<TestStates, TestEvents>> tos = new ArrayList<>();
 
 		@Override

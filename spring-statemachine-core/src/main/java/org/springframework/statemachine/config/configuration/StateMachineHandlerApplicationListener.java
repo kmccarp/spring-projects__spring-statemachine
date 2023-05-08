@@ -27,8 +27,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
  */
 public class StateMachineHandlerApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
 
-	public final static String BEAN_NAME = "stateMachineHandlerApplicationListener";
-	private Long lastRefreshTime = null;
+	public static final String BEAN_NAME = "stateMachineHandlerApplicationListener";
+	private Long lastRefreshTime;
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {

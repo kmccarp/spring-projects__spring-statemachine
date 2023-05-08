@@ -136,11 +136,11 @@ public class ListenerTests extends AbstractStateMachineTests {
 
 	private static class TestStateMachineListener implements StateMachineListener<TestStates, TestEvents> {
 
-		ArrayList<Holder> states = new ArrayList<Holder>();
-		volatile int started = 0;
-		volatile int stopped = 0;
+		ArrayList<Holder> states = new ArrayList<>();
+		volatile int started;
+		volatile int stopped;
 		CountDownLatch stopLatch = new CountDownLatch(1);
-		ArrayList<Holder2> extended = new ArrayList<Holder2>();
+		ArrayList<Holder2> extended = new ArrayList<>();
 		CountDownLatch extendedLatch = new CountDownLatch(1);
 
 

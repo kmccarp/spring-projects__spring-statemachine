@@ -30,7 +30,7 @@ import org.springframework.statemachine.processor.StateMachineAnnotationPostProc
 @Configuration
 public class StateMachineAnnotationPostProcessorConfiguration {
 
-	private final static String POST_PROCESSOR_BEAN_ID = "org.springframework.statemachine.processor.stateMachineAnnotationPostProcessor";
+	private static final String POST_PROCESSOR_BEAN_ID = "org.springframework.statemachine.processor.stateMachineAnnotationPostProcessor";
 
 	@Bean(name = POST_PROCESSOR_BEAN_ID)
 	public StateMachineAnnotationPostProcessor springStateMachineAnnotationPostProcessor() {
