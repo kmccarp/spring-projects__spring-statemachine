@@ -90,8 +90,7 @@ public class ManualBuilderContextTests extends AbstractStateMachineTests {
 					.and()
 				.withExternal()
 					.source("S2").target("S1").event("E2");
-			StateMachine<String, String> stateMachine = builder.build();
-			return stateMachine;
+			return builder.build();
 		}
 
 		@Bean
@@ -120,8 +119,7 @@ public class ManualBuilderContextTests extends AbstractStateMachineTests {
 					.and()
 				.withExternal()
 					.source("S2").target("S1").event("E2");
-			StateMachine<String, String> stateMachine = builder.build();
-			return stateMachine;
+			return builder.build();
 		}
 
 		@Bean
@@ -135,7 +133,7 @@ public class ManualBuilderContextTests extends AbstractStateMachineTests {
 
 		volatile CountDownLatch stateMachineStartedLatch = new CountDownLatch(1);
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 
 		@Override
 		public void stateMachineStarted(StateMachine<String, String> stateMachine) {

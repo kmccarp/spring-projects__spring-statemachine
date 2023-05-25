@@ -36,10 +36,10 @@ import reactor.core.publisher.Mono;
 @Controller
 public class StateMachineController {
 
-	private final static String[] CUSTOMERS = new String[] { "customer1", "customer2", "customer3" };
-	private final static String[] ORDERS = new String[] { "order1", "order2", "order3" };
-	private final static String[] EVENTS = new String[] { "PLACE_ORDER", "RECEIVE_PAYMENT" };
-	private final static String[] GUIDES = new String[] { "makeProdPlan", "produce", "payment" };
+	private static final String[] CUSTOMERS = new String[] { "customer1", "customer2", "customer3" };
+	private static final String[] ORDERS = new String[] { "order1", "order2", "order3" };
+	private static final String[] EVENTS = new String[] { "PLACE_ORDER", "RECEIVE_PAYMENT" };
+	private static final String[] GUIDES = new String[] { "makeProdPlan", "produce", "payment" };
 
 	@Autowired
 	private StateMachineFactory<String, String> stateMachineFactory;

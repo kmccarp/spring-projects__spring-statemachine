@@ -23,7 +23,7 @@ import org.springframework.statemachine.StateMachineContext;
 
 public class InMemoryStateMachineEnsemble<S, E> extends StateMachineEnsembleObjectSupport<S, E> {
 
-	private final Set<StateMachine<S, E>> joined = new HashSet<StateMachine<S,E>>();
+	private final Set<StateMachine<S, E>> joined = new HashSet<>();
 	private StateMachine<S, E> leader;
 	private StateMachineContext<S, E> current;
 

@@ -108,7 +108,7 @@ public class ReactiveAction2Tests extends AbstractStateMachineTests {
 	private static class TestCountAction implements ReactiveAction<TestStates, TestEvents> {
 
 		private final String id;
-		int count = 0;
+		int count;
 		CountDownLatch latch = new CountDownLatch(1);
 		AtomicLong time = new AtomicLong();
 

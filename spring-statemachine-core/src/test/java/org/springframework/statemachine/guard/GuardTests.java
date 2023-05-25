@@ -28,7 +28,6 @@ import org.springframework.statemachine.AbstractStateMachineTests.TestEvents;
 import org.springframework.statemachine.AbstractStateMachineTests.TestGuard;
 import org.springframework.statemachine.AbstractStateMachineTests.TestStates;
 import org.springframework.statemachine.ObjectStateMachine;
-import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.StateMachineSystemConstants;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
@@ -207,23 +206,15 @@ public class GuardTests {
 
 		@Bean
 		public Guard<TestStates, TestEvents> testGuard1() {
-			return new Guard<TestStates, TestEvents>() {
-
-				@Override
-				public boolean evaluate(StateContext<TestStates, TestEvents> context) {
-					throw new RuntimeException();
-				}
+			return context -> {
+				throw new RuntimeException();
 			};
 		}
 
 		@Bean
 		public Guard<TestStates, TestEvents> testGuard2() {
-			return new Guard<TestStates, TestEvents>() {
-
-				@Override
-				public boolean evaluate(StateContext<TestStates, TestEvents> context) {
-					throw new Error();
-				}
+			return context -> {
+				throw new Error();
 			};
 		}
 	}

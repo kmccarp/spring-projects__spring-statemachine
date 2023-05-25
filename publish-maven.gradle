@@ -24,7 +24,7 @@ def customizePom(pom, gradleProject) {
 
         // eliminate test-scoped dependencies (no need in maven central poms)
         generatedPom.dependencies.removeAll { dep ->
-            dep.scope == 'test'
+            'test'.equals(dep.scope)
         }
 
         // add all items necessary for maven central publication

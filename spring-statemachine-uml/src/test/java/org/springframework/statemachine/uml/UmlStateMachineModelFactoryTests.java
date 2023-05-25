@@ -69,9 +69,9 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		Collection<StateData<String, String>> stateDatas = stateMachineModel.getStatesData().getStateData();
 		assertThat(stateDatas.size()).isEqualTo(2);
 		for (StateData<String, String> stateData : stateDatas) {
-			if (stateData.getState().equals("S1")) {
+			if ("S1".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
-			} else if (stateData.getState().equals("S2")) {
+			} else if ("S2".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 			} else {
 				throw new IllegalArgumentException();
@@ -93,9 +93,9 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		Collection<StateData<String, String>> stateDatas = stateMachineModel.getStatesData().getStateData();
 		assertThat(stateDatas.size()).isEqualTo(2);
 		for (StateData<String, String> stateData : stateDatas) {
-			if (stateData.getState().equals("S1")) {
+			if ("S1".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
-			} else if (stateData.getState().equals("S2")) {
+			} else if ("S2".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 			} else {
 				throw new IllegalArgumentException();
@@ -115,16 +115,16 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		Collection<StateData<String, String>> stateDatas = stateMachineModel.getStatesData().getStateData();
 		assertThat(stateDatas.size()).isEqualTo(4);
 		for (StateData<String, String> stateData : stateDatas) {
-			if (stateData.getState().equals("S1")) {
+			if ("S1".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
 				assertThat(stateData.getParent()).isNull();
-			} else if (stateData.getState().equals("S2")) {
+			} else if ("S2".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 				assertThat(stateData.getParent()).isNull();
-			} else if (stateData.getState().equals("S11")) {
+			} else if ("S11".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
 				assertThat(stateData.getParent()).isEqualTo("S1");
-			} else if (stateData.getState().equals("S12")) {
+			} else if ("S12".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 				assertThat(stateData.getParent()).isEqualTo("S1");
 			} else {
@@ -145,16 +145,16 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		Collection<StateData<String, String>> stateDatas = stateMachineModel.getStatesData().getStateData();
 		assertThat(stateDatas.size()).isEqualTo(4);
 		for (StateData<String, String> stateData : stateDatas) {
-			if (stateData.getState().equals("S1")) {
+			if ("S1".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
 				assertThat(stateData.getRegion()).isNotNull();
-			} else if (stateData.getState().equals("S2")) {
+			} else if ("S2".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 				assertThat(stateData.getRegion()).isNotNull();
-			} else if (stateData.getState().equals("S3")) {
+			} else if ("S3".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
 				assertThat(stateData.getRegion()).isNotNull();
-			} else if (stateData.getState().equals("S4")) {
+			} else if ("S4".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 				assertThat(stateData.getRegion()).isNotNull();
 			} else {
@@ -175,13 +175,13 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		Collection<StateData<String, String>> stateDatas = stateMachineModel.getStatesData().getStateData();
 		assertThat(stateDatas.size()).isEqualTo(3);
 		for (StateData<String, String> stateData : stateDatas) {
-			if (stateData.getState().equals("S1")) {
+			if ("S1".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
 				assertThat(stateData.isEnd()).isFalse();
-			} else if (stateData.getState().equals("S2")) {
+			} else if ("S2".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 				assertThat(stateData.isEnd()).isFalse();
-			} else if (stateData.getState().equals("S3")) {
+			} else if ("S3".equals(stateData.getState())) {
 				assertThat(stateData.isEnd()).isTrue();
 			} else {
 				throw new IllegalArgumentException();
@@ -201,22 +201,22 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		Collection<StateData<String, String>> stateDatas = stateMachineModel.getStatesData().getStateData();
 		assertThat(stateDatas.size()).isEqualTo(8);
 		for (StateData<String, String> stateData : stateDatas) {
-			if (stateData.getState().equals("S1")) {
+			if ("S1".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
-			} else if (stateData.getState().equals("S2")) {
+			} else if ("S2".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
-			} else if (stateData.getState().equals("S21")) {
+			} else if ("S21".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
-			} else if (stateData.getState().equals("S22")) {
+			} else if ("S22".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
-			} else if (stateData.getState().equals("S3")) {
+			} else if ("S3".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
-			} else if (stateData.getState().equals("S4")) {
+			} else if ("S4".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
-			} else if (stateData.getState().equals("ENTRY")) {
+			} else if ("ENTRY".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 				assertThat(stateData.getPseudoStateKind()).isEqualTo(PseudoStateKind.ENTRY);
-			} else if (stateData.getState().equals("EXIT")) {
+			} else if ("EXIT".equals(stateData.getState())) {
 				assertThat(stateData.getPseudoStateKind()).isEqualTo(PseudoStateKind.EXIT);
 				assertThat(stateData.isInitial()).isFalse();
 			} else {
@@ -495,14 +495,14 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		Collection<StateData<String, String>> stateDatas = stateMachineModel.getStatesData().getStateData();
 		assertThat(stateDatas.size()).isEqualTo(3);
 		for (StateData<String, String> stateData : stateDatas) {
-			if (stateData.getState().equals("S1")) {
+			if ("S1".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
 				assertThat(stateData.getDeferred().size()).isEqualTo(1);
 				assertThat(stateData.getDeferred().iterator().next()).isEqualTo("E2");
-			} else if (stateData.getState().equals("S2")) {
+			} else if ("S2".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 				assertThat(stateData.getDeferred().size()).isEqualTo(0);
-			} else if (stateData.getState().equals("S3")) {
+			} else if ("S3".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 				assertThat(stateData.getDeferred().size()).isEqualTo(0);
 			} else {
@@ -525,11 +525,11 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		assertThat(transitionDatas.size()).isEqualTo(4);
 		for (TransitionData<String, String> transitionData : transitionDatas) {
 			if (transitionData.getEvent() != null) {
-				if (transitionData.getEvent().equals("E1")) {
+				if ("E1".equals(transitionData.getEvent())) {
 					assertThat(transitionData.getKind()).isEqualTo(TransitionKind.EXTERNAL);
-				} else if (transitionData.getEvent().equals("E2")) {
+				} else if ("E2".equals(transitionData.getEvent())) {
 					assertThat(transitionData.getKind()).isEqualTo(TransitionKind.LOCAL);
-				} else if (transitionData.getEvent().equals("E3")) {
+				} else if ("E3".equals(transitionData.getEvent())) {
 					assertThat(transitionData.getKind()).isEqualTo(TransitionKind.INTERNAL);
 				} else {
 					throw new IllegalArgumentException();
@@ -915,22 +915,22 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		Collection<StateData<String, String>> stateDatas = stateMachineModel.getStatesData().getStateData();
 		assertThat(stateDatas.size()).isEqualTo(8);
 		for (StateData<String, String> stateData : stateDatas) {
-			if (stateData.getState().equals("S1")) {
+			if ("S1".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
-			} else if (stateData.getState().equals("S2")) {
+			} else if ("S2".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
-			} else if (stateData.getState().equals("S21")) {
+			} else if ("S21".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isTrue();
-			} else if (stateData.getState().equals("S22")) {
+			} else if ("S22".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
-			} else if (stateData.getState().equals("S3")) {
+			} else if ("S3".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
-			} else if (stateData.getState().equals("S4")) {
+			} else if ("S4".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
-			} else if (stateData.getState().equals("ENTRY")) {
+			} else if ("ENTRY".equals(stateData.getState())) {
 				assertThat(stateData.isInitial()).isFalse();
 				assertThat(stateData.getPseudoStateKind()).isEqualTo(PseudoStateKind.ENTRY);
-			} else if (stateData.getState().equals("EXIT")) {
+			} else if ("EXIT".equals(stateData.getState())) {
 				assertThat(stateData.getPseudoStateKind()).isEqualTo(PseudoStateKind.EXIT);
 				assertThat(stateData.isInitial()).isFalse();
 			} else {
