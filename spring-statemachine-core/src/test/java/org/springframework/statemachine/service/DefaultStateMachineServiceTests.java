@@ -52,10 +52,10 @@ public class DefaultStateMachineServiceTests extends AbstractStateMachineTests {
 		context.register(Config1.class);
 		context.refresh();
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINEFACTORY, StateMachineFactory.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINEFACTORY, StateMachineFactory.class);
 
 		DefaultStateMachineService<TestStates, TestEvents> service = new DefaultStateMachineService<>(stateMachineFactory);
-		StateMachine<TestStates,TestEvents> machine1 = service.acquireStateMachine("m1", false);
+		StateMachine<TestStates, TestEvents> machine1 = service.acquireStateMachine("m1", false);
 		assertThat(((Lifecycle)machine1).isRunning()).isFalse();
 	}
 
@@ -64,10 +64,10 @@ public class DefaultStateMachineServiceTests extends AbstractStateMachineTests {
 		context.register(Config1.class);
 		context.refresh();
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINEFACTORY, StateMachineFactory.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINEFACTORY, StateMachineFactory.class);
 
 		DefaultStateMachineService<TestStates, TestEvents> service = new DefaultStateMachineService<>(stateMachineFactory);
-		StateMachine<TestStates,TestEvents> machine1 = service.acquireStateMachine("m1", true);
+		StateMachine<TestStates, TestEvents> machine1 = service.acquireStateMachine("m1", true);
 		assertThat(((Lifecycle)machine1).isRunning()).isTrue();
 	}
 
@@ -76,10 +76,10 @@ public class DefaultStateMachineServiceTests extends AbstractStateMachineTests {
 		context.register(Config1.class);
 		context.refresh();
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINEFACTORY, StateMachineFactory.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINEFACTORY, StateMachineFactory.class);
 
 		DefaultStateMachineService<TestStates, TestEvents> service = new DefaultStateMachineService<>(stateMachineFactory);
-		StateMachine<TestStates,TestEvents> machine1 = service.acquireStateMachine("m1", true);
+		StateMachine<TestStates, TestEvents> machine1 = service.acquireStateMachine("m1", true);
 		assertThat(((Lifecycle)machine1).isRunning()).isTrue();
 		service.releaseStateMachine("m1");
 		assertThat(((Lifecycle)machine1).isRunning()).isFalse();
@@ -90,10 +90,10 @@ public class DefaultStateMachineServiceTests extends AbstractStateMachineTests {
 		context.register(Config1.class);
 		context.refresh();
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINEFACTORY, StateMachineFactory.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINEFACTORY, StateMachineFactory.class);
 
 		DefaultStateMachineService<TestStates, TestEvents> service = new DefaultStateMachineService<>(stateMachineFactory);
-		StateMachine<TestStates,TestEvents> machine1 = service.acquireStateMachine("m1", true);
+		StateMachine<TestStates, TestEvents> machine1 = service.acquireStateMachine("m1", true);
 		assertThat(((Lifecycle)machine1).isRunning()).isTrue();
 		service.releaseStateMachine("m1", false);
 		assertThat(((Lifecycle)machine1).isRunning()).isTrue();
@@ -104,11 +104,11 @@ public class DefaultStateMachineServiceTests extends AbstractStateMachineTests {
 		context.register(Config1.class);
 		context.refresh();
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINEFACTORY, StateMachineFactory.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINEFACTORY, StateMachineFactory.class);
 
 		DefaultStateMachineService<TestStates, TestEvents> service = new DefaultStateMachineService<>(stateMachineFactory);
-		StateMachine<TestStates,TestEvents> machine1 = service.acquireStateMachine("m1", false);
-		StateMachine<TestStates,TestEvents> machine2 = service.acquireStateMachine("m2", false);
+		StateMachine<TestStates, TestEvents> machine1 = service.acquireStateMachine("m1", false);
+		StateMachine<TestStates, TestEvents> machine2 = service.acquireStateMachine("m2", false);
 		assertThat(((Lifecycle)machine1).isRunning()).isFalse();
 		assertThat(((Lifecycle)machine2).isRunning()).isFalse();
 		Map<?, ?> machines = TestUtils.readField("machines", service);
@@ -124,19 +124,19 @@ public class DefaultStateMachineServiceTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1);
 		}
 	}
 }

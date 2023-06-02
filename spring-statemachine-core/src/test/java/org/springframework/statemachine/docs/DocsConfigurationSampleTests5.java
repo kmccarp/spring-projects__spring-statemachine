@@ -59,9 +59,8 @@ public class DocsConfigurationSampleTests5 extends AbstractStateMachineTests {
 		stateMachine1.startReactively().block();
 
 		stateMachine1
-			.sendEvent(Mono.just(MessageBuilder
-				.withPayload("E1").build()))
-			.blockLast();
+	.sendEvent(Mono.just(MessageBuilder.withPayload("E1").build()))
+	.blockLast();
 		assertThat(stateMachine1.getState().getIds()).containsExactly("S2");
 
 		persister.persist(stateMachine1, "myid");
@@ -86,21 +85,22 @@ public class DocsConfigurationSampleTests5 extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
+
 // end::snippetA[]
 
 // tag::snippetB[]

@@ -46,10 +46,7 @@ public class LinkedRegionsTests extends AbstractBuildTests {
 		stateMachine.addStateListener(listener);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStateChanged(15).expectStates("S3").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStateChanged(15).expectStates("S3").and().build();
 		plan.test();
 		assertThat(listener.statesEntered).satisfies(l -> {
 			l.forEach(s -> {
@@ -65,8 +62,8 @@ public class LinkedRegionsTests extends AbstractBuildTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -91,6 +88,7 @@ public class LinkedRegionsTests extends AbstractBuildTests {
 			statesEntered.stream().forEach(System.out::println);
 		}
 	}
+
 	@Override
 	protected AnnotationConfigApplicationContext buildContext() {
 		return new AnnotationConfigApplicationContext();

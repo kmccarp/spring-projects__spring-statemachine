@@ -52,7 +52,7 @@ public class ReactiveLifecycleManager implements StateMachineReactiveLifecycle {
 	}
 
 	public ReactiveLifecycleManager(Supplier<Mono<Void>> preStartRequest, Supplier<Mono<Void>> preStopRequest,
-			Supplier<Mono<Void>> postStartRequest, Supplier<Mono<Void>> postStopRequest) {
+Supplier<Mono<Void>> postStartRequest, Supplier<Mono<Void>> postStopRequest) {
 		this.preStartRequest = preStartRequest;
 		this.preStopRequest = preStopRequest;
 		this.postStartRequest = postStartRequest;
@@ -68,19 +68,19 @@ public class ReactiveLifecycleManager implements StateMachineReactiveLifecycle {
 		log.debug("Request startReactively " + this);
 		return Mono.defer(() -> {
 			return Mono.just(state.compareAndSet(LifecycleState.STOPPED, LifecycleState.STARTING))
-				.filter(owns -> owns)
-				.flatMap(owns -> this.startRequests.next().flatMap(Function.identity()).doOnSuccess(aVoid -> {
-					state.set(LifecycleState.STARTED);
-				}));
-		})
-		.then(Mono.defer(postStartRequest))
-		.then(Mono.defer(() -> {
-			if (stopRequested.compareAndSet(true, false)) {
-				log.debug("Stopping as stopRequested is true");
-				return stopReactively();
-			}
-			return Mono.empty();
+		.filter(owns -> owns)
+		.flatMap(owns -> this.startRequests.next().flatMap(Function.identity()).doOnSuccess(aVoid -> {
+			state.set(LifecycleState.STARTED);
 		}));
+		})
+	.then(Mono.defer(postStartRequest))
+	.then(Mono.defer(() -> {
+		if (stopRequested.compareAndSet(true, false)) {
+			log.debug("Stopping as stopRequested is true");
+			return stopReactively();
+		}
+		return Mono.empty();
+	}));
 	}
 
 	@Override
@@ -88,20 +88,20 @@ public class ReactiveLifecycleManager implements StateMachineReactiveLifecycle {
 		log.debug("Request stopReactively " + this);
 		return Mono.defer(() -> {
 			return Mono.just(state.compareAndSet(LifecycleState.STARTED, LifecycleState.STOPPING))
-				.doOnNext(owns -> {
-					// TODO: REACTOR needs better use of atomic
-					if (!owns && state.get() != LifecycleState.STOPPED) {
-						log.debug("Don't own, requesting to postpone stop" + this);
-						stopRequested.compareAndSet(false, true);
-					}
-				})
-				.filter(owns -> owns)
-				.flatMap(owns -> this.stopRequests.next().flatMap(Function.identity()).doOnSuccess(aVoid -> {
-					state.set(LifecycleState.STOPPED);
-				}))
-				;
+		.doOnNext(owns -> {
+			// TODO: REACTOR needs better use of atomic
+			if (!owns && state.get() != LifecycleState.STOPPED) {
+				log.debug("Don't own, requesting to postpone stop" + this);
+				stopRequested.compareAndSet(false, true);
+			}
 		})
-		.then(Mono.defer(postStopRequest))
+		.filter(owns -> owns)
+		.flatMap(owns -> this.stopRequests.next().flatMap(Function.identity()).doOnSuccess(aVoid -> {
+			state.set(LifecycleState.STOPPED);
+		}))
+			;
+		})
+	.then(Mono.defer(postStopRequest))
 		;
 	}
 

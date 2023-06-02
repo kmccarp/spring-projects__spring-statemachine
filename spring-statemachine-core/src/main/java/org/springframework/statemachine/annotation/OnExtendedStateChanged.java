@@ -40,7 +40,7 @@ import org.springframework.statemachine.StateMachine;
  * @author Janne Valkealahti
  *
  */
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented

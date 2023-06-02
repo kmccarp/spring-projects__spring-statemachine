@@ -49,13 +49,13 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 	 * {@link org.springframework.statemachine.config.ManualBuilderTests#testManualBuildConcept()}
 	 */
 	@Test
-	public void testCreate() throws Exception{
+	public void testCreate() throws Exception {
 		StateMachineConfigBuilder<TestStates, TestEvents> builder = new StateMachineConfigBuilder<>();
 		Config1 config = new Config1();
 		builder.apply(config);
 
-		StateMachineFactory<TestStates,TestEvents> factory = StateMachineFactory.create(builder);
-		StateMachine<TestStates,TestEvents> machine = factory.getStateMachine();
+		StateMachineFactory<TestStates, TestEvents> factory = StateMachineFactory.create(builder);
+		StateMachine<TestStates, TestEvents> machine = factory.getStateMachine();
 		doStartAndAssert(machine);
 
 		assertThat(machine).isNotNull();
@@ -68,7 +68,7 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		context.refresh();
 
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory = resolveFactory(context);
-		StateMachine<TestStates,TestEvents> machine = stateMachineFactory.getStateMachine();
+		StateMachine<TestStates, TestEvents> machine = stateMachineFactory.getStateMachine();
 		doStartAndAssert(machine);
 
 		assertThat(machine.getState().getIds()).containsExactly(TestStates.S1);
@@ -81,7 +81,7 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		context.register(Config2.class);
 		context.refresh();
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory = resolveFactory(context);
-		StateMachine<TestStates,TestEvents> machine = stateMachineFactory.getStateMachine();
+		StateMachine<TestStates, TestEvents> machine = stateMachineFactory.getStateMachine();
 
 		assertThat(((SmartLifecycle)machine).isAutoStartup()).isTrue();
 		assertThat(((SmartLifecycle)machine).isRunning()).isTrue();
@@ -92,7 +92,7 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		context.register(Config3.class);
 		context.refresh();
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory = resolveFactory(context);
-		StateMachine<TestStates,TestEvents> machine = stateMachineFactory.getStateMachine();
+		StateMachine<TestStates, TestEvents> machine = stateMachineFactory.getStateMachine();
 
 		assertThat(((SmartLifecycle)machine).isAutoStartup()).isFalse();
 		assertThat(((SmartLifecycle)machine).isRunning()).isFalse();
@@ -103,7 +103,7 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		context.register(Config4.class);
 		context.refresh();
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory = resolveFactory("factory1", context);
-		StateMachine<TestStates,TestEvents> machine = stateMachineFactory.getStateMachine();
+		StateMachine<TestStates, TestEvents> machine = stateMachineFactory.getStateMachine();
 		doStartAndAssert(machine);
 
 		assertThat(machine.getState().getIds()).containsExactly(TestStates.S1);
@@ -115,8 +115,8 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		context.refresh();
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory1 = resolveFactory("factory1", context);
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory2 = resolveFactory("factory2", context);
-		StateMachine<TestStates,TestEvents> machine1 = stateMachineFactory1.getStateMachine();
-		StateMachine<TestStates,TestEvents> machine2 = stateMachineFactory2.getStateMachine();
+		StateMachine<TestStates, TestEvents> machine1 = stateMachineFactory1.getStateMachine();
+		StateMachine<TestStates, TestEvents> machine2 = stateMachineFactory2.getStateMachine();
 
 		doStartAndAssert(machine1);
 		doStartAndAssert(machine2);
@@ -131,7 +131,7 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		context.refresh();
 
 		StateMachineFactory<TestStates, TestEvents> stateMachineFactory = resolveFactory(context);
-		StateMachine<TestStates,TestEvents> machine = stateMachineFactory.getStateMachine();
+		StateMachine<TestStates, TestEvents> machine = stateMachineFactory.getStateMachine();
 
 		// factory waits machine to get started so we
 		// should have state immediately
@@ -153,19 +153,19 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1);
 		}
 	}
 
@@ -176,19 +176,19 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withVerifier()
-					.enabled(false)
-					.and()
-				.withConfiguration()
-					.autoStartup(true);
+		.withVerifier()
+		.enabled(false)
+		.and()
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 	}
@@ -200,19 +200,19 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withVerifier()
-					.enabled(false)
-					.and()
-				.withConfiguration()
-					.autoStartup(false);
+		.withVerifier()
+		.enabled(false)
+		.and()
+		.withConfiguration()
+		.autoStartup(false);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 	}
@@ -224,25 +224,25 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(false);
+		.withConfiguration()
+		.autoStartup(false);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1);
 		}
 
 	}
@@ -254,25 +254,25 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(false);
+		.withConfiguration()
+		.autoStartup(false);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1);
 		}
 
 	}
@@ -284,26 +284,26 @@ public class StateMachineFactoryTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1);
 		}
 	}
 

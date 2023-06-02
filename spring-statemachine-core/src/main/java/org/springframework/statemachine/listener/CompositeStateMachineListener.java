@@ -33,14 +33,13 @@ import org.springframework.statemachine.transition.Transition;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class CompositeStateMachineListener<S, E> extends AbstractCompositeListener<StateMachineListener<S, E>>
-		implements StateMachineListener<S, E> {
+public class CompositeStateMachineListener<S, E> extends AbstractCompositeListener<StateMachineListener<S, E>>implements StateMachineListener<S, E> {
 
 	private final static Log log = LogFactory.getLog(CompositeStateMachineListener.class);
 
 	@Override
 	public void stateChanged(State<S, E> from, State<S, E> to) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.stateChanged(from, to);
@@ -52,7 +51,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void stateEntered(State<S, E> state) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.stateEntered(state);
@@ -64,7 +63,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void stateExited(State<S, E> state) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.stateExited(state);
@@ -76,7 +75,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void eventNotAccepted(Message<E> event) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.eventNotAccepted(event);
@@ -88,7 +87,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void transition(Transition<S, E> transition) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.transition(transition);
@@ -100,7 +99,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void transitionStarted(Transition<S, E> transition) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.transitionStarted(transition);
@@ -112,7 +111,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void transitionEnded(Transition<S, E> transition) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.transitionEnded(transition);
@@ -124,7 +123,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void stateMachineStarted(StateMachine<S, E> stateMachine) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.stateMachineStarted(stateMachine);
@@ -136,7 +135,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void stateMachineStopped(StateMachine<S, E> stateMachine) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.stateMachineStopped(stateMachine);
@@ -148,7 +147,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void stateMachineError(StateMachine<S, E> stateMachine, Exception exception) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.stateMachineError(stateMachine, exception);
@@ -160,7 +159,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void extendedStateChanged(Object key, Object value) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.extendedStateChanged(key, value);
@@ -172,7 +171,7 @@ public class CompositeStateMachineListener<S, E> extends AbstractCompositeListen
 
 	@Override
 	public void stateContext(StateContext<S, E> stateContext) {
-		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			StateMachineListener<S, E> listener = iterator.next();
 			try {
 				listener.stateContext(stateContext);

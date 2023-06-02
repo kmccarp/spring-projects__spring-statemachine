@@ -25,7 +25,7 @@ import org.springframework.statemachine.StateMachineEventResult;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@SuppressWarnings({ "unused", "deprecation" })
+@SuppressWarnings({"unused", "deprecation"})
 public class DocsMigrationTests {
 
 	StateMachine<String, String> machine;
@@ -54,10 +54,10 @@ public class DocsMigrationTests {
 		// tag::snippetB3[]
 		Mono<Message<String>> mono = Mono.just(MessageBuilder.withPayload("EVENT").build());
 		machine.sendEvent(mono)
-			.doOnComplete(() -> {
-				System.out.println("Event handling complete");
-			})
-			.subscribe();
+	.doOnComplete(() -> {
+		System.out.println("Event handling complete");
+	})
+	.subscribe();
 		// end::snippetB3[]
 	}
 

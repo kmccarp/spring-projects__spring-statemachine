@@ -33,16 +33,15 @@ import org.springframework.util.Assert;
  * @author Rob Winch
  * @author Janne Valkealahti
  */
-public class DefaultEventSecurityExpressionHandler<T> extends
-		AbstractSecurityExpressionHandler<Message<T>> {
+public class DefaultEventSecurityExpressionHandler<T> extendsAbstractSecurityExpressionHandler<Message<T>> {
 
 	private AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
 
 	@Override
 	protected SecurityExpressionOperations createSecurityExpressionRoot(
-			Authentication authentication, Message<T> invocation) {
+Authentication authentication, Message<T> invocation) {
 		EventSecurityExpressionRoot root = new EventSecurityExpressionRoot(
-				authentication, invocation);
+	authentication, invocation);
 		root.setPermissionEvaluator(getPermissionEvaluator());
 		root.setTrustResolver(trustResolver);
 		root.setRoleHierarchy(getRoleHierarchy());

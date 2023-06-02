@@ -30,8 +30,7 @@ import org.springframework.statemachine.transition.Transition;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface JunctionTransitionConfigurer<S, E>
-		extends AnnotationConfigurerBuilder<StateMachineTransitionConfigurer<S, E>> {
+public interface JunctionTransitionConfigurer<S, E>extends AnnotationConfigurerBuilder<StateMachineTransitionConfigurer<S, E>> {
 
 	/**
 	 * Specify a source state {@code S} for this {@link Transition}.

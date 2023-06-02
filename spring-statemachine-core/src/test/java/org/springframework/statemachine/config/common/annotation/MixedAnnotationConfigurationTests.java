@@ -35,7 +35,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(loader=AnnotationConfigContextLoader.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class)
 public class MixedAnnotationConfigurationTests {
 
 	@Autowired
@@ -72,8 +72,8 @@ public class MixedAnnotationConfigurationTests {
 		@Override
 		public void configure(SimpleTestConfigBuilder config) throws Exception {
 			config
-				.withProperties()
-					.property("simpleKey1", "simpleValue1");
+		.withProperties()
+		.property("simpleKey1", "simpleValue1");
 		}
 	}
 
@@ -84,8 +84,8 @@ public class MixedAnnotationConfigurationTests {
 		@Override
 		public void configure(ComplexTestConfigBuilder config) throws Exception {
 			config
-				.withProperties()
-					.property("complexKey1", "complexValue1");
+		.withProperties()
+		.property("complexKey1", "complexValue1");
 		}
 	}
 

@@ -38,8 +38,8 @@ public class AbstractLocalTransition<S, E> extends AbstractTransition<S, E> {
 	 * @param trigger the trigger
 	 */
 	public AbstractLocalTransition(State<S, E> source, State<S, E> target,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
+Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger) {
 		super(source, target, actions, event, TransitionKind.LOCAL, guard, trigger);
 	}
 
@@ -55,8 +55,8 @@ public class AbstractLocalTransition<S, E> extends AbstractTransition<S, E> {
 	 * @param securityRule the security rule
 	 */
 	public AbstractLocalTransition(State<S, E> source, State<S, E> target,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger, SecurityRule securityRule) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
+Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger, SecurityRule securityRule) {
 		super(source, target, actions, event, TransitionKind.LOCAL, guard, trigger, securityRule, null);
 	}
 
@@ -73,8 +73,8 @@ public class AbstractLocalTransition<S, E> extends AbstractTransition<S, E> {
 	 * @param name the name
 	 */
 	public AbstractLocalTransition(State<S, E> source, State<S, E> target,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger, SecurityRule securityRule, String name) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
+Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger, SecurityRule securityRule, String name) {
 		super(source, target, actions, event, TransitionKind.LOCAL, guard, trigger, securityRule, name);
 	}
 }

@@ -33,12 +33,11 @@ import reactor.core.publisher.Mono;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class CompositeStateMachineMonitor<S, E> extends AbstractCompositeItems<StateMachineMonitor<S, E>>
-		implements StateMachineMonitor<S, E> {
+public class CompositeStateMachineMonitor<S, E> extends AbstractCompositeItems<StateMachineMonitor<S, E>>implements StateMachineMonitor<S, E> {
 
 	@Override
 	public void transition(StateMachine<S, E> stateMachine, Transition<S, E> transition, long duration) {
-		for (Iterator<StateMachineMonitor<S, E>> iterator = getItems().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineMonitor<S, E>> iterator = getItems().reverse();iterator.hasNext();) {
 			StateMachineMonitor<S, E> monitor = iterator.next();
 			monitor.transition(stateMachine, transition, duration);
 		}
@@ -46,8 +45,8 @@ public class CompositeStateMachineMonitor<S, E> extends AbstractCompositeItems<S
 
 	@Override
 	public void action(StateMachine<S, E> stateMachine, Function<StateContext<S, E>, Mono<Void>> action,
-			long duration) {
-		for (Iterator<StateMachineMonitor<S, E>> iterator = getItems().reverse(); iterator.hasNext();) {
+long duration) {
+		for (Iterator<StateMachineMonitor<S, E>> iterator = getItems().reverse();iterator.hasNext();) {
 			StateMachineMonitor<S, E> monitor = iterator.next();
 			monitor.action(stateMachine, action, duration);
 		}

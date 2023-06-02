@@ -35,7 +35,7 @@ import org.springframework.security.core.Authentication;
  *
  * @param <T> the message type
  */
-public class EventVoter<T> implements AccessDecisionVoter<Message<T>>{
+public class EventVoter<T> implements AccessDecisionVoter<Message<T>> {
 
 	private String eventPrefix = "EVENT_";
 

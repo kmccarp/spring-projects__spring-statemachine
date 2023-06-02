@@ -19,15 +19,14 @@ import java.util.Iterator;
 
 import org.springframework.statemachine.listener.AbstractCompositeListener;
 
-public class CompositePseudoStateListener<S, E> extends AbstractCompositeListener<PseudoStateListener<S, E>> implements
-		PseudoStateListener<S, E> {
+public class CompositePseudoStateListener<S, E> extends AbstractCompositeListener<PseudoStateListener<S, E>> implementsPseudoStateListener<S, E> {
 
 	@Override
 	public void onContext(PseudoStateContext<S, E> context) {
-		for (Iterator<PseudoStateListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
-			PseudoStateListener<S, E> listener = iterator.next();			
+		for (Iterator<PseudoStateListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
+			PseudoStateListener<S, E> listener = iterator.next();
 			listener.onContext(context);
-		}		
+		}
 	}
 
 }

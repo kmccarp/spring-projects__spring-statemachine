@@ -98,7 +98,7 @@ public class ZookeeperStateMachinePersist<S, E> implements StateMachinePersist<S
 	}
 
 	@Override
-	public void write(StateMachineContext<S,E> context, Stat stat) {
+	public void write(StateMachineContext<S, E> context, Stat stat) {
 		byte[] data = serialize(context);
 		CuratorTransaction tx = curatorClient.inTransaction();
 		try {

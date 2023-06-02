@@ -32,9 +32,7 @@ import org.springframework.statemachine.config.model.TransitionsData;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultJoinTransitionConfigurer<S, E>
-		extends	AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>
-		implements JoinTransitionConfigurer<S, E> {
+public class DefaultJoinTransitionConfigurer<S, E>extends	AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>implements JoinTransitionConfigurer<S, E> {
 
 	private S target;
 

@@ -36,6 +36,6 @@ import org.springframework.statemachine.config.common.annotation.configuration.O
 @Target(ElementType.TYPE)
 @Documented
 @EnableAnnotationConfiguration
-@Import({ComplexTestConfiguration.class,ObjectPostProcessorConfiguration.class})
+@Import({ComplexTestConfiguration.class, ObjectPostProcessorConfiguration.class})
 public @interface EnableComplexTest {
 }

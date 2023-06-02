@@ -52,6 +52,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void anyTransition() {
 		}
 	}
+
 // end::snippetA[]
 
 // tag::snippetAA[]
@@ -62,6 +63,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void anyTransition() {
 		}
 	}
+
 // end::snippetAA[]
 
 // tag::snippetAAAA[]
@@ -72,6 +74,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void anyTransition() {
 		}
 	}
+
 // end::snippetAAAA[]
 
 // tag::snippetAAA[]
@@ -80,6 +83,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 	@WithStateMachine(name = "myMachineBeanName")
 	public @interface WithMyBean {
 	}
+
 // end::snippetAAA[]
 
 
@@ -88,20 +92,20 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		Builder<String, String> builder = StateMachineBuilder.builder();
 
 		builder.configureConfiguration()
-			.withConfiguration()
-				.machineId("myMachineId")
-				.beanFactory(beanFactory);
+	.withConfiguration()
+	.machineId("myMachineId")
+	.beanFactory(beanFactory);
 
 		builder.configureStates()
-			.withStates()
-				.initial("S1")
-				.state("S2");
+	.withStates()
+	.initial("S1")
+	.state("S2");
 
 		builder.configureTransitions()
-			.withExternal()
-				.source("S1")
-				.target("S2")
-				.event("E1");
+	.withExternal()
+	.source("S1")
+	.target("S2")
+	.event("E1");
 
 		return builder.build();
 	}
@@ -113,6 +117,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void onStateChanged() {
 		}
 	}
+
 // end::snippetAAAAA[]
 
 // tag::snippetB[]
@@ -123,6 +128,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void anyTransition(StateContext<String, String> stateContext) {
 		}
 	}
+
 // end::snippetB[]
 
 // tag::snippetBB[]
@@ -131,15 +137,16 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 
 		@OnTransition
 		public void anyTransition(
-				@EventHeaders Map<String, Object> headers,
-				@EventHeader("myheader1") Object myheader1,
-				@EventHeader(name = "myheader2", required = false) String myheader2,
-				ExtendedState extendedState,
-				StateMachine<String, String> stateMachine,
-				Message<String> message,
-				Exception e) {
+	@EventHeaders Map<String, Object> headers,
+	@EventHeader("myheader1") Object myheader1,
+	@EventHeader(name = "myheader2", required = false) String myheader2,
+	ExtendedState extendedState,
+	StateMachine<String, String> stateMachine,
+	Message<String> message,
+	Exception e) {
 		}
 	}
+
 // end::snippetBB[]
 
 // tag::snippetC[]
@@ -154,6 +161,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void anyTransition() {
 		}
 	}
+
 // end::snippetC[]
 
 // tag::snippetD[]
@@ -164,6 +172,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void fromS1ToS2(@EventHeaders Map<String, Object> headers, ExtendedState extendedState) {
 		}
 	}
+
 // end::snippetD[]
 
 // tag::snippetE[]
@@ -176,6 +185,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 
 		States[] target() default {};
 	}
+
 // end::snippetE[]
 
 // tag::snippetF[]
@@ -186,6 +196,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void fromS1ToS2() {
 		}
 	}
+
 // end::snippetF[]
 
 // tag::snippetG[]
@@ -196,6 +207,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void anyStateChange() {
 		}
 	}
+
 // end::snippetG[]
 
 // tag::snippetGG[]
@@ -206,6 +218,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void stateChangeFromS1toS2() {
 		}
 	}
+
 // end::snippetGG[]
 
 // tag::snippetGGG[]
@@ -218,6 +231,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 
 		States[] target() default {};
 	}
+
 // end::snippetGGG[]
 
 // tag::snippetGGGG[]
@@ -228,6 +242,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void fromS1ToS2() {
 		}
 	}
+
 // end::snippetGGGG[]
 
 // tag::snippetGGGGG[]
@@ -242,6 +257,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void anyStateExit() {
 		}
 	}
+
 // end::snippetGGGGG[]
 
 // tag::snippetH[]
@@ -256,6 +272,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void e1EventNotAccepted() {
 		}
 	}
+
 // end::snippetH[]
 
 // tag::snippetI[]
@@ -270,6 +287,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void onStateMachineStop() {
 		}
 	}
+
 // end::snippetI[]
 
 // tag::snippetII[]
@@ -280,6 +298,7 @@ public class DocsConfigurationSampleTests4 extends AbstractStateMachineTests {
 		public void onStateMachineError() {
 		}
 	}
+
 // end::snippetII[]
 
 // tag::snippetJ[]

@@ -29,12 +29,11 @@ import org.springframework.statemachine.listener.AbstractCompositeListener;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class CompositeEnsembleListener<S, E> extends AbstractCompositeListener<EnsembleListener<S, E>> implements
-	EnsembleListener<S, E> {
+public class CompositeEnsembleListener<S, E> extends AbstractCompositeListener<EnsembleListener<S, E>> implementsEnsembleListener<S, E> {
 
 	@Override
 	public void stateMachineJoined(StateMachine<S, E> stateMachine, StateMachineContext<S, E> context) {
-		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			EnsembleListener<S, E> listener = iterator.next();
 			listener.stateMachineJoined(stateMachine, context);
 		}
@@ -42,7 +41,7 @@ public class CompositeEnsembleListener<S, E> extends AbstractCompositeListener<E
 
 	@Override
 	public void stateMachineLeft(StateMachine<S, E> stateMachine, StateMachineContext<S, E> context) {
-		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			EnsembleListener<S, E> listener = iterator.next();
 			listener.stateMachineLeft(stateMachine, context);
 		}
@@ -50,7 +49,7 @@ public class CompositeEnsembleListener<S, E> extends AbstractCompositeListener<E
 
 	@Override
 	public void stateChanged(StateMachineContext<S, E> context) {
-		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			EnsembleListener<S, E> listener = iterator.next();
 			listener.stateChanged(context);
 		}
@@ -58,7 +57,7 @@ public class CompositeEnsembleListener<S, E> extends AbstractCompositeListener<E
 
 	@Override
 	public void ensembleError(StateMachineEnsembleException exception) {
-		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			EnsembleListener<S, E> listener = iterator.next();
 			listener.ensembleError(exception);
 		}
@@ -66,7 +65,7 @@ public class CompositeEnsembleListener<S, E> extends AbstractCompositeListener<E
 
 	@Override
 	public void ensembleLeaderGranted(StateMachine<S, E> stateMachine) {
-		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			EnsembleListener<S, E> listener = iterator.next();
 			listener.ensembleLeaderGranted(stateMachine);
 		}
@@ -74,7 +73,7 @@ public class CompositeEnsembleListener<S, E> extends AbstractCompositeListener<E
 
 	@Override
 	public void ensembleLeaderRevoked(StateMachine<S, E> stateMachine) {
-		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<EnsembleListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			EnsembleListener<S, E> listener = iterator.next();
 			listener.ensembleLeaderRevoked(stateMachine);
 		}

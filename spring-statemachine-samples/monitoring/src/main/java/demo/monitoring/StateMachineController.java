@@ -46,9 +46,9 @@ public class StateMachineController {
 		if (events != null) {
 			for (String event : events) {
 				stateMachine
-					.sendEvent(Mono.just(MessageBuilder
-						.withPayload(event).build()))
-					.blockLast();
+			.sendEvent(Mono.just(MessageBuilder
+	.withPayload(event).build()))
+			.blockLast();
 			}
 		}
 		stateMachine.stopReactively().block();

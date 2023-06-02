@@ -95,9 +95,9 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 	private Disposable triggerDisposable;
 
 	public ReactiveStateMachineExecutor(StateMachine<S, E> stateMachine, StateMachine<S, E> relayStateMachine,
-			Collection<Transition<S, E>> transitions, Map<Trigger<S, E>, Transition<S, E>> triggerToTransitionMap,
-			List<Transition<S, E>> triggerlessTransitions, Transition<S, E> initialTransition, Message<E> initialEvent,
-			TransitionConflictPolicy transitionConflictPolicy) {
+Collection<Transition<S, E>> transitions, Map<Trigger<S, E>, Transition<S, E>> triggerToTransitionMap,
+List<Transition<S, E>> triggerlessTransitions, Transition<S, E> initialTransition, Message<E> initialEvent,
+TransitionConflictPolicy transitionConflictPolicy) {
 		this.stateMachine = stateMachine;
 		this.relayStateMachine = relayStateMachine;
 		this.triggerToTransitionMap = triggerToTransitionMap;
@@ -202,13 +202,12 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 		Mono<Void> triggerCallbackSink = Mono.create(triggerCallback);
 
 		return messages
-			.flatMap(m -> handleEvent(m, callback, triggerCallback))
-			.flatMap(tqi -> Mono.fromRunnable(() -> {
-					triggerSink.emitNext(tqi, EmitFailureHandler.FAIL_FAST);
-				})
-				.retryWhen(Retry.fixedDelay(10, Duration.ofMillis(10))))
-			.then()
-			.and(triggerCallbackSink);
+	.flatMap(m -> handleEvent(m, callback, triggerCallback))
+	.flatMap(tqi -> Mono.fromRunnable(() -> {
+		triggerSink.emitNext(tqi, EmitFailureHandler.FAIL_FAST);
+	}).retryWhen(Retry.fixedDelay(10, Duration.ofMillis(10))))
+	.then()
+	.and(triggerCallbackSink);
 	}
 
 	private Mono<TriggerQueueItem> handleEvent(Message<E> queuedEvent, StateMachineExecutorCallback callback, StateMachineExecutorCallback triggerCallback) {
@@ -216,36 +215,36 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 			log.debug("Handling message " + queuedEvent);
 		}
 		return Mono.defer(() -> {
-			State<S,E> currentState = stateMachine.getState();
+			State<S, E> currentState = stateMachine.getState();
 			if ((currentState != null && currentState.shouldDefer(queuedEvent))) {
 				log.info("Current state " + currentState + " deferred event " + queuedEvent);
 				return Mono.just(new TriggerQueueItem(null, queuedEvent, callback, triggerCallback));
 			}
 			TriggerContext<S, E> triggerContext = new DefaultTriggerContext<S, E>(queuedEvent.getPayload());
 			return Flux.fromIterable(transitions)
-				.filter(transition -> transition.getTrigger() != null)
-				.filter(transition -> StateMachineUtils.containsAtleastOne(transition.getSource().getIds(),
-						currentState.getIds()))
-				.flatMap(transition -> {
-					return Mono.from(transition.getTrigger().evaluate(triggerContext))
-						.flatMap(e -> {
-							if (e) {
-								return Mono.just(transition.getTrigger());
-							} else {
-								return Mono.empty();
-							}
-						});
-				})
-				.next()
-				.doOnNext(trigger -> deferList.remove(queuedEvent))
-				.map(trigger -> new TriggerQueueItem(trigger, queuedEvent, callback, triggerCallback));
+		.filter(transition -> transition.getTrigger() != null)
+		.filter(transition -> StateMachineUtils.containsAtleastOne(transition.getSource().getIds(),
+currentState.getIds()))
+		.flatMap(transition -> {
+			return Mono.from(transition.getTrigger().evaluate(triggerContext))
+	.flatMap(e -> {
+		if (e) {
+			return Mono.just(transition.getTrigger());
+		} else {
+			return Mono.empty();
+		}
+	});
+		})
+		.next()
+		.doOnNext(trigger -> deferList.remove(queuedEvent))
+		.map(trigger -> new TriggerQueueItem(trigger, queuedEvent, callback, triggerCallback));
 		});
 	}
 
 	private Mono<Void> handleTrigger(TriggerQueueItem queueItem) {
 		return Mono.defer(() -> {
 			Mono<Void> ret = null;
-			State<S,E> currentState = stateMachine.getState();
+			State<S, E> currentState = stateMachine.getState();
 			if (queueItem != null && currentState != null) {
 				if (log.isDebugEnabled()) {
 					log.debug("Process trigger item " + queueItem + " " + this);
@@ -305,35 +304,31 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 			}
 			return ret;
 		})
-		.onErrorResume(resumeTriggerErrorToContext())
-		.and(Mono.deferContextual(Mono::just)
-			.doOnNext(ctx -> {
-				if (queueItem.callback != null) {
-					Optional<ExecutorExceptionHolder> holder = ctx.getOrEmpty(StateMachineSystemConstants.REACTOR_CONTEXT_ERRORS);
-					holder.ifPresent(h -> {
-						if (h.getError() != null) {
-							queueItem.callback.error(new StateMachineException("Execution error", h.getError()));
-						} else {
-							queueItem.callback.complete();
-						}
-					});
-				}
+	.onErrorResume(resumeTriggerErrorToContext())
+	.and(Mono.deferContextual(Mono::just).doOnNext(ctx -> {
+if (queueItem.callback != null) {
+	Optional<ExecutorExceptionHolder> holder = ctx.getOrEmpty(StateMachineSystemConstants.REACTOR_CONTEXT_ERRORS);
+	holder.ifPresent(h -> {
+		if (h.getError() != null) {
+			queueItem.callback.error(new StateMachineException("Execution error", h.getError()));
+		} else {
+			queueItem.callback.complete();
+		}
+	});
+}
 
-				if (queueItem.triggerCallback != null) {
-					Optional<ExecutorExceptionHolder> holder = ctx.getOrEmpty(REACTOR_CONTEXT_TRIGGER_ERRORS);
-					holder.ifPresent(h -> {
-						if (h.getError() != null) {
-							queueItem.triggerCallback.error(new StateMachineException("Execution error", h.getError()));
-						} else {
-							queueItem.triggerCallback.complete();
-						}
-					});
-				}
-			})
-		)
-		.contextWrite(Context.of(
-				StateMachineSystemConstants.REACTOR_CONTEXT_ERRORS, new ExecutorExceptionHolder(),
-				REACTOR_CONTEXT_TRIGGER_ERRORS, new ExecutorExceptionHolder()));
+if (queueItem.triggerCallback != null) {
+	Optional<ExecutorExceptionHolder> holder = ctx.getOrEmpty(REACTOR_CONTEXT_TRIGGER_ERRORS);
+	holder.ifPresent(h -> {
+		if (h.getError() != null) {
+			queueItem.triggerCallback.error(new StateMachineException("Execution error", h.getError()));
+		} else {
+			queueItem.triggerCallback.complete();
+		}
+	});
+}})
+	)
+	.contextWrite(Context.of(StateMachineSystemConstants.REACTOR_CONTEXT_ERRORS, new ExecutorExceptionHolder(),REACTOR_CONTEXT_TRIGGER_ERRORS, new ExecutorExceptionHolder()));
 	}
 
 
@@ -361,83 +356,78 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 
 	private Mono<Boolean> handleTriggerTrans(List<Transition<S, E>> trans, Message<E> queuedMessage, State<S, E> completion) {
 		return Flux.fromIterable(trans)
-			.filter(t -> {
-				State<S,E> source = t.getSource();
-				if (source == null) {
-					return false;
+	.filter(t -> {
+		State<S, E> source = t.getSource();
+		if (source == null) {
+			return false;
+		}
+		State<S, E> currentState = stateMachine.getState();
+		if (currentState == null) {
+			return false;
+		}
+		if (!StateMachineUtils.containsAtleastOne(source.getIds(), currentState.getIds())) {
+			return false;
+		}
+		if (transitionConflictPolicy != TransitionConflictPolicy.PARENT && completion != null
+&& !source.getId().equals(completion.getId())) {
+			if (source.isOrthogonal()) {
+				return false;
+			} else if (!StateMachineUtils.isSubstate(source, completion)) {
+				return false;
+			}
+		}
+		return true;
+	})
+	.flatMap(t -> {
+		if (StateMachineUtils.isPseudoState(t.getTarget(), PseudoStateKind.JOIN)) {
+			if (joinSyncStates.isEmpty()) {
+				List<List<State<S, E>>> joins = ((JoinPseudoState<S, E>)t.getTarget().getPseudoState()).getJoins();
+				for (List<State<S, E>> j : joins) {
+					joinSyncStates.addAll(j);
 				}
-				State<S,E> currentState = stateMachine.getState();
-				if (currentState == null) {
-					return false;
-				}
-				if (!StateMachineUtils.containsAtleastOne(source.getIds(), currentState.getIds())) {
-					return false;
-				}
-				if (transitionConflictPolicy != TransitionConflictPolicy.PARENT && completion != null
-							&& !source.getId().equals(completion.getId())) {
-					if (source.isOrthogonal()) {
-						return false;
-					} else if (!StateMachineUtils.isSubstate(source, completion)) {
-						return false;
-					}
-				}
-				return true;
-			})
-			.flatMap(t -> {
-				if (StateMachineUtils.isPseudoState(t.getTarget(), PseudoStateKind.JOIN)) {
-					if (joinSyncStates.isEmpty()) {
-						List<List<State<S,E>>> joins = ((JoinPseudoState<S, E>)t.getTarget().getPseudoState()).getJoins();
-						for (List<State<S,E>> j : joins) {
-							joinSyncStates.addAll(j);
-						}
-					}
-					joinSyncTransitions.add(t);
-					boolean removed = joinSyncStates.remove(t.getSource());
-					boolean joincomplete = removed & joinSyncStates.isEmpty();
-					if (joincomplete) {
-						return Flux.fromIterable(joinSyncTransitions)
-							.flatMap(tt -> {
-								StateContext<S, E> stateContext = buildStateContext(queuedMessage, tt, relayStateMachine);
-								return tt.transit(stateContext).then(stateMachineExecutorTransit.transit(tt, stateContext, queuedMessage));
-							})
-							.doFinally(s -> {
-								joinSyncTransitions.clear();
-							})
-							.then(Mono.just(true));
-					} else {
-						return Mono.just(false);
-					}
-				} else {
-					StateContext<S, E> stateContext = buildStateContext(queuedMessage, t, relayStateMachine);
-					return Mono.just(stateContext)
-						.map(context -> interceptors.preTransition(stateContext))
-						.then(t.transit(stateContext)
-							.flatMap(at -> {
-								if (at) {
-									return stateMachineExecutorTransit.transit(t, stateContext, queuedMessage)
-									.thenReturn(true)
-									.doOnNext(a -> {
-										interceptors.postTransition(stateContext);
-									});
-								} else {
-									return Mono.just(false);
-								}
-							})
-						);
-				}
-			})
-			.takeUntil(transit -> transit)
-			.last(false);
+			}
+			joinSyncTransitions.add(t);
+			boolean removed = joinSyncStates.remove(t.getSource());
+			boolean joincomplete = removed & joinSyncStates.isEmpty();
+			if (joincomplete) {
+				return Flux.fromIterable(joinSyncTransitions)
+		.flatMap(tt -> {
+			StateContext<S, E> stateContext = buildStateContext(queuedMessage, tt, relayStateMachine);
+			return tt.transit(stateContext).then(stateMachineExecutorTransit.transit(tt, stateContext, queuedMessage));
+		})
+		.doFinally(s -> {
+			joinSyncTransitions.clear();
+		})
+		.then(Mono.just(true));
+			} else {
+				return Mono.just(false);
+			}
+		} else {
+			StateContext<S, E> stateContext = buildStateContext(queuedMessage, t, relayStateMachine);
+			return Mono.just(stateContext)
+	.map(context -> interceptors.preTransition(stateContext))
+	.then(t.transit(stateContext).flatMap(at -> {
+if (at) {
+	return stateMachineExecutorTransit.transit(t, stateContext, queuedMessage).thenReturn(true).doOnNext(a -> {
+interceptors.postTransition(stateContext);});
+} else {
+	return Mono.just(false);
+}})
+	);
+		}
+	})
+	.takeUntil(transit -> transit)
+	.last(false);
 	}
 
-	private StateContext<S, E> buildStateContext(Message<E> message, Transition<S,E> transition, StateMachine<S, E> stateMachine) {
+	private StateContext<S, E> buildStateContext(Message<E> message, Transition<S, E> transition, StateMachine<S, E> stateMachine) {
 		// TODO: maybe a direct use of MessageHeaders is wring, combine
 		//       payload and headers as a message?
 
 		// add sm id to headers so that user of a StateContext can
 		// see who initiated this transition
 		MessageHeaders messageHeaders = message != null ? message.getHeaders() : new MessageHeaders(
-				new HashMap<String, Object>());
+	new HashMap<String, Object>());
 		Map<String, Object> map = new HashMap<String, Object>(messageHeaders);
 		if (!map.containsKey(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER)) {
 			// don't set sm id if it's already present because
@@ -450,19 +440,19 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 	private void registerTriggerListener() {
 		for (final Trigger<S, E> trigger : triggerToTransitionMap.keySet()) {
 			if (trigger instanceof TimerTrigger) {
-				((TimerTrigger<?, ?>) trigger).addTriggerListener(new TriggerListener() {
+				((TimerTrigger<?, ?>)trigger).addTriggerListener(new TriggerListener() {
 					@Override
 					public void triggered() {
 						if (log.isDebugEnabled()) {
 							log.debug("TimedTrigger triggered " + trigger);
 						}
 						Mono.just(new TriggerQueueItem(trigger, null, null, null))
-							.flatMap(tqi -> Mono.fromCallable(() -> {
-									triggerSink.emitNext(tqi, EmitFailureHandler.FAIL_FAST);
-									return null;
-								})
-								.retryWhen(Retry.fixedDelay(10, Duration.ofNanos(10))))
-							.subscribe();
+					.flatMap(tqi -> Mono.fromCallable(() -> {
+						triggerSink.emitNext(tqi, EmitFailureHandler.FAIL_FAST);
+						return null;
+					})
+			.retryWhen(Retry.fixedDelay(10, Duration.ofNanos(10))))
+					.subscribe();
 					}
 				});
 			}
@@ -471,33 +461,33 @@ public class ReactiveStateMachineExecutor<S, E> extends LifecycleObjectSupport i
 
 	private Mono<Void> startTriggers() {
 		List<StateMachineReactiveLifecycle> smrl = triggerToTransitionMap.keySet().stream()
-			.filter(StateMachineReactiveLifecycle.class::isInstance)
-			.map(StateMachineReactiveLifecycle.class::cast)
-			.collect(Collectors.toList());
+	.filter(StateMachineReactiveLifecycle.class::isInstance)
+	.map(StateMachineReactiveLifecycle.class::cast)
+	.collect(Collectors.toList());
 		return Flux.fromIterable(smrl)
-			.flatMap(StateMachineReactiveLifecycle::startReactively)
-			.then();
+	.flatMap(StateMachineReactiveLifecycle::startReactively)
+	.then();
 	}
 
 	private Mono<Void> stopTriggers() {
 		List<StateMachineReactiveLifecycle> smrl = triggerToTransitionMap.keySet().stream()
-			.filter(StateMachineReactiveLifecycle.class::isInstance)
-			.map(StateMachineReactiveLifecycle.class::cast)
-			.collect(Collectors.toList());
+	.filter(StateMachineReactiveLifecycle.class::isInstance)
+	.map(StateMachineReactiveLifecycle.class::cast)
+	.collect(Collectors.toList());
 		return Flux.fromIterable(smrl)
-			.flatMap(StateMachineReactiveLifecycle::stopReactively)
-			.then();
+	.flatMap(StateMachineReactiveLifecycle::stopReactively)
+	.then();
 	}
 
 	private static Function<? super Throwable, Mono<Void>> resumeTriggerErrorToContext() {
 		return t -> Mono.deferContextual(Mono::just)
-			.doOnNext(ctx -> {
-				Optional<ExecutorExceptionHolder> holder = ctx.getOrEmpty(REACTOR_CONTEXT_TRIGGER_ERRORS);
-				holder.ifPresent(h -> {
-					h.setError(t);
-				});
-			})
-			.then();
+	.doOnNext(ctx -> {
+		Optional<ExecutorExceptionHolder> holder = ctx.getOrEmpty(REACTOR_CONTEXT_TRIGGER_ERRORS);
+		holder.ifPresent(h -> {
+			h.setError(t);
+		});
+	})
+	.then();
 	}
 
 	private class TriggerQueueItem {

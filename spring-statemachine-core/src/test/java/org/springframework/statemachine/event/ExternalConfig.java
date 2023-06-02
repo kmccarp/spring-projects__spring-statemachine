@@ -33,14 +33,14 @@ public class ExternalConfig {
 
 		Builder<TestStates, TestEvents> builder = StateMachineBuilder.builder();
 		builder.configureStates()
-			.withStates()
-				.initial(TestStates.S1)
-				.state(TestStates.S2);
+	.withStates()
+	.initial(TestStates.S1)
+	.state(TestStates.S2);
 		builder.configureTransitions()
-			.withExternal()
-				.source(TestStates.S1)
-				.target(TestStates.S2)
-				.event(TestEvents.E1);
+	.withExternal()
+	.source(TestStates.S1)
+	.target(TestStates.S2)
+	.event(TestEvents.E1);
 		return builder.build();
 	}
 

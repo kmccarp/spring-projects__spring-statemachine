@@ -38,8 +38,8 @@ public class DefaultExternalTransition<S, E> extends AbstractExternalTransition<
 	 * @param trigger the trigger
 	 */
 	public DefaultExternalTransition(State<S, E> source, State<S, E> target,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
+Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger) {
 		super(source, target, actions, event, guard, trigger);
 	}
 
@@ -55,8 +55,8 @@ public class DefaultExternalTransition<S, E> extends AbstractExternalTransition<
 	 * @param securityRule the security rule
 	 */
 	public DefaultExternalTransition(State<S, E> source, State<S, E> target,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger, SecurityRule securityRule) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
+Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger, SecurityRule securityRule) {
 		super(source, target, actions, event, guard, trigger, securityRule);
 	}
 
@@ -73,8 +73,8 @@ public class DefaultExternalTransition<S, E> extends AbstractExternalTransition<
 	 * @param name the name
 	 */
 	public DefaultExternalTransition(State<S, E> source, State<S, E> target,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger, SecurityRule securityRule, String name) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event,
+Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger, SecurityRule securityRule, String name) {
 		super(source, target, actions, event, guard, trigger, securityRule, name);
 	}
 }

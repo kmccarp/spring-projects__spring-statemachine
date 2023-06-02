@@ -206,41 +206,41 @@ public class StateMachineTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2)
-					.state(TestStates.S3, TestEvents.E4)
-					.state(TestStates.S4);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2)
+		.state(TestStates.S3, TestEvents.E4)
+		.state(TestStates.S4);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.action(loggingAction())
-					.action(loggingAction())
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2)
-					.action(loggingAction())
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.S4)
-					.event(TestEvents.E3)
-					.action(loggingAction())
-					.and()
-				.withExternal()
-					.source(TestStates.S4)
-					.target(TestStates.S3)
-					.event(TestEvents.E4)
-					.action(loggingAction());
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.action(loggingAction())
+		.action(loggingAction())
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2)
+		.action(loggingAction())
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.S4)
+		.event(TestEvents.E3)
+		.action(loggingAction())
+		.and()
+		.withExternal()
+		.source(TestStates.S4)
+		.target(TestStates.S3)
+		.event(TestEvents.E4)
+		.action(loggingAction());
 		}
 
 		@Bean
@@ -256,39 +256,39 @@ public class StateMachineTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2)
-					.state(TestStates.S3)
-					.state(TestStates.S4);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2)
+		.state(TestStates.S3)
+		.state(TestStates.S4);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.action(testAction1())
-					.and()
-				.withInternal()
-					.source(TestStates.S2)
-					.timer(1000)
-					.action(testAction2())
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2)
-					.action(testAction3())
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.S4)
-					.event(TestEvents.E3)
-					.action(testAction4());
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.action(testAction1())
+		.and()
+		.withInternal()
+		.source(TestStates.S2)
+		.timer(1000)
+		.action(testAction2())
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2)
+		.action(testAction3())
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.S4)
+		.event(TestEvents.E3)
+		.action(testAction4());
 		}
 
 		@Bean
@@ -320,59 +320,59 @@ public class StateMachineTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.state(TestStates.SI)
-					.fork(TestStates.S1)
-					.state(TestStates.S2)
-					.end(TestStates.SF)
-					.join(TestStates.S3)
-					.state(TestStates.S4)
-					.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S20)
-						.state(TestStates.S20)
-						.state(TestStates.S21)
-						.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S30)
-						.state(TestStates.S30)
-						.state(TestStates.S31);
+		.withStates()
+		.initial(TestStates.SI)
+		.state(TestStates.SI)
+		.fork(TestStates.S1)
+		.state(TestStates.S2)
+		.end(TestStates.SF)
+		.join(TestStates.S3)
+		.state(TestStates.S4)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S20)
+		.state(TestStates.S20)
+		.state(TestStates.S21)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S30)
+		.state(TestStates.S30)
+		.state(TestStates.S31);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S20)
-					.target(TestStates.S21)
-					.event(TestEvents.E2)
-					.and()
-				.withExternal()
-					.source(TestStates.S30)
-					.target(TestStates.S31)
-					.event(TestEvents.E3)
-					.and()
-				.withFork()
-					.source(TestStates.S1)
-					.target(TestStates.S20)
-					.target(TestStates.S30)
-					.and()
-				.withJoin()
-					.source(TestStates.S21)
-					.source(TestStates.S31)
-					.target(TestStates.S3)
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.S4);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S20)
+		.target(TestStates.S21)
+		.event(TestEvents.E2)
+		.and()
+		.withExternal()
+		.source(TestStates.S30)
+		.target(TestStates.S31)
+		.event(TestEvents.E3)
+		.and()
+		.withFork()
+		.source(TestStates.S1)
+		.target(TestStates.S20)
+		.target(TestStates.S30)
+		.and()
+		.withJoin()
+		.source(TestStates.S21)
+		.source(TestStates.S31)
+		.target(TestStates.S3)
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.S4);
 		}
 
 	}
@@ -384,19 +384,19 @@ public class StateMachineTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("SI")
-					.state("S1")
-					.state("S2");
+		.withStates()
+		.initial("SI")
+		.state("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("SI")
-					.target("S1")
-					.event("E1");
+		.withExternal()
+		.source("SI")
+		.target("S1")
+		.event("E1");
 		}
 
 	}
@@ -408,18 +408,18 @@ public class StateMachineTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.SI)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.SI)
+		.event(TestEvents.E1);
 		}
 	}
 

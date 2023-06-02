@@ -48,7 +48,7 @@ public class FixedMethodFilter implements MethodFilter {
 			filteredList.add(this.method);
 			return filteredList;
 		}
-		return Collections.<Method> emptyList();
+		return Collections.<Method>emptyList();
 	}
 
 }

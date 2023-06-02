@@ -30,44 +30,45 @@ import org.springframework.statemachine.ensemble.StateMachineEnsemble;
 import org.springframework.statemachine.zookeeper.ZookeeperStateMachineEnsemble;
 
 @Configuration
-public class Application  {
+public class Application {
 
 	@Configuration
 	@EnableStateMachine
 	static class StateMachineConfig
-			extends StateMachineConfigurerAdapter<String, String> {
+extends StateMachineConfigurerAdapter<String, String> {
 
 //tag::snippetA[]
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withDistributed()
-					.ensemble(stateMachineEnsemble());
+		.withDistributed()
+		.ensemble(stateMachineEnsemble());
 		}
+
 //end::snippetA[]
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("LOCKED")
-					.state("UNLOCKED");
+		.withStates()
+		.initial("LOCKED")
+		.state("UNLOCKED");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("LOCKED")
-					.target("UNLOCKED")
-					.event("COIN")
-					.and()
-				.withExternal()
-					.source("UNLOCKED")
-					.target("LOCKED")
-					.event("PUSH");
+		.withExternal()
+		.source("LOCKED")
+		.target("UNLOCKED")
+		.event("COIN")
+		.and()
+		.withExternal()
+		.source("UNLOCKED")
+		.target("LOCKED")
+		.event("PUSH");
 		}
 
 //tag::snippetB[]
@@ -79,8 +80,8 @@ public class Application  {
 		@Bean
 		public CuratorFramework curatorClient() throws Exception {
 			CuratorFramework client = CuratorFrameworkFactory.builder().defaultData(new byte[0])
-					.retryPolicy(new ExponentialBackoffRetry(1000, 3))
-					.connectString("localhost:2181").build();
+		.retryPolicy(new ExponentialBackoffRetry(1000, 3))
+		.connectString("localhost:2181").build();
 			client.start();
 			return client;
 		}
@@ -89,11 +90,11 @@ public class Application  {
 	}
 
 	public enum States {
-	    LOCKED, UNLOCKED
+		LOCKED, UNLOCKED
 	}
 
 	public enum Events {
-	    COIN, PUSH
+		COIN, PUSH
 	}
 
 	public static void main(String[] args) throws Exception {

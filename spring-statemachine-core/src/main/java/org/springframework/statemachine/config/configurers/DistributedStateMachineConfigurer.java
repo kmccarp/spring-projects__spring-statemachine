@@ -28,8 +28,7 @@ import org.springframework.statemachine.ensemble.StateMachineEnsemble;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface DistributedStateMachineConfigurer<S, E> extends
-		AnnotationConfigurerBuilder<StateMachineConfigurationConfigurer<S, E>> {
+public interface DistributedStateMachineConfigurer<S, E> extendsAnnotationConfigurerBuilder<StateMachineConfigurationConfigurer<S, E>> {
 
 	/**
 	 * Specify a {@link StateMachineEnsemble}.

@@ -44,7 +44,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
  *
  */
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(loader=AnnotationConfigContextLoader.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class)
 public class ComplexAnnotationConfigurationTests {
 
 	@Autowired
@@ -91,26 +91,26 @@ public class ComplexAnnotationConfigurationTests {
 		@Override
 		public void configure(ComplexTestConfigBuilder config) throws Exception {
 			config
-				.withProperties()
-					.property("complexKey1", "complexValue1");
+		.withProperties()
+		.property("complexKey1", "complexValue1");
 		}
 
 		@Override
 		public void configure(ComplexTestConfigBeanABuilder beanA) throws Exception {
 			beanA
-				.withResources()
-					.resource("complexResourceA1")
-					.resource("complexResourceA2")
-					.and()
-				.setData("complexDataA");
+		.withResources()
+		.resource("complexResourceA1")
+		.resource("complexResourceA2")
+		.and()
+		.setData("complexDataA");
 		}
 
 		@Override
 		public void configure(ComplexTestConfigBeanBConfigurer beanB) throws Exception {
 			beanB
-				.setData("complexDataB")
-				.setDataBB("complexDataBB")
-				.withResources().and();
+		.setData("complexDataB")
+		.setDataBB("complexDataBB")
+		.withResources().and();
 		}
 
 	}

@@ -34,7 +34,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { Application.class})
+@SpringBootTest(classes = {Application.class})
 @WebAppConfiguration
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class DeployTests {
@@ -47,24 +47,24 @@ public class DeployTests {
 	@Test
 	public void testHome() throws Exception {
 		mvc.
-			perform(get("/state")).
-			andExpect(status().isOk());
+	perform(get("/state")).
+	andExpect(status().isOk());
 	}
 
 	@Test
 	public void testDeploy() throws Exception {
 		mvc.
-			perform(get("/state").param("event", "DEPLOY")).
-			andExpect(status().isOk()).
-			andExpect(content().string(containsString("States: [READY]")));
+	perform(get("/state").param("event", "DEPLOY")).
+	andExpect(status().isOk()).
+	andExpect(content().string(containsString("States: [READY]")));
 	}
 
 	@Test
 	public void testUndeploy() throws Exception {
 		mvc.
-			perform(get("/state").param("event", "UNDEPLOY")).
-			andExpect(status().isOk()).
-			andExpect(content().string(containsString("States: [READY]")));
+	perform(get("/state").param("event", "UNDEPLOY")).
+	andExpect(status().isOk()).
+	andExpect(content().string(containsString("States: [READY]")));
 	}
 
 	@BeforeEach

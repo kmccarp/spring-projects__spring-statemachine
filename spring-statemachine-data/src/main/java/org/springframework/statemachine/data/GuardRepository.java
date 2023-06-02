@@ -27,5 +27,5 @@ import org.springframework.data.repository.Repository;
  * @param <T> the guard entity type
  */
 @NoRepositoryBean
-public interface GuardRepository <T extends RepositoryGuard> extends CrudRepository<T, Long> {
+public interface GuardRepository<T extends RepositoryGuard> extends CrudRepository<T, Long> {
 }

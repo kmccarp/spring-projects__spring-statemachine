@@ -64,29 +64,29 @@ public class RelayTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2)
-					.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S20)
-						.state(TestStates.S20, action1(), null)
-						.state(TestStates.S21);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S20)
+		.state(TestStates.S20, action1(), null)
+		.state(TestStates.S21);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S20)
-					.target(TestStates.S21)
-					.event(TestEvents.E2);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S20)
+		.target(TestStates.S21)
+		.event(TestEvents.E2);
 		}
 
 		@Bean
@@ -96,9 +96,9 @@ public class RelayTests extends AbstractStateMachineTests {
 				@Override
 				public void execute(StateContext<TestStates, TestEvents> context) {
 					context.getStateMachine()
-						.sendEvent(Mono.just(MessageBuilder
-							.withPayload(TestEvents.E2).build()))
-						.subscribe();
+				.sendEvent(Mono.just(MessageBuilder
+		.withPayload(TestEvents.E2).build()))
+				.subscribe();
 				}
 			};
 		}

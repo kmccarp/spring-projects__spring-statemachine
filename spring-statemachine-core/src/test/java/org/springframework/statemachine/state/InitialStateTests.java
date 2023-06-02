@@ -39,14 +39,14 @@ import org.springframework.statemachine.config.builders.StateMachineTransitionCo
  */
 public class InitialStateTests extends AbstractStateMachineTests {
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testInitialStateTransition() throws Exception {
 		context.register(Config1.class);
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		machine.start();
 		assertThat(machine.getState().getIds()).containsExactly(TestStates.S1);
 	}
@@ -59,14 +59,14 @@ public class InitialStateTests extends AbstractStateMachineTests {
 		}).isInstanceOf(Exception.class);
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testInitialNoNeedAsState() throws Exception {
 		context.register(Config3.class);
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		machine.start();
 		assertThat(machine.getState().getIds()).containsExactly(TestStates.SI);
 		machine.sendEvent(TestEvents.E1);
@@ -80,27 +80,27 @@ public class InitialStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S1)
-					.and()
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S1)
+		.and()
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2);
 		}
 
 	}
@@ -112,16 +112,16 @@ public class InitialStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S1);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S1);
 		}
 
 	}
@@ -133,18 +133,18 @@ public class InitialStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.state(TestStates.S1);
+		.withStates()
+		.initial(TestStates.SI)
+		.state(TestStates.S1);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S1)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S1)
+		.event(TestEvents.E1);
 		}
 
 	}

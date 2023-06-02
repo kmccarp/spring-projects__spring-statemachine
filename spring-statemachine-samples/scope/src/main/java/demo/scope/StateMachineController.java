@@ -47,9 +47,9 @@ public class StateMachineController {
 	public String getStates(@RequestParam(value = "event", required = false) Events event, Model model) {
 		if (event != null) {
 			stateMachine
-				.sendEvent(Mono.just(MessageBuilder
-					.withPayload(event).build()))
-				.blockLast();
+		.sendEvent(Mono.just(MessageBuilder
+.withPayload(event).build()))
+		.blockLast();
 		}
 		model.addAttribute("states", stateMachine.getState().getIds());
 		model.addAttribute("stateChartModel", stateChartModel);

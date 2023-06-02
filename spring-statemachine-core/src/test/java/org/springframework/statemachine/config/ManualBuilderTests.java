@@ -50,13 +50,13 @@ public class ManualBuilderTests {
 		StatesData<String, String> stateMachineStates = stateMachineConfig.getStates();
 		ConfigurationData<String, String> stateMachineConfigurationConfig = stateMachineConfig.getStateMachineConfigurationConfig();
 		ObjectStateMachineFactory<String, String> stateMachineFactory = new ObjectStateMachineFactory<String, String>(
-				new DefaultStateMachineModel<String, String>(stateMachineConfigurationConfig, stateMachineStates, stateMachineTransitions));
+	new DefaultStateMachineModel<String, String>(stateMachineConfigurationConfig, stateMachineStates, stateMachineTransitions));
 
 		StaticListableBeanFactory beanFactory = new StaticListableBeanFactory();
 		stateMachineFactory.setBeanFactory(beanFactory);
 
 		TestListener listener = new TestListener();
-		StateMachine<String,String> stateMachine = stateMachineFactory.getStateMachine();
+		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 		stateMachine.addStateListener(listener);
 		doStartAndAssert(stateMachine);
 
@@ -73,19 +73,19 @@ public class ManualBuilderTests {
 		StaticListableBeanFactory beanFactory = new StaticListableBeanFactory();
 
 		builder.configureConfiguration()
-			.withConfiguration()
-				.beanFactory(beanFactory);
+	.withConfiguration()
+	.beanFactory(beanFactory);
 
 		builder.configureStates()
-			.withStates()
-				.initial("S1").state("S2");
+	.withStates()
+	.initial("S1").state("S2");
 
 		builder.configureTransitions()
-			.withExternal()
-				.source("S1").target("S2").event("E1")
-				.and()
-			.withExternal()
-				.source("S2").target("S1").event("E2");
+	.withExternal()
+	.source("S1").target("S2").event("E1")
+	.and()
+	.withExternal()
+	.source("S2").target("S1").event("E2");
 
 		StateMachine<String, String> stateMachine = builder.build();
 		assertThat(stateMachine).isNotNull();
@@ -106,19 +106,19 @@ public class ManualBuilderTests {
 		StaticListableBeanFactory beanFactory = new StaticListableBeanFactory();
 
 		builder.configureConfiguration()
-			.withConfiguration()
-				.beanFactory(beanFactory);
+	.withConfiguration()
+	.beanFactory(beanFactory);
 
 		builder.configureStates()
-			.withStates()
-				.initial(MyStates.S1).state(MyStates.S2);
+	.withStates()
+	.initial(MyStates.S1).state(MyStates.S2);
 
 		builder.configureTransitions()
-			.withExternal()
-				.source(MyStates.S1).target(MyStates.S2).event(MyEvents.E1)
-				.and()
-			.withExternal()
-				.source(MyStates.S2).target(MyStates.S1).event(MyEvents.E2);
+	.withExternal()
+	.source(MyStates.S1).target(MyStates.S2).event(MyEvents.E1)
+	.and()
+	.withExternal()
+	.source(MyStates.S2).target(MyStates.S1).event(MyEvents.E2);
 
 		StateMachine<MyStates, MyEvents> stateMachine = builder.build();
 		assertThat(stateMachine).isNotNull();
@@ -144,19 +144,19 @@ public class ManualBuilderTests {
 		Builder<String, String> builder = StateMachineBuilder.builder();
 
 		builder.configureConfiguration()
-			.withConfiguration()
-				.autoStartup(true);
+	.withConfiguration()
+	.autoStartup(true);
 
 		builder.configureStates()
-			.withStates()
-				.initial("S1").state("S2");
+	.withStates()
+	.initial("S1").state("S2");
 
 		builder.configureTransitions()
-			.withExternal()
-				.source("S1").target("S2").event("E1")
-				.and()
-			.withExternal()
-				.source("S2").target("S1").event("E2");
+	.withExternal()
+	.source("S1").target("S2").event("E1")
+	.and()
+	.withExternal()
+	.source("S2").target("S1").event("E2");
 
 		StateMachine<String, String> stateMachine = builder.build();
 
@@ -177,18 +177,18 @@ public class ManualBuilderTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1").state("S2");
+		.withStates()
+		.initial("S1").state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("E2");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S1").event("E2");
 		}
 
 	}

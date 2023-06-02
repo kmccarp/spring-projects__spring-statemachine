@@ -37,12 +37,12 @@ public class JoinPseudoStateTests {
 		joins.add(Collections.singletonList(s1));
 		joins.add(Collections.singletonList(s2));
 
-		JoinPseudoState<String,String> pseudoState = new JoinPseudoState<String, String>(joins, Collections.emptyList());
+		JoinPseudoState<String, String> pseudoState = new JoinPseudoState<String, String>(joins, Collections.emptyList());
 
 		Object obj1 = TestUtils.readField("tracker", pseudoState);
 		Object obj2 = TestUtils.readField("track", obj1);
 
-		List<List<State<String, String>>> track = (List<List<State<String, String>>>) obj2;
+		List<List<State<String, String>>> track = (List<List<State<String, String>>>)obj2;
 		assertThat(track).hasSize(2);
 		assertThat(track.get(0)).hasSize(1);
 		assertThat(track.get(1)).hasSize(1);
@@ -72,12 +72,12 @@ public class JoinPseudoStateTests {
 		joins.add(Arrays.asList(s11, s12));
 		joins.add(Arrays.asList(s21, s22));
 
-		JoinPseudoState<String,String> pseudoState = new JoinPseudoState<String, String>(joins, Collections.emptyList());
+		JoinPseudoState<String, String> pseudoState = new JoinPseudoState<String, String>(joins, Collections.emptyList());
 
 		Object obj1 = TestUtils.readField("tracker", pseudoState);
 		Object obj2 = TestUtils.readField("track", obj1);
 
-		List<List<State<String, String>>> track = (List<List<State<String, String>>>) obj2;
+		List<List<State<String, String>>> track = (List<List<State<String, String>>>)obj2;
 		assertThat(track).hasSize(2);
 		assertThat(track.get(0)).hasSize(2);
 		assertThat(track.get(1)).hasSize(2);

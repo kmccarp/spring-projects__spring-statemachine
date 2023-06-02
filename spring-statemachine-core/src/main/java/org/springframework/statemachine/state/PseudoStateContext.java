@@ -31,7 +31,7 @@ public interface PseudoStateContext<S, E> {
 	 * @return the pseudo state
 	 */
 	PseudoState<S, E> getPseudoState();
-	
+
 	/**
 	 * Gets the pseudo action.
 	 *
@@ -43,7 +43,7 @@ public interface PseudoStateContext<S, E> {
 	 * The PseudoAction enumeration.
 	 */
 	public enum PseudoAction {
-		
+
 		/**
 		 * Indication that states has been joined.
 		 */

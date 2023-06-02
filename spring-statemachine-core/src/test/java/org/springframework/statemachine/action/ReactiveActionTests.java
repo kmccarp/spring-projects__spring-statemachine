@@ -75,26 +75,26 @@ public class ReactiveActionTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.stateExitFunction(TestStates.S2, testAction2())
-					.stateDoFunction(TestStates.S3, testAction3())
-					.stateEntryFunction(TestStates.S3, testAction4());
+		.withStates()
+		.initial(TestStates.S1)
+		.stateExitFunction(TestStates.S2, testAction2())
+		.stateDoFunction(TestStates.S3, testAction3())
+		.stateEntryFunction(TestStates.S3, testAction4());
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.actionFunction(testAction1())
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.actionFunction(testAction1())
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2);
 		}
 
 		@Bean

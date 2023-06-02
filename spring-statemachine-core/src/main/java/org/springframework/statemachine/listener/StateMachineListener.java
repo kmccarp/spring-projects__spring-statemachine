@@ -30,7 +30,7 @@ import org.springframework.statemachine.transition.Transition;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface StateMachineListener<S,E> {
+public interface StateMachineListener<S, E> {
 
 	/**
 	 * Notified when state is changed.
@@ -38,21 +38,21 @@ public interface StateMachineListener<S,E> {
 	 * @param from the source state
 	 * @param to the target state
 	 */
-	void stateChanged(State<S,E> from, State<S,E> to);
+	void stateChanged(State<S, E> from, State<S, E> to);
 
 	/**
 	 * Notified when state is entered.
 	 *
 	 * @param state the state
 	 */
-	void stateEntered(State<S,E> state);
+	void stateEntered(State<S, E> state);
 
 	/**
 	 * Notified when state is exited.
 	 *
 	 * @param state the state
 	 */
-	void stateExited(State<S,E> state);
+	void stateExited(State<S, E> state);
 
 	/**
 	 * Notified when event was not accepted.

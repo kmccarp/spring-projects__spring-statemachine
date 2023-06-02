@@ -37,7 +37,7 @@ public class AbstractInternalTransition<S, E> extends AbstractTransition<S, E> {
 	 * @param trigger the trigger
 	 */
 	public AbstractInternalTransition(State<S, E> source, Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
-			E event, Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger) {
+E event, Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger) {
 		super(source, source, actions, event, TransitionKind.INTERNAL, guard, trigger);
 	}
 
@@ -52,8 +52,8 @@ public class AbstractInternalTransition<S, E> extends AbstractTransition<S, E> {
 	 * @param securityRule the security rule
 	 */
 	public AbstractInternalTransition(State<S, E> source, Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
-			E event, Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger,
-			SecurityRule securityRule) {
+E event, Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger,
+SecurityRule securityRule) {
 		super(source, source, actions, event, TransitionKind.INTERNAL, guard, trigger, securityRule, null);
 	}
 
@@ -69,8 +69,8 @@ public class AbstractInternalTransition<S, E> extends AbstractTransition<S, E> {
 	 * @param name the name
 	 */
 	public AbstractInternalTransition(State<S, E> source, Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
-			E event, Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger,
-			SecurityRule securityRule, String name) {
+E event, Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger,
+SecurityRule securityRule, String name) {
 		super(source, source, actions, event, TransitionKind.INTERNAL, guard, trigger, securityRule, name);
 	}
 }

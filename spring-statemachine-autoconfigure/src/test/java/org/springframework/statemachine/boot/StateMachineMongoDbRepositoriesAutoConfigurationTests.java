@@ -46,10 +46,10 @@ public class StateMachineMongoDbRepositoriesAutoConfigurationTests {
 		context = new AnnotationConfigApplicationContext();
 		context.register(TestConfiguration.class);
 		context.register(
-				MongoAutoConfiguration.class,
-				MongoDataAutoConfiguration.class,
-				MongoRepositoriesAutoConfiguration.class,
-				StateMachineMongoDbRepositoriesAutoConfiguration.class);
+	MongoAutoConfiguration.class,
+	MongoDataAutoConfiguration.class,
+	MongoRepositoriesAutoConfiguration.class,
+	StateMachineMongoDbRepositoriesAutoConfiguration.class);
 
 		context.refresh();
 		assertThat(context.containsBean("mongoDbStateRepository")).isTrue();

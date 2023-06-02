@@ -80,7 +80,7 @@ public class EventDeferTests extends AbstractStateMachineTests {
 		AtomicReference<Throwable> error = new AtomicReference<>();
 		AtomicInteger i1 = new AtomicInteger();
 		Thread t1 = new Thread(() -> {
-			while(i1.incrementAndGet() < 200) {
+			while (i1.incrementAndGet() < 200) {
 				try {
 					doSendEventAndConsumeAll(machine, "E1");
 					doSendEventAndConsumeAll(machine, "E2");
@@ -93,7 +93,7 @@ public class EventDeferTests extends AbstractStateMachineTests {
 		});
 		AtomicInteger i2 = new AtomicInteger();
 		Thread t2 = new Thread(() -> {
-			while(i2.incrementAndGet() < 200) {
+			while (i2.incrementAndGet() < 200) {
 				try {
 					doSendEventAndConsumeAll(machine, "E1");
 					doSendEventAndConsumeAll(machine, "E2");
@@ -297,53 +297,53 @@ public class EventDeferTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("READY")
-					.state("SUB1")
-					.state("SUB2", "E1", "E2")
-					.state("SUB3", "E1", "E2")
-					.and()
-					.withStates()
-						.parent("SUB1")
-						.initial("SUB1READY")
-						.and()
-					.withStates()
-						.parent("SUB2")
-						.initial("SUB2READY")
-						.and()
-					.withStates()
-						.parent("SUB3")
-						.initial("SUB3READY");
+		.withStates()
+		.initial("READY")
+		.state("SUB1")
+		.state("SUB2", "E1", "E2")
+		.state("SUB3", "E1", "E2")
+		.and()
+		.withStates()
+		.parent("SUB1")
+		.initial("SUB1READY")
+		.and()
+		.withStates()
+		.parent("SUB2")
+		.initial("SUB2READY")
+		.and()
+		.withStates()
+		.parent("SUB3")
+		.initial("SUB3READY");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("READY").target("SUB1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("READY").target("SUB2")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("READY").target("SUB3")
-					.event("E3")
-					.and()
-				.withExternal()
-					.source("SUB1READY").target("READY")
-					.and()
-				.withExternal()
-					.source("SUB2READY").target("READY")
-					.and()
-				.withExternal()
-					.source("SUB3").target("READY")
-					.event("NOTUSED")
-					.and()
-				.withExternal()
-					.source("SUB3READY").target("READY")
-					.event("E4");
+		.withExternal()
+		.source("READY").target("SUB1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("READY").target("SUB2")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("READY").target("SUB3")
+		.event("E3")
+		.and()
+		.withExternal()
+		.source("SUB1READY").target("READY")
+		.and()
+		.withExternal()
+		.source("SUB2READY").target("READY")
+		.and()
+		.withExternal()
+		.source("SUB3").target("READY")
+		.event("NOTUSED")
+		.and()
+		.withExternal()
+		.source("SUB3READY").target("READY")
+		.event("E4");
 		}
 
 	}
@@ -355,39 +355,39 @@ public class EventDeferTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("READY")
-					.state("S1")
-					.state("S2")
-					.state("S3", "E1", "E2");
+		.withStates()
+		.initial("READY")
+		.state("S1")
+		.state("S2")
+		.state("S3", "E1", "E2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("READY").target("S1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("READY").target("S2")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("READY").target("S3")
-					.event("E3")
-					.and()
-				.withExternal()
-					.source("S3").target("S1")
-					.event("E4")
-					.and()
-				.withExternal()
-					.source("S3").target("S2")
-					.event("E5")
-					.and()
-				.withExternal()
-					.source("S3").target("READY")
-					.event("E6");
+		.withExternal()
+		.source("READY").target("S1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("READY").target("S2")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("READY").target("S3")
+		.event("E3")
+		.and()
+		.withExternal()
+		.source("S3").target("S1")
+		.event("E4")
+		.and()
+		.withExternal()
+		.source("S3").target("S2")
+		.event("E5")
+		.and()
+		.withExternal()
+		.source("S3").target("READY")
+		.event("E6");
 		}
 
 	}
@@ -399,68 +399,68 @@ public class EventDeferTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("READY")
-					.state("SUB1")
-					.state("SUB2")
-					.state("SUB3")
-					.state("SUB4")
-					.state("SUB5")
-					.and()
-					.withStates()
-						.parent("SUB1")
-						.initial("SUB11")
-						.state("SUB12", "E15")
-						.and()
-					.withStates()
-						.parent("SUB2")
-						.initial("SUB21")
-						.state("SUB22")
-						.and()
-					.withStates()
-						.parent("SUB3")
-						.initial("SUB31")
-						.state("SUB32");
+		.withStates()
+		.initial("READY")
+		.state("SUB1")
+		.state("SUB2")
+		.state("SUB3")
+		.state("SUB4")
+		.state("SUB5")
+		.and()
+		.withStates()
+		.parent("SUB1")
+		.initial("SUB11")
+		.state("SUB12", "E15")
+		.and()
+		.withStates()
+		.parent("SUB2")
+		.initial("SUB21")
+		.state("SUB22")
+		.and()
+		.withStates()
+		.parent("SUB3")
+		.initial("SUB31")
+		.state("SUB32");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("READY").target("SUB1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("READY").target("SUB2")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("READY").target("SUB3")
-					.event("E3")
-					.and()
-				.withExternal()
-					.source("READY").target("SUB4")
-					.event("E4")
-					.and()
-				.withExternal()
-					.source("READY").target("SUB5")
-					.event("E5")
-					.and()
-				.withExternal()
-					.source("SUB1").target("SUB5")
-					.event("E15")
-					.and()
-				.withExternal()
-					.source("SUB5").target("SUB1")
-					.event("E51")
-					.and()
-				.withExternal()
-					.source("SUB11").target("SUB12")
-					.event("E1112")
-					.and()
-				.withExternal()
-					.source("SUB12").target("SUB11")
-					.event("E1211");
+		.withExternal()
+		.source("READY").target("SUB1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("READY").target("SUB2")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("READY").target("SUB3")
+		.event("E3")
+		.and()
+		.withExternal()
+		.source("READY").target("SUB4")
+		.event("E4")
+		.and()
+		.withExternal()
+		.source("READY").target("SUB5")
+		.event("E5")
+		.and()
+		.withExternal()
+		.source("SUB1").target("SUB5")
+		.event("E15")
+		.and()
+		.withExternal()
+		.source("SUB5").target("SUB1")
+		.event("E51")
+		.and()
+		.withExternal()
+		.source("SUB11").target("SUB12")
+		.event("E1112")
+		.and()
+		.withExternal()
+		.source("SUB12").target("SUB11")
+		.event("E1211");
 		}
 
 	}
@@ -472,48 +472,48 @@ public class EventDeferTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("READY")
-					.state("SUB1")
-					.state("SUB2")
-					.and()
-					.withStates()
-						.parent("SUB1")
-						.initial("SUB111")
-						.state("SUB112", "E3", "E6")
-						.and()
-					.withStates()
-						.parent("SUB1")
-						.initial("SUB121")
-						.state("SUB122", "E3", "E7");
+		.withStates()
+		.initial("READY")
+		.state("SUB1")
+		.state("SUB2")
+		.and()
+		.withStates()
+		.parent("SUB1")
+		.initial("SUB111")
+		.state("SUB112", "E3", "E6")
+		.and()
+		.withStates()
+		.parent("SUB1")
+		.initial("SUB121")
+		.state("SUB122", "E3", "E7");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("READY").target("SUB1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("SUB1").target("SUB2")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("SUB1").target("SUB2")
-					.event("E3")
-					.and()
-				.withExternal()
-					.source("SUB1").target("SUB2")
-					.event("E4")
-					.and()
-				.withExternal()
-					.source("SUB111").target("SUB112")
-					.event("E5")
-					.and()
-				.withExternal()
-					.source("SUB121").target("SUB122")
-					.event("E8");
+		.withExternal()
+		.source("READY").target("SUB1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("SUB1").target("SUB2")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("SUB1").target("SUB2")
+		.event("E3")
+		.and()
+		.withExternal()
+		.source("SUB1").target("SUB2")
+		.event("E4")
+		.and()
+		.withExternal()
+		.source("SUB111").target("SUB112")
+		.event("E5")
+		.and()
+		.withExternal()
+		.source("SUB121").target("SUB122")
+		.event("E8");
 		}
 
 	}
@@ -525,22 +525,22 @@ public class EventDeferTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S1", "E2")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S1", "E2")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S1")
-					.event("E2");
+		.withExternal()
+		.source("S1").target("S2")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S1")
+		.event("E2");
 		}
 	}
 

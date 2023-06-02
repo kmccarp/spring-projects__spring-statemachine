@@ -56,7 +56,7 @@ import org.springframework.web.context.WebApplicationContext;
 import reactor.core.publisher.Mono;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes={SessionScopedAnnotationTests.Config2.class, SessionScopedAnnotationTests.Config1.class})
+@ContextConfiguration(classes = {SessionScopedAnnotationTests.Config2.class, SessionScopedAnnotationTests.Config1.class})
 @WebAppConfiguration
 @DirtiesContext(methodMode = MethodMode.AFTER_METHOD)
 public class SessionScopedAnnotationTests {
@@ -75,8 +75,8 @@ public class SessionScopedAnnotationTests {
 	public void testAutoStart() throws Exception {
 		MockHttpSession session1 = new MockHttpSession();
 		mvc.
-			perform(get("/ping").session(session1)).
-			andExpect(status().isOk());
+	perform(get("/ping").session(session1)).
+	andExpect(status().isOk());
 		Object machine = session1.getAttribute("scopedTarget.stateMachine");
 		assertThat(machine).isNotNull();
 		assertThat(TestUtils.<Boolean>callMethod("isRunning", machine)).isTrue();
@@ -88,41 +88,41 @@ public class SessionScopedAnnotationTests {
 		MockHttpSession session2 = new MockHttpSession();
 
 		mvc.
-			perform(get("/state").session(session1)).
-			andExpect(status().isOk()).
-			andExpect(content().string("SI"));
+	perform(get("/state").session(session1)).
+	andExpect(status().isOk()).
+	andExpect(content().string("SI"));
 		mvc.
-			perform(get("/state").session(session2)).
-			andExpect(status().isOk()).
-			andExpect(content().string("SI"));
+	perform(get("/state").session(session2)).
+	andExpect(status().isOk()).
+	andExpect(content().string("SI"));
 
 		mvc.
-			perform(post("/state").session(session1).param("event", "E1")).
-			andExpect(status().isAccepted());
+	perform(post("/state").session(session1).param("event", "E1")).
+	andExpect(status().isAccepted());
 		mvc.
-			perform(post("/state").session(session2).param("event", "E2")).
-			andExpect(status().isAccepted());
+	perform(post("/state").session(session2).param("event", "E2")).
+	andExpect(status().isAccepted());
 
 		mvc.
-			perform(get("/state").session(session1)).
-			andExpect(status().isOk()).
-			andExpect(content().string("S1"));
+	perform(get("/state").session(session1)).
+	andExpect(status().isOk()).
+	andExpect(content().string("S1"));
 		mvc.
-			perform(get("/state").session(session2)).
-			andExpect(status().isOk()).
-			andExpect(content().string("S2"));
+	perform(get("/state").session(session2)).
+	andExpect(status().isOk()).
+	andExpect(content().string("S2"));
 
 		session1.invalidate();
 		session2.invalidate();
 	}
 
 	@Test
-	public void testDestruction() throws Exception  {
+	public void testDestruction() throws Exception {
 		MockHttpSession session1 = new MockHttpSession();
 		mvc.
-			perform(get("/state").session(session1)).
-			andExpect(status().isOk()).
-			andExpect(content().string("SI"));
+	perform(get("/state").session(session1)).
+	andExpect(status().isOk()).
+	andExpect(content().string("SI"));
 
 		Object machine = session1.getAttribute("scopedTarget.stateMachine");
 		machine = TestUtils.readField("object", machine);
@@ -134,37 +134,37 @@ public class SessionScopedAnnotationTests {
 
 	@Configuration
 	@EnableStateMachine
-	@Scope(scopeName="session", proxyMode=ScopedProxyMode.TARGET_CLASS)
+	@Scope(scopeName = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 	public static class Config1 extends StateMachineConfigurerAdapter<String, String> {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("SI")
-					.state("S1")
-					.state("S2");
+		.withStates()
+		.initial("SI")
+		.state("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("SI")
-					.target("S1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("SI")
-					.target("S2")
-					.event("E2");
+		.withExternal()
+		.source("SI")
+		.target("S1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("SI")
+		.target("S2")
+		.event("E2");
 		}
 
 	}
@@ -183,23 +183,23 @@ public class SessionScopedAnnotationTests {
 		@Autowired
 		StateMachine<String, String> stateMachine;
 
-		@RequestMapping(path="/ping", method=RequestMethod.GET)
+		@RequestMapping(path = "/ping", method = RequestMethod.GET)
 		public HttpEntity<Void> dummyPing() {
 			// dummy ping to instantiate session and then create machine
 			stateMachine.getState();
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 
-		@RequestMapping(path="/state", method=RequestMethod.POST)
+		@RequestMapping(path = "/state", method = RequestMethod.POST)
 		public HttpEntity<Void> setState(@RequestParam("event") String event) {
 			stateMachine
-				.sendEvent(Mono.just(MessageBuilder
-					.withPayload(event).build()))
-				.subscribe();
+		.sendEvent(Mono.just(MessageBuilder
+.withPayload(event).build()))
+		.subscribe();
 			return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 		}
 
-		@RequestMapping(path="/state", method=RequestMethod.GET)
+		@RequestMapping(path = "/state", method = RequestMethod.GET)
 		@ResponseBody
 		public String getState() {
 			return stateMachine.getState().getId();

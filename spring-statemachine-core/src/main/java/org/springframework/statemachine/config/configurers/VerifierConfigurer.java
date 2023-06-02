@@ -27,8 +27,7 @@ import org.springframework.statemachine.config.model.verifier.StateMachineModelV
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface VerifierConfigurer <S, E> extends
-		AnnotationConfigurerBuilder<StateMachineConfigurationConfigurer<S, E>> {
+public interface VerifierConfigurer<S, E> extendsAnnotationConfigurerBuilder<StateMachineConfigurationConfigurer<S, E>> {
 
 	/**
 	 * Specify if verifier is enabled. On default verifier is enabled.

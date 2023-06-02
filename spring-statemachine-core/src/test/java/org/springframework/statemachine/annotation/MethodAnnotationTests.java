@@ -55,8 +55,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig1.class, Config1.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(context.containsBean("fooMachine")).isTrue();
 		Bean1 bean1 = context.getBean(Bean1.class);
 
@@ -84,8 +84,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig1.class, Config1.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(context.containsBean("fooMachine")).isTrue();
 		Bean1 bean1 = context.getBean(Bean1.class);
 
@@ -112,8 +112,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 	public void testOnStateMachineStartStop() throws Exception {
 		context.register(BeanConfig1.class, Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(context.containsBean("fooMachine")).isTrue();
 		Bean1 bean1 = context.getBean(Bean1.class);
 
@@ -139,8 +139,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig5.class, Config1.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(context.containsBean("fooMachine")).isTrue();
 		Bean5 bean5 = context.getBean(Bean5.class);
 		machine.start();
@@ -166,8 +166,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig2.class, Config1.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(context.containsBean("fooMachine")).isTrue();
 		machine.start();
 
@@ -175,11 +175,11 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 
 		// this event should cause 'method1' to get called
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1)
-				.setHeader("foo", "jee")
-				.setHeader("bar1", "jee1")
-				.setHeader("bar2", "jee2")
-				.setHeader("bar3", "jee3")
-				.build());
+	.setHeader("foo", "jee")
+	.setHeader("bar1", "jee1")
+	.setHeader("bar2", "jee2")
+	.setHeader("bar3", "jee3")
+	.build());
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E2).build());
 
 		assertThat(bean2.onMethod1Latch.await(2, TimeUnit.SECONDS)).isTrue();
@@ -203,8 +203,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig3.class, Config1.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(context.containsBean("fooMachine")).isTrue();
 		machine.start();
 
@@ -222,8 +222,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig4.class, Config1.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(context.containsBean("fooMachine")).isTrue();
 		Bean4 bean4 = context.getBean(Bean4.class);
 		machine.start();
@@ -249,8 +249,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig6.class, Config1.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		Bean6 bean6 = context.getBean(Bean6.class);
 		machine.start();
 
@@ -270,8 +270,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig7.class, Config1.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		Bean7 bean7 = context.getBean(Bean7.class);
 		machine.start();
 
@@ -290,8 +290,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig8.class, Config1.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		Bean8 bean8 = context.getBean(Bean8.class);
 		machine.start();
 
@@ -307,8 +307,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig9.class, Config2.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		Bean9 bean9 = context.getBean(Bean9.class);
 		machine.start();
 
@@ -328,8 +328,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig10.class, Config3.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		Bean10 bean10 = context.getBean(Bean10.class);
 		machine.start();
 
@@ -349,8 +349,8 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		context.register(BeanConfig11.class, Config4.class);
 		context.refresh();
 
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		Bean11 bean11 = context.getBean(Bean11.class);
 		machine.start();
 
@@ -425,7 +425,7 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		}
 
 		@OnStateMachineStart
-		public void onStateMachineStartWithParam(StateMachine<TestStates,TestEvents> machine) {
+		public void onStateMachineStartWithParam(StateMachine<TestStates, TestEvents> machine) {
 		}
 
 		@OnStateMachineStop
@@ -435,7 +435,7 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		}
 
 		@OnStateMachineStop
-		public void onStateMachineStopWithParam(StateMachine<TestStates,TestEvents> machine) {
+		public void onStateMachineStopWithParam(StateMachine<TestStates, TestEvents> machine) {
 		}
 
 		public void reset(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8) {
@@ -493,7 +493,7 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 
 		@OnTransition(source = "S1", target = "S2")
 		public void method4(@EventHeader(name = "bar1") Object header1, @EventHeader(value = "bar2") Object header2,
-				@EventHeader(value = "bar3") String header3) {
+	@EventHeader(value = "bar3") String header3) {
 			this.bar1Header = header1;
 			this.bar2Header = header2;
 			this.bar3Header = header3;
@@ -702,7 +702,7 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		}
 	}
 
-	@WithStateMachine(id="myMachine")
+	@WithStateMachine(id = "myMachine")
 	static class Bean11 {
 		CountDownLatch OnTransition1Latch = new CountDownLatch(1);
 		CountDownLatch OnTransition2Latch = new CountDownLatch(1);
@@ -839,37 +839,37 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.end(TestStates.SF)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.end(TestStates.SF)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.guard(testGuard())
-					.action(testAction())
-					.action(extendedStateAction())
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2)
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.S4)
-					.event(TestEvents.E3)
-					.and()
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.SF)
-					.event(TestEvents.EF);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.guard(testGuard())
+		.action(testAction())
+		.action(extendedStateAction())
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2)
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.S4)
+		.event(TestEvents.E3)
+		.and()
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.SF)
+		.event(TestEvents.EF);
 		}
 
 		@Bean
@@ -905,42 +905,42 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2)
-					.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S20)
-						.state(TestStates.S20)
-						.state(TestStates.S21)
-						.history(TestStates.SH, History.SHALLOW);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S20)
+		.state(TestStates.S20)
+		.state(TestStates.S21)
+		.history(TestStates.SH, History.SHALLOW);
 
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S20)
-					.target(TestStates.S21)
-					.event(TestEvents.E2)
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S1)
-					.event(TestEvents.E3)
-					.and()
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.SH)
-					.event(TestEvents.E4);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S20)
+		.target(TestStates.S21)
+		.event(TestEvents.E2)
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S1)
+		.event(TestEvents.E3)
+		.and()
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.SH)
+		.event(TestEvents.E4);
 		}
 
 	}
@@ -952,42 +952,42 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2)
-					.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S20)
-						.state(TestStates.S20)
-						.end(TestStates.S21)
-						.history(TestStates.SH, History.SHALLOW);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S20)
+		.state(TestStates.S20)
+		.end(TestStates.S21)
+		.history(TestStates.SH, History.SHALLOW);
 
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S20)
-					.target(TestStates.S21)
-					.event(TestEvents.E2)
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S1)
-					.event(TestEvents.E3)
-					.and()
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.SH)
-					.event(TestEvents.E4);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S20)
+		.target(TestStates.S21)
+		.event(TestEvents.E2)
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S1)
+		.event(TestEvents.E3)
+		.and()
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.SH)
+		.event(TestEvents.E4);
 		}
 
 	}
@@ -999,26 +999,26 @@ public class MethodAnnotationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config.withConfiguration()
-				.machineId("myMachine");
+		.machineId("myMachine");
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states.withStates()
-				.initial(TestStates.S1)
-				.states(EnumSet.allOf(TestStates.class));
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1).target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S2).target(TestStates.S1)
-					.event(TestEvents.E2);
+		.withExternal()
+		.source(TestStates.S1).target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S2).target(TestStates.S1)
+		.event(TestEvents.E2);
 		}
 	}
 

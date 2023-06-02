@@ -27,8 +27,7 @@ import org.springframework.statemachine.persist.StateMachineRuntimePersister;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface PersistenceConfigurer<S, E> extends
-		AnnotationConfigurerBuilder<StateMachineConfigurationConfigurer<S, E>> {
+public interface PersistenceConfigurer<S, E> extendsAnnotationConfigurerBuilder<StateMachineConfigurationConfigurer<S, E>> {
 
 	/**
 	 * Specify a state machine runtime persister.

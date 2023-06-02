@@ -47,7 +47,7 @@ public class ShowcaseTests {
 
 	private AnnotationConfigApplicationContext context;
 
-	private StateMachine<States,Events> machine;
+	private StateMachine<States, Events> machine;
 
 	private TestListener listener;
 
@@ -291,7 +291,7 @@ public class ShowcaseTests {
 	static class Config {
 
 		@Autowired
-		private StateMachine<States,Events> machine;
+		private StateMachine<States, Events> machine;
 
 		@Bean
 		public StateMachineListener<States, Events> stateMachineListener() {
@@ -307,9 +307,9 @@ public class ShowcaseTests {
 		volatile CountDownLatch stateEnteredLatch = new CountDownLatch(3);
 		volatile CountDownLatch stateExitedLatch = new CountDownLatch(0);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
-		volatile List<Transition<States, Events>> transitions = new ArrayList<Transition<States,Events>>();
-		List<State<States, Events>> statesEntered = new ArrayList<State<States,Events>>();
-		List<State<States, Events>> statesExited = new ArrayList<State<States,Events>>();
+		volatile List<Transition<States, Events>> transitions = new ArrayList<Transition<States, Events>>();
+		List<State<States, Events>> statesEntered = new ArrayList<State<States, Events>>();
+		List<State<States, Events>> statesExited = new ArrayList<State<States, Events>>();
 		volatile int transitionCount = 0;
 
 		@Override

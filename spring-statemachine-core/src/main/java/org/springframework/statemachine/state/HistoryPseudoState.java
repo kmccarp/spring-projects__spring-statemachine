@@ -54,7 +54,7 @@ public class HistoryPseudoState<S, E> extends AbstractPseudoState<S, E> {
 	public HistoryPseudoState(PseudoStateKind kind, StateHolder<S, E> defaultState, StateHolder<S, E> containingState) {
 		super(kind);
 		Assert.isTrue(PseudoStateKind.HISTORY_SHALLOW == kind || PseudoStateKind.HISTORY_DEEP == kind,
-				"Pseudo state must be either shallow or deep");
+	"Pseudo state must be either shallow or deep");
 		Assert.notNull(defaultState, "Holder defaultState must be set");
 		Assert.notNull(containingState, "Holder containingState must be set");
 		this.defaultState = defaultState;

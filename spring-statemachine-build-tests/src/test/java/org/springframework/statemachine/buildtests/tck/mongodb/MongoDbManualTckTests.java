@@ -252,8 +252,8 @@ public class MongoDbManualTckTests extends AbstractTckTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean

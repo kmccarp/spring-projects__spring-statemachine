@@ -78,18 +78,18 @@ public class ManualBuilderContextTests extends AbstractStateMachineTests {
 		StateMachine<String, String> stateMachine() throws Exception {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder.configureConfiguration()
-				.withConfiguration()
-					.autoStartup(true)
-					.listener(testListener());
+		.withConfiguration()
+		.autoStartup(true)
+		.listener(testListener());
 			builder.configureStates()
-				.withStates()
-					.initial("S1").state("S2");
+		.withStates()
+		.initial("S1").state("S2");
 			builder.configureTransitions()
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("E2");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S1").event("E2");
 			StateMachine<String, String> stateMachine = builder.build();
 			return stateMachine;
 		}
@@ -108,18 +108,18 @@ public class ManualBuilderContextTests extends AbstractStateMachineTests {
 		StateMachine<String, String> stateMachine() throws Exception {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder.configureConfiguration()
-				.withConfiguration()
-					.autoStartup(false)
-					.listener(testListener());
+		.withConfiguration()
+		.autoStartup(false)
+		.listener(testListener());
 			builder.configureStates()
-				.withStates()
-					.initial("S1").state("S2");
+		.withStates()
+		.initial("S1").state("S2");
 			builder.configureTransitions()
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("E2");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S1").event("E2");
 			StateMachine<String, String> stateMachine = builder.build();
 			return stateMachine;
 		}

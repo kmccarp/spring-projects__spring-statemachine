@@ -57,8 +57,8 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		TestEventListener listener = context.getBean(TestEventListener.class);
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		machine.start();
 		assertThat(machine).isNotNull();
 		machine.sendEvent(TestEvents.E1);
@@ -81,8 +81,8 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		TestEventListener eventListener = context.getBean(TestEventListener.class);
 		TestListener listener = new TestListener();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		eventListener.reset(2, 0);
 		machine.addStateListener(listener);
 		machine.start();
@@ -109,8 +109,8 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		machine.start();
 		assertThat(machine).isNotNull();
 
@@ -125,8 +125,8 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 
@@ -147,8 +147,8 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 
@@ -169,8 +169,8 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 
@@ -191,8 +191,8 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 
@@ -214,8 +214,8 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 
@@ -237,8 +237,8 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 
@@ -261,39 +261,39 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class))
-					.end(TestStates.SF);
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class))
+		.end(TestStates.SF);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S1)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E2)
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E3)
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.S4)
-					.event(TestEvents.E4)
-					.and()
-				.withExternal()
-					.source(TestStates.S4)
-					.target(TestStates.SF)
-					.event(TestEvents.EF);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S1)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E2)
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E3)
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.S4)
+		.event(TestEvents.E4)
+		.and()
+		.withExternal()
+		.source(TestStates.S4)
+		.target(TestStates.SF)
+		.event(TestEvents.EF);
 		}
 
 		@Bean
@@ -310,38 +310,38 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.and()
-					.withStates()
-						.parent(TestStates.S1)
-						.initial(TestStates.S10)
-						.state(TestStates.S10)
-						.state(TestStates.S11)
-						.state(TestStates.S12)
-						.state(TestStates.S13);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.and()
+		.withStates()
+		.parent(TestStates.S1)
+		.initial(TestStates.S10)
+		.state(TestStates.S10)
+		.state(TestStates.S11)
+		.state(TestStates.S12)
+		.state(TestStates.S13);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S10)
-					.target(TestStates.S11)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.state(TestStates.S1)
-					.source(TestStates.S10)
-					.target(TestStates.S12)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.state(TestStates.S1)
-					.source(TestStates.S10)
-					.target(TestStates.S13)
-					.event(TestEvents.E2);
+		.withExternal()
+		.source(TestStates.S10)
+		.target(TestStates.S11)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.state(TestStates.S1)
+		.source(TestStates.S10)
+		.target(TestStates.S12)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.state(TestStates.S1)
+		.source(TestStates.S10)
+		.target(TestStates.S13)
+		.event(TestEvents.E2);
 		}
 
 	}
@@ -353,41 +353,41 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2)
-					.and()
-					.withStates()
-						.parent(TestStates.S1)
-						.initial(TestStates.S11)
-						.state(TestStates.S12)
-						.and()
-						.withStates()
-							.parent(TestStates.S11)
-							.initial(TestStates.S111)
-							.state(TestStates.S112);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2)
+		.and()
+		.withStates()
+		.parent(TestStates.S1)
+		.initial(TestStates.S11)
+		.state(TestStates.S12)
+		.and()
+		.withStates()
+		.parent(TestStates.S11)
+		.initial(TestStates.S111)
+		.state(TestStates.S112);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.guardExpression("extendedState.variables.containsKey('S1E1')")
-					.and()
-				.withExternal()
-					.source(TestStates.S11)
-					.target(TestStates.S12)
-					.event(TestEvents.E1)
-					.guardExpression("extendedState.variables.containsKey('S11E1')")
-					.and()
-				.withExternal()
-					.source(TestStates.S111)
-					.target(TestStates.S112)
-					.event(TestEvents.E1)
-					.guardExpression("extendedState.variables.containsKey('S111E1')");
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.guardExpression("extendedState.variables.containsKey('S1E1')")
+		.and()
+		.withExternal()
+		.source(TestStates.S11)
+		.target(TestStates.S12)
+		.event(TestEvents.E1)
+		.guardExpression("extendedState.variables.containsKey('S11E1')")
+		.and()
+		.withExternal()
+		.source(TestStates.S111)
+		.target(TestStates.S112)
+		.event(TestEvents.E1)
+		.guardExpression("extendedState.variables.containsKey('S111E1')");
 		}
 	}
 
@@ -398,35 +398,35 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2)
-					.and()
-					.withStates()
-						.parent(TestStates.S1)
-						.initial(TestStates.S11)
-						.state(TestStates.S12)
-						.and()
-						.withStates()
-							.parent(TestStates.S11)
-							.initial(TestStates.S111)
-							.state(TestStates.S112);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2)
+		.and()
+		.withStates()
+		.parent(TestStates.S1)
+		.initial(TestStates.S11)
+		.state(TestStates.S12)
+		.and()
+		.withStates()
+		.parent(TestStates.S11)
+		.initial(TestStates.S111)
+		.state(TestStates.S112);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S11)
-					.target(TestStates.S12)
-					.event(TestEvents.E1)
-					.guardExpression("extendedState.variables.containsKey('S11E1')")
-					.and()
-				.withExternal()
-					.source(TestStates.S111)
-					.target(TestStates.S112)
-					.event(TestEvents.E1)
-					.guardExpression("extendedState.variables.containsKey('S111E1')");
+		.withExternal()
+		.source(TestStates.S11)
+		.target(TestStates.S12)
+		.event(TestEvents.E1)
+		.guardExpression("extendedState.variables.containsKey('S11E1')")
+		.and()
+		.withExternal()
+		.source(TestStates.S111)
+		.target(TestStates.S112)
+		.event(TestEvents.E1)
+		.guardExpression("extendedState.variables.containsKey('S111E1')");
 		}
 	}
 
@@ -448,7 +448,7 @@ public class StateMachineEventTests extends AbstractStateMachineTests {
 			}
 		}
 
-		public void reset(int c1,int c2) {
+		public void reset(int c1, int c2) {
 			onEventLatch = new CountDownLatch(c1);
 			eventNotAcceptedEvents = new ArrayList<StateMachineEvent>();
 			stateChangedEvents.clear();

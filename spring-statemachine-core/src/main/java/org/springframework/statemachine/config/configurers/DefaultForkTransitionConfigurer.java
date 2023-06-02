@@ -31,9 +31,7 @@ import org.springframework.statemachine.config.model.TransitionsData;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultForkTransitionConfigurer<S, E>
-		extends	AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>
-		implements ForkTransitionConfigurer<S, E> {
+public class DefaultForkTransitionConfigurer<S, E>extends	AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>implements ForkTransitionConfigurer<S, E> {
 
 	private S source;
 

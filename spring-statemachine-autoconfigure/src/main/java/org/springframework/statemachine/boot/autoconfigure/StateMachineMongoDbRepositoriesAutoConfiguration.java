@@ -34,8 +34,8 @@ import org.springframework.statemachine.data.mongodb.MongoDbStateRepository;
 @ConditionalOnClass(MongoDbStateRepository.class)
 @ConditionalOnProperty(prefix = "spring.statemachine.data.mongo.repositories", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureAfter(MongoRepositoriesAutoConfiguration.class)
-@EntityScan(basePackageClasses = { MongoDbRepositoryState.class })
-@EnableMongoRepositories(basePackageClasses = { MongoDbStateRepository.class })
+@EntityScan(basePackageClasses = {MongoDbRepositoryState.class})
+@EnableMongoRepositories(basePackageClasses = {MongoDbStateRepository.class})
 public class StateMachineMongoDbRepositoriesAutoConfiguration {
 
 }

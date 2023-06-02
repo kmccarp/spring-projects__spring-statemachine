@@ -38,12 +38,12 @@ public class StateMachineInterceptorAdapter<S, E> implements StateMachineInterce
 
 	@Override
 	public void preStateChange(State<S, E> state, Message<E> message, Transition<S, E> transition,
-			StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
+StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
 	}
 
 	@Override
 	public void postStateChange(State<S, E> state, Message<E> message, Transition<S, E> transition,
-			StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
+StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
 	}
 
 	@Override

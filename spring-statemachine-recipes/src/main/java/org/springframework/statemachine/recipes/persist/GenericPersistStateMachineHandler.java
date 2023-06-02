@@ -29,25 +29,25 @@ import org.springframework.util.Assert;
  */
 public class GenericPersistStateMachineHandler<S, E> extends AbstractPersistStateMachineHandler<S, E> {
 
-    protected final StateMachine<S, E> stateMachine;
+	protected final StateMachine<S, E> stateMachine;
 
-    /**
-     * Instantiates a new persist state machine handler.
-     *
-     * @param stateMachine the state machine
-     */
-    public GenericPersistStateMachineHandler(StateMachine<S, E> stateMachine) {
-        Assert.notNull(stateMachine, "State machine must be set");
-        this.stateMachine = stateMachine;
-    }
+	/**
+	* Instantiates a new persist state machine handler.
+	*
+	* @param stateMachine the state machine
+	*/
+	public GenericPersistStateMachineHandler(StateMachine<S, E> stateMachine) {
+		Assert.notNull(stateMachine, "State machine must be set");
+		this.stateMachine = stateMachine;
+	}
 
-    @Override
-    protected void onInit() throws Exception {
-        initStateMachine(stateMachine);
-    }
+	@Override
+	protected void onInit() throws Exception {
+		initStateMachine(stateMachine);
+	}
 
-    @Override
-    protected StateMachine<S, E> getInitStateMachine() {
-        return stateMachine;
-    }
+	@Override
+	protected StateMachine<S, E> getInitStateMachine() {
+		return stateMachine;
+	}
 }

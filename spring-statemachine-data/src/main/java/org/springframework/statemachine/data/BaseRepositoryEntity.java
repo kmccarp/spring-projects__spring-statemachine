@@ -23,6 +23,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * @author Janne Valkealahti
  *
  */
-@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="_class")
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "_class")
 public abstract class BaseRepositoryEntity {
 }

@@ -30,9 +30,7 @@ import org.springframework.statemachine.config.model.StateMachineModelFactory;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class StateMachineModelBuilder<S, E>
-		extends AbstractConfiguredAnnotationBuilder<ModelData<S, E>, StateMachineModelConfigurer<S, E>, StateMachineModelBuilder<S, E>>
-		implements StateMachineModelConfigurer<S, E> {
+public class StateMachineModelBuilder<S, E>extends AbstractConfiguredAnnotationBuilder<ModelData<S, E>, StateMachineModelConfigurer<S, E>, StateMachineModelBuilder<S, E>>implements StateMachineModelConfigurer<S, E> {
 
 	private StateMachineModelFactory<S, E> factory;
 
@@ -50,7 +48,7 @@ public class StateMachineModelBuilder<S, E>
 	 * @param allowConfigurersOfSameType the allow configurers of same type
 	 */
 	public StateMachineModelBuilder(ObjectPostProcessor<Object> objectPostProcessor,
-			boolean allowConfigurersOfSameType) {
+boolean allowConfigurersOfSameType) {
 		super(objectPostProcessor, allowConfigurersOfSameType);
 	}
 

@@ -68,8 +68,8 @@ public abstract class AbstractZookeeperTests {
 		@Bean(destroyMethod = "close")
 		public CuratorFramework curatorClient() throws Exception {
 			CuratorFramework client = CuratorFrameworkFactory.builder().defaultData(new byte[0])
-					.retryPolicy(new ExponentialBackoffRetry(1000, 3))
-					.connectString("localhost:" + testingServerWrapper.getPort()).build();
+		.retryPolicy(new ExponentialBackoffRetry(1000, 3))
+		.connectString("localhost:" + testingServerWrapper.getPort()).build();
 			// for testing we start it here, thought initiator
 			// is trying to start it if not already done
 			client.start();

@@ -111,7 +111,7 @@ public class UmlStateMachineModelFactory extends AbstractStateMachineModelFactor
 			Holder[] resources = resourceResolver.resolve();
 			holder = resources != null && resources.length > 0 ? resources[0] : null;
 			resource = UmlUtils.getResource(holder.uri.getPath());
-			model = (Model) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.MODEL);
+			model = (Model)EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.MODEL);
 		} catch (Exception e) {
 			throw new IllegalArgumentException("Cannot build build model from resource " + resource + " or location " + location, e);
 		} finally {

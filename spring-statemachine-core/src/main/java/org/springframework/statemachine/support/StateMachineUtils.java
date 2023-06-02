@@ -123,9 +123,9 @@ public abstract class StateMachineUtils {
 		}
 		PseudoStateKind kind = pseudoState.getKind();
 		if (kind == PseudoStateKind.CHOICE || kind == PseudoStateKind.JUNCTION || kind == PseudoStateKind.ENTRY
-				|| kind == PseudoStateKind.EXIT || kind == PseudoStateKind.HISTORY_DEEP
-				|| kind == PseudoStateKind.HISTORY_SHALLOW || kind == PseudoStateKind.FORK
-				|| kind == PseudoStateKind.JOIN) {
+	|| kind == PseudoStateKind.EXIT || kind == PseudoStateKind.HISTORY_DEEP
+	|| kind == PseudoStateKind.HISTORY_SHALLOW || kind == PseudoStateKind.FORK
+	|| kind == PseudoStateKind.JOIN) {
 			return true;
 		} else {
 			return false;
@@ -205,12 +205,12 @@ public abstract class StateMachineUtils {
 	 */
 	public static Function<? super Throwable, Mono<Void>> resumeErrorToContext() {
 		return t -> Mono.deferContextual(Mono::just)
-			.doOnNext(ctx -> {
-				Optional<ExecutorExceptionHolder> holder = ctx.getOrEmpty(StateMachineSystemConstants.REACTOR_CONTEXT_ERRORS);
-				holder.ifPresent(h -> {
-					h.setError(t);
-				});
-			})
-			.then();
+	.doOnNext(ctx -> {
+		Optional<ExecutorExceptionHolder> holder = ctx.getOrEmpty(StateMachineSystemConstants.REACTOR_CONTEXT_ERRORS);
+		holder.ifPresent(h -> {
+			h.setError(t);
+		});
+	})
+	.then();
 	}
 }

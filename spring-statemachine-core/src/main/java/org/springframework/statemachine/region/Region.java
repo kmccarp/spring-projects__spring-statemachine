@@ -131,7 +131,7 @@ public interface Region<S, E> extends StateMachineReactiveLifecycle {
 	 *
 	 * @return current state
 	 */
-	State<S,E> getState();
+	State<S, E> getState();
 
 	/**
 	 * Gets the {@link State}s defined in this region. Returned collection is
@@ -146,7 +146,7 @@ public interface Region<S, E> extends StateMachineReactiveLifecycle {
 	 *
 	 * @return immutable copy of transitions
 	 */
-	Collection<Transition<S,E>> getTransitions();
+	Collection<Transition<S, E>> getTransitions();
 
 	/**
 	 * Checks if region complete. Region is considered to be completed if it has

@@ -30,32 +30,32 @@ public class DocsConfigurationSampleTests7 {
 	@Configuration
 	@EnableStateMachine
 	public class Config1
-			extends StateMachineConfigurerAdapter<String, String> {
+extends StateMachineConfigurerAdapter<String, String> {
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2").event("E1").guard(guard1(true))
-					.and()
-				.withExternal()
-					.source("S1").target("S2").event("E2").guard(guard1(false))
-					.and()
-				.withExternal()
-					.source("S1").target("S2").event("E3").guard(guard2(true))
-					.and()
-				.withExternal()
-					.source("S1").target("S2").event("E4").guard(guard2(false));
+		.withExternal()
+		.source("S1").target("S2").event("E1").guard(guard1(true))
+		.and()
+		.withExternal()
+		.source("S1").target("S2").event("E2").guard(guard1(false))
+		.and()
+		.withExternal()
+		.source("S1").target("S2").event("E3").guard(guard2(true))
+		.and()
+		.withExternal()
+		.source("S1").target("S2").event("E4").guard(guard2(false));
 		}
 
 		@Bean

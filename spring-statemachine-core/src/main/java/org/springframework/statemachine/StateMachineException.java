@@ -66,5 +66,5 @@ public class StateMachineException extends NonTransientDataAccessException {
 	public StateMachineException(String message) {
 		super(message);
 	}
-	
+
 }

@@ -32,5 +32,5 @@ public class StateMachineEventPublisherConfiguration {
 	public StateMachineEventPublisher stateMachineEventPublisher() {
 		return new DefaultStateMachineEventPublisher();
 	}
-	
+
 }

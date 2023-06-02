@@ -41,6 +41,7 @@ public class StateMachineConfig {
 		factoryBean.setResources(new Resource[]{new ClassPathResource("data.json")});
 		return factoryBean;
 	}
+
 //end::snippetA[]
 
 //tag::snippetB[]
@@ -57,8 +58,8 @@ public class StateMachineConfig {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean

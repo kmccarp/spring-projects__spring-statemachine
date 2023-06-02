@@ -69,7 +69,7 @@ public class StateMachineTestPlan<S, E> {
 	 * @param defaultAwaitTime the default await time in seconds
 	 */
 	public StateMachineTestPlan(Map<Object, StateMachine<S, E>> stateMachines, List<StateMachineTestPlanStep<S, E>> steps,
-			Integer defaultAwaitTime) {
+Integer defaultAwaitTime) {
 		this.stateMachines = stateMachines;
 		this.steps = steps;
 		if (defaultAwaitTime != null) {
@@ -85,30 +85,30 @@ public class StateMachineTestPlan<S, E> {
 	public void test() throws Exception {
 
 		Map<StateMachine<S, E>, LatchStateMachineListener<S, E>> listeners =
-				new HashMap<StateMachine<S,E>, LatchStateMachineListener<S,E>>();
+	new HashMap<StateMachine<S, E>, LatchStateMachineListener<S, E>>();
 		for (StateMachine<S, E> stateMachine : stateMachines.values()) {
 			LatchStateMachineListener<S, E> listener = new LatchStateMachineListener<S, E>();
 			listeners.put(stateMachine, listener);
 			stateMachine.addStateListener(listener);
 		}
 		log.info("Running test plan for machines "
-				+ StringUtils.collectionToCommaDelimitedString(stateMachines.values()));
+	+ StringUtils.collectionToCommaDelimitedString(stateMachines.values()));
 
 		int stepCounter = 0;
 		for (StateMachineTestPlanStep<S, E> step : steps) {
 			log.info("Running test plan step " + stepCounter++);
 			for (LatchStateMachineListener<S, E> listener : listeners.values()) {
 				listener.reset(
-						step.expectStateChanged != null ? step.expectStateChanged : 0,
-						step.expectStateEntered != null ? step.expectStateEntered : 0,
-						step.expectStateExited != null ? step.expectStateExited : 0,
-						step.expectEventNotAccepted != null ? step.expectEventNotAccepted : 0,
-						step.expectTransition != null ? step.expectTransition : 0,
-						step.expectTransitionStarted != null ? step.expectTransitionStarted : 0,
-						step.expectTransitionEnded != null ? step.expectTransitionEnded : 0,
-						step.expectStateMachineStarted != null ? step.expectStateMachineStarted : 0,
-						step.expectStateMachineStopped != null ? step.expectStateMachineStopped : 0,
-						step.expectExtendedStateChanged != null ? step.expectExtendedStateChanged : 0);
+			step.expectStateChanged != null ? step.expectStateChanged : 0,
+			step.expectStateEntered != null ? step.expectStateEntered : 0,
+			step.expectStateExited != null ? step.expectStateExited : 0,
+			step.expectEventNotAccepted != null ? step.expectEventNotAccepted : 0,
+			step.expectTransition != null ? step.expectTransition : 0,
+			step.expectTransitionStarted != null ? step.expectTransitionStarted : 0,
+			step.expectTransitionEnded != null ? step.expectTransitionEnded : 0,
+			step.expectStateMachineStarted != null ? step.expectStateMachineStarted : 0,
+			step.expectStateMachineStopped != null ? step.expectStateMachineStopped : 0,
+			step.expectExtendedStateChanged != null ? step.expectExtendedStateChanged : 0);
 			}
 
 			// need to call start here, ok to call from all steps
@@ -119,9 +119,9 @@ public class StateMachineTestPlan<S, E> {
 			if (step.expectStateMachineStarted != null) {
 				for (Entry<StateMachine<S, E>, LatchStateMachineListener<S, E>> entry : listeners.entrySet()) {
 					assertThat("StateMachineStarted Await not matched for machine " + entry.getKey(), entry.getValue()
-							.getStateMachineStartedLatch().await(defaultAwaitTime, TimeUnit.SECONDS), is(true));
+				.getStateMachineStartedLatch().await(defaultAwaitTime, TimeUnit.SECONDS), is(true));
 					assertThat("StateMachineStarted count not matched for machine " + entry.getKey(), entry.getValue()
-							.getStateMachineStarted().size(), is(step.expectStateMachineStarted));
+				.getStateMachineStarted().size(), is(step.expectStateMachineStarted));
 				}
 			}
 
@@ -168,9 +168,9 @@ public class StateMachineTestPlan<S, E> {
 			if (step.expectStateChanged != null) {
 				for (Entry<StateMachine<S, E>, LatchStateMachineListener<S, E>> entry : listeners.entrySet()) {
 					assertThat("StateChanged Await not matched for machine " + entry.getKey(), entry.getValue()
-							.getStateChangedLatch().await(defaultAwaitTime, TimeUnit.SECONDS), is(true));
+				.getStateChangedLatch().await(defaultAwaitTime, TimeUnit.SECONDS), is(true));
 					assertThat("StateChanged count not matched for machine " + entry.getKey(), entry.getValue()
-							.getStateChanged().size(), is(step.expectStateChanged));
+				.getStateChanged().size(), is(step.expectStateChanged));
 				}
 			}
 
@@ -266,8 +266,8 @@ public class StateMachineTestPlan<S, E> {
 					Map<Object, Object> variables = stateMachine.getExtendedState().getVariables();
 					for (Object key : step.expectVariableKeys) {
 						assertThat(
-								"Key [" + key + "] doesn't exist in extended state variables", variables,
-								IsMapContaining.hasKey(key));
+					"Key [" + key + "] doesn't exist in extended state variables", variables,
+					IsMapContaining.hasKey(key));
 					}
 				}
 			}
@@ -286,9 +286,9 @@ public class StateMachineTestPlan<S, E> {
 					Map<Object, Object> variables = stateMachine.getExtendedState().getVariables();
 					for (Entry<Object, Object> entry : step.expectVariables.entrySet()) {
 						assertThat(
-								"Entry with key=[" + entry.getKey() + "] value=[" + entry.getValue()
-										+ "] doesn't exist in extended state variables",
-								variables, IsMapContaining.hasEntry(entry.getKey(), entry.getValue()));
+					"Entry with key=[" + entry.getKey() + "] value=[" + entry.getValue()
+			+ "] doesn't exist in extended state variables",
+					variables, IsMapContaining.hasEntry(entry.getKey(), entry.getValue()));
 					}
 				}
 			}
@@ -305,8 +305,8 @@ public class StateMachineTestPlan<S, E> {
 		final CountDownLatch latch = new CountDownLatch(1);
 		final ArrayList<Thread> joins = new ArrayList<Thread>();
 		int threadCount = machines.size();
-		for (int i = 0; i < threadCount; ++i) {
-			final StateMachine<S,E> machine = machines.get(i);
+		for (int i = 0;i < threadCount;++i) {
+			final StateMachine<S, E> machine = machines.get(i);
 			Runnable runner = new Runnable() {
 
 				@Override

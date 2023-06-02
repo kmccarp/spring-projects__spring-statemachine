@@ -44,27 +44,30 @@ public class StateMachineConfig {
 //tag::snippetA[]
 	@Bean
 	public StateMachineRuntimePersister<String, String, String> stateMachineRuntimePersister(
-			JpaStateMachineRepository jpaStateMachineRepository) {
+JpaStateMachineRepository jpaStateMachineRepository) {
 		return new JpaPersistingStateMachineInterceptor<>(jpaStateMachineRepository);
 	}
+
 //end::snippetA[]
 
 //tag::snippetB[]
 	@Bean
 	public StateMachineService<String, String> stateMachineService(
-			StateMachineFactory<String, String> stateMachineFactory,
-			StateMachineRuntimePersister<String, String, String> stateMachineRuntimePersister) {
+StateMachineFactory<String, String> stateMachineFactory,
+StateMachineRuntimePersister<String, String, String> stateMachineRuntimePersister) {
 		return new DefaultStateMachineService<String, String>(stateMachineFactory, stateMachineRuntimePersister);
 	}
+
 //end::snippetB[]
 
 //tag::snippetC[]
 	@Bean
 	public StateMachineJackson2RepositoryPopulatorFactoryBean jackson2RepositoryPopulatorFactoryBean() {
 		StateMachineJackson2RepositoryPopulatorFactoryBean factoryBean = new StateMachineJackson2RepositoryPopulatorFactoryBean();
-		factoryBean.setResources(new Resource[] { new ClassPathResource("datajpamultipersist.json") });
+		factoryBean.setResources(new Resource[]{new ClassPathResource("datajpamultipersist.json")});
 		return factoryBean;
 	}
+
 //end::snippetC[]
 
 //tag::snippetD[]
@@ -83,18 +86,18 @@ public class StateMachineConfig {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withPersistence()
-					.runtimePersister(stateMachineRuntimePersister);
+		.withPersistence()
+		.runtimePersister(stateMachineRuntimePersister);
 		}
 
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model)
-				throws Exception {
+	throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean

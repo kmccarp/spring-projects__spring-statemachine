@@ -74,36 +74,36 @@ public class DistributedLeaderActionTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true)
-					.and()
-				.withDistributed()
-					.ensemble(ensemble());
+		.withConfiguration()
+		.autoStartup(true)
+		.and()
+		.withDistributed()
+		.ensemble(ensemble());
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2", testDistributedLeaderAction(), null)
-					.state("S3", testDistributedLeaderAction(), null);
+		.withStates()
+		.initial("S1")
+		.state("S2", testDistributedLeaderAction(), null)
+		.state("S3", testDistributedLeaderAction(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S3")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("S3").target("S1")
-					.event("E3");
+		.withExternal()
+		.source("S1").target("S2")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S3")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("S3").target("S1")
+		.event("E3");
 		}
 
 		@Bean

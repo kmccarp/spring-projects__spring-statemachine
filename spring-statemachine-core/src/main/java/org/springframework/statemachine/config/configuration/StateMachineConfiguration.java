@@ -58,19 +58,18 @@ import org.springframework.util.StringUtils;
  * @param <E> the type of event
  */
 @Configuration
-public class StateMachineConfiguration<S, E> extends
-		AbstractImportingAnnotationConfiguration<StateMachineConfigBuilder<S, E>, StateMachineConfig<S, E>> {
+public class StateMachineConfiguration<S, E> extendsAbstractImportingAnnotationConfiguration<StateMachineConfigBuilder<S, E>, StateMachineConfig<S, E>> {
 
 	private final StateMachineConfigBuilder<S, E> builder = new StateMachineConfigBuilder<S, E>();
 
 	@Override
 	protected BeanDefinition buildBeanDefinition(AnnotationMetadata importingClassMetadata,
-			Class<? extends Annotation> namedAnnotation) throws Exception {
+Class<? extends Annotation> namedAnnotation) throws Exception {
 
 		String enableStateMachineEnclosingClassName = importingClassMetadata.getClassName();
 		// for below classloader, see gh122
 		Class<?> enableStateMachineEnclosingClass = ClassUtils.forName(enableStateMachineEnclosingClassName,
-				ClassUtils.getDefaultClassLoader());
+	ClassUtils.getDefaultClassLoader());
 		// return null if it looks like @EnableStateMachine was annotated with class
 		// not extending StateMachineConfigurer.
 		if (!ClassUtils.isAssignable(StateMachineConfigurer.class, enableStateMachineEnclosingClass)) {
@@ -78,14 +77,14 @@ public class StateMachineConfiguration<S, E> extends
 		}
 
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
-				.rootBeanDefinition(StateMachineDelegatingFactoryBean.class);
+	.rootBeanDefinition(StateMachineDelegatingFactoryBean.class);
 		AnnotationAttributes esmAttributes = AnnotationAttributes.fromMap(importingClassMetadata.getAnnotationAttributes(
-				EnableStateMachine.class.getName(), false));
+	EnableStateMachine.class.getName(), false));
 		Boolean contextEvents = esmAttributes.getBoolean("contextEvents");
 
 		// check if Scope annotation is defined and set scope from it
 		AnnotationAttributes scopeAttributes = AnnotationAttributes.fromMap(importingClassMetadata.getAnnotationAttributes(
-				Scope.class.getName(), false));
+	Scope.class.getName(), false));
 		if (scopeAttributes != null) {
 			String scope = scopeAttributes.getString("value");
 			if (StringUtils.hasText(scope)) {
@@ -128,8 +127,8 @@ public class StateMachineConfiguration<S, E> extends
 	}
 
 	private static class StateMachineDelegatingFactoryBean<S, E>
-		extends BeanDelegatingFactoryBean<StateMachine<S, E>,StateMachineConfigBuilder<S, E>,StateMachineConfig<S, E>>
-		implements SmartLifecycle, BeanNameAware, BeanClassLoaderAware {
+extends BeanDelegatingFactoryBean<StateMachine<S, E>, StateMachineConfigBuilder<S, E>, StateMachineConfig<S, E>>
+implements SmartLifecycle, BeanNameAware, BeanClassLoaderAware {
 
 		private String clazzName;
 		private Boolean contextEvents;
@@ -140,7 +139,7 @@ public class StateMachineConfiguration<S, E> extends
 		private ClassLoader classLoader;
 
 		public StateMachineDelegatingFactoryBean(StateMachineConfigBuilder<S, E> builder, Class<StateMachine<S, E>> clazz,
-				String clazzName, Boolean contextEvents) {
+	String clazzName, Boolean contextEvents) {
 			super(builder, clazz);
 			this.clazzName = clazzName;
 			this.contextEvents = contextEvents;
@@ -160,8 +159,8 @@ public class StateMachineConfiguration<S, E> extends
 		@Override
 		public void afterPropertiesSet() throws Exception {
 			AnnotationConfigurer<StateMachineConfig<S, E>, StateMachineConfigBuilder<S, E>> configurer =
-					(AnnotationConfigurer<StateMachineConfig<S, E>, StateMachineConfigBuilder<S, E>>) getBeanFactory()
-						.getBean(ClassUtils.forName(clazzName, classLoader));
+		(AnnotationConfigurer<StateMachineConfig<S, E>, StateMachineConfigBuilder<S, E>>)getBeanFactory()
+.getBean(ClassUtils.forName(clazzName, classLoader));
 			StateMachineConfigBuilder<S, E> builder = getBuilder();
 			builder.apply(configurer);
 
@@ -175,8 +174,8 @@ public class StateMachineConfiguration<S, E> extends
 				stateMachineFactory.setStateMachineMonitor(stateMachineMonitor);
 			}
 			StateMachine<S, E> stateMachine = stateMachineFactory.getStateMachine();
-			this.lifecycle = (SmartLifecycle) stateMachine;
-			this.disposableBean = (DisposableBean) stateMachine;
+			this.lifecycle = (SmartLifecycle)stateMachine;
+			this.disposableBean = (DisposableBean)stateMachine;
 			setObject(stateMachine);
 		}
 

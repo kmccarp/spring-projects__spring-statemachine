@@ -36,14 +36,14 @@ public class KryoStateMachineSerialisationServiceTests {
 	@Test
 	public void testContextWithChilds() throws Exception {
 		StateMachineContext<String, String> child1 = new DefaultStateMachineContext<String, String>("child1", null, null,
-				new DefaultExtendedState());
+	new DefaultExtendedState());
 		StateMachineContext<String, String> child2 = new DefaultStateMachineContext<String, String>("child2", null, null,
-				new DefaultExtendedState());
+	new DefaultExtendedState());
 		List<StateMachineContext<String, String>> childs = new ArrayList<>();
 		childs.add(child1);
 		childs.add(child2);
 		StateMachineContext<String, String> root = new DefaultStateMachineContext<String, String>(childs, "root", null,
-				null, new DefaultExtendedState());
+	null, new DefaultExtendedState());
 
 		KryoStateMachineSerialisationService<String, String> service = new KryoStateMachineSerialisationService<>();
 		byte[] bytes = service.serialiseStateMachineContext(root);

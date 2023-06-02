@@ -28,8 +28,7 @@ import org.springframework.statemachine.security.SecurityRule.ComparisonType;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface SecurityConfigurer<S, E> extends
-		AnnotationConfigurerBuilder<StateMachineConfigurationConfigurer<S, E>> {
+public interface SecurityConfigurer<S, E> extendsAnnotationConfigurerBuilder<StateMachineConfigurationConfigurer<S, E>> {
 
 	/**
 	 * Specify if security is enabled. On default security is enabled

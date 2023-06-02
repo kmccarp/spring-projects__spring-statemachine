@@ -70,28 +70,29 @@ public class DocsConfigurationSampleTests10 extends AbstractStateMachineTests {
 // tag::snippetA[]
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withConfiguration()
-					.machineId("mymachine");
+		.withConfiguration()
+		.machineId("mymachine");
 		}
+
 // end::snippetA[]
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 
@@ -101,27 +102,27 @@ public class DocsConfigurationSampleTests10 extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withConfiguration()
-					.machineId("mymachine");
+		.withConfiguration()
+		.machineId("mymachine");
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 

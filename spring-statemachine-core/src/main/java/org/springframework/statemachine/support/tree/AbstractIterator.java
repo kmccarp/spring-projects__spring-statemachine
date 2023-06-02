@@ -41,11 +41,11 @@ public abstract class AbstractIterator<T> implements Iterator<T> {
 	public final boolean hasNext() {
 		Assert.state(state != State.FAILED, "state cannot be null");
 		switch (state) {
-		case DONE:
-			return false;
-		case READY:
-			return true;
-		default:
+			case DONE:
+				return false;
+			case READY:
+				return true;
+			default:
 		}
 		return tryToComputeNext();
 	}

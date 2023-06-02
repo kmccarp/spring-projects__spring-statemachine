@@ -75,38 +75,38 @@ public class SessionScopedManualTests {
 		MockHttpSession session2 = new MockHttpSession();
 
 		mvc.
-			perform(get("/state").session(session1)).
-			andExpect(status().isOk()).
-			andExpect(content().string("S1"));
+	perform(get("/state").session(session1)).
+	andExpect(status().isOk()).
+	andExpect(content().string("S1"));
 		mvc.
-			perform(get("/state").session(session2)).
-			andExpect(status().isOk()).
-			andExpect(content().string("S1"));
+	perform(get("/state").session(session2)).
+	andExpect(status().isOk()).
+	andExpect(content().string("S1"));
 
 		mvc.
-			perform(post("/state").session(session1).param("event", "E1")).
-			andExpect(status().isAccepted());
+	perform(post("/state").session(session1).param("event", "E1")).
+	andExpect(status().isAccepted());
 		mvc.
-			perform(post("/state").session(session2).param("event", "E1")).
-			andExpect(status().isAccepted());
+	perform(post("/state").session(session2).param("event", "E1")).
+	andExpect(status().isAccepted());
 
 		mvc.
-			perform(get("/state").session(session1)).
-			andExpect(status().isOk()).
-			andExpect(content().string("S2"));
+	perform(get("/state").session(session1)).
+	andExpect(status().isOk()).
+	andExpect(content().string("S2"));
 		mvc.
-			perform(get("/state").session(session2)).
-			andExpect(status().isOk()).
-			andExpect(content().string("S2"));
+	perform(get("/state").session(session2)).
+	andExpect(status().isOk()).
+	andExpect(content().string("S2"));
 	}
 
 	@Test
-	public void testDestruction() throws Exception  {
+	public void testDestruction() throws Exception {
 		MockHttpSession session1 = new MockHttpSession();
 		mvc.
-			perform(get("/state").session(session1)).
-			andExpect(status().isOk()).
-			andExpect(content().string("S1"));
+	perform(get("/state").session(session1)).
+	andExpect(status().isOk()).
+	andExpect(content().string("S1"));
 		Object machine = session1.getAttribute("scopedTarget.stateMachine");
 		assertThat(machine).isNotNull();
 		assertThat(TestUtils.<Boolean>callMethod("isRunning", machine)).isTrue();
@@ -118,8 +118,8 @@ public class SessionScopedManualTests {
 	public void testAutoStart() throws Exception {
 		MockHttpSession session1 = new MockHttpSession();
 		mvc.
-			perform(get("/ping").session(session1)).
-			andExpect(status().isOk());
+	perform(get("/ping").session(session1)).
+	andExpect(status().isOk());
 		Object machine = session1.getAttribute("scopedTarget.stateMachine");
 		assertThat(machine).isNotNull();
 		assertThat(TestUtils.<Boolean>callMethod("isRunning", machine)).isTrue();
@@ -129,21 +129,21 @@ public class SessionScopedManualTests {
 	static class Config {
 
 		@Bean
-		@Scope(scopeName="session", proxyMode=ScopedProxyMode.TARGET_CLASS)
+		@Scope(scopeName = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 		StateMachine<String, String> stateMachine() throws Exception {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder.configureConfiguration()
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 			builder.configureStates()
-				.withStates()
-					.initial("S1").state("S2");
+		.withStates()
+		.initial("S1").state("S2");
 			builder.configureTransitions()
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("E2");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S1").event("E2");
 			StateMachine<String, String> stateMachine = builder.build();
 			return stateMachine;
 		}
@@ -160,23 +160,23 @@ public class SessionScopedManualTests {
 		@Autowired
 		StateMachine<String, String> stateMachine;
 
-		@RequestMapping(path="/ping", method=RequestMethod.GET)
+		@RequestMapping(path = "/ping", method = RequestMethod.GET)
 		public HttpEntity<Void> dummyPing() {
 			// dummy ping to instantiate session and then create machine
 			stateMachine.getState();
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 
-		@RequestMapping(path="/state", method=RequestMethod.POST)
+		@RequestMapping(path = "/state", method = RequestMethod.POST)
 		public HttpEntity<Void> setState(@RequestParam("event") String event) {
 			stateMachine
-				.sendEvent(Mono.just(MessageBuilder
-					.withPayload(event).build()))
-				.subscribe();
+		.sendEvent(Mono.just(MessageBuilder
+.withPayload(event).build()))
+		.subscribe();
 			return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 		}
 
-		@RequestMapping(path="/state", method=RequestMethod.GET)
+		@RequestMapping(path = "/state", method = RequestMethod.GET)
 		@ResponseBody
 		public String getState() {
 			return stateMachine.getState().getId();

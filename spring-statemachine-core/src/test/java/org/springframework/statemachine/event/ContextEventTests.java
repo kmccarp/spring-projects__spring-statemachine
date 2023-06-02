@@ -54,8 +54,8 @@ public class ContextEventTests extends AbstractStateMachineTests {
 	public void contextEventsEnabled() throws Exception {
 		context.register(Config.class, Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		machine.start();
 		machine.sendEvent(TestEvents.E1);
 		StateMachineApplicationEventListener listener = context.getBean(StateMachineApplicationEventListener.class);
@@ -68,8 +68,8 @@ public class ContextEventTests extends AbstractStateMachineTests {
 	public void contextEventsDisabled() throws Exception {
 		context.register(Config.class, Config2.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		machine.start();
 		machine.sendEvent(TestEvents.E1);
 		StateMachineApplicationEventListener listener = context.getBean(StateMachineApplicationEventListener.class);
@@ -82,8 +82,8 @@ public class ContextEventTests extends AbstractStateMachineTests {
 	public void contextEventsWithManualBuilder() throws Exception {
 		context.register(Config.class, Config3.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		machine.start();
 		machine.sendEvent(TestEvents.E1);
 		StateMachineApplicationEventListener listener = context.getBean(StateMachineApplicationEventListener.class);
@@ -96,8 +96,8 @@ public class ContextEventTests extends AbstractStateMachineTests {
 	public void contextEventsWithManualBuilderExternalConfigClass() throws Exception {
 		context.register(Config.class, ExternalConfig.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		StateMachineApplicationEventListener listener = context.getBean(StateMachineApplicationEventListener.class);
 		machine.start();
 		listener.latch.await(1, TimeUnit.SECONDS);
@@ -114,19 +114,19 @@ public class ContextEventTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1);
 		}
 
 	}
@@ -138,19 +138,19 @@ public class ContextEventTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1);
 		}
 
 	}
@@ -164,14 +164,14 @@ public class ContextEventTests extends AbstractStateMachineTests {
 
 			Builder<TestStates, TestEvents> builder = StateMachineBuilder.builder();
 			builder.configureStates()
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2);
 			builder.configureTransitions()
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1);
 			return builder.build();
 		}
 
@@ -191,11 +191,11 @@ public class ContextEventTests extends AbstractStateMachineTests {
 		volatile CountDownLatch latch = new CountDownLatch(1);
 		volatile int count = 0;
 
-	    @Override
-	    public void onApplicationEvent(StateMachineEvent event) {
-	    	count++;
-	    	latch.countDown();
-	    }
+		@Override
+		public void onApplicationEvent(StateMachineEvent event) {
+			count++;
+			latch.countDown();
+		}
 
 		public void reset() {
 			count = 0;

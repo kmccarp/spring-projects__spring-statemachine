@@ -63,7 +63,7 @@ public class DefaultStateMachineService<S, E> implements StateMachineService<S, 
 	 * @param stateMachinePersist the state machine persist
 	 */
 	public DefaultStateMachineService(StateMachineFactory<S, E> stateMachineFactory,
-			StateMachinePersist<S, E, String> stateMachinePersist) {
+StateMachinePersist<S, E, String> stateMachinePersist) {
 		Assert.notNull(stateMachineFactory, "'stateMachineFactory' must be set");
 		this.stateMachineFactory = stateMachineFactory;
 		this.stateMachinePersist = stateMachinePersist;
@@ -171,7 +171,7 @@ public class DefaultStateMachineService<S, E> implements StateMachineService<S, 
 
 	protected StateMachine<S, E> handleStart(StateMachine<S, E> stateMachine, boolean start) {
 		if (start) {
-			if (!((Lifecycle) stateMachine).isRunning()) {
+			if (!((Lifecycle)stateMachine).isRunning()) {
 				StartListener<S, E> listener = new StartListener<>(stateMachine);
 				stateMachine.addStateListener(listener);
 				stateMachine.startReactively().block();
@@ -186,7 +186,7 @@ public class DefaultStateMachineService<S, E> implements StateMachineService<S, 
 
 	protected StateMachine<S, E> handleStop(StateMachine<S, E> stateMachine, boolean stop) {
 		if (stop) {
-			if (((Lifecycle) stateMachine).isRunning()) {
+			if (((Lifecycle)stateMachine).isRunning()) {
 				StopListener<S, E> listener = new StopListener<>(stateMachine);
 				stateMachine.addStateListener(listener);
 				stateMachine.stopReactively().block();

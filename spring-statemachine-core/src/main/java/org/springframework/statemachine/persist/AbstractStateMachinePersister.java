@@ -80,13 +80,13 @@ public abstract class AbstractStateMachinePersister<S, E, T> implements StateMac
 		S id = null;
 		State<S, E> state = stateMachine.getState();
 		if (state.isSubmachineState()) {
-			StateMachine<S, E> submachine = ((AbstractState<S, E>) state).getSubmachine();
+			StateMachine<S, E> submachine = ((AbstractState<S, E>)state).getSubmachine();
 			id = submachine.getState().getId();
 			childs.add(buildStateMachineContext(submachine));
 		} else if (state.isOrthogonal()) {
 			Collection<Region<S, E>> regions = ((AbstractState<S, E>)state).getRegions();
 			for (Region<S, E> r : regions) {
-				StateMachine<S, E> rsm = (StateMachine<S, E>) r;
+				StateMachine<S, E> rsm = (StateMachine<S, E>)r;
 				childs.add(buildStateMachineContext(rsm));
 			}
 			id = state.getId();
@@ -96,15 +96,15 @@ public abstract class AbstractStateMachinePersister<S, E, T> implements StateMac
 
 		// building history state mappings
 		Map<S, S> historyStates = new HashMap<S, S>();
-		PseudoState<S, E> historyState = ((AbstractStateMachine<S, E>) stateMachine).getHistoryState();
+		PseudoState<S, E> historyState = ((AbstractStateMachine<S, E>)stateMachine).getHistoryState();
 		if (historyState != null && ((HistoryPseudoState<S, E>)historyState).getState() != null) {
-			historyStates.put(null, ((HistoryPseudoState<S, E>) historyState).getState().getId());
+			historyStates.put(null, ((HistoryPseudoState<S, E>)historyState).getState().getId());
 		}
 		Collection<State<S, E>> states = stateMachine.getStates();
 		for (State<S, E> ss : states) {
 			if (ss.isSubmachineState()) {
-				StateMachine<S, E> submachine = ((AbstractState<S, E>) ss).getSubmachine();
-				PseudoState<S, E> ps = ((AbstractStateMachine<S, E>) submachine).getHistoryState();
+				StateMachine<S, E> submachine = ((AbstractState<S, E>)ss).getSubmachine();
+				PseudoState<S, E> ps = ((AbstractStateMachine<S, E>)submachine).getHistoryState();
 				if (ps != null) {
 					State<S, E> pss = ((HistoryPseudoState<S, E>)ps).getState();
 					if (pss != null) {

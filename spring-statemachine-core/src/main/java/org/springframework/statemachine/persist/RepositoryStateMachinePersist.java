@@ -30,7 +30,7 @@ import org.springframework.statemachine.StateMachinePersist;
  */
 public class RepositoryStateMachinePersist<S, E> implements StateMachinePersist<S, E, String> {
 
-	private final StateMachineContextRepository<S, E, StateMachineContext<S,E>> repository;
+	private final StateMachineContextRepository<S, E, StateMachineContext<S, E>> repository;
 
 	/**
 	 * Instantiates a new repository state machine persist.

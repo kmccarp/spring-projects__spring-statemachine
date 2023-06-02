@@ -34,7 +34,7 @@ import org.springframework.stereotype.Component;
  * @author Janne Valkealahti
  *
  */
-@Target({ ElementType.TYPE, ElementType.METHOD })
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented

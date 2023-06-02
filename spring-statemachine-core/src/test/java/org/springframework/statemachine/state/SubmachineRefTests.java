@@ -87,16 +87,16 @@ public class SubmachineRefTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2", subStateMachine);
+		.withStates()
+		.initial("S1")
+		.state("S2", subStateMachine);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2").event("E1");
+		.withExternal()
+		.source("S1").target("S2").event("E1");
 		}
 
 	}
@@ -108,23 +108,23 @@ public class SubmachineRefTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S20")
-					.state("S21")
-					.and()
-					.withStates()
-						.parent("S21")
-						.initial("S30")
-						.state("S31");
+		.withStates()
+		.initial("S20")
+		.state("S21")
+		.and()
+		.withStates()
+		.parent("S21")
+		.initial("S30")
+		.state("S31");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S20").target("S21").event("E2").and()
-				.withExternal()
-					.source("S30").target("S31").event("E3");
+		.withExternal()
+		.source("S20").target("S21").event("E2").and()
+		.withExternal()
+		.source("S30").target("S31").event("E3");
 		}
 
 	}
@@ -140,16 +140,16 @@ public class SubmachineRefTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2", subStateMachineFactory);
+		.withStates()
+		.initial("S1")
+		.state("S2", subStateMachineFactory);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2").event("E1");
+		.withExternal()
+		.source("S1").target("S2").event("E1");
 		}
 
 	}
@@ -161,23 +161,23 @@ public class SubmachineRefTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S20")
-					.state("S21")
-					.and()
-					.withStates()
-						.parent("S21")
-						.initial("S30")
-						.state("S31");
+		.withStates()
+		.initial("S20")
+		.state("S21")
+		.and()
+		.withStates()
+		.parent("S21")
+		.initial("S30")
+		.state("S31");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S20").target("S21").event("E2").and()
-				.withExternal()
-					.source("S30").target("S31").event("E3");
+		.withExternal()
+		.source("S20").target("S21").event("E2").and()
+		.withExternal()
+		.source("S30").target("S31").event("E3");
 		}
 
 	}

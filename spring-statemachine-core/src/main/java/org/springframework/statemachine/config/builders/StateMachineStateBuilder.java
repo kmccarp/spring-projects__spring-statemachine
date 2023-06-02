@@ -34,18 +34,16 @@ import org.springframework.statemachine.config.model.StatesData;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class StateMachineStateBuilder<S, E>
-		extends AbstractConfiguredAnnotationBuilder<StatesData<S, E>, StateMachineStateConfigurer<S, E>, StateMachineStateBuilder<S, E>>
-		implements StateMachineStateConfigurer<S, E> {
+public class StateMachineStateBuilder<S, E>extends AbstractConfiguredAnnotationBuilder<StatesData<S, E>, StateMachineStateConfigurer<S, E>, StateMachineStateBuilder<S, E>>implements StateMachineStateConfigurer<S, E> {
 
-	private final Collection<StateData<S, E>> stateDatas = new ArrayList<StateData<S,E>>();
+	private final Collection<StateData<S, E>> stateDatas = new ArrayList<StateData<S, E>>();
 
 	public StateMachineStateBuilder() {
 		super();
 	}
 
 	public StateMachineStateBuilder(ObjectPostProcessor<Object> objectPostProcessor,
-			boolean allowConfigurersOfSameType) {
+boolean allowConfigurersOfSameType) {
 		super(objectPostProcessor, allowConfigurersOfSameType);
 	}
 

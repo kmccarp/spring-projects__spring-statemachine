@@ -36,9 +36,7 @@ import org.springframework.statemachine.guard.Guard;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultJunctionTransitionConfigurer<S, E>
-		extends	AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>
-		implements JunctionTransitionConfigurer<S, E> {
+public class DefaultJunctionTransitionConfigurer<S, E>extends	AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>implements JunctionTransitionConfigurer<S, E> {
 
 	private S source;
 	private JunctionData<S, E> first;

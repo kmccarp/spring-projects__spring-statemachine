@@ -372,40 +372,40 @@ public class EventHeaderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("SI")
-					.state("S1", headerTestAction1(), null)
-					.and()
-					.withStates()
-						.parent("S1")
-						.initial("S11", headerTestAction1I())
-						.state("S11", headerTestAction11(), null)
-						.state("S12")
-						.and()
-						.withStates()
-							.parent("S11")
-							.initial("S111")
-							.state("S111", headerTestAction111(), null)
-							.state("S122", headerTestAction112(), null);
+		.withStates()
+		.initial("SI")
+		.state("S1", headerTestAction1(), null)
+		.and()
+		.withStates()
+		.parent("S1")
+		.initial("S11", headerTestAction1I())
+		.state("S11", headerTestAction11(), null)
+		.state("S12")
+		.and()
+		.withStates()
+		.parent("S11")
+		.initial("S111")
+		.state("S111", headerTestAction111(), null)
+		.state("S122", headerTestAction112(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("SI")
-					.target("S1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S111")
-					.target("S122")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("S122")
-					.target("S111")
-					.event("E3");
+		.withExternal()
+		.source("SI")
+		.target("S1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S111")
+		.target("S122")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("S122")
+		.target("S111")
+		.event("E3");
 		}
 
 		@Bean
@@ -441,40 +441,40 @@ public class EventHeaderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("SI")
-					.state("S1", headerTestAction1(), null)
-					.and()
-					.withStates()
-						.parent("S1")
-						.initial("S11", headerTestAction1I())
-						.state("S11", headerTestAction11(), null)
-						.state("S12")
-						.and()
-						.withStates()
-							.parent("S11")
-							.initial("S111")
-							.state("S111", headerTestAction111(), null)
-							.state("S122", headerTestAction112(), null);
+		.withStates()
+		.initial("SI")
+		.state("S1", headerTestAction1(), null)
+		.and()
+		.withStates()
+		.parent("S1")
+		.initial("S11", headerTestAction1I())
+		.state("S11", headerTestAction11(), null)
+		.state("S12")
+		.and()
+		.withStates()
+		.parent("S11")
+		.initial("S111")
+		.state("S111", headerTestAction111(), null)
+		.state("S122", headerTestAction112(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("SI")
-					.target("S1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S111")
-					.target("S122")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("S122")
-					.target("S111")
-					.event("E3");
+		.withExternal()
+		.source("SI")
+		.target("S1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S111")
+		.target("S122")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("S122")
+		.target("S111")
+		.event("E3");
 		}
 
 		@Bean
@@ -510,28 +510,28 @@ public class EventHeaderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("SI")
-					.state("S1", headerTestAction1(), null)
-					.state("S2", headerTestAction2(), null)
-					.state("S3", headerTestAction3(), null);
+		.withStates()
+		.initial("SI")
+		.state("S1", headerTestAction1(), null)
+		.state("S2", headerTestAction2(), null)
+		.state("S3", headerTestAction3(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("SI")
-					.target("S1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.and()
-				.withExternal()
-					.source("S2")
-					.target("S3");
+		.withExternal()
+		.source("SI")
+		.target("S1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.and()
+		.withExternal()
+		.source("S2")
+		.target("S3");
 		}
 
 		@Bean
@@ -557,28 +557,28 @@ public class EventHeaderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("SI")
-					.state("S1", headerTestAction1(), null)
-					.state("S2", headerTestAction2(), null)
-					.state("S3", headerTestAction3(), null);
+		.withStates()
+		.initial("SI")
+		.state("S1", headerTestAction1(), null)
+		.state("S2", headerTestAction2(), null)
+		.state("S3", headerTestAction3(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("SI")
-					.target("S1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.and()
-				.withExternal()
-					.source("S2")
-					.target("S3");
+		.withExternal()
+		.source("SI")
+		.target("S1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.and()
+		.withExternal()
+		.source("S2")
+		.target("S3");
 		}
 
 		@Bean

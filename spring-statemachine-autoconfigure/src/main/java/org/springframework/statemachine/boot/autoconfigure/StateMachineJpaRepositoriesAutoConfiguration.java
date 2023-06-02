@@ -34,8 +34,8 @@ import org.springframework.statemachine.data.jpa.JpaStateRepository;
 @ConditionalOnClass(JpaStateRepository.class)
 @ConditionalOnProperty(prefix = "spring.statemachine.data.jpa.repositories", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureAfter(JpaRepositoriesAutoConfiguration.class)
-@EntityScan(basePackageClasses = { JpaRepositoryState.class })
-@EnableJpaRepositories(basePackageClasses = { JpaStateRepository.class })
+@EntityScan(basePackageClasses = {JpaRepositoryState.class})
+@EnableJpaRepositories(basePackageClasses = {JpaStateRepository.class})
 public class StateMachineJpaRepositoriesAutoConfiguration {
 
 }

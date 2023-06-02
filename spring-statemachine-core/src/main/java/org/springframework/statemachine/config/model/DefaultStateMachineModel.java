@@ -37,7 +37,7 @@ public class DefaultStateMachineModel<S, E> extends StateMachineModel<S, E> {
 	 * @param transitionsData the transitions
 	 */
 	public DefaultStateMachineModel(ConfigurationData<S, E> configurationData, StatesData<S, E> statesData,
-			TransitionsData<S, E> transitionsData) {
+TransitionsData<S, E> transitionsData) {
 		this.configuration = configurationData;
 		this.states = statesData;
 		this.transitions = transitionsData;

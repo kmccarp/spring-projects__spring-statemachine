@@ -62,9 +62,9 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		StateMachine<String, String> machine1 =
-				context.getBean("sm1", StateMachine.class);
+	context.getBean("sm1", StateMachine.class);
 		StateMachine<String, String> machine2 =
-				context.getBean("sm2", StateMachine.class);
+	context.getBean("sm2", StateMachine.class);
 
 		TestListener listener1 = new TestListener();
 		TestListener listener2 = new TestListener();
@@ -72,22 +72,22 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		machine2.addStateListener(listener2);
 
 		CuratorFramework curatorClient =
-				context.getBean("curatorClient", CuratorFramework.class);
+	context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+	new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+	new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
 		ensemble1.afterPropertiesSet();
 		ensemble2.afterPropertiesSet();
 		ensemble1.start();
 		ensemble2.start();
 
 		DistributedStateMachine<String, String> machine1s =
-				new DistributedStateMachine<String, String>(ensemble1, machine1);
+	new DistributedStateMachine<String, String>(ensemble1, machine1);
 
 		DistributedStateMachine<String, String> machine2s =
-				new DistributedStateMachine<String, String>(ensemble2, machine2);
+	new DistributedStateMachine<String, String>(ensemble2, machine2);
 
 		machine1s.afterPropertiesSet();
 		machine2s.afterPropertiesSet();
@@ -123,9 +123,9 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		StateMachine<String, String> machine1 =
-				context.getBean("sm1", StateMachine.class);
+	context.getBean("sm1", StateMachine.class);
 		StateMachine<String, String> machine2 =
-				context.getBean("sm2", StateMachine.class);
+	context.getBean("sm2", StateMachine.class);
 
 		TestListener listener1 = new TestListener();
 		TestListener listener2 = new TestListener();
@@ -133,22 +133,22 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		machine2.addStateListener(listener2);
 
 		CuratorFramework curatorClient =
-				context.getBean("curatorClient", CuratorFramework.class);
+	context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+	new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+	new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
 		ensemble1.afterPropertiesSet();
 		ensemble2.afterPropertiesSet();
 		ensemble1.start();
 		ensemble2.start();
 
 		DistributedStateMachine<String, String> machine1s =
-				new DistributedStateMachine<String, String>(ensemble1, machine1);
+	new DistributedStateMachine<String, String>(ensemble1, machine1);
 
 		DistributedStateMachine<String, String> machine2s =
-				new DistributedStateMachine<String, String>(ensemble2, machine2);
+	new DistributedStateMachine<String, String>(ensemble2, machine2);
 
 		machine1s.afterPropertiesSet();
 		machine2s.afterPropertiesSet();
@@ -184,9 +184,9 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		StateMachine<String, String> machine1 =
-				context.getBean("sm1", StateMachine.class);
+	context.getBean("sm1", StateMachine.class);
 		StateMachine<String, String> machine2 =
-				context.getBean("sm2", StateMachine.class);
+	context.getBean("sm2", StateMachine.class);
 
 		assertThat(((SmartLifecycle)machine1).isAutoStartup()).isFalse();
 		assertThat(((SmartLifecycle)machine1).isRunning()).isFalse();
@@ -201,18 +201,12 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		StateMachine<String, String> machine1 =
-				context.getBean("sm1", StateMachine.class);
+	context.getBean("sm1", StateMachine.class);
 		StateMachine<String, String> machine2 =
-				context.getBean("sm2", StateMachine.class);
+	context.getBean("sm2", StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(machine1)
-					.stateMachine(machine2)
-					.step().expectState("SI").and()
-					.step().sendEvent("E1").expectStateChanged(1).expectState("S1").and()
-					.step().sendEvent("E2").expectStateChanged(1).expectState("S2").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(machine1).stateMachine(machine2).step().expectState("SI").and().step().sendEvent("E1").expectStateChanged(1).expectState("S1").and().step().sendEvent("E2").expectStateChanged(1).expectState("S2").and().build();
 
 		plan.test();
 	}
@@ -223,35 +217,16 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		CuratorFramework curatorClient =
-				context.getBean("curatorClient", CuratorFramework.class);
+	context.getBean("curatorClient", CuratorFramework.class);
 
 		StateMachine<String, String> machine1 =
-				buildTestStateMachine(curatorClient);
+	buildTestStateMachine(curatorClient);
 
 		StateMachine<String, String> machine2 =
-				buildTestStateMachine(curatorClient);
+	buildTestStateMachine(curatorClient);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.defaultAwaitTime(2)
-					.stateMachine(machine1)
-					.stateMachine(machine2)
-					.step()
-						.expectStates("S0", "S1", "S11")
-						.expectVariable("foo")
-						.expectVariable("foo", 0)
-						.and()
-					.step()
-						.sendEvent("C", machine1)
-						.expectStateChanged(3)
-						.expectStates("S0", "S2", "S21", "S211")
-						.and()
-					.step()
-						.sendEvent("C", machine2)
-						.expectStateChanged(2)
-						.expectStates("S0", "S1", "S11")
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().defaultAwaitTime(2).stateMachine(machine1).stateMachine(machine2).step().expectStates("S0", "S1", "S11").expectVariable("foo").expectVariable("foo", 0).and().step().sendEvent("C", machine1).expectStateChanged(3).expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("C", machine2).expectStateChanged(2).expectStates("S0", "S1", "S11").and().build();
 
 		plan.test();
 	}
@@ -262,41 +237,21 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		CuratorFramework curatorClient =
-				context.getBean("curatorClient", CuratorFramework.class);
+	context.getBean("curatorClient", CuratorFramework.class);
 
 		StateMachine<String, String> machine1 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 		StateMachine<String, String> machine2 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 		StateMachine<String, String> machine3 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 		StateMachine<String, String> machine4 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 		StateMachine<String, String> machine5 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.defaultAwaitTime(2)
-					.stateMachine(machine1)
-					.stateMachine(machine2)
-					.stateMachine(machine3)
-					.stateMachine(machine4)
-					.stateMachine(machine5)
-					.step()
-						.expectStates("SI")
-						.and()
-					.step()
-						.sendEvent("E1", true)
-						.expectStateChanged(1)
-						.expectStates("S1")
-						.and()
-					.step()
-						.sendEvent("E2", true)
-						.expectStateChanged(1)
-						.expectStates("S2")
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().defaultAwaitTime(2).stateMachine(machine1).stateMachine(machine2).stateMachine(machine3).stateMachine(machine4).stateMachine(machine5).step().expectStates("SI").and().step().sendEvent("E1", true).expectStateChanged(1).expectStates("S1").and().step().sendEvent("E2", true).expectStateChanged(1).expectStates("S2").and().build();
 
 		plan.test();
 	}
@@ -307,66 +262,21 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		CuratorFramework curatorClient =
-				context.getBean("curatorClient", CuratorFramework.class);
+	context.getBean("curatorClient", CuratorFramework.class);
 
 		StateMachine<String, String> machine1 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 		StateMachine<String, String> machine2 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 		StateMachine<String, String> machine3 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 		StateMachine<String, String> machine4 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 		StateMachine<String, String> machine5 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.defaultAwaitTime(2)
-					.stateMachine(machine1)
-					.stateMachine(machine2)
-					.stateMachine(machine3)
-					.stateMachine(machine4)
-					.stateMachine(machine5)
-					.step()
-						.expectStates("SI")
-						.and()
-					.step()
-						.sendEvent("E1", true)
-						.expectStateChanged(1)
-						.expectStates("S1")
-						.and()
-					.step()
-						.sendEvent("E2", true, true)
-						.expectStateChanged(1)
-						.expectStates("S2")
-						.and()
-					.step()
-						.sendEvent("E3", true, true)
-						.expectStateChanged(1)
-						.expectStates("S1")
-						.and()
-					.step()
-						.sendEvent("E2", true, true)
-						.expectStateChanged(1)
-						.expectStates("S2")
-						.and()
-					.step()
-						.sendEvent("E3", true, true)
-						.expectStateChanged(1)
-						.expectStates("S1")
-						.and()
-					.step()
-						.sendEvent("E2", true, true)
-						.expectStateChanged(1)
-						.expectStates("S2")
-						.and()
-					.step()
-						.sendEvent("E3", true, true)
-						.expectStateChanged(1)
-						.expectStates("S1")
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().defaultAwaitTime(2).stateMachine(machine1).stateMachine(machine2).stateMachine(machine3).stateMachine(machine4).stateMachine(machine5).step().expectStates("SI").and().step().sendEvent("E1", true).expectStateChanged(1).expectStates("S1").and().step().sendEvent("E2", true, true).expectStateChanged(1).expectStates("S2").and().step().sendEvent("E3", true, true).expectStateChanged(1).expectStates("S1").and().step().sendEvent("E2", true, true).expectStateChanged(1).expectStates("S2").and().step().sendEvent("E3", true, true).expectStateChanged(1).expectStates("S1").and().step().sendEvent("E2", true, true).expectStateChanged(1).expectStates("S2").and().step().sendEvent("E3", true, true).expectStateChanged(1).expectStates("S1").and().build();
 
 		plan.test();
 	}
@@ -377,32 +287,20 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		CuratorFramework curatorClient =
-				context.getBean("curatorClient", CuratorFramework.class);
+	context.getBean("curatorClient", CuratorFramework.class);
 
 		StateMachine<String, String> machine1 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 		StateMachine<String, String> machine2 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 
 		Message<String> message = MessageBuilder
-				.withPayload("EV")
-				.setHeader("testVariable", "x1")
-				.build();
+	.withPayload("EV")
+	.setHeader("testVariable", "x1")
+	.build();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.defaultAwaitTime(2)
-					.stateMachine(machine1)
-					.stateMachine(machine2)
-					.step()
-						.expectStates("SI")
-						.and()
-					.step()
-						.sendEvent(message, machine1)
-						.expectTransition(1)
-						.expectVariable("testVariable", "x1")
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().defaultAwaitTime(2).stateMachine(machine1).stateMachine(machine2).step().expectStates("SI").and().step().sendEvent(message, machine1).expectTransition(1).expectVariable("testVariable", "x1").and().build();
 
 		plan.test();
 	}
@@ -413,38 +311,20 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		CuratorFramework curatorClient =
-				context.getBean("curatorClient", CuratorFramework.class);
+	context.getBean("curatorClient", CuratorFramework.class);
 
 		StateMachine<String, String> machine1 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 		StateMachine<String, String> machine2 =
-				buildTestStateMachine2(curatorClient);
+	buildTestStateMachine2(curatorClient);
 
 		Message<String> message = MessageBuilder
-				.withPayload("EV")
-				.setHeader("testVariable", "x1")
-				.build();
+	.withPayload("EV")
+	.setHeader("testVariable", "x1")
+	.build();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.defaultAwaitTime(2)
-					.stateMachine(machine1)
-					.stateMachine(machine2)
-					.step()
-						.expectStates("SI")
-						.and()
-					.step()
-						.sendEvent("E1", machine1)
-						.expectStateChanged(1)
-						.expectStates("S1")
-						.and()
-					.step()
-						.sendEvent(message, machine1)
-						.expectTransition(1)
-						.expectExtendedStateChanged(1)
-						.expectVariable("testVariable", "x1")
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().defaultAwaitTime(2).stateMachine(machine1).stateMachine(machine2).step().expectStates("SI").and().step().sendEvent("E1", machine1).expectStateChanged(1).expectStates("S1").and().step().sendEvent(message, machine1).expectTransition(1).expectExtendedStateChanged(1).expectVariable("testVariable", "x1").and().build();
 
 		plan.test();
 	}
@@ -456,9 +336,9 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		StateMachine<String, String> machine1 =
-				context.getBean("sm1", StateMachine.class);
+	context.getBean("sm1", StateMachine.class);
 		StateMachine<String, String> machine2 =
-				context.getBean("sm2", StateMachine.class);
+	context.getBean("sm2", StateMachine.class);
 
 		TestListener listener1 = new TestListener();
 		TestListener listener2 = new TestListener();
@@ -466,15 +346,15 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		machine2.addStateListener(listener2);
 
 		CuratorFramework curatorClient =
-				context.getBean("curatorClient", CuratorFramework.class);
+	context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+	new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
 		ensemble1.afterPropertiesSet();
 		ensemble1.start();
 
 		DistributedStateMachine<String, String> machine1s =
-				new DistributedStateMachine<String, String>(ensemble1, machine1);
+	new DistributedStateMachine<String, String>(ensemble1, machine1);
 
 
 		machine1s.afterPropertiesSet();
@@ -487,12 +367,12 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		assertThat(machine1.getState().getIds()).containsOnly("S1");
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+	new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
 
 		ensemble2.afterPropertiesSet();
 		ensemble2.start();
 		DistributedStateMachine<String, String> machine2s =
-				new DistributedStateMachine<String, String>(ensemble2, machine2);
+	new DistributedStateMachine<String, String>(ensemble2, machine2);
 		machine2s.afterPropertiesSet();
 		machine2s.start();
 		assertThat(machine2.getState().getIds()).containsOnly("S1");
@@ -504,24 +384,13 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		CuratorFramework curatorClient =
-				context.getBean("curatorClient", CuratorFramework.class);
+	context.getBean("curatorClient", CuratorFramework.class);
 
 		StateMachine<String, String> machine1 =
-				buildTestStateMachine(curatorClient);
+	buildTestStateMachine(curatorClient);
 
 		StateMachineTestPlan<String, String> plan1 =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.defaultAwaitTime(2)
-					.stateMachine(machine1)
-					.step()
-						.expectStates("S0", "S1", "S11")
-						.and()
-					.step()
-						.sendEvent("C", machine1)
-						.expectStateChanged(3)
-						.expectStates("S0", "S2", "S21", "S211")
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().defaultAwaitTime(2).stateMachine(machine1).step().expectStates("S0", "S1", "S11").and().step().sendEvent("C", machine1).expectStateChanged(3).expectStates("S0", "S2", "S21", "S211").and().build();
 		plan1.test();
 
 		Object ensemble = TestUtils.readField("ensemble", machine1);
@@ -532,18 +401,7 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		TestUtils.callMethod("handleZkConnect", ensemble);
 
 		StateMachineTestPlan<String, String> plan2 =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.defaultAwaitTime(2)
-					.stateMachine(machine1)
-					.step()
-						.expectStates("S0", "S2", "S21", "S211")
-						.and()
-					.step()
-						.sendEvent("C", machine1)
-						.expectStateChanged(2)
-						.expectStates("S0", "S1", "S11")
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().defaultAwaitTime(2).stateMachine(machine1).step().expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("C", machine1).expectStateChanged(2).expectStates("S0", "S1", "S11").and().build();
 		plan2.test();
 	}
 
@@ -553,36 +411,21 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		context.refresh();
 
 		CuratorFramework curatorClient =
-				context.getBean("curatorClient", CuratorFramework.class);
+	context.getBean("curatorClient", CuratorFramework.class);
 
 		StateMachine<String, String> machine1 =
-				buildTestStateMachine(curatorClient);
+	buildTestStateMachine(curatorClient);
 		StateMachine<String, String> machine2 =
-				buildTestStateMachine(curatorClient);
+	buildTestStateMachine(curatorClient);
 		StateMachine<String, String> machine3 =
-				buildTestStateMachine(curatorClient);
+	buildTestStateMachine(curatorClient);
 		StateMachine<String, String> machine4 =
-				buildTestStateMachine(curatorClient);
+	buildTestStateMachine(curatorClient);
 		StateMachine<String, String> machine5 =
-				buildTestStateMachine(curatorClient);
+	buildTestStateMachine(curatorClient);
 
 		StateMachineTestPlan<String, String> plan1 =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.defaultAwaitTime(2)
-					.stateMachine(machine1)
-					.stateMachine(machine2)
-					.stateMachine(machine3)
-					.stateMachine(machine4)
-					.stateMachine(machine5)
-					.step()
-						.expectStates("S0", "S1", "S11")
-						.and()
-					.step()
-						.sendEvent("C", machine1)
-						.expectStateChanged(3)
-						.expectStates("S0", "S2", "S21", "S211")
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().defaultAwaitTime(2).stateMachine(machine1).stateMachine(machine2).stateMachine(machine3).stateMachine(machine4).stateMachine(machine5).step().expectStates("S0", "S1", "S11").and().step().sendEvent("C", machine1).expectStateChanged(3).expectStates("S0", "S2", "S21", "S211").and().build();
 		plan1.test();
 
 		Object ensemble2 = TestUtils.readField("ensemble", machine2);
@@ -602,42 +445,7 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		TestUtils.callMethod("handleZkConnect", ensemble5);
 
 		StateMachineTestPlan<String, String> plan2 =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.defaultAwaitTime(2)
-					.stateMachine(machine1)
-					.stateMachine(machine2)
-					.stateMachine(machine3)
-					.stateMachine(machine4)
-					.stateMachine(machine5)
-					.step()
-						.expectStates("S0", "S2", "S21", "S211")
-						.and()
-					.step()
-						.sendEvent("C", machine1)
-						.expectStateChanged(2)
-						.expectStates("S0", "S1", "S11")
-						.and()
-					.step()
-						.sendEvent("C", machine2)
-						.expectStateChanged(3)
-						.expectStates("S0", "S2", "S21", "S211")
-						.and()
-					.step()
-						.sendEvent("C", machine3)
-						.expectStateChanged(2)
-						.expectStates("S0", "S1", "S11")
-						.and()
-					.step()
-						.sendEvent("C", machine4)
-						.expectStateChanged(3)
-						.expectStates("S0", "S2", "S21", "S211")
-						.and()
-					.step()
-						.sendEvent("C", machine5)
-						.expectStateChanged(2)
-						.expectStates("S0", "S1", "S11")
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().defaultAwaitTime(2).stateMachine(machine1).stateMachine(machine2).stateMachine(machine3).stateMachine(machine4).stateMachine(machine5).step().expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("C", machine1).expectStateChanged(2).expectStates("S0", "S1", "S11").and().step().sendEvent("C", machine2).expectStateChanged(3).expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("C", machine3).expectStateChanged(2).expectStates("S0", "S1", "S11").and().step().sendEvent("C", machine4).expectStateChanged(3).expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("C", machine5).expectStateChanged(2).expectStates("S0", "S1", "S11").and().build();
 		plan2.test();
 	}
 
@@ -696,18 +504,19 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withDistributed()
-					.ensemble(stateMachineEnsemble())
-					.and()
-				.withConfiguration()
-					.listener(stateMachineListener())
-					// TODO: false, really? testStateChangesConfigSetup() will fail if true
-					// maybe it's due to dist needs to be reseted!
-					// previously setting it true, didn't actually enable autostart.
-					.autoStartup(false);
+		.withDistributed()
+		.ensemble(stateMachineEnsemble())
+		.and()
+		.withConfiguration()
+		.listener(stateMachineListener())
+		// TODO: false, really? testStateChangesConfigSetup() will fail if true
+		// maybe it's due to dist needs to be reseted!
+		// previously setting it true, didn't actually enable autostart.
+		.autoStartup(false);
 		}
 
 		public abstract StateMachineEnsemble<String, String> stateMachineEnsemble() throws Exception;
+
 		public abstract TestListener stateMachineListener();
 
 	}
@@ -717,24 +526,24 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("SI")
-					.state("S1")
-					.state("S2");
+		.withStates()
+		.initial("SI")
+		.state("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("SI")
-					.target("S1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E2");
+		.withExternal()
+		.source("SI")
+		.target("S1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E2");
 		}
 
 	}
@@ -776,151 +585,151 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 
 	private static StateMachineEnsemble<String, String> stateMachineEnsemble(CuratorFramework curatorClient) {
 		ZookeeperStateMachineEnsemble<String, String> ensemble = new ZookeeperStateMachineEnsemble<String, String>(
-				curatorClient, "/foo");
+	curatorClient, "/foo");
 		ensemble.afterPropertiesSet();
 		ensemble.start();
 		return ensemble;
 	}
 
 	private StateMachine<String, String> buildTestStateMachine(CuratorFramework curatorClient)
-			throws Exception {
+throws Exception {
 		StateMachineBuilder.Builder<String, String> builder = StateMachineBuilder.builder();
 
 		builder.configureConfiguration()
-			.withConfiguration()
-				.autoStartup(true)
-				.and()
-			.withDistributed()
-				.ensemble(stateMachineEnsemble(curatorClient));
+	.withConfiguration()
+	.autoStartup(true)
+	.and()
+	.withDistributed()
+	.ensemble(stateMachineEnsemble(curatorClient));
 
 		builder.configureStates()
-				.withStates()
-					.initial("S0", fooAction())
-					.state("S0")
-					.and()
-					.withStates()
-						.parent("S0")
-						.initial("S1")
-						.state("S1")
-						.and()
-						.withStates()
-							.parent("S1")
-							.initial("S11")
-							.state("S11")
-							.state("S12")
-							.and()
-					.withStates()
-						.parent("S0")
-						.state("S2")
-						.and()
-						.withStates()
-							.parent("S2")
-							.initial("S21")
-							.state("S21")
-							.and()
-							.withStates()
-								.parent("S21")
-								.initial("S211")
-								.state("S211")
-								.state("S212");
+	.withStates()
+	.initial("S0", fooAction())
+	.state("S0")
+	.and()
+	.withStates()
+	.parent("S0")
+	.initial("S1")
+	.state("S1")
+	.and()
+	.withStates()
+	.parent("S1")
+	.initial("S11")
+	.state("S11")
+	.state("S12")
+	.and()
+	.withStates()
+	.parent("S0")
+	.state("S2")
+	.and()
+	.withStates()
+	.parent("S2")
+	.initial("S21")
+	.state("S21")
+	.and()
+	.withStates()
+	.parent("S21")
+	.initial("S211")
+	.state("S211")
+	.state("S212");
 
 		builder.configureTransitions()
-				.withExternal()
-					.source("S1").target("S1").event("A")
-					.guard(foo1Guard())
-					.and()
-				.withExternal()
-					.source("S1").target("S11").event("B")
-					.and()
-				.withExternal()
-					.source("S21").target("S211").event("B")
-					.and()
-				.withExternal()
-					.source("S1").target("S2").event("C")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("C")
-					.and()
-				.withExternal()
-					.source("S1").target("S0").event("D")
-					.and()
-				.withExternal()
-					.source("S211").target("S21").event("D")
-					.and()
-				.withExternal()
-					.source("S0").target("S211").event("E")
-					.and()
-				.withExternal()
-					.source("S1").target("S211").event("F")
-					.and()
-				.withExternal()
-					.source("S2").target("S11").event("F")
-					.and()
-				.withExternal()
-					.source("S11").target("S211").event("G")
-					.and()
-				.withExternal()
-					.source("S211").target("S0").event("G")
-					.and()
-				.withInternal()
-					.source("S0").event("H")
-					.guard(foo0Guard())
-					.action(fooAction())
-					.and()
-				.withInternal()
-					.source("S2").event("H")
-					.guard(foo1Guard())
-					.action(fooAction())
-					.and()
-				.withInternal()
-					.source("S1").event("H")
-					.and()
-				.withExternal()
-					.source("S11").target("S12").event("I")
-					.and()
-				.withExternal()
-					.source("S211").target("S212").event("I")
-					.and()
-				.withExternal()
-					.source("S12").target("S212").event("I");
+	.withExternal()
+	.source("S1").target("S1").event("A")
+	.guard(foo1Guard())
+	.and()
+	.withExternal()
+	.source("S1").target("S11").event("B")
+	.and()
+	.withExternal()
+	.source("S21").target("S211").event("B")
+	.and()
+	.withExternal()
+	.source("S1").target("S2").event("C")
+	.and()
+	.withExternal()
+	.source("S2").target("S1").event("C")
+	.and()
+	.withExternal()
+	.source("S1").target("S0").event("D")
+	.and()
+	.withExternal()
+	.source("S211").target("S21").event("D")
+	.and()
+	.withExternal()
+	.source("S0").target("S211").event("E")
+	.and()
+	.withExternal()
+	.source("S1").target("S211").event("F")
+	.and()
+	.withExternal()
+	.source("S2").target("S11").event("F")
+	.and()
+	.withExternal()
+	.source("S11").target("S211").event("G")
+	.and()
+	.withExternal()
+	.source("S211").target("S0").event("G")
+	.and()
+	.withInternal()
+	.source("S0").event("H")
+	.guard(foo0Guard())
+	.action(fooAction())
+	.and()
+	.withInternal()
+	.source("S2").event("H")
+	.guard(foo1Guard())
+	.action(fooAction())
+	.and()
+	.withInternal()
+	.source("S1").event("H")
+	.and()
+	.withExternal()
+	.source("S11").target("S12").event("I")
+	.and()
+	.withExternal()
+	.source("S211").target("S212").event("I")
+	.and()
+	.withExternal()
+	.source("S12").target("S212").event("I");
 
 		return builder.build();
 	}
 
 	private StateMachine<String, String> buildTestStateMachine2(CuratorFramework curatorClient)
-			throws Exception {
+throws Exception {
 		StateMachineBuilder.Builder<String, String> builder = StateMachineBuilder.builder();
 
 		builder.configureConfiguration()
-			.withConfiguration()
-				.autoStartup(true)
-				.and()
-			.withDistributed()
-				.ensemble(stateMachineEnsemble(curatorClient));
+	.withConfiguration()
+	.autoStartup(true)
+	.and()
+	.withDistributed()
+	.ensemble(stateMachineEnsemble(curatorClient));
 
 		builder.configureStates()
-				.withStates()
-					.initial("SI")
-					.state("S1")
-					.state("S2");
+	.withStates()
+	.initial("SI")
+	.state("S1")
+	.state("S2");
 
 		builder.configureTransitions()
-				.withExternal()
-					.source("SI").target("S1").event("E1")
-					.and()
-				.withExternal()
-					.source("S1").target("S2").event("E2")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("E3")
-					.and()
-				.withInternal()
-					.source("SI").event("EV")
-					.action(setVariableAction())
-					.and()
-				.withInternal()
-					.source("S1").event("EV")
-					.action(setVariableAction());
+	.withExternal()
+	.source("SI").target("S1").event("E1")
+	.and()
+	.withExternal()
+	.source("S1").target("S2").event("E2")
+	.and()
+	.withExternal()
+	.source("S2").target("S1").event("E3")
+	.and()
+	.withInternal()
+	.source("SI").event("EV")
+	.action(setVariableAction())
+	.and()
+	.withInternal()
+	.source("S1").event("EV")
+	.action(setVariableAction());
 
 		return builder.build();
 	}

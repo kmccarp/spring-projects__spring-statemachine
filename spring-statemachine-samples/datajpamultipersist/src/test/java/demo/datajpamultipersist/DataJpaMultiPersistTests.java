@@ -36,7 +36,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { Application.class })
+@SpringBootTest(classes = {Application.class})
 @WebAppConfiguration
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class DataJpaMultiPersistTests {
@@ -49,68 +49,68 @@ public class DataJpaMultiPersistTests {
 	@Test
 	public void testHome() throws Exception {
 		mvc.
-			perform(get("/state")).
-			andExpect(status().isOk()).
-			andExpect(content().string(allOf(
-				containsString("Enter S1"),
-				containsString("Machine started"))));
+	perform(get("/state")).
+	andExpect(status().isOk()).
+	andExpect(content().string(allOf(
+	containsString("Enter S1"),
+	containsString("Machine started"))));
 	}
 
 	@Test
 	public void testSendEventE1WithMachine1() throws Exception {
 		mvc.
-			perform(get("/state")
-				.param("events", "E1")
-				.param("machine", StateMachineController.MACHINE_ID_1)).
-			andExpect(status().isOk()).
-			andExpect(content().string(allOf(
-				containsString("Enter S1"),
-				containsString("Exit S1"),
-				containsString("Enter S2"))));
+	perform(get("/state")
+	.param("events", "E1")
+	.param("machine", StateMachineController.MACHINE_ID_1)).
+	andExpect(status().isOk()).
+	andExpect(content().string(allOf(
+	containsString("Enter S1"),
+	containsString("Exit S1"),
+	containsString("Enter S2"))));
 	}
 
 	@Test
 	public void testSendEventsE1E2WithMachine1() throws Exception {
 		mvc.
-			perform(get("/state")
-				.param("events", "E1")
-				.param("events", "E2")
-				.param("machine", StateMachineController.MACHINE_ID_1)).
-			andExpect(status().isOk()).
-			andExpect(content().string(allOf(
-				containsString("Enter S1"),
-				containsString("Exit S1"),
-				containsString("Enter S2"),
-				containsString("Exit S2"),
-				containsString("Enter S3"))));
+	perform(get("/state")
+	.param("events", "E1")
+	.param("events", "E2")
+	.param("machine", StateMachineController.MACHINE_ID_1)).
+	andExpect(status().isOk()).
+	andExpect(content().string(allOf(
+	containsString("Enter S1"),
+	containsString("Exit S1"),
+	containsString("Enter S2"),
+	containsString("Exit S2"),
+	containsString("Enter S3"))));
 	}
 
 	@Test
 	public void testWithMachine2() throws Exception {
 		mvc.
-			perform(get("/state")
-				.param("machine", StateMachineController.MACHINE_ID_2)).
-			andExpect(status().isOk()).
-			andExpect(content().string(allOf(
-				containsString("Enter S10"),
-				containsString("Enter S20"),
-				containsString("Enter null"))));
+	perform(get("/state")
+	.param("machine", StateMachineController.MACHINE_ID_2)).
+	andExpect(status().isOk()).
+	andExpect(content().string(allOf(
+	containsString("Enter S10"),
+	containsString("Enter S20"),
+	containsString("Enter null"))));
 	}
 
 	@Test
 	public void testSendEventsE10E20WithMachine2() throws Exception {
 		mvc.
-			perform(get("/state")
-				.param("events", "E10")
-				.param("events", "E20")
-				.param("machine", StateMachineController.MACHINE_ID_2)).
-			andExpect(status().isOk()).
-			andExpect(content().string(allOf(
-				containsString("Enter S10"),
-				containsString("Enter S20"),
-				containsString("Enter S11"),
-				containsString("Enter S21"),
-				containsString("Enter null"))));
+	perform(get("/state")
+	.param("events", "E10")
+	.param("events", "E20")
+	.param("machine", StateMachineController.MACHINE_ID_2)).
+	andExpect(status().isOk()).
+	andExpect(content().string(allOf(
+	containsString("Enter S10"),
+	containsString("Enter S20"),
+	containsString("Enter S11"),
+	containsString("Enter S21"),
+	containsString("Enter null"))));
 	}
 
 	@BeforeEach

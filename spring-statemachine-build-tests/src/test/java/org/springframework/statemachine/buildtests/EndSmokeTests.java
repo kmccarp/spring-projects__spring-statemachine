@@ -44,11 +44,7 @@ public class EndSmokeTests extends AbstractBuildTests {
 		t.start();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("S1").and()
-					.step().sendEvent("E1").expectStateChanged(1).expectState("SF").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("S1").and().step().sendEvent("E1").expectStateChanged(1).expectState("SF").and().build();
 		plan.test();
 
 		t.runWhile = false;
@@ -92,15 +88,15 @@ public class EndSmokeTests extends AbstractBuildTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean

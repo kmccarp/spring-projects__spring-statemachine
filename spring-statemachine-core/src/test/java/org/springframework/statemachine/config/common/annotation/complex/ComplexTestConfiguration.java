@@ -36,24 +36,24 @@ public class ComplexTestConfiguration extends AbstractAnnotationConfiguration<Co
 
 	ComplexTestConfigBuilder builder = new ComplexTestConfigBuilder();
 
-	@Autowired(required=false)
+	@Autowired(required = false)
 	@Qualifier("simpleConfig")
 	SimpleTestConfig simpleTestConfig;
 
-	@Bean(name="complexConfig")
+	@Bean(name = "complexConfig")
 	public ComplexTestConfig complexTestConfig() {
 		ComplexTestConfig config = builder.getOrBuild();
 		config.simpleTestConfig = simpleTestConfig;
 		return config;
 	}
 
-	@Bean(name="complexConfigData")
+	@Bean(name = "complexConfigData")
 	public String complexTestConfigData() {
 		ComplexTestConfig config = builder.getOrBuild();
 		return config.complexData;
 	}
 
-	@Bean(name="complexConfigBeanB")
+	@Bean(name = "complexConfigBeanB")
 	public ComplexTestConfigBeanB complexTestConfigBeanB() {
 		ComplexTestConfig config = builder.getOrBuild();
 		return config.complexBeanB;

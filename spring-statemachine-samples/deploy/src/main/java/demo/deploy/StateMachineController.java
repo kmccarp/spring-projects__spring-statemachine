@@ -34,8 +34,8 @@ import reactor.core.publisher.Mono;
 @Controller
 public class StateMachineController {
 
-	private final static String[] EVENTS = new String[] { "DEPLOY", "UNDEPLOY" };
-	private final static String[] FAILS = new String[] { "isInstalled", "installedOk", "isRunning", "hasError" };
+	private final static String[] EVENTS = new String[]{"DEPLOY", "UNDEPLOY"};
+	private final static String[] FAILS = new String[]{"isInstalled", "installedOk", "isRunning", "hasError"};
 
 	@Autowired
 	private StateMachine<String, String> stateMachine;
@@ -50,7 +50,7 @@ public class StateMachineController {
 
 	@RequestMapping("/state")
 	public String feedAndGetState(@RequestParam(value = "event", required = false) String event,
-			@RequestParam(value = "fail", required = false) Collection<String> fails, Model model) throws Exception {
+@RequestParam(value = "fail", required = false) Collection<String> fails, Model model) throws Exception {
 		model.addAttribute("allTypes", EVENTS);
 		model.addAttribute("failTypes", FAILS);
 		if (StringUtils.hasText(event)) {
@@ -62,9 +62,9 @@ public class StateMachineController {
 			}
 			listener.resetMessages();
 			stateMachine
-				.sendEvent(Mono.just(MessageBuilder
-					.createMessage(event, new MessageHeaders(headers))))
-				.blockLast();
+		.sendEvent(Mono.just(MessageBuilder
+.createMessage(event, new MessageHeaders(headers))))
+		.blockLast();
 		}
 		model.addAttribute("states", stateMachine.getState().getIds());
 		model.addAttribute("messages", listener.getMessages());

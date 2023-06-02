@@ -146,7 +146,7 @@ public class StateMachineBuilder {
 	}
 
 	private static class BuilderStateMachineConfigurerAdapter<S extends Object, E extends Object>
-			implements StateMachineConfigurer<S, E> {
+implements StateMachineConfigurer<S, E> {
 
 		private StateMachineModelBuilder<S, E> modelBuilder;
 		private StateMachineTransitionBuilder<S, E> transitionBuilder;

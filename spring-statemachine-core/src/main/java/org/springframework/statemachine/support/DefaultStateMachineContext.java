@@ -64,7 +64,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	 * @param historyStates the history state mappings
 	 */
 	public DefaultStateMachineContext(S state, E event, Map<String, Object> eventHeaders, ExtendedState extendedState,
-			Map<S, S> historyStates) {
+Map<S, S> historyStates) {
 		this(new ArrayList<StateMachineContext<S, E>>(), state, event, eventHeaders, extendedState, historyStates);
 	}
 
@@ -79,7 +79,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	 * @param id the machine id
 	 */
 	public DefaultStateMachineContext(S state, E event, Map<String, Object> eventHeaders, ExtendedState extendedState,
-			Map<S, S> historyStates, String id) {
+Map<S, S> historyStates, String id) {
 		this(new ArrayList<StateMachineContext<S, E>>(), state, event, eventHeaders, extendedState, historyStates, id);
 	}
 
@@ -93,7 +93,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	 * @param extendedState the extended state
 	 */
 	public DefaultStateMachineContext(List<StateMachineContext<S, E>> childs, S state, E event,
-			Map<String, Object> eventHeaders, ExtendedState extendedState) {
+Map<String, Object> eventHeaders, ExtendedState extendedState) {
 		this(childs, state, event, eventHeaders, extendedState, null);
 	}
 
@@ -108,7 +108,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	 * @param historyStates the history state mappings
 	 */
 	public DefaultStateMachineContext(List<StateMachineContext<S, E>> childs, S state, E event,
-			Map<String, Object> eventHeaders, ExtendedState extendedState, Map<S, S> historyStates) {
+Map<String, Object> eventHeaders, ExtendedState extendedState, Map<S, S> historyStates) {
 		this(childs, state, event, eventHeaders, extendedState, historyStates, null);
 	}
 
@@ -124,7 +124,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	 * @param id the machine id
 	 */
 	public DefaultStateMachineContext(List<StateMachineContext<S, E>> childs, S state, E event,
-			Map<String, Object> eventHeaders, ExtendedState extendedState, Map<S, S> historyStates, String id) {
+Map<String, Object> eventHeaders, ExtendedState extendedState, Map<S, S> historyStates, String id) {
 		this.childs = childs;
 		this.childRefs = new ArrayList<>();
 		this.state = state;
@@ -148,7 +148,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	 * @param id the machine id
 	 */
 	public DefaultStateMachineContext(List<String> childRefs, List<StateMachineContext<S, E>> childs, S state, E event,
-			Map<String, Object> eventHeaders, ExtendedState extendedState, Map<S, S> historyStates, String id) {
+Map<String, Object> eventHeaders, ExtendedState extendedState, Map<S, S> historyStates, String id) {
 		this.childs = childs;
 		this.childRefs = childRefs;
 		this.state = state;
@@ -225,7 +225,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		DefaultStateMachineContext<?, ?> other = (DefaultStateMachineContext<?, ?>) obj;
+		DefaultStateMachineContext<?, ?> other = (DefaultStateMachineContext<?, ?>)obj;
 		if (childRefs == null) {
 			if (other.childRefs != null) {
 				return false;
@@ -288,7 +288,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	@Override
 	public String toString() {
 		return "DefaultStateMachineContext [id=" + id + ", childs=" + childs + ", childRefs=" + childRefs + ", state="
-				+ state + ", historyStates=" + historyStates + ", event=" + event + ", eventHeaders=" + eventHeaders
-				+ ", extendedState=" + extendedState + "]";
+	+ state + ", historyStates=" + historyStates + ", event=" + event + ", eventHeaders=" + eventHeaders
+	+ ", extendedState=" + extendedState + "]";
 	}
 }

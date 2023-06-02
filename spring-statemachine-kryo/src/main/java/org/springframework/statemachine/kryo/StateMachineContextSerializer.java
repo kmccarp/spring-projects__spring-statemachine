@@ -60,19 +60,19 @@ public class StateMachineContextSerializer<S, E> extends Serializer<StateMachine
 	@SuppressWarnings("unchecked")
 	@Override
 	public StateMachineContext<S, E> read(Kryo kryo, Input input, Class<StateMachineContext<S, E>> clazz) {
-		E event = (E) kryo.readClassAndObject(input);
-		S state = (S) kryo.readClassAndObject(input);
-		Map<String, Object> eventHeaders = (Map<String, Object>) kryo.readClassAndObject(input);
-		Map<Object, Object> variables = (Map<Object, Object>) kryo.readClassAndObject(input);
-		List<StateMachineContext<S, E>> childs = (List<StateMachineContext<S, E>>) kryo.readClassAndObject(input);
-		Map<S, S> historyStates = (Map<S, S>) kryo.readClassAndObject(input);
-		String id = (String) kryo.readClassAndObject(input);
+		E event = (E)kryo.readClassAndObject(input);
+		S state = (S)kryo.readClassAndObject(input);
+		Map<String, Object> eventHeaders = (Map<String, Object>)kryo.readClassAndObject(input);
+		Map<Object, Object> variables = (Map<Object, Object>)kryo.readClassAndObject(input);
+		List<StateMachineContext<S, E>> childs = (List<StateMachineContext<S, E>>)kryo.readClassAndObject(input);
+		Map<S, S> historyStates = (Map<S, S>)kryo.readClassAndObject(input);
+		String id = (String)kryo.readClassAndObject(input);
 		List<String> childRefs = new ArrayList<>();
-		if(input.canReadInt()) {
-			childRefs = (List<String>) kryo.readClassAndObject(input);
+		if (input.canReadInt()) {
+			childRefs = (List<String>)kryo.readClassAndObject(input);
 		}
 
 		return new DefaultStateMachineContext<S, E>(childRefs, childs, state, event, eventHeaders,
-				new DefaultExtendedState(variables), historyStates, id);
+	new DefaultExtendedState(variables), historyStates, id);
 	}
 }

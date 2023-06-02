@@ -38,8 +38,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import demo.CommonConfiguration;
 
 @ExtendWith(SpringExtension.class)
-@DirtiesContext(classMode=ClassMode.AFTER_EACH_TEST_METHOD)
-@SpringBootTest(classes = { CommonConfiguration.class, Application.class, StateMachineCommands.class })
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+@SpringBootTest(classes = {CommonConfiguration.class, Application.class, StateMachineCommands.class})
 public class PersistTests {
 
 	@Autowired

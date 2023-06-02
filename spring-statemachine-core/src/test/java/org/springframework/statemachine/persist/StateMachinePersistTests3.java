@@ -51,7 +51,7 @@ public class StateMachinePersistTests3 extends AbstractStateMachineTests {
 		@SuppressWarnings("unchecked")
 		StateMachineFactory<String, String> stateMachineFactory = context.getBean(StateMachineFactory.class);
 
-		StateMachine<String,String> stateMachine = stateMachineFactory.getStateMachine("testid2");
+		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine("testid2");
 		assertThat(stateMachine).isNotNull();
 		assertThat(stateMachine.getId()).isEqualTo("testid2");
 
@@ -74,7 +74,7 @@ public class StateMachinePersistTests3 extends AbstractStateMachineTests {
 		@SuppressWarnings("unchecked")
 		StateMachineFactory<String, String> stateMachineFactory = context.getBean(StateMachineFactory.class);
 
-		StateMachine<String,String> stateMachine = stateMachineFactory.getStateMachine("testid2");
+		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine("testid2");
 		assertThat(stateMachine).isNotNull();
 		assertThat(stateMachine.getId()).isEqualTo("testid2");
 		TestUtils.setField("id", stateMachine, "newid");
@@ -97,7 +97,7 @@ public class StateMachinePersistTests3 extends AbstractStateMachineTests {
 		InMemoryStateMachinePersist1 stateMachinePersist = new InMemoryStateMachinePersist1();
 		StateMachinePersister<String, String, String> persister = new DefaultStateMachinePersister<>(stateMachinePersist);
 		@SuppressWarnings("unchecked")
-		StateMachine<String,String> stateMachine = context.getBean(StateMachine.class);
+		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 		assertThat(stateMachine).isNotNull();
 		assertThat(stateMachine.getId()).isNull();
 		TestUtils.setField("id", stateMachine, "newid");
@@ -117,25 +117,25 @@ public class StateMachinePersistTests3 extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 
@@ -146,25 +146,25 @@ public class StateMachinePersistTests3 extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 

@@ -32,13 +32,12 @@ import reactor.core.publisher.Mono;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class CompositeActionListener<S, E> extends AbstractCompositeItems<ActionListener<S, E>>
-		implements ActionListener<S, E> {
+public class CompositeActionListener<S, E> extends AbstractCompositeItems<ActionListener<S, E>>implements ActionListener<S, E> {
 
 	@Override
 	public void onExecute(StateMachine<S, E> stateMachine, Function<StateContext<S, E>, Mono<Void>> action,
-			long duration) {
-		for (Iterator<ActionListener<S, E>> iterator = getItems().reverse(); iterator.hasNext();) {
+long duration) {
+		for (Iterator<ActionListener<S, E>> iterator = getItems().reverse();iterator.hasNext();) {
 			ActionListener<S, E> listener = iterator.next();
 			listener.onExecute(stateMachine, action, duration);
 		}

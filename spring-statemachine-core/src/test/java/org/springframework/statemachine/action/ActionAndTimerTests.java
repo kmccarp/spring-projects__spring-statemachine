@@ -75,29 +75,29 @@ public class ActionAndTimerTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2, null, testExitAction())
-					.state(TestStates.S3);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2, null, testExitAction())
+		.state(TestStates.S3);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2)
-					.and()
-				.withInternal()
-					.source(TestStates.S2)
-					.action(testTimerAction())
-					.timerOnce(1000);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2)
+		.and()
+		.withInternal()
+		.source(TestStates.S2)
+		.action(testTimerAction())
+		.timerOnce(1000);
 		}
 
 		@Bean
@@ -118,29 +118,29 @@ public class ActionAndTimerTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2, null, testExitAction())
-					.state(TestStates.S3);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2, null, testExitAction())
+		.state(TestStates.S3);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2)
-					.and()
-				.withInternal()
-					.source(TestStates.S2)
-					.action(testTimerAction())
-					.timerOnce(1000);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2)
+		.and()
+		.withInternal()
+		.source(TestStates.S2)
+		.action(testTimerAction())
+		.timerOnce(1000);
 		}
 
 		@Bean

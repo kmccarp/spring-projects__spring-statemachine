@@ -91,8 +91,7 @@ public abstract class AbstractExpressionEvaluator implements BeanFactoryAware, I
 		if (this.evaluationContext == null) {
 			if (this.beanFactory == null && !beanFactoryRequired) {
 				this.evaluationContext = ExpressionUtils.createStandardEvaluationContext();
-			}
-			else {
+			}else {
 				this.evaluationContext = ExpressionUtils.createStandardEvaluationContext(this.beanFactory);
 			}
 			if (this.typeConverter != null) {
@@ -103,7 +102,7 @@ public abstract class AbstractExpressionEvaluator implements BeanFactoryAware, I
 	}
 
 	protected Object evaluateExpression(String expression, Object input) {
-		return this.evaluateExpression(expression, input, (Class<?>) null);
+		return this.evaluateExpression(expression, input, (Class<?>)null);
 	}
 
 	protected <T> T evaluateExpression(String expression, Object input, Class<T> expectedType) {
@@ -111,7 +110,7 @@ public abstract class AbstractExpressionEvaluator implements BeanFactoryAware, I
 	}
 
 	protected Object evaluateExpression(Expression expression, Object input) {
-		return this.evaluateExpression(expression, input, (Class<?>) null);
+		return this.evaluateExpression(expression, input, (Class<?>)null);
 	}
 
 	protected <T> T evaluateExpression(Expression expression, Class<T> expectedType) {

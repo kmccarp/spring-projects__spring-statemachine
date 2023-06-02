@@ -75,41 +75,41 @@ public class LeaderZookeeperStateMachineEnsembleTests extends AbstractZookeeperT
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true)
-					.and()
-				.withDistributed()
-					.ensemble(stateMachineEnsemble());
+		.withConfiguration()
+		.autoStartup(true)
+		.and()
+		.withDistributed()
+		.ensemble(stateMachineEnsemble());
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2")
-					.state("S3");
+		.withStates()
+		.initial("S1")
+		.state("S2")
+		.state("S3");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S3")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("S3").target("S1")
-					.event("E3");
+		.withExternal()
+		.source("S1").target("S2")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S3")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("S3").target("S1")
+		.event("E3");
 		}
 
 		@Bean
 		public StateMachineEnsemble<String, String> stateMachineEnsemble() throws Exception {
-			LeaderZookeeperStateMachineEnsemble<String,String> ensemble = new LeaderZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+			LeaderZookeeperStateMachineEnsemble<String, String> ensemble = new LeaderZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
 			ensemble.addEnsembleListener(testEnsembleListener());
 			return ensemble;
 		}

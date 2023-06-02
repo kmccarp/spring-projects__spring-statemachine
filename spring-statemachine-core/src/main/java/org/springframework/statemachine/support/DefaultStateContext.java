@@ -39,7 +39,7 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
 	private final Message<E> message;
 	private final MessageHeaders messageHeaders;
 	private final ExtendedState extendedState;
-	private final Transition<S,E> transition;
+	private final Transition<S, E> transition;
 	private final StateMachine<S, E> stateMachine;
 	private final State<S, E> source;
 	private final State<S, E> target;
@@ -61,7 +61,7 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
 	 * @param exception the exception
 	 */
 	public DefaultStateContext(Stage stage, Message<E> message, MessageHeaders messageHeaders, ExtendedState extendedState,
-			Transition<S, E> transition, StateMachine<S, E> stateMachine, State<S, E> source, State<S, E> target, Exception exception) {
+Transition<S, E> transition, StateMachine<S, E> stateMachine, State<S, E> source, State<S, E> target, Exception exception) {
 		this.stage = stage;
 		this.message = message;
 		this.messageHeaders = messageHeaders;
@@ -91,8 +91,8 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
 	 * @param exception the exception
 	 */
 	public DefaultStateContext(Stage stage, Message<E> message, MessageHeaders messageHeaders, ExtendedState extendedState,
-			Transition<S, E> transition, StateMachine<S, E> stateMachine, State<S, E> source, State<S, E> target,
-			Collection<State<S, E>> sources, Collection<State<S, E>> targets, Exception exception) {
+Transition<S, E> transition, StateMachine<S, E> stateMachine, State<S, E> source, State<S, E> target,
+Collection<State<S, E>> sources, Collection<State<S, E>> targets, Exception exception) {
 		this.stage = stage;
 		this.message = message;
 		this.messageHeaders = messageHeaders;
@@ -179,7 +179,7 @@ public class DefaultStateContext<S, E> implements StateContext<S, E> {
 	@Override
 	public String toString() {
 		return "DefaultStateContext [stage=" + stage + ", message=" + message + ", messageHeaders=" + messageHeaders + ", extendedState="
-				+ extendedState + ", transition=" + transition + ", stateMachine=" + stateMachine + ", source=" + source + ", target="
-				+ target + ", sources=" + sources + ", targets=" + targets + ", exception=" + exception + "]";
+	+ extendedState + ", transition=" + transition + ", stateMachine=" + stateMachine + ", source=" + source + ", target="
+	+ target + ", sources=" + sources + ", targets=" + targets + ", exception=" + exception + "]";
 	}
 }

@@ -36,10 +36,10 @@ import reactor.core.publisher.Mono;
 @Controller
 public class StateMachineController {
 
-	private final static String[] CUSTOMERS = new String[] { "customer1", "customer2", "customer3" };
-	private final static String[] ORDERS = new String[] { "order1", "order2", "order3" };
-	private final static String[] EVENTS = new String[] { "PLACE_ORDER", "RECEIVE_PAYMENT" };
-	private final static String[] GUIDES = new String[] { "makeProdPlan", "produce", "payment" };
+	private final static String[] CUSTOMERS = new String[]{"customer1", "customer2", "customer3"};
+	private final static String[] ORDERS = new String[]{"order1", "order2", "order3"};
+	private final static String[] EVENTS = new String[]{"PLACE_ORDER", "RECEIVE_PAYMENT"};
+	private final static String[] GUIDES = new String[]{"makeProdPlan", "produce", "payment"};
 
 	@Autowired
 	private StateMachineFactory<String, String> stateMachineFactory;
@@ -56,12 +56,12 @@ public class StateMachineController {
 
 	@RequestMapping("/state")
 	public String feedAndGetStates(
-			@RequestParam(value = "action", required = false) String action,
-			@RequestParam(value = "customer", required = false) String customer,
-			@RequestParam(value = "order", required = false) String order,
-			@RequestParam(value = "event", required = false) String event,
-			@RequestParam(value = "guide", required = false) List<String> guides,
-			Model model) throws Exception {
+@RequestParam(value = "action", required = false) String action,
+@RequestParam(value = "customer", required = false) String customer,
+@RequestParam(value = "order", required = false) String order,
+@RequestParam(value = "event", required = false) String event,
+@RequestParam(value = "guide", required = false) List<String> guides,
+Model model) throws Exception {
 		StateMachine<String, String> stateMachine = null;
 		if (StringUtils.hasText(customer) && StringUtils.hasText(order)) {
 			stateMachine = getMachine(customer + ":" + order);
@@ -85,9 +85,9 @@ public class StateMachineController {
 				}
 			}
 			stateMachine
-				.sendEvent(Mono.just(MessageBuilder
-					.createMessage(event, new MessageHeaders(headers))))
-				.blockLast();
+		.sendEvent(Mono.just(MessageBuilder
+.createMessage(event, new MessageHeaders(headers))))
+		.blockLast();
 		}
 
 		model.addAttribute("allIds", machines.keySet());
@@ -101,7 +101,7 @@ public class StateMachineController {
 	}
 
 	private synchronized StateMachine<String, String> getMachine(String id) {
-		StateMachine<String,String> machine = machines.get(id);
+		StateMachine<String, String> machine = machines.get(id);
 		if (machine == null) {
 			machine = stateMachineFactory.getStateMachine(id);
 			machines.put(id, machine);

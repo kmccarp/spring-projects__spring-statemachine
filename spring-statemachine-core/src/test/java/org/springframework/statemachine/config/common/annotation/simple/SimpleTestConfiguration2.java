@@ -33,9 +33,9 @@ public class SimpleTestConfiguration2 extends AbstractImportingAnnotationConfigu
 
 	@Override
 	protected BeanDefinition buildBeanDefinition(AnnotationMetadata importingClassMetadata,
-			Class<? extends Annotation> namedAnnotation) throws Exception {
+Class<? extends Annotation> namedAnnotation) throws Exception {
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
-				.rootBeanDefinition(SimpleTestConfigDelegatingFactoryBean.class);
+	.rootBeanDefinition(SimpleTestConfigDelegatingFactoryBean.class);
 		beanDefinitionBuilder.addConstructorArgValue(builder);
 		return beanDefinitionBuilder.getBeanDefinition();
 	}

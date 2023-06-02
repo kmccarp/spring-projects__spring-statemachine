@@ -33,26 +33,25 @@ import reactor.core.publisher.Mono;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class CompositeStateListener<S, E> extends AbstractCompositeListener<StateListener<S, E>>
-		implements StateListener<S, E> {
+public class CompositeStateListener<S, E> extends AbstractCompositeListener<StateListener<S, E>>implements StateListener<S, E> {
 
 	@Override
 	public void onEntry(StateContext<S, E> context) {
-		for (Iterator<StateListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			iterator.next().onEntry(context);
 		}
 	}
 
 	@Override
 	public void onExit(StateContext<S, E> context) {
-		for (Iterator<StateListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			iterator.next().onExit(context);
 		}
 	}
 
 	@Override
 	public void onComplete(StateContext<S, E> context) {
-		for (Iterator<StateListener<S, E>> iterator = getListeners().reverse(); iterator.hasNext();) {
+		for (Iterator<StateListener<S, E>> iterator = getListeners().reverse();iterator.hasNext();) {
 			iterator.next().onComplete(context);
 		}
 	}
@@ -64,8 +63,8 @@ public class CompositeStateListener<S, E> extends AbstractCompositeListener<Stat
 			Iterable<StateListener<S, E>> iterable = () -> iterator;
 			Stream<StateListener<S, E>> stream = StreamSupport.stream(iterable.spliterator(), false);
 			return Flux.fromStream(stream)
-				.flatMap(listener -> listener.doOnComplete(context))
-				.then();
+		.flatMap(listener -> listener.doOnComplete(context))
+		.then();
 		});
 	}
 }

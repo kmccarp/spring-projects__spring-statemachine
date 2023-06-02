@@ -38,13 +38,12 @@ import reactor.core.publisher.Mono;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultExternalTransitionConfigurer<S, E> extends AbstractTransitionConfigurer<S, E>
-		implements ExternalTransitionConfigurer<S, E> {
+public class DefaultExternalTransitionConfigurer<S, E> extends AbstractTransitionConfigurer<S, E>implements ExternalTransitionConfigurer<S, E> {
 
 	@Override
 	public void configure(StateMachineTransitionBuilder<S, E> builder) throws Exception {
 		builder.addTransition(getSource(), getTarget(), getState(), getEvent(), getPeriod(), getCount(), getActions(), getGuard(), TransitionKind.EXTERNAL,
-				getSecurityRule(), getName());
+	getSecurityRule(), getName());
 	}
 
 	@Override
@@ -110,7 +109,7 @@ public class DefaultExternalTransitionConfigurer<S, E> extends AbstractTransitio
 	@Override
 	public ExternalTransitionConfigurer<S, E> guardExpression(String expression) {
 		SpelExpressionParser parser = new SpelExpressionParser(
-				new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
+	new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
 		setGuard(new SpelExpressionGuard<S, E>(parser.parseExpression(expression)));
 		return this;
 	}

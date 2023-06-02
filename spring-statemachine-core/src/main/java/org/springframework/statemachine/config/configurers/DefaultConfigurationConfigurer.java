@@ -37,9 +37,7 @@ import org.springframework.statemachine.transition.TransitionConflictPolicy;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultConfigurationConfigurer<S, E>
-		extends AnnotationConfigurerAdapter<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>
-		implements ConfigurationConfigurer<S, E> {
+public class DefaultConfigurationConfigurer<S, E>extends AnnotationConfigurerAdapter<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>implements ConfigurationConfigurer<S, E> {
 
 	private String machineId;
 	private BeanFactory beanFactory;

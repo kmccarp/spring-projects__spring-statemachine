@@ -65,7 +65,7 @@ public class TransitionData<S, E> {
 	 * @param kind the kind
 	 */
 	public TransitionData(S source, S target, E event, Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind) {
+Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind) {
 		this(source, target, null, event, null, null, actions, guard, kind, null, null);
 	}
 
@@ -81,7 +81,7 @@ public class TransitionData<S, E> {
 	 * @param name the name
 	 */
 	public TransitionData(S source, S target, E event, Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind, String name) {
+Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind, String name) {
 		this(source, target, null, event, null, null, actions, guard, kind, null, name);
 	}
 
@@ -97,8 +97,8 @@ public class TransitionData<S, E> {
 	 * @param kind the kind
 	 */
 	public TransitionData(S source, S target, Long period, Integer count,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
+Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind) {
 		this(source, target, null, null, period, count, actions, guard, kind, null, null);
 	}
 
@@ -115,8 +115,8 @@ public class TransitionData<S, E> {
 	 * @param name the name
 	 */
 	public TransitionData(S source, S target, Long period, Integer count,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind, String name) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
+Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind, String name) {
 		this(source, target, null, null, period, count, actions, guard, kind, null, name);
 	}
 
@@ -136,8 +136,8 @@ public class TransitionData<S, E> {
 	 * @param name the name
 	 */
 	public TransitionData(S source, S target, S state, E event, Long period, Integer count,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind, SecurityRule securityRule, String name) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
+Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind, SecurityRule securityRule, String name) {
 		this.source = source;
 		this.target = target;
 		this.state = state;

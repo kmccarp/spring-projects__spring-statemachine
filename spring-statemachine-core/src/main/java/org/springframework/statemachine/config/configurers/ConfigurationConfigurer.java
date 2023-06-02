@@ -34,8 +34,7 @@ import org.springframework.statemachine.transition.TransitionConflictPolicy;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface ConfigurationConfigurer<S, E> extends
-		AnnotationConfigurerBuilder<StateMachineConfigurationConfigurer<S, E>> {
+public interface ConfigurationConfigurer<S, E> extendsAnnotationConfigurerBuilder<StateMachineConfigurationConfigurer<S, E>> {
 
 	/**
 	 * Specify a machine identifier.

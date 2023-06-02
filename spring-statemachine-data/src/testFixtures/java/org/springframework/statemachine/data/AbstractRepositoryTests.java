@@ -86,12 +86,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S1").and()
-					.step().sendEvent("E1").expectStates("S2").and()
-					.step().sendEvent("E2").expectStates("S3").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S1").and().step().sendEvent("E1").expectStates("S2").and().step().sendEvent("E2").expectStates("S3").and().build();
 		plan.test();
 	}
 
@@ -105,14 +100,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S1").and()
-					.step().sendEvent("E1").expectStates("S2", "S20").and()
-					.step().sendEvent("E2").expectStates("S2", "S21").and()
-					.step().sendEvent("E3").expectStates("S1").and()
-					.step().sendEvent("E4").expectStates("S2", "S21").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S1").and().step().sendEvent("E1").expectStates("S2", "S20").and().step().sendEvent("E2").expectStates("S2", "S21").and().step().sendEvent("E3").expectStates("S1").and().step().sendEvent("E4").expectStates("S2", "S21").and().build();
 		plan.test();
 	}
 
@@ -126,14 +114,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S1").and()
-					.step().sendEvent("E1").expectStates("S2", "S20").and()
-					.step().sendEvent("E2").expectStates("S2", "S21").and()
-					.step().sendEvent("E3").expectStates("S1").and()
-					.step().sendEvent("E4").expectStates("S2", "S21").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S1").and().step().sendEvent("E1").expectStates("S2", "S20").and().step().sendEvent("E2").expectStates("S2", "S21").and().step().sendEvent("E3").expectStates("S1").and().step().sendEvent("E4").expectStates("S2", "S21").and().build();
 		plan.test();
 	}
 
@@ -147,13 +128,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S10", "S20").and()
-					.step().sendEvent("E1").expectStates("S11", "S21").and()
-					.step().sendEvent("E2").expectStates("S10", "S21").and()
-					.step().sendEvent("E3").expectStates("S10", "S20").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S10", "S20").and().step().sendEvent("E1").expectStates("S11", "S21").and().step().sendEvent("E2").expectStates("S10", "S21").and().step().sendEvent("E3").expectStates("S10", "S20").and().build();
 		plan.test();
 	}
 
@@ -167,11 +142,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("SI").and()
-					.step().sendEvent(MessageBuilder.withPayload("E1").setHeader("choice", "s30").build()).expectStates("S30").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("SI").and().step().sendEvent(MessageBuilder.withPayload("E1").setHeader("choice", "s30").build()).expectStates("S30").and().build();
 		plan.test();
 	}
 
@@ -185,11 +156,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("SI").and()
-					.step().sendEvent(MessageBuilder.withPayload("E1").setHeader("choice", "s31").build()).expectStates("S31").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("SI").and().step().sendEvent(MessageBuilder.withPayload("E1").setHeader("choice", "s31").build()).expectStates("S31").and().build();
 		plan.test();
 	}
 
@@ -203,11 +170,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("SI").and()
-					.step().sendEvent(MessageBuilder.withPayload("E1").setHeader("choice", "s32").build()).expectStates("S32").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("SI").and().step().sendEvent(MessageBuilder.withPayload("E1").setHeader("choice", "s32").build()).expectStates("S32").and().build();
 		plan.test();
 	}
 
@@ -221,11 +184,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("SI").and()
-					.step().sendEvent(MessageBuilder.withPayload("E1").build()).expectStates("S33").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("SI").and().step().sendEvent(MessageBuilder.withPayload("E1").build()).expectStates("S33").and().build();
 		plan.test();
 	}
 
@@ -239,11 +198,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("SI").and()
-					.step().sendEvent(MessageBuilder.withPayload("E1").setHeader("junction", "s30").build()).expectStates("S30").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("SI").and().step().sendEvent(MessageBuilder.withPayload("E1").setHeader("junction", "s30").build()).expectStates("S30").and().build();
 		plan.test();
 	}
 
@@ -257,11 +212,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("SI").and()
-					.step().sendEvent(MessageBuilder.withPayload("E1").setHeader("junction", "s31").build()).expectStates("S31").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("SI").and().step().sendEvent(MessageBuilder.withPayload("E1").setHeader("junction", "s31").build()).expectStates("S31").and().build();
 		plan.test();
 	}
 
@@ -275,11 +226,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("SI").and()
-					.step().sendEvent(MessageBuilder.withPayload("E1").setHeader("junction", "s32").build()).expectStates("S32").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("SI").and().step().sendEvent(MessageBuilder.withPayload("E1").setHeader("junction", "s32").build()).expectStates("S32").and().build();
 		plan.test();
 	}
 
@@ -293,11 +240,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("SI").and()
-					.step().sendEvent(MessageBuilder.withPayload("E1").build()).expectStates("S33").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("SI").and().step().sendEvent(MessageBuilder.withPayload("E1").build()).expectStates("S33").and().build();
 		plan.test();
 	}
 
@@ -311,12 +254,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S1").and()
-					.step().sendEvent("ENTRY1").expectStates("S2", "S22").and()
-					.step().sendEvent("EXIT1").expectStates("S4").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S1").and().step().sendEvent("ENTRY1").expectStates("S2", "S22").and().step().sendEvent("EXIT1").expectStates("S4").and().build();
 		plan.test();
 	}
 
@@ -330,11 +268,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("SI").and()
-					.step().sendEvent("E1").expectStates("S2", "S21", "S31").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("SI").and().step().sendEvent("E1").expectStates("S2", "S21", "S31").and().build();
 		plan.test();
 
 		State<String, String> endState = null;
@@ -361,14 +295,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("SI").and()
-					.step().sendEvent("E1").expectStates("S2", "S20", "S30").and()
-					.step().sendEvent("E2").expectStates("S2", "S21", "S30").and()
-					.step().sendEvent("E3").expectStates("S4").and()
-					.step().sendEvent("E4").expectStates("SI").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("SI").and().step().sendEvent("E1").expectStates("S2", "S20", "S30").and().step().sendEvent("E2").expectStates("S2", "S21", "S30").and().step().sendEvent("E3").expectStates("S4").and().step().sendEvent("E4").expectStates("SI").and().build();
 		plan.test();
 	}
 
@@ -382,13 +309,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("READY").and()
-					.step().sendEvent("E3").expectStates("S3").and()
-					.step().sendEvent("E1").expectStates("S3").and()
-					.step().sendEvent("E6").expectStates("S1").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("READY").and().step().sendEvent("E3").expectStates("S3").and().step().sendEvent("E1").expectStates("S3").and().step().sendEvent("E6").expectStates("S1").and().build();
 		plan.test();
 	}
 
@@ -402,13 +323,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S1").and()
-					.step().sendEvent("E1").expectStates("S2", "S21").and()
-					.step().sendEvent("E3").expectStates("S2", "S22").and()
-					.step().sendEvent("E2").expectStates("S3").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S1").and().step().sendEvent("E1").expectStates("S2", "S21").and().step().sendEvent("E3").expectStates("S2", "S22").and().step().sendEvent("E2").expectStates("S3").and().build();
 		plan.test();
 	}
 
@@ -422,11 +337,7 @@ public abstract class AbstractRepositoryTests {
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S1").expectVariable("foo", 0).and()
-					.step().sendEvent("E1").expectStates("S2").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S1").expectVariable("foo", 0).and().step().sendEvent("E1").expectStates("S2").and().build();
 		plan.test();
 	}
 
@@ -442,10 +353,10 @@ public abstract class AbstractRepositoryTests {
 		Map<String, State<String, String>> states = stateMachine.getStates().stream().collect(Collectors.toMap((State<String, String> s1) -> s1.getId(), s2 -> s2));
 		assertThat(states.size()).isEqualTo(2);
 
-		State<String,String> S1 = (State<String, String>) states.get("S1");
+		State<String, String> S1 = (State<String, String>)states.get("S1");
 		assertThat(S1.getExitActions().size()).isEqualTo(1);
 
-		State<String,String> S2 = (State<String,String>)states.get("S2");
+		State<String, String> S2 = (State<String, String>)states.get("S2");
 		assertThat(S2.getEntryActions().size()).isEqualTo(1);
 		assertThat(S2.getStateActions().size()).isEqualTo(1);
 	}
@@ -649,8 +560,8 @@ public abstract class AbstractRepositoryTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean

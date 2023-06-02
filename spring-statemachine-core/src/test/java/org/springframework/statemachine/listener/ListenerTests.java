@@ -55,8 +55,8 @@ public class ListenerTests extends AbstractStateMachineTests {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config1.class);
 		assertThat(ctx.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				ctx.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	ctx.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		machine.start();
 
 		TestStateMachineListener listener = new TestStateMachineListener();
@@ -82,8 +82,8 @@ public class ListenerTests extends AbstractStateMachineTests {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config2.class);
 		assertThat(ctx.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				ctx.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	ctx.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 
 		TestStateMachineListener listener = new TestStateMachineListener();
 		machine.addStateListener(listener);
@@ -102,8 +102,8 @@ public class ListenerTests extends AbstractStateMachineTests {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config2.class);
 		assertThat(ctx.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				ctx.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	ctx.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 
 		TestStateMachineListener listener = new TestStateMachineListener();
 		machine.addStateListener(listener);
@@ -160,6 +160,7 @@ public class ListenerTests extends AbstractStateMachineTests {
 		static class Holder {
 			State<TestStates, TestEvents> from;
 			State<TestStates, TestEvents> to;
+
 			public Holder(State<TestStates, TestEvents> from, State<TestStates, TestEvents> to) {
 				this.from = from;
 				this.to = to;
@@ -169,6 +170,7 @@ public class ListenerTests extends AbstractStateMachineTests {
 		static class Holder2 {
 			Object key;
 			Object value;
+
 			public Holder2(Object key, Object value) {
 				this.key = key;
 				this.value = value;
@@ -226,41 +228,41 @@ public class ListenerTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2)
-					.state(TestStates.S3, TestEvents.E4)
-					.state(TestStates.S4);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2)
+		.state(TestStates.S3, TestEvents.E4)
+		.state(TestStates.S4);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.action(loggingAction())
-					.action(loggingAction())
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2)
-					.action(loggingAction())
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.S4)
-					.event(TestEvents.E3)
-					.action(loggingAction())
-					.and()
-				.withExternal()
-					.source(TestStates.S4)
-					.target(TestStates.S3)
-					.event(TestEvents.E4)
-					.action(loggingAction());
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.action(loggingAction())
+		.action(loggingAction())
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2)
+		.action(loggingAction())
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.S4)
+		.event(TestEvents.E3)
+		.action(loggingAction())
+		.and()
+		.withExternal()
+		.source(TestStates.S4)
+		.target(TestStates.S3)
+		.event(TestEvents.E4)
+		.action(loggingAction());
 		}
 
 		@Bean
@@ -276,26 +278,26 @@ public class ListenerTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.end(TestStates.S3)
-					.state(TestStates.S1)
-					.state(TestStates.S2)
-					.state(TestStates.S3);
+		.withStates()
+		.initial(TestStates.S1)
+		.end(TestStates.S3)
+		.state(TestStates.S1)
+		.state(TestStates.S2)
+		.state(TestStates.S3);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2);
 		}
 	}
 }

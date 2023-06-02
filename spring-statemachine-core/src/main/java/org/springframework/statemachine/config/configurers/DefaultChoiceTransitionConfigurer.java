@@ -36,9 +36,7 @@ import org.springframework.statemachine.guard.Guard;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultChoiceTransitionConfigurer<S, E>
-		extends	AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>
-		implements ChoiceTransitionConfigurer<S, E> {
+public class DefaultChoiceTransitionConfigurer<S, E>extends	AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>implements ChoiceTransitionConfigurer<S, E> {
 
 	private S source;
 	private ChoiceData<S, E> first;

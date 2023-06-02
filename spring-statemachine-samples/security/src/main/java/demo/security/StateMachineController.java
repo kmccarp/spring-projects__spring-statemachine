@@ -52,9 +52,9 @@ public class StateMachineController {
 		if (event != null) {
 			try {
 				stateMachine
-					.sendEvent(Mono.just(MessageBuilder
-						.withPayload(event).build()))
-					.blockLast();
+			.sendEvent(Mono.just(MessageBuilder
+	.withPayload(event).build()))
+			.blockLast();
 			} catch (Exception e) {
 				log.error("Error sendEvent", e);
 			}

@@ -67,11 +67,11 @@ public class ChoicePseudoState<S, E> implements PseudoState<S, E> {
 			}
 			return Mono.justOrEmpty(csd);
 		})
-		.flatMap(csd -> {
-			return Flux.fromIterable(csd.getActions())
-				.flatMap(a -> a.apply(context))
-				.then(Mono.just(csd.getState()));
-		});
+	.flatMap(csd -> {
+		return Flux.fromIterable(csd.getActions())
+.flatMap(a -> a.apply(context))
+.then(Mono.just(csd.getState()));
+	});
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public class ChoicePseudoState<S, E> implements PseudoState<S, E> {
 		 * @param actions the actions
 		 */
 		public ChoiceStateData(StateHolder<S, E> state, Guard<S, E> guard,
-				Collection<Function<StateContext<S, E>, Mono<Void>>> actions) {
+	Collection<Function<StateContext<S, E>, Mono<Void>>> actions) {
 			Assert.notNull(state, "Holder must be set");
 			this.state = state;
 			this.guard = guard;

@@ -63,7 +63,7 @@ public class StateMachineModelFactoryTests extends AbstractStateMachineTests {
 		modelBuilder.setBeanFactory(context);
 		ObjectStateMachineFactory<String, String> factory = new ObjectStateMachineFactory<>(modelBuilder.build());
 
-		StateMachine<String,String> stateMachine = factory.getStateMachine();
+		StateMachine<String, String> stateMachine = factory.getStateMachine();
 		doStartAndAssert(stateMachine);
 		assertThat(stateMachine.getState().getIds()).containsExactly("S1");
 		doSendEventAndConsumeAll(stateMachine, "E1");
@@ -87,7 +87,7 @@ public class StateMachineModelFactoryTests extends AbstractStateMachineTests {
 		context.register(Config3.class);
 		context.refresh();
 		StateMachineFactory<String, String> stateMachineFactory = resolveFactory(context);
-		StateMachine<String,String> stateMachine = stateMachineFactory.getStateMachine();
+		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 		TestStateMachineModelFactory modelFactory = context.getBean(TestStateMachineModelFactory.class);
 
 		doStartAndAssert(stateMachine);
@@ -151,8 +151,8 @@ public class StateMachineModelFactoryTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -177,8 +177,8 @@ public class StateMachineModelFactoryTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -203,15 +203,15 @@ public class StateMachineModelFactoryTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.listener(stateMachineListener());
+		.withConfiguration()
+		.listener(stateMachineListener());
 		}
 
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -230,7 +230,8 @@ public class StateMachineModelFactoryTests extends AbstractStateMachineTests {
 
 		@Bean
 		public StateMachineListener<String, String> stateMachineListener() {
-			return new StateMachineListenerAdapter<String, String>(){};
+			return new StateMachineListenerAdapter<String, String>(){
+			};
 		}
 	}
 
@@ -241,15 +242,15 @@ public class StateMachineModelFactoryTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.listener(stateMachineListener());
+		.withConfiguration()
+		.listener(stateMachineListener());
 		}
 
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -268,7 +269,8 @@ public class StateMachineModelFactoryTests extends AbstractStateMachineTests {
 
 		@Bean
 		public StateMachineListener<String, String> stateMachineListener() {
-			return new StateMachineListenerAdapter<String, String>(){};
+			return new StateMachineListenerAdapter<String, String>(){
+			};
 		}
 	}
 

@@ -29,11 +29,10 @@ import reactor.core.publisher.Mono;
 public class StateMachineCommands extends AbstractStateMachineCommands<States, Events> {
 
 	@CliCommand(value = "sm event", help = "Sends an event to a state machine")
-	public String event(@CliOption(key = { "", "event" }, mandatory = true, help = "The event") final Events event) {
+	public String event(@CliOption(key = {"", "event"}, mandatory = true, help = "The event") final Events event) {
 		getStateMachine()
-			.sendEvent(Mono.just(MessageBuilder
-				.withPayload(event).build()))
-			.subscribe();
+	.sendEvent(Mono.just(MessageBuilder.withPayload(event).build()))
+	.subscribe();
 		return "Event " + event + " send";
 	}
 }

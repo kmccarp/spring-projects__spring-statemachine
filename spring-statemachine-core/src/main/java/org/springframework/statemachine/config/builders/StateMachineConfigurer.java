@@ -26,8 +26,7 @@ import org.springframework.statemachine.config.common.annotation.AnnotationConfi
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface StateMachineConfigurer<S, E> extends
-		AnnotationConfigurer<StateMachineConfig<S, E>, StateMachineConfigBuilder<S, E>> {
+public interface StateMachineConfigurer<S, E> extendsAnnotationConfigurer<StateMachineConfig<S, E>, StateMachineConfigBuilder<S, E>> {
 
 	/**
 	 * Callback for {@link StateMachineModelConfigurer}.

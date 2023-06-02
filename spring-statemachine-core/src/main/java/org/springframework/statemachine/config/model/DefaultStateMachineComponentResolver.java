@@ -62,10 +62,10 @@ public class DefaultStateMachineComponentResolver<S, E> implements StateMachineC
 	 * @param registeredGuards the registered guards
 	 */
 	public DefaultStateMachineComponentResolver(BeanFactory beanFactory, Map<String, Action<S, E>> registeredActions,
-			Map<String, Guard<S, E>> registeredGuards) {
+Map<String, Guard<S, E>> registeredGuards) {
 		this.beanFactory = beanFactory;
 		this.registeredActions = registeredActions != null ? registeredActions : new HashMap<String, Action<S, E>>();
-		this.registeredGuards =  registeredGuards != null ? registeredGuards : new HashMap<String, Guard<S, E>>();
+		this.registeredGuards = registeredGuards != null ? registeredGuards : new HashMap<String, Guard<S, E>>();
 	}
 
 	@SuppressWarnings("unchecked")

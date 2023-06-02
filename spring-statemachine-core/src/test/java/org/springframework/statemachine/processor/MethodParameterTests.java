@@ -45,10 +45,10 @@ public class MethodParameterTests {
 	public void testOnTransition() {
 		Bean1 bean1 = new Bean1();
 		Method method = ReflectionUtils.findMethod(Bean1.class, "onTransition", Map.class, ExtendedState.class, StateMachine.class,
-				Message.class, Exception.class, StateContext.class);
+	Message.class, Exception.class, StateContext.class);
 		OnTransition annotation = AnnotationUtils.findAnnotation(method, OnTransition.class);
 		StateMachineHandler<OnTransition, String, String> handler = new StateMachineHandler<OnTransition, String, String>(Bean1.class,
-				bean1, method, annotation, annotation);
+	bean1, method, annotation, annotation);
 
 		Message<String> message = MessageBuilder.withPayload("S").build();
 		MessageHeaders messageHeaders = message.getHeaders();
@@ -63,7 +63,7 @@ public class MethodParameterTests {
 			@Override
 			public StateContext<String, String> getStateContext() {
 				return new DefaultStateContext<String, String>(Stage.TRANSITION, message, messageHeaders, extendedState, transition, stateMachine, source,
-						target, exception);
+			target, exception);
 			}
 		};
 
@@ -74,7 +74,7 @@ public class MethodParameterTests {
 
 		@OnTransition
 		public void onTransition(@EventHeaders Map<String, Object> headers, ExtendedState extendedState, StateMachine<?, ?> stateMachine,
-				Message<?> message, Exception e, StateContext<?, ?> stateContext) {
+	Message<?> message, Exception e, StateContext<?, ?> stateContext) {
 			assertThat(headers).isNotNull();
 			assertThat(extendedState).isNotNull();
 			assertThat(stateMachine).isNotNull();

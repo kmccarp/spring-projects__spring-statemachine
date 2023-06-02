@@ -36,8 +36,7 @@ import reactor.core.publisher.Mono;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface TransitionConfigurer<T, S, E> extends
-		AnnotationConfigurerBuilder<StateMachineTransitionConfigurer<S, E>> {
+public interface TransitionConfigurer<T, S, E> extendsAnnotationConfigurerBuilder<StateMachineTransitionConfigurer<S, E>> {
 
 	/**
 	 * Specify a source state {@code S} for this {@link Transition}.

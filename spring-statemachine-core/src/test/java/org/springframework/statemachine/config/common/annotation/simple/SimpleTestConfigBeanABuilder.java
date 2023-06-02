@@ -31,9 +31,7 @@ import org.springframework.statemachine.config.common.annotation.configurers.Res
  * @author Janne Valkealahti
  *
  */
-public class SimpleTestConfigBeanABuilder
-		extends AbstractConfiguredAnnotationBuilder<SimpleTestConfigBeanA, SimpleTestConfigBeanABuilder, SimpleTestConfigBeanABuilder>
-		implements ResourceConfigurerAware {
+public class SimpleTestConfigBeanABuilderextends AbstractConfiguredAnnotationBuilder<SimpleTestConfigBeanA, SimpleTestConfigBeanABuilder, SimpleTestConfigBeanABuilder>implements ResourceConfigurerAware {
 
 	private String data;
 	private Set<Resource> resources = new HashSet<Resource>();
@@ -61,7 +59,7 @@ public class SimpleTestConfigBeanABuilder
 	}
 
 	public ResourceConfigurer<SimpleTestConfigBeanABuilder> withResources() throws Exception {
-		return getOrApply(new DefaultResourceConfigurer<SimpleTestConfigBeanA, SimpleTestConfigBeanABuilder,SimpleTestConfigBeanABuilder>());
+		return getOrApply(new DefaultResourceConfigurer<SimpleTestConfigBeanA, SimpleTestConfigBeanABuilder, SimpleTestConfigBeanABuilder>());
 	}
 
 }

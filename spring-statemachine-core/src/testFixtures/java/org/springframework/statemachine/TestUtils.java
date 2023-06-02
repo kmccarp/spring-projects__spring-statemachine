@@ -51,33 +51,33 @@ public class TestUtils {
 	@SuppressWarnings("unchecked")
 	public static <S, E> StateMachine<S, E> resolveMachine(BeanFactory beanFactory) {
 		assertThat(beanFactory.containsBean(DEFAULT_ID_STATEMACHINE)).isTrue();
-		return (StateMachine<S, E>) beanFactory.getBean(DEFAULT_ID_STATEMACHINE);
+		return (StateMachine<S, E>)beanFactory.getBean(DEFAULT_ID_STATEMACHINE);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static <S, E> StateMachine<S, E> resolveMachine(String id, BeanFactory beanFactory) {
-		return (StateMachine<S, E>) beanFactory.getBean(id, StateMachine.class);
+		return (StateMachine<S, E>)beanFactory.getBean(id, StateMachine.class);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static <S, E> StateMachineFactory<S, E> resolveFactory(BeanFactory beanFactory) {
 		assertThat(beanFactory.containsBean(DEFAULT_ID_STATEMACHINEFACTORY)).isTrue();
-		return (StateMachineFactory<S, E>) beanFactory.getBean(DEFAULT_ID_STATEMACHINEFACTORY);
+		return (StateMachineFactory<S, E>)beanFactory.getBean(DEFAULT_ID_STATEMACHINEFACTORY);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static <S, E> StateMachineFactory<S, E> resolveFactory(String id, BeanFactory beanFactory) {
-		return (StateMachineFactory<S, E>) beanFactory.getBean(id, StateMachineFactory.class);
+		return (StateMachineFactory<S, E>)beanFactory.getBean(id, StateMachineFactory.class);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static <S, E, T> StateMachinePersister<S, E, T> resolvePersister(BeanFactory beanFactory) {
-		return (StateMachinePersister<S, E, T>) beanFactory.getBean(StateMachinePersister.class);
+		return (StateMachinePersister<S, E, T>)beanFactory.getBean(StateMachinePersister.class);
 	}
 
 	@SuppressWarnings("unchecked")
 	public static <S, E> Action<S, E> resolveAction(String id, BeanFactory beanFactory) {
-		return (Action<S, E>) beanFactory.getBean(id, Action.class);
+		return (Action<S, E>)beanFactory.getBean(id, Action.class);
 	}
 
 	public static <S, E> void doStartAndAssert(StateMachine<S, E> stateMachine) {
@@ -103,58 +103,58 @@ public class TestUtils {
 
 	public static <S, E> void doSendEventAndConsumeAll(StateMachine<S, E> stateMachine, E event) {
 		StepVerifier.create(stateMachine.sendEvent(eventAsMono(event)))
-			.thenConsumeWhile(eventResult -> {
-				log.debug("Consume eventResult " + eventResult);
-				return true;
-			})
-			.expectComplete()
-			.verify(Duration.ofSeconds(5));
+	.thenConsumeWhile(eventResult -> {
+		log.debug("Consume eventResult " + eventResult);
+		return true;
+	})
+	.expectComplete()
+	.verify(Duration.ofSeconds(5));
 	}
 
 	public static <S, E> void doSendEventAndConsumeAll(StateMachine<S, E> stateMachine, Message<E> event) {
 		StepVerifier.create(stateMachine.sendEvent(eventAsMono(event)))
-			.thenConsumeWhile(eventResult -> true)
-			.verifyComplete();
+	.thenConsumeWhile(eventResult -> true)
+	.verifyComplete();
 	}
 
 	public static <S, E> void doSendEventAndConsumeResultAsDenied(StateMachine<S, E> stateMachine, E event) {
 		StepVerifier.create(stateMachine.sendEvent(eventAsMono(event)))
-			.consumeNextWith(result -> {
-				assertThat(result.getResultType()).isEqualTo(ResultType.DENIED);
-			})
-			.verifyComplete();
+	.consumeNextWith(result -> {
+		assertThat(result.getResultType()).isEqualTo(ResultType.DENIED);
+	})
+	.verifyComplete();
 	}
 
 	public static <S, E> void doSendEventAndConsumeResultAsDenied(StateMachine<S, E> stateMachine, Message<E> event) {
 		StepVerifier.create(stateMachine.sendEvent(eventAsMono(event)))
-			.consumeNextWith(result -> {
-				assertThat(result.getResultType()).isEqualTo(ResultType.DENIED);
-			})
-			.verifyComplete();
+	.consumeNextWith(result -> {
+		assertThat(result.getResultType()).isEqualTo(ResultType.DENIED);
+	})
+	.verifyComplete();
 	}
 
 	@SafeVarargs
 	public static <S, E> void doSendEventsAndConsumeAll(StateMachine<S, E> stateMachine, E... events) {
 		StepVerifier.create(stateMachine.sendEvents(eventsAsFlux(events)))
-			.thenConsumeWhile(eventResult -> {
-				log.debug("Consume eventResult " + eventResult);
-				return true;
-			})
-			.expectComplete()
-			.verify(Duration.ofSeconds(5));
+	.thenConsumeWhile(eventResult -> {
+		log.debug("Consume eventResult " + eventResult);
+		return true;
+	})
+	.expectComplete()
+	.verify(Duration.ofSeconds(5));
 	}
 
 	@SafeVarargs
 	public static <S, E> void doSendEventsAndConsumeAllWithComplete(StateMachine<S, E> stateMachine, E... events) {
 		Flux<Void> completions = stateMachine.sendEvents(eventsAsFlux(events))
-			.doOnNext(result -> {
-				log.debug("Consume eventResult " + result);
-			})
-			.flatMap(result -> result.complete());
+	.doOnNext(result -> {
+		log.debug("Consume eventResult " + result);
+	})
+	.flatMap(result -> result.complete());
 		StepVerifier.create(completions)
-			.thenConsumeWhile(complete -> true)
-			.expectComplete()
-			.verify(Duration.ofSeconds(10));
+	.thenConsumeWhile(complete -> true)
+	.expectComplete()
+	.verify(Duration.ofSeconds(10));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -172,9 +172,9 @@ public class TestUtils {
 
 		if (field == null)
 			throw new IllegalArgumentException("Cannot find field '" + name + "' in the class hierarchy of "
-					+ target.getClass());
+		+ target.getClass());
 		field.setAccessible(true);
-		return (T) field.get(target);
+		return (T)field.get(target);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -184,9 +184,9 @@ public class TestUtils {
 
 		if (method == null)
 			throw new IllegalArgumentException("Cannot find method '" + method + "' in the class hierarchy of "
-					+ target.getClass());
+		+ target.getClass());
 		method.setAccessible(true);
-		return (T) ReflectionUtils.invokeMethod(method, target);
+		return (T)ReflectionUtils.invokeMethod(method, target);
 	}
 
 	public static void setField(String name, Object target, Object value) throws Exception {
@@ -203,7 +203,7 @@ public class TestUtils {
 
 		if (field == null)
 			throw new IllegalArgumentException("Cannot find field '" + name + "' in the class hierarchy of "
-					+ target.getClass());
+		+ target.getClass());
 		field.setAccessible(true);
 		field.set(target, value);
 	}
@@ -215,9 +215,9 @@ public class TestUtils {
 
 		if (method == null)
 			throw new IllegalArgumentException("Cannot find method '" + method + "' in the class hierarchy of "
-					+ target.getClass());
+		+ target.getClass());
 		method.setAccessible(true);
-		return (T) ReflectionUtils.invokeMethod(method, target, args);
+		return (T)ReflectionUtils.invokeMethod(method, target, args);
 	}
 
 }

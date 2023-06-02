@@ -83,16 +83,16 @@ public class SubmachineRefEnumTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2, subStateMachine);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2, subStateMachine);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1).target(TestStates.S2).event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1).target(TestStates.S2).event(TestEvents.E1);
 		}
 
 	}
@@ -104,23 +104,23 @@ public class SubmachineRefEnumTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S20)
-					.state(TestStates.S21)
-					.and()
-					.withStates()
-						.parent(TestStates.S21)
-						.initial(TestStates.S30)
-						.state(TestStates.S31);
+		.withStates()
+		.initial(TestStates.S20)
+		.state(TestStates.S21)
+		.and()
+		.withStates()
+		.parent(TestStates.S21)
+		.initial(TestStates.S30)
+		.state(TestStates.S31);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S20).target(TestStates.S21).event(TestEvents.E2).and()
-				.withExternal()
-					.source(TestStates.S30).target(TestStates.S31).event(TestEvents.E3);
+		.withExternal()
+		.source(TestStates.S20).target(TestStates.S21).event(TestEvents.E2).and()
+		.withExternal()
+		.source(TestStates.S30).target(TestStates.S31).event(TestEvents.E3);
 		}
 
 	}
@@ -136,16 +136,16 @@ public class SubmachineRefEnumTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<Object, Object> states) throws Exception {
 			states
-				.withStates()
-					.initial(States1.S1)
-					.state(States1.S2, subStateMachine);
+		.withStates()
+		.initial(States1.S1)
+		.state(States1.S2, subStateMachine);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<Object, Object> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(States1.S1).target(States1.S2).event(Events1.E1);
+		.withExternal()
+		.source(States1.S1).target(States1.S2).event(Events1.E1);
 		}
 
 	}
@@ -157,23 +157,23 @@ public class SubmachineRefEnumTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<Object, Object> states) throws Exception {
 			states
-				.withStates()
-					.initial(States2.S20)
-					.state(States2.S21)
-					.and()
-					.withStates()
-						.parent(States2.S21)
-						.initial(States2.S30)
-						.state(States2.S31);
+		.withStates()
+		.initial(States2.S20)
+		.state(States2.S21)
+		.and()
+		.withStates()
+		.parent(States2.S21)
+		.initial(States2.S30)
+		.state(States2.S31);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<Object, Object> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(States2.S20).target(States2.S21).event(Events2.E2).and()
-				.withExternal()
-					.source(States2.S30).target(States2.S31).event(Events2.E3);
+		.withExternal()
+		.source(States2.S20).target(States2.S21).event(Events2.E2).and()
+		.withExternal()
+		.source(States2.S30).target(States2.S31).event(Events2.E3);
 		}
 
 	}

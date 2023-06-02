@@ -31,24 +31,30 @@ public class StateMachineConfig {
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2", null, (c) -> {System.out.println("hello");})
-					.state("S3", (c) -> {System.out.println("hello");}, null);
+		.withStates()
+		.initial("S1")
+		.state("S2", null, (c) -> {
+		 System.out.println("hello");
+	 })
+		.state("S3", (c) -> {
+		 System.out.println("hello");
+	 }, null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.action((c) -> {System.out.println("hello");})
-					.and()
-				.withExternal()
-					.source("S2").target("S3").event("E2");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.action((c) -> {
+		 System.out.println("hello");
+	 })
+		.and()
+		.withExternal()
+		.source("S2").target("S3").event("E2");
 		}
 	}
 //end::snippetA[]

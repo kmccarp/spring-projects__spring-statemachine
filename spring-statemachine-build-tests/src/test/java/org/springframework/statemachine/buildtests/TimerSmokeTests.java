@@ -30,6 +30,7 @@ import org.springframework.statemachine.test.StateMachineTestPlanBuilder;
 public class TimerSmokeTests {
 
 	private static ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+
 	{
 		taskExecutor.initialize();
 	}
@@ -38,19 +39,19 @@ public class TimerSmokeTests {
 		StateMachineBuilder.Builder<String, String> builder = StateMachineBuilder.builder();
 
 		builder.configureStates()
-			.withStates()
-				.initial("initial")
-				.end("end");
+	.withStates()
+	.initial("initial")
+	.end("end");
 
 		builder.configureTransitions()
-			.withExternal()
-				.source("initial")
-				.target("end")
-				.timerOnce(30)
-				.and()
-			.withLocal()
-				.source("initial")
-				.event("repeate");
+	.withExternal()
+	.source("initial")
+	.target("end")
+	.timerOnce(30)
+	.and()
+	.withLocal()
+	.source("initial")
+	.event("repeate");
 
 		return builder.build();
 	}
@@ -59,24 +60,24 @@ public class TimerSmokeTests {
 		StateMachineBuilder.Builder<String, String> builder = StateMachineBuilder.builder();
 
 		builder.configureStates()
-			.withStates()
-				.initial("initial").end("end").and()
-				.withStates().parent("initial").initial("inner");
+	.withStates()
+	.initial("initial").end("end").and()
+	.withStates().parent("initial").initial("inner");
 
 		builder.configureTransitions()
-			.withExternal()
-				.source("initial")
-				.target("end")
-				.timerOnce(30)
-				.and()
-			.withExternal()
-				.source("inner")
-				.target("end")
-				.timerOnce(15)
-				.and()
-			.withLocal()
-				.source("inner")
-				.event("repeate");
+	.withExternal()
+	.source("initial")
+	.target("end")
+	.timerOnce(30)
+	.and()
+	.withExternal()
+	.source("inner")
+	.target("end")
+	.timerOnce(15)
+	.and()
+	.withLocal()
+	.source("inner")
+	.event("repeate");
 
 		return builder.build();
 	}
@@ -84,7 +85,7 @@ public class TimerSmokeTests {
 	@Test
 	public void testNPE() throws Exception {
 		StateMachine<String, String> stateMachine;
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0;i < 20;i++) {
 			stateMachine = buildMachine();
 			doStartAndAssert(stateMachine);
 			while (!stateMachine.isComplete()) {
@@ -96,10 +97,10 @@ public class TimerSmokeTests {
 	@Test
 	public void testNPE2() throws Exception {
 		StateMachine<String, String> stateMachine;
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0;i < 20;i++) {
 			stateMachine = buildMachine2();
 			doStartAndAssert(stateMachine);
-			while(!stateMachine.isComplete()) {
+			while (!stateMachine.isComplete()) {
 				doSendEventAndConsumeAll(stateMachine, "repeate");
 			}
 			doStopAndAssert(stateMachine);
@@ -110,25 +111,25 @@ public class TimerSmokeTests {
 	@Tag("smoke")
 	public void testDeadlock() throws Exception {
 		StateMachineTestPlan<String, String> plan;
-		for (int i = 0; i < 100; i++) {
-			plan = StateMachineTestPlanBuilder.<String, String> builder()
-					.defaultAwaitTime(5)
-					.stateMachine(buildMachine())
-					.step()
-						.expectStateMachineStarted(1)
-						.expectStateEntered(1)
-						.expectStateEntered("initial")
-						.and()
-					.step()
-						.sendEvent("repeate")
-						.expectStates("initial")
-						.and()
-					.step()
-						.expectStateEntered(1)
-						.expectStateEntered("end")
-						.expectStateMachineStopped(1)
-						.and()
-					.build();
+		for (int i = 0;i < 100;i++) {
+			plan = StateMachineTestPlanBuilder.<String, String>builder()
+		.defaultAwaitTime(5)
+		.stateMachine(buildMachine())
+		.step()
+		.expectStateMachineStarted(1)
+		.expectStateEntered(1)
+		.expectStateEntered("initial")
+		.and()
+		.step()
+		.sendEvent("repeate")
+		.expectStates("initial")
+		.and()
+		.step()
+		.expectStateEntered(1)
+		.expectStateEntered("end")
+		.expectStateMachineStopped(1)
+		.and()
+		.build();
 			plan.test();
 		}
 	}

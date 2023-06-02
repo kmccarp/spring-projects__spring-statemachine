@@ -46,7 +46,7 @@ public class MessageHeadersSerializer extends Serializer<MessageHeaders> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public MessageHeaders read(Kryo kryo, Input input, Class<MessageHeaders> type) {
-		Map<String, Object> eventHeaders = (Map<String, Object>) kryo.readClassAndObject(input);
+		Map<String, Object> eventHeaders = (Map<String, Object>)kryo.readClassAndObject(input);
 		return new MessageHeaders(eventHeaders);
 	}
 

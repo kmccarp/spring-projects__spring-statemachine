@@ -19,32 +19,32 @@ import org.springframework.util.Assert;
  */
 public class FactoryPersistStateMachineHandler<S, E> extends AbstractPersistStateMachineHandler<S, E> {
 
-    protected final StateMachineFactory<S, E> factory;
-    protected final StateMachineBuilder.Builder<S, E> builder;
+	protected final StateMachineFactory<S, E> factory;
+	protected final StateMachineBuilder.Builder<S, E> builder;
 
-    public FactoryPersistStateMachineHandler(StateMachineBuilder.Builder<S, E> builder) {
-        Assert.notNull(builder, "State machine builder must be set");
-        this.builder = builder;
-        factory = null;
-    }
+	public FactoryPersistStateMachineHandler(StateMachineBuilder.Builder<S, E> builder) {
+		Assert.notNull(builder, "State machine builder must be set");
+		this.builder = builder;
+		factory = null;
+	}
 
-    public FactoryPersistStateMachineHandler(StateMachineFactory<S, E> factory) {
-        Assert.notNull(factory, "State machine factory must be set");
-        this.factory = factory;
-        builder = null;
-    }
+	public FactoryPersistStateMachineHandler(StateMachineFactory<S, E> factory) {
+		Assert.notNull(factory, "State machine factory must be set");
+		this.factory = factory;
+		builder = null;
+	}
 
-    @Override
-    protected StateMachine<S, E> getInitStateMachine() {
-        StateMachine<S, E> stateMachine;
-        if (factory != null) {
-            stateMachine = factory.getStateMachine();
-        } else if (builder != null) {
-            stateMachine = builder.build();
-        } else {
-            throw new StateMachineException("Factory or builder must be set to build state machine for handler");
-        }
-        initStateMachine(stateMachine);
-        return stateMachine;
-    }
+	@Override
+	protected StateMachine<S, E> getInitStateMachine() {
+		StateMachine<S, E> stateMachine;
+		if (factory != null) {
+			stateMachine = factory.getStateMachine();
+		} else if (builder != null) {
+			stateMachine = builder.build();
+		} else {
+			throw new StateMachineException("Factory or builder must be set to build state machine for handler");
+		}
+		initStateMachine(stateMachine);
+		return stateMachine;
+	}
 }

@@ -28,43 +28,44 @@ import org.springframework.statemachine.config.builders.StateMachineTransitionCo
 import org.springframework.statemachine.recipes.persist.PersistStateMachineHandler;
 
 @SpringBootApplication
-public class Application  {
+public class Application {
 
 //tag::snippetA[]
 	@Configuration
 	@EnableStateMachine
 	static class StateMachineConfig
-			extends StateMachineConfigurerAdapter<String, String> {
+extends StateMachineConfigurerAdapter<String, String> {
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("PLACED")
-					.state("PROCESSING")
-					.state("SENT")
-					.state("DELIVERED");
+		.withStates()
+		.initial("PLACED")
+		.state("PROCESSING")
+		.state("SENT")
+		.state("DELIVERED");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("PLACED").target("PROCESSING")
-					.event("PROCESS")
-					.and()
-				.withExternal()
-					.source("PROCESSING").target("SENT")
-					.event("SEND")
-					.and()
-				.withExternal()
-					.source("SENT").target("DELIVERED")
-					.event("DELIVER");
+		.withExternal()
+		.source("PLACED").target("PROCESSING")
+		.event("PROCESS")
+		.and()
+		.withExternal()
+		.source("PROCESSING").target("SENT")
+		.event("SEND")
+		.and()
+		.withExternal()
+		.source("SENT").target("DELIVERED")
+		.event("DELIVER");
 		}
 
 	}
+
 //end::snippetA[]
 
 //tag::snippetB[]
@@ -85,6 +86,7 @@ public class Application  {
 		}
 
 	}
+
 //end::snippetB[]
 
 //tag::snippetC[]
@@ -103,6 +105,7 @@ public class Application  {
 		}
 
 	}
+
 //end::snippetC[]
 
 	public static void main(String[] args) throws Exception {

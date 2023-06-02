@@ -67,11 +67,11 @@ public class JunctionPseudoState<S, E> implements PseudoState<S, E> {
 			}
 			return Mono.justOrEmpty(jsd);
 		})
-		.flatMap(jsd -> {
-			return Flux.fromIterable(jsd.getActions())
-				.flatMap(a -> a.apply(context))
-				.then(Mono.just(jsd.getState()));
-		});
+	.flatMap(jsd -> {
+		return Flux.fromIterable(jsd.getActions())
+.flatMap(a -> a.apply(context))
+.then(Mono.just(jsd.getState()));
+	});
 	}
 
 
@@ -117,7 +117,7 @@ public class JunctionPseudoState<S, E> implements PseudoState<S, E> {
 		 * @param actions the actions
 		 */
 		public JunctionStateData(StateHolder<S, E> state, Guard<S, E> guard,
-				Collection<Function<StateContext<S, E>, Mono<Void>>> actions) {
+	Collection<Function<StateContext<S, E>, Mono<Void>>> actions) {
 			Assert.notNull(state, "Holder must be set");
 			this.state = state;
 			this.guard = guard;

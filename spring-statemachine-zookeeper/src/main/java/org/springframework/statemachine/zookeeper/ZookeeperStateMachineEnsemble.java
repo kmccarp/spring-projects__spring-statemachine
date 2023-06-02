@@ -79,7 +79,7 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 	private final CuratorWatcher watcher = new StateWatcher();
 	private PersistentNode node;
 	private final Queue<StateMachine<S, E>> joinQueue = new ConcurrentLinkedQueue<StateMachine<S, E>>();
-	private final List<StateMachine<S, E>> joined = new ArrayList<StateMachine<S,E>>();
+	private final List<StateMachine<S, E>> joined = new ArrayList<StateMachine<S, E>>();
 	private final Object joinLock = new Object();
 	private final ConnectionStateListener connectionListener = new LocalConnectionStateListener();
 
@@ -316,7 +316,7 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 				CuratorTransactionFinal tt = tx.create().forPath(baseDataPath).and();
 				tt = tt.create().forPath(statePath).and();
 				tt = tt.create().forPath(logPath).and();
-				for (int i = 0; i<logSize; i++) {
+				for (int i = 0;i < logSize;i++) {
 					tt = tt.create().forPath(logPath + "/" + i).and();
 				}
 				tt.commit();
@@ -359,7 +359,7 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 		} else if (wrapper.version > notifyWrapper.version) {
 			if (log.isDebugEnabled()) {
 				log.debug("Wrapper version higher that notifyWrapper version, notifyWrapper=[" + notifyWrapper
-						+ "], wrapper=[" + wrapper + "] for " + this);
+			+ "], wrapper=[" + wrapper + "] for " + this);
 			}
 			notifyRef.set(wrapper);
 			notifyStateChanged(wrapper.context);
@@ -369,7 +369,7 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 	private void traceLogWrappers(StateWrapper currentWrapper, StateWrapper notifyWrapper, StateWrapper newWrapper) {
 		if (log.isTraceEnabled()) {
 			log.trace("Wrappers id=" + uuid + "\ncurrentWrapper=[" + currentWrapper + "] \nnotifyWrapper=["
-					+ notifyWrapper + "] \nnewWrapper=[" + newWrapper + "]");
+		+ notifyWrapper + "] \nnewWrapper=[" + newWrapper + "]");
 		}
 	}
 
@@ -394,21 +394,21 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 				log.trace("Process WatchedEvent: id=" + uuid + " " + event);
 			}
 			switch (event.getType()) {
-			case NodeDataChanged:
-				try {
-					// re-read once if we did read log history
-					// there might be unread change
-					if (handleDataChange()) {
-						handleDataChange();
+				case NodeDataChanged:
+					try {
+						// re-read once if we did read log history
+						// there might be unread change
+						if (handleDataChange()) {
+							handleDataChange();
+						}
+					} catch (Exception e) {
+						log.error("Error handling event", e);
 					}
-				} catch (Exception e) {
-					log.error("Error handling event", e);
-				}
-				registerWatcherForStatePath();
-				break;
-			default:
-				registerWatcherForStatePath();
-				break;
+					registerWatcherForStatePath();
+					break;
+				default:
+					registerWatcherForStatePath();
+					break;
 			}
 		}
 
@@ -428,8 +428,8 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 		traceLogWrappers(currentWrapper, notifyWrapper, newWrapper);
 
 		if (currentWrapper.version + 1 == newWrapper.version
-				&& notifyWrapper.version >= currentWrapper.version
-				&& stateRef.compareAndSet(currentWrapper, newWrapper)) {
+	&& notifyWrapper.version >= currentWrapper.version
+	&& stateRef.compareAndSet(currentWrapper, newWrapper)) {
 			// simply used to check if we don't need to replay, if so
 			// we can just try to notify
 			mayNotifyStateChanged(newWrapper);
@@ -439,9 +439,9 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 			if (log.isDebugEnabled()) {
 				log.debug("Events missed, trying to replay start " + start + " count " + count);
 			}
-			for (int i = start; i < (start + count); i++) {
+			for (int i = start;i < (start + count);i++) {
 				Stat stat = new Stat();
-				StateMachineContext<S, E> context = ((ZookeeperStateMachinePersist<S, E>) persist).readLog(i, stat);
+				StateMachineContext<S, E> context = ((ZookeeperStateMachinePersist<S, E>)persist).readLog(i, stat);
 				int ver = (stat.getVersion() - 1) * logSize + (i + 1);
 
 				// check if we're behind more than a log size meaning we can't
@@ -480,23 +480,23 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 		public void stateChanged(CuratorFramework client, ConnectionState newState) {
 			if (curatorClient == client) {
 				switch (newState) {
-				case CONNECTED:
-				case RECONNECTED:
-					handleZkConnect();
-					break;
-				case READ_ONLY:
-					break;
-				case LOST:
-				case SUSPENDED:
-					handleZkDisconnect();
-					break;
-				default:
-					break;
+					case CONNECTED:
+					case RECONNECTED:
+						handleZkConnect();
+						break;
+					case READ_ONLY:
+						break;
+					case LOST:
+					case SUSPENDED:
+						handleZkDisconnect();
+						break;
+					default:
+						break;
 				}
 			}
 		}
 
-	};
+	}
 
 	/**
 	 * Wrapper object for a {@link StateMachineContext} and its

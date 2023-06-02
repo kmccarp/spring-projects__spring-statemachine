@@ -79,35 +79,35 @@ public class StateMachineMonitorTests extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withMonitoring()
-					.monitor(stateMachineMonitor());
+		.withMonitoring()
+		.monitor(stateMachineMonitor());
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S1", null, exaction())
-					.state("S2", saction())
-					.state("S2", enaction(), null);
+		.withStates()
+		.initial("S1")
+		.state("S1", null, exaction())
+		.state("S2", saction())
+		.state("S2", enaction(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.action(taction())
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S2")
-					.target("S1")
-					.event("E2");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.action(taction())
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S2")
+		.target("S1")
+		.event("E2");
 		}
 
 		@Bean
@@ -163,6 +163,7 @@ public class StateMachineMonitorTests extends AbstractStateMachineTests {
 
 	private static class LatchAction implements Action<String, String> {
 		final CountDownLatch latch = new CountDownLatch(1);
+
 		@Override
 		public void execute(StateContext<String, String> context) {
 			try {
@@ -192,7 +193,7 @@ public class StateMachineMonitorTests extends AbstractStateMachineTests {
 
 		@Override
 		public void action(StateMachine<String, String> stateMachine,
-				Function<StateContext<String, String>, Mono<Void>> action, long duration) {
+	Function<StateContext<String, String>, Mono<Void>> action, long duration) {
 			actions.put(action, new Actions(action, duration));
 			latch.countDown();
 		}
@@ -207,16 +208,19 @@ public class StateMachineMonitorTests extends AbstractStateMachineTests {
 		static class Transitions {
 			Transition<String, String> transition;
 			Long duration;
+
 			public Transitions(Transition<String, String> transition, Long duration) {
 				super();
 				this.transition = transition;
 				this.duration = duration;
 			}
 		}
+
 		@SuppressWarnings("unused")
 		static class Actions {
 			Function<StateContext<String, String>, Mono<Void>> action;
 			Long duration;
+
 			public Actions(Function<StateContext<String, String>, Mono<Void>> action, Long duration) {
 				this.action = action;
 				this.duration = duration;

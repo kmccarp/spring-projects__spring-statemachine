@@ -35,13 +35,12 @@ import org.springframework.util.ClassUtils;
  * @param <O> The object that used builder returns
  * @param <B> The type of the builder
  */
-public abstract class AbstractAnnotationConfiguration<B extends AnnotationBuilder<O>, O>
-		implements ImportAware, BeanClassLoaderAware {
+public abstract class AbstractAnnotationConfiguration<B extends AnnotationBuilder<O>, O>implements ImportAware, BeanClassLoaderAware {
 
-	private List<AnnotationConfigurer<O,B>> configurers;
+	private List<AnnotationConfigurer<O, B>> configurers;
 
 	private ClassLoader beanClassLoader;
-	
+
 	private AnnotationAttributes annotationAttributes;
 
 	@Override
@@ -52,19 +51,19 @@ public abstract class AbstractAnnotationConfiguration<B extends AnnotationBuilde
 	@Override
 	public void setImportMetadata(AnnotationMetadata importMetadata) {
 		Map<String, Object> enableConfigurationAttrMap =
-				importMetadata.getAnnotationAttributes(EnableAnnotationConfiguration.class.getName());
+	importMetadata.getAnnotationAttributes(EnableAnnotationConfiguration.class.getName());
 		AnnotationAttributes enableConfigurationAttrs = AnnotationAttributes.fromMap(enableConfigurationAttrMap);
-		if(enableConfigurationAttrs == null) {
+		if (enableConfigurationAttrs == null) {
 			// search parent classes
 			Class<?> currentClass = ClassUtils.resolveClassName(importMetadata.getClassName(), beanClassLoader);
-			for(Class<?> classToInspect = currentClass ;classToInspect != null; classToInspect = classToInspect.getSuperclass()) {
+			for (Class<?> classToInspect = currentClass;classToInspect != null;classToInspect = classToInspect.getSuperclass()) {
 				EnableAnnotationConfiguration enableConfigurationAnnotation =
-						AnnotationUtils.findAnnotation(classToInspect, EnableAnnotationConfiguration.class);
-				if(enableConfigurationAnnotation == null) {
+			AnnotationUtils.findAnnotation(classToInspect, EnableAnnotationConfiguration.class);
+				if (enableConfigurationAnnotation == null) {
 					continue;
 				}
 				enableConfigurationAttrMap = AnnotationUtils
-						.getAnnotationAttributes(enableConfigurationAnnotation);
+			.getAnnotationAttributes(enableConfigurationAnnotation);
 				enableConfigurationAttrs = AnnotationAttributes.fromMap(enableConfigurationAttrMap);
 			}
 		}
@@ -77,7 +76,7 @@ public abstract class AbstractAnnotationConfiguration<B extends AnnotationBuilde
 	 * @param configurers the configurers
 	 * @throws Exception the exception
 	 */
-	@Autowired(required=false)
+	@Autowired(required = false)
 	public void setConfigurers(List<AnnotationConfigurer<O, B>> configurers) throws Exception {
 		this.configurers = configurers;
 		onConfigurers(configurers);

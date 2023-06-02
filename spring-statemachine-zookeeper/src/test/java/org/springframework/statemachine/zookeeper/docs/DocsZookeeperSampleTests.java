@@ -36,44 +36,44 @@ public class DocsZookeeperSampleTests {
 	@Configuration
 	@EnableStateMachine
 	public class Config
-			extends StateMachineConfigurerAdapter<String, String> {
+extends StateMachineConfigurerAdapter<String, String> {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withDistributed()
-					.ensemble(stateMachineEnsemble())
-					.and()
-				.withConfiguration()
-					.autoStartup(true);
+		.withDistributed()
+		.ensemble(stateMachineEnsemble())
+		.and()
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			// config states
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			// config transitions
 		}
 
 		@Bean
 		public StateMachineEnsemble<String, String> stateMachineEnsemble()
-				throws Exception {
+	throws Exception {
 			return new ZookeeperStateMachineEnsemble<String, String>(curatorClient(), "/zkpath");
 		}
 
 		@Bean
 		public CuratorFramework curatorClient()
-				throws Exception {
+	throws Exception {
 			CuratorFramework client = CuratorFrameworkFactory
-					.builder()
-					.defaultData(new byte[0])
-					.connectString("localhost:2181").build();
+		.builder()
+		.defaultData(new byte[0])
+		.connectString("localhost:2181").build();
 			client.start();
 			return client;
 		}

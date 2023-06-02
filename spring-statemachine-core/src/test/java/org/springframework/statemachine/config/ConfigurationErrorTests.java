@@ -54,16 +54,16 @@ public class ConfigurationErrorTests extends AbstractStateMachineTests {
 		assertThatThrownBy(() -> {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder
-				.configureStates()
-				.withStates()
-				.state("S1")
-				.state("S2");
+		.configureStates()
+		.withStates()
+		.state("S1")
+		.state("S2");
 			builder
-				.configureTransitions()
-				.withExternal()
-				.source("S1")
-				.target("S2")
-				.event("E1");
+		.configureTransitions()
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 			builder.build();
 		}).satisfies(e -> {
 			assertThat(e.getCause()).isInstanceOf(MalformedConfigurationException.class);
@@ -75,11 +75,11 @@ public class ConfigurationErrorTests extends AbstractStateMachineTests {
 		assertThatThrownBy(() -> {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder
-				.configureStates()
-				.withStates()
-				.initial("S1")
-				.state("S1")
-				.state("S2");
+		.configureStates()
+		.withStates()
+		.initial("S1")
+		.state("S1")
+		.state("S2");
 			builder.build();
 		}).satisfies(e -> {
 			assertThat(e.getCause()).isInstanceOf(MalformedConfigurationException.class);
@@ -91,15 +91,15 @@ public class ConfigurationErrorTests extends AbstractStateMachineTests {
 		// should fail for no transitions but verifier is disabled
 		Builder<String, String> builder = StateMachineBuilder.builder();
 		builder
-			.configureConfiguration()
-				.withVerifier()
-					.enabled(false);
+	.configureConfiguration()
+	.withVerifier()
+	.enabled(false);
 		builder
-			.configureStates()
-				.withStates()
-					.initial("S1")
-					.state("S1")
-					.state("S2");
+	.configureStates()
+	.withStates()
+	.initial("S1")
+	.state("S1")
+	.state("S2");
 		builder.build();
 	}
 
@@ -108,15 +108,15 @@ public class ConfigurationErrorTests extends AbstractStateMachineTests {
 		TestStateMachineModelVerifier verifier = new TestStateMachineModelVerifier();
 		Builder<String, String> builder = StateMachineBuilder.builder();
 		builder
-			.configureConfiguration()
-				.withVerifier()
-					.verifier(verifier);
+	.configureConfiguration()
+	.withVerifier()
+	.verifier(verifier);
 		builder
-			.configureStates()
-				.withStates()
-					.initial("S1")
-					.state("S1")
-					.state("S2");
+	.configureStates()
+	.withStates()
+	.initial("S1")
+	.state("S1")
+	.state("S2");
 		builder.build();
 		assertThat(verifier.latch.await(2, TimeUnit.SECONDS)).isTrue();
 	}
@@ -126,15 +126,15 @@ public class ConfigurationErrorTests extends AbstractStateMachineTests {
 		assertThatThrownBy(() -> {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder.configureStates()
-				.withStates()
-					.initial("S1")
-					.state("S1")
-					.choice("S2")
-					.state("S3");
+		.withStates()
+		.initial("S1")
+		.state("S1")
+		.choice("S2")
+		.state("S3");
 			builder.configureTransitions()
-				.withExternal()
-					.source("S1")
-					.target("S2");
+		.withExternal()
+		.source("S1")
+		.target("S2");
 			builder.build();
 		}).satisfies(e -> {
 			assertThat(e.getCause()).isInstanceOf(MalformedConfigurationException.class);
@@ -150,19 +150,19 @@ public class ConfigurationErrorTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					//.initial("S1")
-					.state("S1")
-					.state("S2");
+		.withStates()
+		//.initial("S1")
+		.state("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 

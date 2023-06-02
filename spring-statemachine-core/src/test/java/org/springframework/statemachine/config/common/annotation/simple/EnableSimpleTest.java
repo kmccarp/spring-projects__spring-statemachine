@@ -36,6 +36,6 @@ import org.springframework.statemachine.config.common.annotation.configuration.O
 @Target(ElementType.TYPE)
 @Documented
 @EnableAnnotationConfiguration
-@Import({SimpleTestConfiguration.class,ObjectPostProcessorConfiguration.class})
+@Import({SimpleTestConfiguration.class, ObjectPostProcessorConfiguration.class})
 public @interface EnableSimpleTest {
 }

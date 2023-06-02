@@ -39,7 +39,7 @@ import io.micrometer.core.instrument.MeterRegistry;
  *
  */
 @Configuration
-@EnableConfigurationProperties({ StateMachineProperties.class })
+@EnableConfigurationProperties({StateMachineProperties.class})
 @ConditionalOnClass(MeterRegistry.class)
 @ConditionalOnProperty(prefix = "spring.statemachine.monitor", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class StateMachineAutoConfiguration {
@@ -47,20 +47,20 @@ public class StateMachineAutoConfiguration {
 	@ManagementContextConfiguration
 	public static class StateMachineTraceEndpointConfiguration {
 
-	    @Bean
-	    public StateMachineTraceEndpoint stateMachineTraceEndpoint(StateMachineTraceRepository stateMachineTraceRepository) {
+		@Bean
+		public StateMachineTraceEndpoint stateMachineTraceEndpoint(StateMachineTraceRepository stateMachineTraceRepository) {
 			return new StateMachineTraceEndpoint(stateMachineTraceRepository);
-	    }
+		}
 	}
 
 	@Configuration
 	public static class StateMachineTraceRepositoryConfiguration {
 
-	    @ConditionalOnMissingBean(StateMachineTraceRepository.class)
-	    @Bean
-	    public InMemoryStateMachineTraceRepository stateMachineTraceRepository() {
-	            return new InMemoryStateMachineTraceRepository();
-	    }
+		@ConditionalOnMissingBean(StateMachineTraceRepository.class)
+		@Bean
+		public InMemoryStateMachineTraceRepository stateMachineTraceRepository() {
+			return new InMemoryStateMachineTraceRepository();
+		}
 	}
 
 	@Configuration
@@ -70,7 +70,7 @@ public class StateMachineAutoConfiguration {
 		private final StateMachineTraceRepository stateMachineTraceRepository;
 
 		public StateMachineMonitoringConfiguration(ObjectProvider<MeterRegistry> meterRegistryProvider,
-				ObjectProvider<StateMachineTraceRepository> traceRepositoryProvider) {
+	ObjectProvider<StateMachineTraceRepository> traceRepositoryProvider) {
 			this.meterRegistry = meterRegistryProvider.getIfAvailable();
 			this.stateMachineTraceRepository = traceRepositoryProvider.getIfAvailable();
 		}

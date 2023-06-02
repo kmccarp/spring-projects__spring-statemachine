@@ -102,13 +102,13 @@ public abstract class AbstractSecurityTests extends AbstractStateMachineTests {
 	}
 
 	protected static StateMachine<States, Events> buildMachine(TestListener listener, String attributes, ComparisonType match,
-			String expression, String eventAttributes, ComparisonType eventMatch, String eventExpression) throws Exception {
+String expression, String eventAttributes, ComparisonType eventMatch, String eventExpression) throws Exception {
 		Builder<States, Events> builder = StateMachineBuilder.<States, Events>builder();
 
 		StateMachineConfigurationConfigurer<States, Events> configureConfiguration = builder.configureConfiguration();
 		configureConfiguration.withConfiguration()
-				.listener(listener)
-				.autoStartup(true);
+	.listener(listener)
+	.autoStartup(true);
 
 		SecurityConfigurer<States, Events> withSecurity = configureConfiguration.withSecurity();
 		withSecurity.enabled(true);
@@ -123,13 +123,13 @@ public abstract class AbstractSecurityTests extends AbstractStateMachineTests {
 
 
 		builder.configureStates()
-			.withStates()
-				.initial(States.S0)
-				.state(States.S0)
-				.state(States.S1);
+	.withStates()
+	.initial(States.S0)
+	.state(States.S0)
+	.state(States.S1);
 
 		ExternalTransitionConfigurer<States, Events> withExternal = builder.configureTransitions()
-			.withExternal();
+	.withExternal();
 		if (attributes != null) {
 			withExternal.secured(attributes, match);
 		}

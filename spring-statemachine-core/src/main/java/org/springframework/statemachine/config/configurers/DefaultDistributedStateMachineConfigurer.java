@@ -29,9 +29,7 @@ import org.springframework.statemachine.ensemble.StateMachineEnsemble;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultDistributedStateMachineConfigurer<S, E>
-		extends AnnotationConfigurerAdapter<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>
-		implements DistributedStateMachineConfigurer<S, E> {
+public class DefaultDistributedStateMachineConfigurer<S, E>extends AnnotationConfigurerAdapter<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>implements DistributedStateMachineConfigurer<S, E> {
 
 	private StateMachineEnsemble<S, E> ensemble;
 

@@ -34,8 +34,8 @@ import org.springframework.statemachine.data.redis.RedisStateRepository;
 @ConditionalOnClass(RedisStateRepository.class)
 @ConditionalOnProperty(prefix = "spring.statemachine.data.redis.repositories", name = "enabled", havingValue = "true", matchIfMissing = true)
 @AutoConfigureAfter(RedisRepositoriesAutoConfiguration.class)
-@EntityScan(basePackageClasses = { RedisRepositoryState.class })
-@EnableRedisRepositories(basePackageClasses = { RedisStateRepository.class })
+@EntityScan(basePackageClasses = {RedisRepositoryState.class})
+@EnableRedisRepositories(basePackageClasses = {RedisStateRepository.class})
 public class StateMachineRedisRepositoriesAutoConfiguration {
 
 }

@@ -87,23 +87,23 @@ public class StateMachineAutoConfigurationTests {
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2")
-					.state("S3");
+		.withStates()
+		.initial("S1")
+		.state("S2")
+		.state("S3");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S3").event("E2");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S3").event("E2");
 		}
 	}
 }

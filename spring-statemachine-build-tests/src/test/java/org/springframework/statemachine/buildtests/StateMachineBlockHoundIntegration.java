@@ -24,6 +24,6 @@ public class StateMachineBlockHoundIntegration implements BlockHoundIntegration 
 	public void applyTo(Builder builder) {
 		// whitelisting some blocking calls in tests
 		builder
-			.allowBlockingCallsInside("java.util.concurrent.locks.AbstractQueuedSynchronizer", "parkAndCheckInterrupt");
+	.allowBlockingCallsInside("java.util.concurrent.locks.AbstractQueuedSynchronizer", "parkAndCheckInterrupt");
 	}
 }

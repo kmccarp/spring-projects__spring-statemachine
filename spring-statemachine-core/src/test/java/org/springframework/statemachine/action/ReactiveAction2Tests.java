@@ -69,24 +69,24 @@ public class ReactiveAction2Tests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.stateEntryFunction(TestStates.S2, testAction3())
-					.stateEntryFunction(TestStates.S3, testAction4());
+		.withStates()
+		.initial(TestStates.S1)
+		.stateEntryFunction(TestStates.S2, testAction3())
+		.stateEntryFunction(TestStates.S3, testAction4());
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2);
 		}
 
 		@Bean
@@ -119,13 +119,13 @@ public class ReactiveAction2Tests extends AbstractStateMachineTests {
 		@Override
 		public Mono<Void> apply(StateContext<TestStates, TestEvents> context) {
 			return Mono.delay(Duration.ofMillis(2000))
-				.doFinally(x -> {
-					count++;
-					time.set(System.currentTimeMillis());
-					latch.countDown();
-				})
-				.then()
-				.log(id);
+		.doFinally(x -> {
+			count++;
+			time.set(System.currentTimeMillis());
+			latch.countDown();
+		})
+		.then()
+		.log(id);
 		}
 	}
 }

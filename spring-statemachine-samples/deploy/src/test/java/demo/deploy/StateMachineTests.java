@@ -29,7 +29,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { StateMachineConfig.class})
+@SpringBootTest(classes = {StateMachineConfig.class})
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class StateMachineTests {
 
@@ -39,51 +39,30 @@ public class StateMachineTests {
 	@Test
 	public void testDeployInstalledInstallOkInstallOk() throws Exception {
 		Message<String> deploy = MessageBuilder.withPayload("DEPLOY")
-				.setHeader("isInstalled", true)
-				.setHeader("installedOk", true)
-				.setHeader("hasError", true).build();
+	.setHeader("isInstalled", true)
+	.setHeader("installedOk", true)
+	.setHeader("hasError", true).build();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent(deploy)
-						.expectStateChanged(6)
-						.expectStateEntered("DEPLOY", "PREPAREDEPLOY", "INSTALL", "START", "ERROR", "READY")
-						.expectStates("READY").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent(deploy).expectStateChanged(6).expectStateEntered("DEPLOY", "PREPAREDEPLOY", "INSTALL", "START", "ERROR", "READY").expectStates("READY").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testDeployInstalledInstallOkInstallError() throws Exception {
 		Message<String> deploy = MessageBuilder.withPayload("DEPLOY")
-				.setHeader("isInstalled", true)
-				.setHeader("hasError", true).build();
+	.setHeader("isInstalled", true)
+	.setHeader("hasError", true).build();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent(deploy)
-						.expectStateChanged(5)
-						.expectStateEntered("DEPLOY", "PREPAREDEPLOY", "INSTALL", "ERROR", "READY")
-						.expectStates("READY").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent(deploy).expectStateChanged(5).expectStateEntered("DEPLOY", "PREPAREDEPLOY", "INSTALL", "ERROR", "READY").expectStates("READY").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testDeployInstalledInstallFail() throws Exception {
 		Message<String> deploy = MessageBuilder.withPayload("DEPLOY")
-				.setHeader("isInstalled", true).build();
+	.setHeader("isInstalled", true).build();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent(deploy)
-						.expectStateChanged(4)
-						.expectStateEntered("DEPLOY", "PREPAREDEPLOY", "INSTALL", "READY")
-						.expectStates("READY").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent(deploy).expectStateChanged(4).expectStateEntered("DEPLOY", "PREPAREDEPLOY", "INSTALL", "READY").expectStates("READY").and().build();
 		plan.test();
 	}
 
@@ -91,32 +70,17 @@ public class StateMachineTests {
 	public void testUndeploy() throws Exception {
 		Message<String> deploy = MessageBuilder.withPayload("UNDEPLOY").build();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent(deploy)
-						.expectStateChanged(3)
-						.expectStateEntered("UNDEPLOY", "PREPAREUNDEPLOY", "READY")
-						.expectStateExited("READY", "PREPAREUNDEPLOY", "UNDEPLOY")
-						.expectStates("READY").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent(deploy).expectStateChanged(3).expectStateEntered("UNDEPLOY", "PREPAREUNDEPLOY", "READY").expectStateExited("READY", "PREPAREUNDEPLOY", "UNDEPLOY").expectStates("READY").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testUndeployRunningOk() throws Exception {
 		Message<String> deploy = MessageBuilder.withPayload("UNDEPLOY")
-				.setHeader("isRunning", true)
-				.setHeader("hasError", true).build();
+	.setHeader("isRunning", true)
+	.setHeader("hasError", true).build();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent(deploy)
-						.expectStateChanged(5)
-						.expectStateEntered("UNDEPLOY", "PREPAREUNDEPLOY", "STOP", "ERROR", "READY")
-						.expectStates("READY").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent(deploy).expectStateChanged(5).expectStateEntered("UNDEPLOY", "PREPAREUNDEPLOY", "STOP", "ERROR", "READY").expectStates("READY").and().build();
 		plan.test();
 	}
 
@@ -124,14 +88,7 @@ public class StateMachineTests {
 	public void testUndeployNotRunningOk() throws Exception {
 		Message<String> undeploy = MessageBuilder.withPayload("UNDEPLOY").build();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent(undeploy)
-						.expectStateChanged(3)
-						.expectStateEntered("UNDEPLOY", "PREPAREUNDEPLOY", "READY")
-						.expectStates("READY").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent(undeploy).expectStateChanged(3).expectStateEntered("UNDEPLOY", "PREPAREUNDEPLOY", "READY").expectStates("READY").and().build();
 		plan.test();
 	}
 }

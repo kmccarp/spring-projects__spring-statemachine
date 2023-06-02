@@ -39,7 +39,7 @@ public class StateMachineController {
 
 	public final static String MACHINE_ID_1 = "datajpapersist1";
 	public final static String MACHINE_ID_2 = "datajpapersist2";
-	private final static String[] MACHINES = new String[] { MACHINE_ID_1, MACHINE_ID_2 };
+	private final static String[] MACHINES = new String[]{MACHINE_ID_1, MACHINE_ID_2};
 
 	private final StateMachineLogListener listener = new StateMachineLogListener();
 	private StateMachine<States, Events> currentStateMachine;
@@ -57,16 +57,16 @@ public class StateMachineController {
 
 	@RequestMapping("/state")
 	public String feedAndGetStates(
-			@RequestParam(value = "events", required = false) List<Events> events,
-			@RequestParam(value = "machine", required = false, defaultValue = MACHINE_ID_1) String machine,
-			Model model) throws Exception {
+@RequestParam(value = "events", required = false) List<Events> events,
+@RequestParam(value = "machine", required = false, defaultValue = MACHINE_ID_1) String machine,
+Model model) throws Exception {
 		StateMachine<States, Events> stateMachine = getStateMachine(machine);
 		if (events != null) {
 			for (Events event : events) {
 				stateMachine
-					.sendEvent(Mono.just(MessageBuilder
-						.withPayload(event).build()))
-					.blockLast();
+			.sendEvent(Mono.just(MessageBuilder
+	.withPayload(event).build()))
+			.blockLast();
 			}
 		}
 		StateMachineContext<States, Events> stateMachineContext = stateMachinePersist.read(machine);
@@ -94,6 +94,7 @@ public class StateMachineController {
 		}
 		return currentStateMachine;
 	}
+
 //end::snippetA[]
 
 	private Events[] getEvents() {

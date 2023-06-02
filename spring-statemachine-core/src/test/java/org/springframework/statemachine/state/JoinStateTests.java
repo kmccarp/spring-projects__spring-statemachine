@@ -51,8 +51,8 @@ public class JoinStateTests extends AbstractStateMachineTests {
 	public void testJoin() throws Exception {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 		listener.reset(1);
@@ -84,8 +84,8 @@ public class JoinStateTests extends AbstractStateMachineTests {
 	public void testJoinLoopTwice() throws Exception {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 		assertThat(machine).isNotNull();
@@ -126,8 +126,8 @@ public class JoinStateTests extends AbstractStateMachineTests {
 	public void testJoinSuper() throws Exception {
 		context.register(Config2.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 		listener.reset(1);
@@ -159,8 +159,8 @@ public class JoinStateTests extends AbstractStateMachineTests {
 	public void testJoinSuperLoopTwice() throws Exception {
 		context.register(Config2.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 		assertThat(machine).isNotNull();
@@ -200,8 +200,8 @@ public class JoinStateTests extends AbstractStateMachineTests {
 	public void testMultiJoin1() throws Exception {
 		context.register(Config3.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 		listener.reset(1);
@@ -233,8 +233,8 @@ public class JoinStateTests extends AbstractStateMachineTests {
 	public void testMultiJoin2() throws Exception {
 		context.register(Config3.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 		listener.reset(1);
@@ -267,17 +267,17 @@ public class JoinStateTests extends AbstractStateMachineTests {
 	public void testInterceptorPostStateChangeTransitionNotNull() throws Exception {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 
 		final AtomicBoolean nullCheck = new AtomicBoolean(false);
-		machine.addStateMachineInterceptor(new StateMachineInterceptorAdapter<TestStates,TestEvents>() {
+		machine.addStateMachineInterceptor(new StateMachineInterceptorAdapter<TestStates, TestEvents>() {
 			@Override
 			public void postStateChange(State<TestStates, TestEvents> state, Message<TestEvents> message,
-					Transition<TestStates, TestEvents> transition, StateMachine<TestStates, TestEvents> stateMachine,
-					StateMachine<TestStates, TestEvents> rootStateMachine) {
+		Transition<TestStates, TestEvents> transition, StateMachine<TestStates, TestEvents> stateMachine,
+		StateMachine<TestStates, TestEvents> rootStateMachine) {
 				if (state.getId() == TestStates.S4) {
 					nullCheck.set(transition == null);
 				}
@@ -315,8 +315,8 @@ public class JoinStateTests extends AbstractStateMachineTests {
 	public void testJoinSuperMultipleEnds1() throws Exception {
 		context.register(Config4.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 		listener.reset(1);
@@ -348,8 +348,8 @@ public class JoinStateTests extends AbstractStateMachineTests {
 	public void testJoinSuperMultipleEnds2() throws Exception {
 		context.register(Config4.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		TestListener listener = new TestListener();
 		machine.addStateListener(listener);
 		listener.reset(1);
@@ -383,56 +383,56 @@ public class JoinStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.state(TestStates.S2)
-					.join(TestStates.S3)
-					.state(TestStates.S4)
-					.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S20)
-						.state(TestStates.S20)
-						.state(TestStates.S21)
-						.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S30)
-						.state(TestStates.S30)
-						.state(TestStates.S31);
+		.withStates()
+		.initial(TestStates.SI)
+		.state(TestStates.S2)
+		.join(TestStates.S3)
+		.state(TestStates.S4)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S20)
+		.state(TestStates.S20)
+		.state(TestStates.S21)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S30)
+		.state(TestStates.S30)
+		.state(TestStates.S31);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S20)
-					.target(TestStates.S21)
-					.event(TestEvents.E2)
-					.and()
-				.withExternal()
-					.source(TestStates.S30)
-					.target(TestStates.S31)
-					.event(TestEvents.E3)
-					.and()
-				.withJoin()
-					.source(TestStates.S21)
-					.source(TestStates.S31)
-					.target(TestStates.S3)
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.S4)
-					.and()
-				.withExternal()
-					.source(TestStates.S4)
-					.target(TestStates.SI)
-					.event(TestEvents.E4);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S20)
+		.target(TestStates.S21)
+		.event(TestEvents.E2)
+		.and()
+		.withExternal()
+		.source(TestStates.S30)
+		.target(TestStates.S31)
+		.event(TestEvents.E3)
+		.and()
+		.withJoin()
+		.source(TestStates.S21)
+		.source(TestStates.S31)
+		.target(TestStates.S3)
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.S4)
+		.and()
+		.withExternal()
+		.source(TestStates.S4)
+		.target(TestStates.SI)
+		.event(TestEvents.E4);
 		}
 
 	}
@@ -444,53 +444,53 @@ public class JoinStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.state(TestStates.S2)
-					.join(TestStates.S3)
-					.state(TestStates.S4)
-					.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S20)
-						.end(TestStates.S21)
-						.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S30)
-						.end(TestStates.S31);
+		.withStates()
+		.initial(TestStates.SI)
+		.state(TestStates.S2)
+		.join(TestStates.S3)
+		.state(TestStates.S4)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S20)
+		.end(TestStates.S21)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S30)
+		.end(TestStates.S31);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S20)
-					.target(TestStates.S21)
-					.event(TestEvents.E2)
-					.and()
-				.withExternal()
-					.source(TestStates.S30)
-					.target(TestStates.S31)
-					.event(TestEvents.E3)
-					.and()
-				.withJoin()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.S4)
-					.and()
-				.withExternal()
-					.source(TestStates.S4)
-					.target(TestStates.SI)
-					.event(TestEvents.E4);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S20)
+		.target(TestStates.S21)
+		.event(TestEvents.E2)
+		.and()
+		.withExternal()
+		.source(TestStates.S30)
+		.target(TestStates.S31)
+		.event(TestEvents.E3)
+		.and()
+		.withJoin()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.S4)
+		.and()
+		.withExternal()
+		.source(TestStates.S4)
+		.target(TestStates.SI)
+		.event(TestEvents.E4);
 		}
 
 	}
@@ -502,60 +502,60 @@ public class JoinStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.state(TestStates.S2)
-					.join(TestStates.S3)
-					.state(TestStates.SF)
-					.state(TestStates.S4)
-					.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S20)
-						.end(TestStates.S21)
-						.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S30)
-						.end(TestStates.S31);
+		.withStates()
+		.initial(TestStates.SI)
+		.state(TestStates.S2)
+		.join(TestStates.S3)
+		.state(TestStates.SF)
+		.state(TestStates.S4)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S20)
+		.end(TestStates.S21)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S30)
+		.end(TestStates.S31);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S20)
-					.target(TestStates.S21)
-					.event(TestEvents.E2)
-					.and()
-				.withExternal()
-					.source(TestStates.S30)
-					.target(TestStates.S31)
-					.event(TestEvents.E3)
-					.and()
-				.withJoin()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.SF)
-					.guardExpression("!extendedState.variables.isEmpty()")
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.S4)
-					.guardExpression("extendedState.variables.isEmpty()")
-					.and()
-				.withExternal()
-					.source(TestStates.S4)
-					.target(TestStates.SI)
-					.event(TestEvents.E4);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S20)
+		.target(TestStates.S21)
+		.event(TestEvents.E2)
+		.and()
+		.withExternal()
+		.source(TestStates.S30)
+		.target(TestStates.S31)
+		.event(TestEvents.E3)
+		.and()
+		.withJoin()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.SF)
+		.guardExpression("!extendedState.variables.isEmpty()")
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.S4)
+		.guardExpression("extendedState.variables.isEmpty()")
+		.and()
+		.withExternal()
+		.source(TestStates.S4)
+		.target(TestStates.SI)
+		.event(TestEvents.E4);
 		}
 
 	}
@@ -567,59 +567,59 @@ public class JoinStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.state(TestStates.S2)
-					.join(TestStates.S3)
-					.state(TestStates.S4)
-					.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S20)
-						.end(TestStates.S21)
-						.end(TestStates.S22)
-						.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S30)
-						.end(TestStates.S31);
+		.withStates()
+		.initial(TestStates.SI)
+		.state(TestStates.S2)
+		.join(TestStates.S3)
+		.state(TestStates.S4)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S20)
+		.end(TestStates.S21)
+		.end(TestStates.S22)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S30)
+		.end(TestStates.S31);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S20)
-					.target(TestStates.S21)
-					.event(TestEvents.E2)
-					.and()
-				.withExternal()
-					.source(TestStates.S20)
-					.target(TestStates.S22)
-					.event(TestEvents.E5)
-					.and()
-				.withExternal()
-					.source(TestStates.S30)
-					.target(TestStates.S31)
-					.event(TestEvents.E3)
-					.and()
-				.withJoin()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.and()
-				.withExternal()
-					.source(TestStates.S3)
-					.target(TestStates.S4)
-					.and()
-				.withExternal()
-					.source(TestStates.S4)
-					.target(TestStates.SI)
-					.event(TestEvents.E4);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S20)
+		.target(TestStates.S21)
+		.event(TestEvents.E2)
+		.and()
+		.withExternal()
+		.source(TestStates.S20)
+		.target(TestStates.S22)
+		.event(TestEvents.E5)
+		.and()
+		.withExternal()
+		.source(TestStates.S30)
+		.target(TestStates.S31)
+		.event(TestEvents.E3)
+		.and()
+		.withJoin()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.and()
+		.withExternal()
+		.source(TestStates.S3)
+		.target(TestStates.S4)
+		.and()
+		.withExternal()
+		.source(TestStates.S4)
+		.target(TestStates.SI)
+		.event(TestEvents.E4);
 		}
 
 	}
@@ -629,7 +629,7 @@ public class JoinStateTests extends AbstractStateMachineTests {
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
 		volatile int stateChangedCount = 0;
-		final List<Transition<TestStates, TestEvents>> transitions = new ArrayList<Transition<TestStates,TestEvents>>();
+		final List<Transition<TestStates, TestEvents>> transitions = new ArrayList<Transition<TestStates, TestEvents>>();
 
 		@Override
 		public void stateChanged(State<TestStates, TestEvents> from, State<TestStates, TestEvents> to) {

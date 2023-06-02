@@ -42,11 +42,7 @@ public class WaitErrorConceptTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent("DO").expectStateChanged(11).expectStates("READY").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent("DO").expectStateChanged(11).expectStates("READY").and().build();
 		plan.test();
 	}
 
@@ -59,11 +55,7 @@ public class WaitErrorConceptTests extends AbstractBuildTests {
 		Message<String> message = MessageBuilder.withPayload("DO").setHeader("step2error", true).build();
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent(message).expectStateChanged(5).expectStates("READY").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent(message).expectStateChanged(5).expectStates("READY").and().build();
 		plan.test();
 	}
 
@@ -74,8 +66,8 @@ public class WaitErrorConceptTests extends AbstractBuildTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean

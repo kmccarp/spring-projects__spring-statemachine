@@ -60,8 +60,8 @@ public class TransitionsData<S, E> {
 	 * @param historys the historys
 	 */
 	public TransitionsData(Collection<TransitionData<S, E>> transitionsData, Map<S, List<ChoiceData<S, E>>> choices,
-			Map<S, List<JunctionData<S, E>>> junctions, Map<S, List<S>> forks, Map<S, List<S>> joins, Collection<EntryData<S, E>> entrys,
-			Collection<ExitData<S, E>> exits, Collection<HistoryData<S, E>> historys) {
+Map<S, List<JunctionData<S, E>>> junctions, Map<S, List<S>> forks, Map<S, List<S>> joins, Collection<EntryData<S, E>> entrys,
+Collection<ExitData<S, E>> exits, Collection<HistoryData<S, E>> historys) {
 		this.transitions = transitionsData;
 		this.choices = choices;
 		this.junctions = junctions;

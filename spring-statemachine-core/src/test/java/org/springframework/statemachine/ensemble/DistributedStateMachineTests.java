@@ -40,17 +40,17 @@ public class DistributedStateMachineTests extends AbstractStateMachineTests {
 		context.register(Config1.class, Config2.class);
 		context.refresh();
 		StateMachine<String, String> machine1 =
-				context.getBean("sm1", StateMachine.class);
+	context.getBean("sm1", StateMachine.class);
 		StateMachine<String, String> machine2 =
-				context.getBean("sm2", StateMachine.class);
+	context.getBean("sm2", StateMachine.class);
 
 		StateMachineEnsemble<String, String> ensemble = new InMemoryStateMachineEnsemble<String, String>();
 
 		DistributedStateMachine<String, String> machine1s =
-				new DistributedStateMachine<String, String>(ensemble, machine1);
+	new DistributedStateMachine<String, String>(ensemble, machine1);
 
 		DistributedStateMachine<String, String> machine2s =
-				new DistributedStateMachine<String, String>(ensemble, machine2);
+	new DistributedStateMachine<String, String>(ensemble, machine2);
 
 		machine1s.afterPropertiesSet();
 		machine2s.afterPropertiesSet();
@@ -73,14 +73,14 @@ public class DistributedStateMachineTests extends AbstractStateMachineTests {
 		context.register(Config1.class, Config2.class);
 		context.refresh();
 		StateMachine<String, String> machine1 =
-				context.getBean("sm1", StateMachine.class);
+	context.getBean("sm1", StateMachine.class);
 		StateMachine<String, String> machine2 =
-				context.getBean("sm2", StateMachine.class);
+	context.getBean("sm2", StateMachine.class);
 
 		StateMachineEnsemble<String, String> ensemble = new InMemoryStateMachineEnsemble<String, String>();
 
 		DistributedStateMachine<String, String> machine1s =
-				new DistributedStateMachine<String, String>(ensemble, machine1);
+	new DistributedStateMachine<String, String>(ensemble, machine1);
 		machine1s.afterPropertiesSet();
 		machine1s.start();
 
@@ -88,7 +88,7 @@ public class DistributedStateMachineTests extends AbstractStateMachineTests {
 		assertThat(machine1.getState().getIds()).containsOnly("S1");
 
 		DistributedStateMachine<String, String> machine2s =
-				new DistributedStateMachine<String, String>(ensemble, machine2);
+	new DistributedStateMachine<String, String>(ensemble, machine2);
 		machine2s.afterPropertiesSet();
 		machine2s.start();
 
@@ -110,24 +110,24 @@ public class DistributedStateMachineTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("SI")
-					.state("S1")
-					.state("S2");
+		.withStates()
+		.initial("SI")
+		.state("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("SI")
-					.target("S1")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E2");
+		.withExternal()
+		.source("SI")
+		.target("S1")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E2");
 		}
 
 	}

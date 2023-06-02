@@ -62,7 +62,7 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
 		ObjectStateMachine<String, String> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 
 		StateMachineInterceptorList<?, ?> ilist = TestUtils.readField("interceptors", machine);
@@ -81,7 +81,7 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
 		ObjectStateMachine<String, String> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 
 		StateMachineInterceptorList<?, ?> ilist = TestUtils.readField("interceptors", machine);
@@ -97,7 +97,7 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
 		ObjectStateMachine<String, String> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 
 		StateMachineInterceptorList<?, ?> ilist = TestUtils.readField("interceptors", machine);
@@ -115,7 +115,7 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
 		ObjectStateMachine<String, String> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 
 		StateMachineInterceptorList<?, ?> ilist = TestUtils.readField("interceptors", machine);
@@ -131,7 +131,7 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
 		ObjectStateMachine<String, String> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 
 		StateMachineInterceptorList<?, ?> ilist = TestUtils.readField("interceptors", machine);
@@ -151,7 +151,7 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
 		ObjectStateMachine<String, String> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 
 		Transition<String, String> transition = machine.getTransitions().iterator().next();
@@ -165,7 +165,7 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
 		ObjectStateMachine<String, String> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 
 		Transition<String, String> transition = machine.getTransitions().iterator().next();
@@ -179,7 +179,7 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		@SuppressWarnings("unchecked")
 		ObjectStateMachine<String, String> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 
 		StateMachineInterceptorList<?, ?> ilist = TestUtils.readField("interceptors", machine);
@@ -197,29 +197,29 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withSecurity()
-					.enabled(true);
+		.withSecurity()
+		.enabled(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S0")
-					.state("S1");
+		.withStates()
+		.initial("S0")
+		.state("S1");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S0")
-					.target("S1")
-					.event("A");
+		.withExternal()
+		.source("S0")
+		.target("S1")
+		.event("A");
 		}
 
 	}
@@ -230,29 +230,29 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withSecurity()
-					.enabled(false);
+		.withSecurity()
+		.enabled(false);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S0")
-					.state("S1");
+		.withStates()
+		.initial("S0")
+		.state("S1");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S0")
-					.target("S1")
-					.event("A");
+		.withExternal()
+		.source("S0")
+		.target("S1")
+		.event("A");
 		}
 
 	}
@@ -263,28 +263,28 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withSecurity();
+		.withSecurity();
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S0")
-					.state("S1");
+		.withStates()
+		.initial("S0")
+		.state("S1");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S0")
-					.target("S1")
-					.event("A");
+		.withExternal()
+		.source("S0")
+		.target("S1")
+		.event("A");
 		}
 
 	}
@@ -295,21 +295,21 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S0")
-					.state("S1");
+		.withStates()
+		.initial("S0")
+		.state("S1");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S0")
-					.target("S1")
-					.event("A");
+		.withExternal()
+		.source("S0")
+		.target("S1")
+		.event("A");
 		}
 
 	}
@@ -320,30 +320,30 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withSecurity()
-					.eventAccessDecisionManager(new MockAccessDecisionManager())
-					.transitionAccessDecisionManager(new MockAccessDecisionManager());
+		.withSecurity()
+		.eventAccessDecisionManager(new MockAccessDecisionManager())
+		.transitionAccessDecisionManager(new MockAccessDecisionManager());
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S0")
-					.state("S1");
+		.withStates()
+		.initial("S0")
+		.state("S1");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S0")
-					.target("S1")
-					.event("A");
+		.withExternal()
+		.source("S0")
+		.target("S1")
+		.event("A");
 		}
 
 	}
@@ -354,31 +354,31 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withSecurity()
-					.enabled(true);
+		.withSecurity()
+		.enabled(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S0")
-					.state("S1");
+		.withStates()
+		.initial("S0")
+		.state("S1");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S0")
-					.target("S1")
-					.event("A")
-					.secured("expression")
-					.secured("FOO", ComparisonType.ALL);
+		.withExternal()
+		.source("S0")
+		.target("S1")
+		.event("A")
+		.secured("expression")
+		.secured("FOO", ComparisonType.ALL);
 		}
 
 	}
@@ -389,31 +389,31 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withSecurity()
-					.enabled(true)
-					.event("expression")
-					.event("FOO", ComparisonType.ALL);
+		.withSecurity()
+		.enabled(true)
+		.event("expression")
+		.event("FOO", ComparisonType.ALL);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S0")
-					.state("S1");
+		.withStates()
+		.initial("S0")
+		.state("S1");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S0")
-					.target("S1")
-					.event("A");
+		.withExternal()
+		.source("S0")
+		.target("S1")
+		.event("A");
 		}
 
 	}
@@ -424,31 +424,31 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withSecurity()
-					.enabled(true)
-					.transition("expression")
-					.transition("FOO", ComparisonType.ALL);
+		.withSecurity()
+		.enabled(true)
+		.transition("expression")
+		.transition("FOO", ComparisonType.ALL);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S0")
-					.state("S1");
+		.withStates()
+		.initial("S0")
+		.state("S1");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S0")
-					.target("S1")
-					.event("A");
+		.withExternal()
+		.source("S0")
+		.target("S1")
+		.event("A");
 		}
 
 	}
@@ -457,7 +457,7 @@ public class SecurityConfigTests extends AbstractStateMachineTests {
 
 		@Override
 		public void decide(Authentication authentication, Object object, Collection<ConfigAttribute> configAttributes)
-				throws AccessDeniedException, InsufficientAuthenticationException {
+	throws AccessDeniedException, InsufficientAuthenticationException {
 		}
 
 		@Override

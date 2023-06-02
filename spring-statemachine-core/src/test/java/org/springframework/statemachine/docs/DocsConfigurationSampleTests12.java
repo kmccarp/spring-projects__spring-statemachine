@@ -44,20 +44,20 @@ public class DocsConfigurationSampleTests12 {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("SI")
-					.stateEntry("S1", (context) -> {
-						throw new RuntimeException("example error");
-					});
+		.withStates()
+		.initial("SI")
+		.stateEntry("S1", (context) -> {
+			throw new RuntimeException("example error");
+		});
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("SI")
-					.target("S1")
-					.event("E1");
+		.withExternal()
+		.source("SI")
+		.target("S1")
+		.event("E1");
 		}
 	}
 // end::snippetA1[]
@@ -72,12 +72,12 @@ public class DocsConfigurationSampleTests12 {
 		assertThat(machine.getState().getIds()).containsExactlyInAnyOrder("SI");
 
 		StepVerifier.create(machine.sendEvent(Mono.just(MessageBuilder.withPayload("E1").build())))
-			.consumeNextWith(result -> {
-				StepVerifier.create(result.complete()).consumeErrorWith(e -> {
-					assertThat(e).isInstanceOf(StateMachineException.class).hasMessageContaining("example error");
-				}).verify();
-			})
-			.verifyComplete();
+	.consumeNextWith(result -> {
+		StepVerifier.create(result.complete()).consumeErrorWith(e -> {
+			assertThat(e).isInstanceOf(StateMachineException.class).hasMessageContaining("example error");
+		}).verify();
+	})
+	.verifyComplete();
 
 		assertThat(machine.getState().getIds()).containsExactlyInAnyOrder("S1");
 	}

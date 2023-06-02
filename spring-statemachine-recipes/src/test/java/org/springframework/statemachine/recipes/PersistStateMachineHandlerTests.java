@@ -38,7 +38,7 @@ public class PersistStateMachineHandlerTests {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void testAcceptedStateChangeViaPersist() throws Exception {
-		StateMachine<String,String> stateMachine = buildTestStateMachine();
+		StateMachine<String, String> stateMachine = buildTestStateMachine();
 
 		PersistStateMachineHandler handler = new PersistStateMachineHandler(stateMachine);
 		handler.afterPropertiesSet();
@@ -57,7 +57,7 @@ public class PersistStateMachineHandlerTests {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void testNotAcceptedStateChangeViaPersist() throws Exception {
-		StateMachine<String,String> stateMachine = buildTestStateMachine();
+		StateMachine<String, String> stateMachine = buildTestStateMachine();
 
 		PersistStateMachineHandler handler = new PersistStateMachineHandler(stateMachine);
 		handler.afterPropertiesSet();
@@ -76,7 +76,7 @@ public class PersistStateMachineHandlerTests {
 	@Test
 	@SuppressWarnings("deprecation")
 	public void testChoice() throws Exception {
-		StateMachine<String,String> stateMachine = buildTestStateMachine2();
+		StateMachine<String, String> stateMachine = buildTestStateMachine2();
 
 		PersistStateMachineHandler handler = new PersistStateMachineHandler(stateMachine);
 		handler.afterPropertiesSet();
@@ -97,7 +97,7 @@ public class PersistStateMachineHandlerTests {
 
 	@Test
 	public void testAcceptedStateChangeViaPersistReactively() throws Exception {
-		StateMachine<String,String> stateMachine = buildTestStateMachine();
+		StateMachine<String, String> stateMachine = buildTestStateMachine();
 
 		PersistStateMachineHandler handler = new PersistStateMachineHandler(stateMachine);
 		handler.afterPropertiesSet();
@@ -135,7 +135,7 @@ public class PersistStateMachineHandlerTests {
 		FactoryPersistStateMachineHandler<String, String> handler = new FactoryPersistStateMachineHandler<String, String>(builder);
 
 		ArrayList<TestPersistStateChangeListener> listeners = new ArrayList<>();
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0;i < 8;i++) {
 			listeners.add(new TestPersistStateChangeListener());
 		}
 
@@ -161,7 +161,7 @@ public class PersistStateMachineHandlerTests {
 
 		@Override
 		public void onPersist(State<String, String> state, Message<String> message,
-				Transition<String, String> transition, StateMachine<String, String> stateMachine) {
+	Transition<String, String> transition, StateMachine<String, String> stateMachine) {
 			states.add(state);
 			latch.countDown();
 		}
@@ -172,21 +172,21 @@ public class PersistStateMachineHandlerTests {
 		StateMachineBuilder.Builder<String, String> builder = StateMachineBuilder.builder();
 
 		builder.configureConfiguration()
-			.withConfiguration()
-				.autoStartup(true);
+	.withConfiguration()
+	.autoStartup(true);
 
 		builder.configureStates()
-				.withStates()
-					.initial("SI")
-					.state("S1")
-					.state("S2");
+	.withStates()
+	.initial("SI")
+	.state("S1")
+	.state("S2");
 
 		builder.configureTransitions()
-				.withExternal()
-					.source("SI").target("S1").event("E1")
-					.and()
-				.withExternal()
-					.source("S1").target("S2").event("E2");
+	.withExternal()
+	.source("SI").target("S1").event("E1")
+	.and()
+	.withExternal()
+	.source("S1").target("S2").event("E2");
 
 		return builder;
 	}
@@ -199,23 +199,23 @@ public class PersistStateMachineHandlerTests {
 		StateMachineBuilder.Builder<String, String> builder = StateMachineBuilder.builder();
 
 		builder.configureConfiguration()
-			.withConfiguration()
-				.autoStartup(true);
+	.withConfiguration()
+	.autoStartup(true);
 
 		builder.configureStates()
-				.withStates()
-					.initial("SI")
-					.choice("S1")
-					.state("S2")
-					.state("S3");
+	.withStates()
+	.initial("SI")
+	.choice("S1")
+	.state("S2")
+	.state("S3");
 
 		builder.configureTransitions()
-				.withExternal()
-					.source("SI").target("S1").event("E1")
-					.and()
-				.withChoice()
-					.source("S1")
-					.last("S2");
+	.withExternal()
+	.source("SI").target("S1").event("E1")
+	.and()
+	.withChoice()
+	.source("S1")
+	.last("S2");
 
 		return builder;
 	}

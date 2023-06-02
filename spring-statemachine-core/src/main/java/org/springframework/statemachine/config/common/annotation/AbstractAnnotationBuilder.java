@@ -36,7 +36,7 @@ public abstract class AbstractAnnotationBuilder<O> implements AnnotationBuilder<
 
 	@Override
 	public final O build() throws Exception {
-		if(building.compareAndSet(false, true)) {
+		if (building.compareAndSet(false, true)) {
 			object = doBuild();
 			return object;
 		}
@@ -50,7 +50,7 @@ public abstract class AbstractAnnotationBuilder<O> implements AnnotationBuilder<
 	 * @return the Object that was built
 	 */
 	public final O getObject() {
-		if(!building.get()) {
+		if (!building.get()) {
 			throw new IllegalStateException("This object has not been built");
 		}
 		return object;

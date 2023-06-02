@@ -47,8 +47,8 @@ public class MethodAnnotationWithDefaultsWithFactoryTests extends AbstractStateM
 		Bean1 bean1 = context.getBean(Bean1.class);
 		Bean2 bean2 = context.getBean(Bean2.class);
 
-		StateMachineFactory<TestStates,TestEvents> factory = resolveFactory(context);
-		StateMachine<TestStates,TestEvents> machine = factory.getStateMachine();
+		StateMachineFactory<TestStates, TestEvents> factory = resolveFactory(context);
+		StateMachine<TestStates, TestEvents> machine = factory.getStateMachine();
 		doStartAndAssert(machine);
 
 		assertThat(machine.getState().getIds()).containsExactly(TestStates.S1);
@@ -68,8 +68,8 @@ public class MethodAnnotationWithDefaultsWithFactoryTests extends AbstractStateM
 
 		String id = String.valueOf(System.currentTimeMillis());
 
-		StateMachineFactory<TestStates,TestEvents> factory = resolveFactory(context);
-		StateMachine<TestStates,TestEvents> machine = factory.getStateMachine(id);
+		StateMachineFactory<TestStates, TestEvents> factory = resolveFactory(context);
+		StateMachine<TestStates, TestEvents> machine = factory.getStateMachine(id);
 		doStartAndAssert(machine);
 
 		assertThat(machine.getState().getIds()).containsExactly(TestStates.S1);
@@ -84,7 +84,7 @@ public class MethodAnnotationWithDefaultsWithFactoryTests extends AbstractStateM
 
 		int counter = 0;
 
-		@OnStateChanged (source = "S1", target = "S2")
+		@OnStateChanged(source = "S1", target = "S2")
 		public void onStateChanged() {
 			counter++;
 		}
@@ -122,18 +122,18 @@ public class MethodAnnotationWithDefaultsWithFactoryTests extends AbstractStateM
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1);
 		}
 	}
 

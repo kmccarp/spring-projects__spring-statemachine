@@ -41,7 +41,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { Application.class }, properties = { "endpoints.default.web.enabled=true" })
+@SpringBootTest(classes = {Application.class}, properties = {"endpoints.default.web.enabled=true"})
 @WebAppConfiguration
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class MonitoringTests {
@@ -54,53 +54,53 @@ public class MonitoringTests {
 	@Test
 	public void testHome() throws Exception {
 		mvc.
-			perform(get("/state")).
-			andExpect(status().isOk());
+	perform(get("/state")).
+	andExpect(status().isOk());
 	}
 
 	@Test
 	public void testSendEventE1() throws Exception {
 		mvc.
-			perform(get("/state").param("events", "E1")).
-			andExpect(status().isOk()).
-			andExpect(content().string(containsString("Exit S1")));
+	perform(get("/state").param("events", "E1")).
+	andExpect(status().isOk()).
+	andExpect(content().string(containsString("Exit S1")));
 	}
 
 	@Test
 	public void testSendEventsE1E2() throws Exception {
 		mvc.
-			perform(get("/state").param("events", "E1").param("events", "E2")).
-			andExpect(status().isOk()).
-			andExpect(content().string(allOf(
-						containsString("Exit S1"),
-						containsString("Exit S2"))));
+	perform(get("/state").param("events", "E1").param("events", "E2")).
+	andExpect(status().isOk()).
+	andExpect(content().string(allOf(
+	containsString("Exit S1"),
+	containsString("Exit S2"))));
 	}
 
 	@Test
 	public void testMetrics() throws Exception {
 		mvc.
-			perform(get("/state").param("events", "E1")).
-			andExpect(status().isOk());
+	perform(get("/state").param("events", "E1")).
+	andExpect(status().isOk());
 		mvc.
-			perform(get("/actuator/metrics")).
-			andExpect(jsonPath("$.names", hasItems("ssm.transition.duration", "ssm.transition.transit")));
+	perform(get("/actuator/metrics")).
+	andExpect(jsonPath("$.names", hasItems("ssm.transition.duration", "ssm.transition.transit")));
 		mvc.
-		perform(get("/actuator/metrics/ssm.transition.transit")).
-		andDo(print()).
-		andExpect(jsonPath("$.name", is("ssm.transition.transit"))).
-		andExpect(jsonPath("$.measurements[0].value", notNullValue())).
-		andExpect(jsonPath("$.availableTags[0].tag", is("transitionName"))).
-		andExpect(jsonPath("$.availableTags[0].values", hasItems("EXTERNAL_S1_S2","INITIAL_S1")));
+	perform(get("/actuator/metrics/ssm.transition.transit")).
+	andDo(print()).
+	andExpect(jsonPath("$.name", is("ssm.transition.transit"))).
+	andExpect(jsonPath("$.measurements[0].value", notNullValue())).
+	andExpect(jsonPath("$.availableTags[0].tag", is("transitionName"))).
+	andExpect(jsonPath("$.availableTags[0].values", hasItems("EXTERNAL_S1_S2", "INITIAL_S1")));
 	}
 
 	@Test
 	public void testTrace() throws Exception {
 		mvc.
-			perform(get("/state")).
-			andExpect(status().isOk());
+	perform(get("/state")).
+	andExpect(status().isOk());
 		mvc.
-			perform(get("/actuator/statemachinetrace")).
-			andExpect(jsonPath("$.*.info.transition", containsInAnyOrder("INITIAL_S1")));
+	perform(get("/actuator/statemachinetrace")).
+	andExpect(jsonPath("$.*.info.transition", containsInAnyOrder("INITIAL_S1")));
 	}
 
 	@BeforeEach

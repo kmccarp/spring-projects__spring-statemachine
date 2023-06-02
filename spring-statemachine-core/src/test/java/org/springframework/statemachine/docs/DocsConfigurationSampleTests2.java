@@ -69,33 +69,33 @@ public class DocsConfigurationSampleTests2 extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2")
-					.state("S3");
+		.withStates()
+		.initial("S1")
+		.state("S2")
+		.state("S3");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S1").target("S3").event("E2")
-					.and()
-				.withInternal()
-					.source("S2")
-					.action(timerAction())
-					.timer(1000)
-					.and()
-				.withInternal()
-					.source("S3")
-					.action(timerAction())
-					.timerOnce(1000);
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S1").target("S3").event("E2")
+		.and()
+		.withInternal()
+		.source("S2")
+		.action(timerAction())
+		.timer(1000)
+		.and()
+		.withInternal()
+		.source("S3")
+		.action(timerAction())
+		.timerOnce(1000);
 		}
 
 		@Bean
@@ -111,6 +111,7 @@ public class DocsConfigurationSampleTests2 extends AbstractStateMachineTests {
 			// do something in every 1 sec
 		}
 	}
+
 // end::snippetA[]
 
 // tag::snippetB[]
@@ -118,59 +119,61 @@ public class DocsConfigurationSampleTests2 extends AbstractStateMachineTests {
 	public class Config3 {
 
 		@Bean
-		@Scope(scopeName="session", proxyMode=ScopedProxyMode.TARGET_CLASS)
+		@Scope(scopeName = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 		StateMachine<String, String> stateMachine() throws Exception {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder.configureConfiguration()
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 			builder.configureStates()
-				.withStates()
-					.initial("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S2");
 			builder.configureTransitions()
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 			StateMachine<String, String> stateMachine = builder.build();
 			return stateMachine;
 		}
 
 	}
+
 // end::snippetB[]
 
 // tag::snippetC[]
 	@Configuration
 	@EnableStateMachine
-	@Scope(scopeName="session", proxyMode=ScopedProxyMode.TARGET_CLASS)
+	@Scope(scopeName = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 	public static class Config4 extends StateMachineConfigurerAdapter<String, String> {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 
 	}
+
 // end::snippetC[]
 
 // tag::snippetD[]
@@ -180,21 +183,22 @@ public class DocsConfigurationSampleTests2 extends AbstractStateMachineTests {
 		@Autowired
 		StateMachine<String, String> stateMachine;
 
-		@RequestMapping(path="/state", method=RequestMethod.POST)
+		@RequestMapping(path = "/state", method = RequestMethod.POST)
 		public HttpEntity<Void> setState(@RequestParam("event") String event) {
 			stateMachine
-				.sendEvent(Mono.just(MessageBuilder
-					.withPayload(event).build()))
-				.subscribe();
+		.sendEvent(Mono.just(MessageBuilder
+.withPayload(event).build()))
+		.subscribe();
 			return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
 		}
 
-		@RequestMapping(path="/state", method=RequestMethod.GET)
+		@RequestMapping(path = "/state", method = RequestMethod.GET)
 		@ResponseBody
 		public String getState() {
 			return stateMachine.getState().getId();
 		}
 	}
+
 // end::snippetD[]
 
 	@Test
@@ -276,29 +280,30 @@ public class DocsConfigurationSampleTests2 extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("READY")
-					.state("DEPLOYPREPARE", "DEPLOY")
-					.state("DEPLOYEXECUTE", "DEPLOY");
+		.withStates()
+		.initial("READY")
+		.state("DEPLOYPREPARE", "DEPLOY")
+		.state("DEPLOYEXECUTE", "DEPLOY");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("READY").target("DEPLOYPREPARE")
-					.event("DEPLOY")
-					.and()
-				.withExternal()
-					.source("DEPLOYPREPARE").target("DEPLOYEXECUTE")
-					.and()
-				.withExternal()
-					.source("DEPLOYEXECUTE").target("READY");
+		.withExternal()
+		.source("READY").target("DEPLOYPREPARE")
+		.event("DEPLOY")
+		.and()
+		.withExternal()
+		.source("DEPLOYPREPARE").target("DEPLOYEXECUTE")
+		.and()
+		.withExternal()
+		.source("DEPLOYEXECUTE").target("READY");
 		}
 	}
+
 // end::snippetE[]
 
 // tag::snippetF[]
@@ -308,43 +313,44 @@ public class DocsConfigurationSampleTests2 extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("READY")
-					.state("DEPLOY", "DEPLOY")
-					.state("DONE")
-					.and()
-					.withStates()
-						.parent("DEPLOY")
-						.initial("DEPLOYPREPARE")
-						.state("DEPLOYPREPARE", "DONE")
-						.state("DEPLOYEXECUTE");
+		.withStates()
+		.initial("READY")
+		.state("DEPLOY", "DEPLOY")
+		.state("DONE")
+		.and()
+		.withStates()
+		.parent("DEPLOY")
+		.initial("DEPLOYPREPARE")
+		.state("DEPLOYPREPARE", "DONE")
+		.state("DEPLOYEXECUTE");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("READY").target("DEPLOY")
-					.event("DEPLOY")
-					.and()
-				.withExternal()
-					.source("DEPLOYPREPARE").target("DEPLOYEXECUTE")
-					.and()
-				.withExternal()
-					.source("DEPLOYEXECUTE").target("READY")
-					.and()
-				.withExternal()
-					.source("READY").target("DONE")
-					.event("DONE")
-					.and()
-				.withExternal()
-					.source("DEPLOY").target("DONE")
-					.event("DONE");
+		.withExternal()
+		.source("READY").target("DEPLOY")
+		.event("DEPLOY")
+		.and()
+		.withExternal()
+		.source("DEPLOYPREPARE").target("DEPLOYEXECUTE")
+		.and()
+		.withExternal()
+		.source("DEPLOYEXECUTE").target("READY")
+		.and()
+		.withExternal()
+		.source("READY").target("DONE")
+		.event("DONE")
+		.and()
+		.withExternal()
+		.source("DEPLOY").target("DONE")
+		.event("DONE");
 		}
 	}
+
 // end::snippetF[]
 
 	static class TestListener extends StateMachineListenerAdapter<String, String> {

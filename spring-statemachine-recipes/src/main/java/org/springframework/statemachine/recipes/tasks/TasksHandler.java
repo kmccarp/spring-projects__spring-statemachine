@@ -99,14 +99,14 @@ public class TasksHandler {
 	 * @param persist the state machine persist
 	 */
 	private TasksHandler(List<TaskWrapper> tasks, TasksListener listener, TaskExecutor taskExecutor,
-			StateMachinePersist<String, String, Void> persist) {
+StateMachinePersist<String, String, Void> persist) {
 		this.persist = persist;
 		try {
 			stateMachine = buildStateMachine(tasks, taskExecutor);
 			if (persist != null) {
 				final LocalStateMachineInterceptor interceptor = new LocalStateMachineInterceptor(persist);
 				stateMachine.getStateMachineAccessor()
-					.doWithAllRegions(function -> function.addStateMachineInterceptor(interceptor));
+			.doWithAllRegions(function -> function.addStateMachineInterceptor(interceptor));
 			}
 		} catch (Exception e) {
 			throw new StateMachineException("Error building state machine from tasks", e);
@@ -121,9 +121,8 @@ public class TasksHandler {
 	 */
 	public void runTasks() {
 		stateMachine
-			.sendEvent(Mono.just(MessageBuilder
-				.withPayload(EVENT_RUN).build()))
-			.subscribe();
+	.sendEvent(Mono.just(MessageBuilder.withPayload(EVENT_RUN).build()))
+	.subscribe();
 	}
 
 	/**
@@ -131,9 +130,8 @@ public class TasksHandler {
 	 */
 	public void continueFromError() {
 		stateMachine
-			.sendEvent(Mono.just(MessageBuilder
-				.withPayload(EVENT_CONTINUE).build()))
-			.subscribe();
+	.sendEvent(Mono.just(MessageBuilder.withPayload(EVENT_CONTINUE).build()))
+	.subscribe();
 	}
 
 	/**
@@ -141,9 +139,8 @@ public class TasksHandler {
 	 */
 	public void fixCurrentProblems() {
 		stateMachine
-			.sendEvent(Mono.just(MessageBuilder
-				.withPayload(EVENT_FIX).build()))
-			.subscribe();
+	.sendEvent(Mono.just(MessageBuilder.withPayload(EVENT_FIX).build()))
+	.subscribe();
 	}
 
 	/**
@@ -215,7 +212,7 @@ public class TasksHandler {
 		for (Entry<Object, Object> entry : variables.entrySet()) {
 			if (entry.getKey() instanceof String && ((String)entry.getKey()).startsWith(STATE_TASKS_PREFIX)) {
 				if (entry.getValue() instanceof Integer) {
-					Integer value = (Integer) entry.getValue();
+					Integer value = (Integer)entry.getValue();
 					if (value < 0) {
 						variables.put(entry.getKey(), 0);
 					}
@@ -225,7 +222,7 @@ public class TasksHandler {
 	}
 
 	private StateMachine<String, String> buildStateMachine(List<TaskWrapper> tasks, TaskExecutor taskExecutor)
-			throws Exception {
+throws Exception {
 		StateMachineBuilder.Builder<String, String> builder = StateMachineBuilder.builder();
 
 		int taskCount = topLevelTaskCount(tasks);
@@ -237,20 +234,20 @@ public class TasksHandler {
 		StateMachineTransitionConfigurer<String, String> stateMachineTransitionConfigurer = builder.configureTransitions();
 
 		stateMachineStateConfigurer
-			.withStates()
-				.initial(STATE_READY)
-				.fork(STATE_FORK)
-				.state(STATE_TASKS, tasksEntryAction(), null)
-				.join(STATE_JOIN)
-				.choice(STATE_CHOICE)
-				.state(STATE_ERROR);
+	.withStates()
+	.initial(STATE_READY)
+	.fork(STATE_FORK)
+	.state(STATE_TASKS, tasksEntryAction(), null)
+	.join(STATE_JOIN)
+	.choice(STATE_CHOICE)
+	.state(STATE_ERROR);
 
 		stateMachineTransitionConfigurer
-			.withExternal()
-				.source(STATE_READY).target(STATE_FORK).event(EVENT_RUN)
-				.and()
-			.withFork()
-				.source(STATE_FORK).target(STATE_TASKS);
+	.withExternal()
+	.source(STATE_READY).target(STATE_FORK).event(EVENT_RUN)
+	.and()
+	.withFork()
+	.source(STATE_FORK).target(STATE_TASKS);
 
 		Iterator<Node<TaskWrapper>> iterator = buildTasksIterator(tasks);
 		String parent = null;
@@ -265,55 +262,55 @@ public class TasksHandler {
 			parent = node.getData().parent != null ? STATE_TASKS_PREFIX + node.getData().parent.toString() : STATE_TASKS;
 
 			stateMachineStateConfigurer
-				.withStates()
-					.parent(parent)
-					.initial(initial)
-					.state(task, runnableAction(node.getData().runnable, node.getData().id.toString()), null);
+		.withStates()
+		.parent(parent)
+		.initial(initial)
+		.state(task, runnableAction(node.getData().runnable, node.getData().id.toString()), null);
 
 			if (node.getChildren().isEmpty()) {
 				joinStates.add(task);
 			}
 
 			stateMachineTransitionConfigurer
-				.withExternal()
-					.state(parent)
-					.source(initial)
-					.target(task);
+		.withExternal()
+		.state(parent)
+		.source(initial)
+		.target(task);
 		}
 
 		stateMachineStateConfigurer
-			.withStates()
-				.parent(STATE_ERROR)
-				.initial(STATE_AUTOMATIC)
-				.state(STATE_AUTOMATIC, automaticAction(), null)
-				.state(STATE_MANUAL);
+	.withStates()
+	.parent(STATE_ERROR)
+	.initial(STATE_AUTOMATIC)
+	.state(STATE_AUTOMATIC, automaticAction(), null)
+	.state(STATE_MANUAL);
 
 		stateMachineTransitionConfigurer
-			.withJoin()
-				.sources(joinStates)
-				.target(STATE_JOIN)
-				.and()
-			.withExternal()
-				.source(STATE_JOIN).target(STATE_CHOICE)
-				.and()
-			.withChoice()
-				.source(STATE_CHOICE)
-				.first(STATE_ERROR, tasksChoiceGuard())
-				.last(STATE_READY)
-				.and()
-			.withExternal()
-				.source(STATE_ERROR).target(STATE_READY)
-				.event(EVENT_CONTINUE)
-				.action(continueAction())
-				.and()
-			.withExternal()
-				.source(STATE_AUTOMATIC).target(STATE_MANUAL)
-				.event(EVENT_FALLBACK)
-				.and()
-			.withInternal()
-				.source(STATE_MANUAL)
-				.action(fixAction())
-				.event(EVENT_FIX);
+	.withJoin()
+	.sources(joinStates)
+	.target(STATE_JOIN)
+	.and()
+	.withExternal()
+	.source(STATE_JOIN).target(STATE_CHOICE)
+	.and()
+	.withChoice()
+	.source(STATE_CHOICE)
+	.first(STATE_ERROR, tasksChoiceGuard())
+	.last(STATE_READY)
+	.and()
+	.withExternal()
+	.source(STATE_ERROR).target(STATE_READY)
+	.event(EVENT_CONTINUE)
+	.action(continueAction())
+	.and()
+	.withExternal()
+	.source(STATE_AUTOMATIC).target(STATE_MANUAL)
+	.event(EVENT_FALLBACK)
+	.and()
+	.withInternal()
+	.source(STATE_MANUAL)
+	.action(fixAction())
+	.event(EVENT_FIX);
 
 		return builder.build();
 	}
@@ -333,10 +330,10 @@ public class TasksHandler {
 		}
 
 		TreeTraverser<Node<TaskWrapper>> traverser = new TreeTraverser<Node<TaskWrapper>>() {
-		    @Override
-		    public Iterable<Node<TaskWrapper>> children(Node<TaskWrapper> root) {
-		        return root.getChildren();
-		    }
+			@Override
+			public Iterable<Node<TaskWrapper>> children(Node<TaskWrapper> root) {
+				return root.getChildren();
+			}
 		};
 
 
@@ -463,7 +460,7 @@ public class TasksHandler {
 				for (Entry<Object, Object> entry : variables.entrySet()) {
 					if (entry.getKey() instanceof String && ((String)entry.getKey()).startsWith(STATE_TASKS_PREFIX)) {
 						if (entry.getValue() instanceof Integer) {
-							Integer value = (Integer) entry.getValue();
+							Integer value = (Integer)entry.getValue();
 							if (value < 0) {
 								if (log.isDebugEnabled()) {
 									log.debug("Task id=[" + entry.getKey() + "] has negative execution value, tasksChoiceGuard returns true");
@@ -517,7 +514,7 @@ public class TasksHandler {
 				for (Entry<Object, Object> entry : variables.entrySet()) {
 					if (entry.getKey() instanceof String && ((String)entry.getKey()).startsWith(STATE_TASKS_PREFIX)) {
 						if (entry.getValue() instanceof Integer) {
-							Integer value = (Integer) entry.getValue();
+							Integer value = (Integer)entry.getValue();
 							if (value < 0) {
 								hasErrors = true;
 								break;
@@ -527,14 +524,14 @@ public class TasksHandler {
 				}
 				if (hasErrors) {
 					context.getStateMachine()
-						.sendEvent(Mono.just(MessageBuilder
-							.withPayload(EVENT_FALLBACK).build()))
-						.subscribe();
+				.sendEvent(Mono.just(MessageBuilder
+		.withPayload(EVENT_FALLBACK).build()))
+				.subscribe();
 				} else {
 					context.getStateMachine()
-						.sendEvent(Mono.just(MessageBuilder
-							.withPayload(EVENT_CONTINUE).build()))
-						.subscribe();
+				.sendEvent(Mono.just(MessageBuilder
+		.withPayload(EVENT_CONTINUE).build()))
+				.subscribe();
 				}
 			}
 		};
@@ -555,7 +552,7 @@ public class TasksHandler {
 				for (Entry<Object, Object> entry : variables.entrySet()) {
 					if (entry.getKey() instanceof String && ((String)entry.getKey()).startsWith(STATE_TASKS_PREFIX)) {
 						if (entry.getValue() instanceof Integer) {
-							Integer value = (Integer) entry.getValue();
+							Integer value = (Integer)entry.getValue();
 							if (value < 0) {
 								variables.put(entry.getKey(), 0);
 							}
@@ -682,67 +679,67 @@ public class TasksHandler {
 	}
 
 	private class CompositeTasksListener extends AbstractCompositeListener<TasksListener> implements
-		TasksListener {
+TasksListener {
 
 		@Override
 		public void onTasksStarted() {
-			for (Iterator<TasksListener> iterator = getListeners().reverse(); iterator.hasNext();) {
+			for (Iterator<TasksListener> iterator = getListeners().reverse();iterator.hasNext();) {
 				iterator.next().onTasksStarted();
 			}
 		}
 
 		@Override
 		public void onTasksContinue() {
-			for (Iterator<TasksListener> iterator = getListeners().reverse(); iterator.hasNext();) {
+			for (Iterator<TasksListener> iterator = getListeners().reverse();iterator.hasNext();) {
 				iterator.next().onTasksContinue();
 			}
 		}
 
 		@Override
 		public void onTaskPreExecute(Object id) {
-			for (Iterator<TasksListener> iterator = getListeners().reverse(); iterator.hasNext();) {
+			for (Iterator<TasksListener> iterator = getListeners().reverse();iterator.hasNext();) {
 				iterator.next().onTaskPreExecute(id);
 			}
 		}
 
 		@Override
 		public void onTaskPostExecute(Object id) {
-			for (Iterator<TasksListener> iterator = getListeners().reverse(); iterator.hasNext();) {
+			for (Iterator<TasksListener> iterator = getListeners().reverse();iterator.hasNext();) {
 				iterator.next().onTaskPostExecute(id);
 			}
 		}
 
 		@Override
 		public void onTaskFailed(Object id, Exception exception) {
-			for (Iterator<TasksListener> iterator = getListeners().reverse(); iterator.hasNext();) {
+			for (Iterator<TasksListener> iterator = getListeners().reverse();iterator.hasNext();) {
 				iterator.next().onTaskFailed(id, exception);
 			}
 		}
 
 		@Override
 		public void onTaskSuccess(Object id) {
-			for (Iterator<TasksListener> iterator = getListeners().reverse(); iterator.hasNext();) {
+			for (Iterator<TasksListener> iterator = getListeners().reverse();iterator.hasNext();) {
 				iterator.next().onTaskSuccess(id);
 			}
 		}
 
 		@Override
 		public void onTasksSuccess() {
-			for (Iterator<TasksListener> iterator = getListeners().reverse(); iterator.hasNext();) {
+			for (Iterator<TasksListener> iterator = getListeners().reverse();iterator.hasNext();) {
 				iterator.next().onTasksSuccess();
 			}
 		}
 
 		@Override
 		public void onTasksError() {
-			for (Iterator<TasksListener> iterator = getListeners().reverse(); iterator.hasNext();) {
+			for (Iterator<TasksListener> iterator = getListeners().reverse();iterator.hasNext();) {
 				iterator.next().onTasksError();
 			}
 		}
 
 		@Override
 		public void onTasksAutomaticFix(TasksHandler handler, StateContext<String, String> context) {
-			for (Iterator<TasksListener> iterator = getListeners().reverse(); iterator.hasNext();) {
+			for (Iterator<TasksListener> iterator = getListeners().reverse();iterator.hasNext();) {
 				iterator.next().onTasksAutomaticFix(handler, context);
 			}
 		}
@@ -761,7 +758,7 @@ public class TasksHandler {
 			for (Entry<Object, Object> entry : variables.entrySet()) {
 				if (entry.getKey() instanceof String && ((String)entry.getKey()).startsWith(STATE_TASKS_PREFIX)) {
 					if (entry.getValue() instanceof Integer) {
-						Integer value = (Integer) entry.getValue();
+						Integer value = (Integer)entry.getValue();
 						if (value < 0) {
 							hasErrors = true;
 							break;
@@ -819,11 +816,11 @@ public class TasksHandler {
 			Integer count;
 			String key = STATE_TASKS_PREFIX + getId();
 			if (variables.containsKey(key)) {
-				count = (Integer) variables.get(key);
+				count = (Integer)variables.get(key);
 			} else {
 				count = 0;
 			}
-			count =+ delta;
+			count = +delta;
 			variables.put(key, count);
 		}
 
@@ -847,8 +844,8 @@ public class TasksHandler {
 
 		@Override
 		public void preStateChange(State<String, String> state, Message<String> message,
-				Transition<String, String> transition, StateMachine<String, String> stateMachine,
-				StateMachine<String, String> rootStateMachine) {
+	Transition<String, String> transition, StateMachine<String, String> stateMachine,
+	StateMachine<String, String> rootStateMachine) {
 
 			// skip all other pseudostates than initial
 			if (state == null || (state.getPseudoState() != null && state.getPseudoState().getKind() != PseudoStateKind.INITIAL)) {
@@ -858,14 +855,14 @@ public class TasksHandler {
 			// track root state here and update childs
 			if (currentContext != null && StateMachineUtils.isSubstate(currentContextState, state)) {
 				DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<String, String>(
-						transition != null ? transition.getTarget().getId() : null, message != null ? message.getPayload()
-								: null, message != null ? message.getHeaders() : null, stateMachine.getExtendedState());
+			transition != null ? transition.getTarget().getId() : null, message != null ? message.getPayload()
+	: null, message != null ? message.getHeaders() : null, stateMachine.getExtendedState());
 				currentContext.getChilds().add(context);
 			} else {
 				childs.clear();
 				DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<String, String>(
-						new ArrayList<StateMachineContext<String, String>>(childs), state.getId(), message != null ? message.getPayload()
-								: null, message != null ? message.getHeaders() : null, stateMachine.getExtendedState());
+			new ArrayList<StateMachineContext<String, String>>(childs), state.getId(), message != null ? message.getPayload()
+	: null, message != null ? message.getHeaders() : null, stateMachine.getExtendedState());
 				currentContext = context;
 				currentContextState = state;
 			}

@@ -35,7 +35,7 @@ public interface StateMachine<S, E> extends Region<S, E> {
 	 *
 	 * @return initial state
 	 */
-	State<S,E> getInitialState();
+	State<S, E> getInitialState();
 
 	/**
 	 * Gets the state machine extended state.

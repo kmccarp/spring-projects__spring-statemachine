@@ -61,7 +61,7 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		ObjectStateMachine<TestStates, TestEvents> machine = context.getBean(
-				StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 
 		EventCheckAction eventCheckAction1 = context.getBean("eventCheckAction1", EventCheckAction.class);
 		EventCheckAction eventCheckAction2 = context.getBean("eventCheckAction2", EventCheckAction.class);
@@ -94,7 +94,7 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		ObjectStateMachine<TestStates, TestEvents> machine = context.getBean(
-				StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 
 		EventCheckAction eventCheckAction1 = context.getBean("eventCheckAction1", EventCheckAction.class);
 		EventCheckAction eventCheckAction3 = context.getBean("eventCheckAction3", EventCheckAction.class);
@@ -127,7 +127,7 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		ObjectStateMachine<TestStates, TestEvents> machine = context.getBean(
-				StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 
 		EventCheckAction eventCheckAction1 = context.getBean("eventCheckAction1", EventCheckAction.class);
 		EventCheckAction eventCheckAction3 = context.getBean("eventCheckAction3", EventCheckAction.class);
@@ -160,7 +160,7 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		ObjectStateMachine<TestStates, TestEvents> machine = context.getBean(
-				StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 
 		EventCheckAction eventCheckAction1 = context.getBean("eventCheckAction1", EventCheckAction.class);
 		EventCheckAction eventCheckAction2 = context.getBean("eventCheckAction2", EventCheckAction.class);
@@ -194,7 +194,7 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		ObjectStateMachine<TestStates, TestEvents> machine = context.getBean(
-				StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 
 		EventCheckAction eventCheckAction2 = context.getBean("eventCheckAction2", EventCheckAction.class);
 		EventCheckAction eventCheckAction20 = context.getBean("eventCheckAction20", EventCheckAction.class);
@@ -228,15 +228,15 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states.withStates().initial(TestStates.S1).state(TestStates.S1, eventCheckAction1(), null)
-					.state(TestStates.S2, eventCheckAction2(), null).state(TestStates.S3, eventCheckAction3(), null)
-					.state(TestStates.S4, eventCheckAction4(), null);
+		.state(TestStates.S2, eventCheckAction2(), null).state(TestStates.S3, eventCheckAction3(), null)
+		.state(TestStates.S4, eventCheckAction4(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions.withExternal().source(TestStates.S1).target(TestStates.S2).event(TestEvents.E1).and()
-					.withExternal().source(TestStates.S2).target(TestStates.S3).and().withExternal()
-					.source(TestStates.S3).target(TestStates.S4);
+		.withExternal().source(TestStates.S2).target(TestStates.S3).and().withExternal()
+		.source(TestStates.S3).target(TestStates.S4);
 		}
 
 		@Bean
@@ -267,14 +267,14 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states.withStates().initial(TestStates.S1).state(TestStates.S1, eventCheckAction1(), null)
-					.choice(TestStates.S2).state(TestStates.S3, eventCheckAction3(), null)
-					.state(TestStates.S4, eventCheckAction4(), null);
+		.choice(TestStates.S2).state(TestStates.S3, eventCheckAction3(), null)
+		.state(TestStates.S4, eventCheckAction4(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions.withExternal().source(TestStates.S1).target(TestStates.S2).event(TestEvents.E1).and()
-					.withChoice().source(TestStates.S2).first(TestStates.S3, eventCheckGuard()).last(TestStates.S4);
+		.withChoice().source(TestStates.S2).first(TestStates.S3, eventCheckGuard()).last(TestStates.S4);
 		}
 
 		@Bean
@@ -305,14 +305,14 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states.withStates().initial(TestStates.S1).state(TestStates.S1, eventCheckAction1(), null)
-					.choice(TestStates.S2).state(TestStates.S3, eventCheckAction3(), null)
-					.state(TestStates.S4, eventCheckAction4(), null);
+		.choice(TestStates.S2).state(TestStates.S3, eventCheckAction3(), null)
+		.state(TestStates.S4, eventCheckAction4(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions.withExternal().source(TestStates.S1).target(TestStates.S2).event(TestEvents.E1).and()
-					.withChoice().source(TestStates.S2).first(TestStates.S3, eventCheckGuard()).last(TestStates.S4);
+		.withChoice().source(TestStates.S2).first(TestStates.S3, eventCheckGuard()).last(TestStates.S4);
 		}
 
 		@Bean
@@ -343,15 +343,15 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states.withStates().initial(TestStates.S1).state(TestStates.S1, eventCheckAction1(), null)
-					.state(TestStates.S2, eventCheckAction2(), null).choice(TestStates.S3)
-					.state(TestStates.S4, eventCheckAction4(), null);
+		.state(TestStates.S2, eventCheckAction2(), null).choice(TestStates.S3)
+		.state(TestStates.S4, eventCheckAction4(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions.withExternal().source(TestStates.S1).target(TestStates.S2).event(TestEvents.E1).and()
-					.withExternal().source(TestStates.S2).target(TestStates.S3).and().withChoice()
-					.source(TestStates.S3).first(TestStates.S4, eventCheckGuard()).last(TestStates.S4);
+		.withExternal().source(TestStates.S2).target(TestStates.S3).and().withChoice()
+		.source(TestStates.S3).first(TestStates.S4, eventCheckGuard()).last(TestStates.S4);
 		}
 
 		@Bean
@@ -382,34 +382,34 @@ public class TransitionEventHeaderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2, eventCheckAction2(), null)
-					.and()
-					.withStates()
-						.parent(TestStates.S2)
-						.initial(TestStates.S20)
-						.state(TestStates.S20, eventCheckAction20(), null)
-						.choice(TestStates.S211)
-						.state(TestStates.S212, eventCheckAction212(), null);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2, eventCheckAction2(), null)
+		.and()
+		.withStates()
+		.parent(TestStates.S2)
+		.initial(TestStates.S20)
+		.state(TestStates.S20, eventCheckAction20(), null)
+		.choice(TestStates.S211)
+		.state(TestStates.S212, eventCheckAction212(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S20)
-					.target(TestStates.S211)
-					.and()
-				.withChoice()
-					.source(TestStates.S211)
-					.first(TestStates.S212, eventCheckGuard())
-					.last(TestStates.S212);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S20)
+		.target(TestStates.S211)
+		.and()
+		.withChoice()
+		.source(TestStates.S211)
+		.first(TestStates.S212, eventCheckGuard())
+		.last(TestStates.S212);
 		}
 
 		@Bean

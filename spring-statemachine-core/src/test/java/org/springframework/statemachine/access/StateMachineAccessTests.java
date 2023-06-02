@@ -73,7 +73,7 @@ public class StateMachineAccessTests {
 
 				@Override
 				public List<StateMachineAccess<String, String>> withAllRegions() {
-					List<StateMachineAccess<String, String>> list = new ArrayList<StateMachineAccess<String,String>>();
+					List<StateMachineAccess<String, String>> list = new ArrayList<StateMachineAccess<String, String>>();
 					list.add(MockStateMachine.this);
 					return list;
 				}

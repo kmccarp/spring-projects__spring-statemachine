@@ -149,12 +149,12 @@ public class StateMachineController {
 	@RequestMapping("/event")
 	@ResponseStatus(HttpStatus.OK)
 	public void sendEvent(@RequestParam(value = "id") Events id,
-			@RequestParam(value = "testVariable", required = false) String testVariable) {
+@RequestParam(value = "testVariable", required = false) String testVariable) {
 		log.info("Got request to send event " + id + " testVariable " + testVariable);
 		Message<Events> message = MessageBuilder
-				.withPayload(id)
-				.setHeader("testVariable", testVariable)
-				.build();
+	.withPayload(id)
+	.setHeader("testVariable", testVariable)
+	.build();
 		stateMachine.sendEvent(Mono.just(message)).subscribe();
 	}
 
@@ -170,13 +170,13 @@ public class StateMachineController {
 		stateMachineEnsemble.leave(stateMachine);
 	}
 
-	@RequestMapping(value = "/states", method = RequestMethod.GET, produces="application/json")
+	@RequestMapping(value = "/states", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public Collection<States> getStates() {
 		return stateMachine.getState().getIds();
 	}
 
-	@RequestMapping(value = "/status", method = RequestMethod.GET, produces="application/json")
+	@RequestMapping(value = "/status", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public Map<Object, Object> getStatus() {
 		HashMap<Object, Object> map = new HashMap<Object, Object>();

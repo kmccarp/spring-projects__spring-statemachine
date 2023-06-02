@@ -26,9 +26,7 @@ import org.springframework.statemachine.config.common.annotation.configurers.Res
  * @author Janne Valkealahti
  *
  */
-public class ComplexTestConfigBeanBBuilder
-		extends AbstractConfiguredAnnotationBuilder<ComplexTestConfigBeanB, ComplexTestConfigBeanBConfigurer,ComplexTestConfigBeanBBuilder>
-		implements ComplexTestConfigBeanBConfigurer {
+public class ComplexTestConfigBeanBBuilderextends AbstractConfiguredAnnotationBuilder<ComplexTestConfigBeanB, ComplexTestConfigBeanBConfigurer, ComplexTestConfigBeanBBuilder>implements ComplexTestConfigBeanBConfigurer {
 
 	private String dataB;
 	private String dataBB;
@@ -55,7 +53,7 @@ public class ComplexTestConfigBeanBBuilder
 
 	@Override
 	public ResourceConfigurer<ComplexTestConfigBeanBConfigurer> withResources() throws Exception {
-		return getOrApply(new DefaultResourceConfigurer<ComplexTestConfigBeanB,ComplexTestConfigBeanBConfigurer,ComplexTestConfigBeanBBuilder>());
+		return getOrApply(new DefaultResourceConfigurer<ComplexTestConfigBeanB, ComplexTestConfigBeanBConfigurer, ComplexTestConfigBeanBBuilder>());
 	}
 
 }

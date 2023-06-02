@@ -42,13 +42,13 @@ public class ClassAnnotationTests extends AbstractStateMachineTests {
 	@SuppressWarnings("unchecked")
 	public void testClassAnnotations() throws Exception {
 		AnnotationConfigApplicationContext context =
-				new AnnotationConfigApplicationContext(BeanConfig1.class, FooConfig.class, BarConfig.class);
+	new AnnotationConfigApplicationContext(BeanConfig1.class, FooConfig.class, BarConfig.class);
 
-		ObjectStateMachine<TestStates,TestEvents> fooMachine =
-				context.getBean("fooMachine", ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> fooMachine =
+	context.getBean("fooMachine", ObjectStateMachine.class);
 
-		ObjectStateMachine<TestStates,TestEvents> barMachine =
-				context.getBean("barMachine", ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> barMachine =
+	context.getBean("barMachine", ObjectStateMachine.class);
 
 		assertThat(context.containsBean("fooMachine")).isTrue();
 		assertThat(context.containsBean("barMachine")).isTrue();
@@ -81,10 +81,10 @@ public class ClassAnnotationTests extends AbstractStateMachineTests {
 	@SuppressWarnings("unchecked")
 	public void testClassAnnotationsWithMeta() throws Exception {
 		AnnotationConfigApplicationContext context =
-				new AnnotationConfigApplicationContext(BeanConfig2.class, JeeConfig.class, FooConfig.class);
+	new AnnotationConfigApplicationContext(BeanConfig2.class, JeeConfig.class, FooConfig.class);
 
-		ObjectStateMachine<TestStates,TestEvents> jeeMachine =
-				context.getBean("jeeMachine", ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> jeeMachine =
+	context.getBean("jeeMachine", ObjectStateMachine.class);
 
 		assertThat(context.containsBean("fooMachine")).isTrue();
 		assertThat(context.containsBean("jeeMachine")).isTrue();
@@ -127,7 +127,7 @@ public class ClassAnnotationTests extends AbstractStateMachineTests {
 
 	}
 
-	@Target({ ElementType.TYPE, ElementType.METHOD })
+	@Target({ElementType.TYPE, ElementType.METHOD})
 	@Retention(RetentionPolicy.RUNTIME)
 	@WithStateMachine(name = "jeeMachine")
 	public @interface WithJeeMachine {
@@ -182,20 +182,20 @@ public class ClassAnnotationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.guard(testGuard())
-					.action(testAction());
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.guard(testGuard())
+		.action(testAction());
 		}
 
 		@Bean
@@ -217,20 +217,20 @@ public class ClassAnnotationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.guard(testGuard())
-					.action(testAction());
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.guard(testGuard())
+		.action(testAction());
 		}
 
 		@Bean
@@ -252,20 +252,20 @@ public class ClassAnnotationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.guard(testGuard())
-					.action(testAction());
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.guard(testGuard())
+		.action(testAction());
 		}
 
 		@Bean

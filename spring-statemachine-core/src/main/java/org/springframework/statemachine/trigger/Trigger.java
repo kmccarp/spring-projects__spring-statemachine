@@ -28,7 +28,7 @@ import reactor.core.publisher.Mono;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface Trigger<S,E> {
+public interface Trigger<S, E> {
 
 	/**
 	 * Evaluate trigger.

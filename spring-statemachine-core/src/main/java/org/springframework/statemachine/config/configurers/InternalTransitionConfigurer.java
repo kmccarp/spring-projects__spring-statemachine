@@ -25,7 +25,6 @@ import org.springframework.statemachine.transition.Transition;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface InternalTransitionConfigurer<S, E> extends
-		TransitionConfigurer<InternalTransitionConfigurer<S, E>, S, E> {
+public interface InternalTransitionConfigurer<S, E> extendsTransitionConfigurer<InternalTransitionConfigurer<S, E>, S, E> {
 
 }

@@ -35,7 +35,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { Application.class })
+@SpringBootTest(classes = {Application.class})
 @WebAppConfiguration
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class DataJpaTests {
@@ -48,26 +48,26 @@ public class DataJpaTests {
 	@Test
 	public void testHome() throws Exception {
 		mvc.
-			perform(get("/state")).
-			andExpect(status().isOk());
+	perform(get("/state")).
+	andExpect(status().isOk());
 	}
 
 	@Test
 	public void testSendEventE1() throws Exception {
 		mvc.
-			perform(get("/state").param("events", "E1")).
-			andExpect(status().isOk()).
-			andExpect(content().string(containsString("Exit S1")));
+	perform(get("/state").param("events", "E1")).
+	andExpect(status().isOk()).
+	andExpect(content().string(containsString("Exit S1")));
 	}
 
 	@Test
 	public void testSendEventsE1E2() throws Exception {
 		mvc.
-			perform(get("/state").param("events", "E1").param("events", "E2")).
-			andExpect(status().isOk()).
-			andExpect(content().string(allOf(
-						containsString("Exit S1"),
-						containsString("Exit S2"))));
+	perform(get("/state").param("events", "E1").param("events", "E2")).
+	andExpect(status().isOk()).
+	andExpect(content().string(allOf(
+	containsString("Exit S1"),
+	containsString("Exit S2"))));
 	}
 
 	@BeforeEach

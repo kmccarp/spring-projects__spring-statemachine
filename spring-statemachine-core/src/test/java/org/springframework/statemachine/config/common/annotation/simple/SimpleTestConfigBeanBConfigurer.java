@@ -20,7 +20,9 @@ import org.springframework.statemachine.config.common.annotation.configurers.Res
 public interface SimpleTestConfigBeanBConfigurer {
 
 	SimpleTestConfigBeanBConfigurer setData(String data);
+
 	SimpleTestConfigBeanBConfigurer setDataBB(String data);
+
 	ResourceConfigurer<SimpleTestConfigBeanBConfigurer> withResources() throws Exception;
 
 }

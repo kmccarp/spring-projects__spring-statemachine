@@ -119,7 +119,7 @@ public class TimerTriggerTests extends AbstractStateMachineTests {
 		assertThat(listener.stateMachineStartedLatch.await(2, TimeUnit.SECONDS)).isTrue();
 		assertThat(machine.getState().getIds()).containsOnly("READY");
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0;i < 4;i++) {
 			listener.reset(2);
 			action.reset();
 			doSendEventAndConsumeAll(machine, "SWITCH_TO_RUNNING");
@@ -156,7 +156,7 @@ public class TimerTriggerTests extends AbstractStateMachineTests {
 		Map<Trigger<?, ?>, Transition<?, ?>> triggerToTransitionMap = TestUtils.readField("triggerToTransitionMap", machine);
 		for (Entry<Trigger<?, ?>, Transition<?, ?>> entry : triggerToTransitionMap.entrySet()) {
 			if (entry.getKey() instanceof TimerTrigger) {
-				trigger = (TimerTrigger<?, ?>) entry.getKey();
+				trigger = (TimerTrigger<?, ?>)entry.getKey();
 				continue;
 			}
 		}
@@ -201,23 +201,23 @@ public class TimerTriggerTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withInternal()
-					.source(TestStates.S2)
-					.action(testTimerAction())
-					.timer(10);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withInternal()
+		.source(TestStates.S2)
+		.action(testTimerAction())
+		.timer(10);
 		}
 
 		@Bean
@@ -234,41 +234,41 @@ public class TimerTriggerTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("READY")
-					.state("RUNNING")
-					.state("RUNNING_TESTING")
-					.end("SHUTDOWN");
+		.withStates()
+		.initial("READY")
+		.state("RUNNING")
+		.state("RUNNING_TESTING")
+		.end("SHUTDOWN");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("READY")
-					.target("RUNNING")
-					.event("SWITCH_TO_RUNNING")
-					.and()
-				.withExternal()
-					.source("RUNNING")
-					.target("RUNNING_TESTING")
-					.timer(1000)
-					.action(testTimerAction2())
-					.and()
-				.withExternal()
-					.source("RUNNING_TESTING")
-					.target("RUNNING")
-					.event("SWITCH_TO_RUNNING")
-					.and()
-				.withExternal()
-					.source("RUNNING")
-					.target("SHUTDOWN")
-					.event("SWITCH_TO_SHUTDOWN")
-					.and()
-				.withExternal()
-					.source("RUNNING_TESTING")
-					.target("SHUTDOWN")
-					.event("SWITCH_TO_SHUTDOWN");
+		.withExternal()
+		.source("READY")
+		.target("RUNNING")
+		.event("SWITCH_TO_RUNNING")
+		.and()
+		.withExternal()
+		.source("RUNNING")
+		.target("RUNNING_TESTING")
+		.timer(1000)
+		.action(testTimerAction2())
+		.and()
+		.withExternal()
+		.source("RUNNING_TESTING")
+		.target("RUNNING")
+		.event("SWITCH_TO_RUNNING")
+		.and()
+		.withExternal()
+		.source("RUNNING")
+		.target("SHUTDOWN")
+		.event("SWITCH_TO_SHUTDOWN")
+		.and()
+		.withExternal()
+		.source("RUNNING_TESTING")
+		.target("SHUTDOWN")
+		.event("SWITCH_TO_SHUTDOWN");
 		}
 
 		@Bean
@@ -285,23 +285,23 @@ public class TimerTriggerTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S2);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withInternal()
-					.source(TestStates.S2)
-					.action(testTimerAction())
-					.timerOnce(3000);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withInternal()
+		.source(TestStates.S2)
+		.action(testTimerAction())
+		.timerOnce(3000);
 		}
 
 		@Bean

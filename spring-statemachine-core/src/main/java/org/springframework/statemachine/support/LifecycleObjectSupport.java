@@ -38,8 +38,7 @@ import reactor.core.publisher.Mono;
  *
  */
 public abstract class LifecycleObjectSupport
-		/*extends ReactiveLifecycleManager*/
-		implements InitializingBean, DisposableBean, SmartLifecycle, BeanFactoryAware, StateMachineReactiveLifecycle {
+		/*extends ReactiveLifecycleManager*/implements InitializingBean, DisposableBean, SmartLifecycle, BeanFactoryAware, StateMachineReactiveLifecycle {
 
 	private static final Log log = LogFactory.getLog(LifecycleObjectSupport.class);
 
@@ -57,11 +56,11 @@ public abstract class LifecycleObjectSupport
 
 	public LifecycleObjectSupport() {
 		this.reactiveLifecycleManager = new ReactiveLifecycleManager(
-				() -> doPreStartReactively(),
-				() -> doPreStopReactively(),
-				() -> doPostStartReactively(),
-				() -> doPostStopReactively()
-				);
+	() -> doPreStartReactively(),
+	() -> doPreStopReactively(),
+	() -> doPostStartReactively(),
+	() -> doPostStopReactively()
+		);
 		this.reactiveLifecycleManager.setOwner(this);
 	}
 
@@ -75,7 +74,7 @@ public abstract class LifecycleObjectSupport
 			}
 		} catch (Exception e) {
 			if (e instanceof RuntimeException) {
-				throw (RuntimeException) e;
+				throw (RuntimeException)e;
 			}
 			throw new BeanInitializationException("failed to initialize", e);
 		}
@@ -90,7 +89,7 @@ public abstract class LifecycleObjectSupport
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		Assert.notNull(beanFactory, "beanFactory must not be null");
-		if(log.isTraceEnabled()) {
+		if (log.isTraceEnabled()) {
 			log.trace("Setting bean factory: " + beanFactory + " for " + this);
 		}
 		this.beanFactory = beanFactory;
@@ -168,12 +167,14 @@ public abstract class LifecycleObjectSupport
 	 *
 	 * @throws Exception exception
 	 */
-	protected void onInit() throws Exception {}
+	protected void onInit() throws Exception {
+	}
 
 	/**
 	 * Subclasses may implement this for destroy logic.
 	 */
-	protected void doDestroy() {};
+	protected void doDestroy() {
+	}
 
 	/**
 	 * Subclasses may implement this for pre start logic.

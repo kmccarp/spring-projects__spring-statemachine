@@ -38,11 +38,7 @@ public class LinkedPseudoStatesTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("S1").and()
-					.step().sendEvent("E1").expectStates("S2").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("S1").and().step().sendEvent("E1").expectStates("S2").and().build();
 		plan.test();
 	}
 
@@ -53,11 +49,7 @@ public class LinkedPseudoStatesTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("S1").and()
-					.step().sendEvent("E2").expectStates("S3", "S31", "S32").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("S1").and().step().sendEvent("E2").expectStates("S3", "S31", "S32").and().build();
 		plan.test();
 	}
 
@@ -68,11 +60,7 @@ public class LinkedPseudoStatesTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("S1").and()
-					.step().sendEvent("E3").expectStates("S4").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("S1").and().step().sendEvent("E3").expectStates("S4").and().build();
 		plan.test();
 	}
 
@@ -83,12 +71,7 @@ public class LinkedPseudoStatesTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("S1").and()
-					.step().sendEvent("E4").expectStates("S5", "S52").and()
-					.step().sendEvent("E5").expectStates("S4").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("S1").and().step().sendEvent("E4").expectStates("S5", "S52").and().step().sendEvent("E5").expectStates("S4").and().build();
 		plan.test();
 	}
 
@@ -99,8 +82,8 @@ public class LinkedPseudoStatesTests extends AbstractBuildTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean

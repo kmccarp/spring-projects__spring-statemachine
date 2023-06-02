@@ -29,7 +29,7 @@ import org.springframework.statemachine.StateContext;
  * @param <E> the type of event
  */
 public interface Guard<S, E> {
-	
+
 	/**
 	 * Evaluate a guard condition.
 	 *

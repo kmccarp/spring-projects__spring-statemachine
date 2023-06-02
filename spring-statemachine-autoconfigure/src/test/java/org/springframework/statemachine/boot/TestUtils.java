@@ -43,9 +43,9 @@ public class TestUtils {
 
 		if (field == null)
 			throw new IllegalArgumentException("Cannot find field '" + name + "' in the class hierarchy of "
-					+ target.getClass());
+		+ target.getClass());
 		field.setAccessible(true);
-		return (T) field.get(target);
+		return (T)field.get(target);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -55,9 +55,9 @@ public class TestUtils {
 
 		if (method == null)
 			throw new IllegalArgumentException("Cannot find method '" + method + "' in the class hierarchy of "
-					+ target.getClass());
+		+ target.getClass());
 		method.setAccessible(true);
-		return (T) ReflectionUtils.invokeMethod(method, target);
+		return (T)ReflectionUtils.invokeMethod(method, target);
 	}
 
 	public static void setField(String name, Object target, Object value) throws Exception {
@@ -74,7 +74,7 @@ public class TestUtils {
 
 		if (field == null)
 			throw new IllegalArgumentException("Cannot find field '" + name + "' in the class hierarchy of "
-					+ target.getClass());
+		+ target.getClass());
 		field.setAccessible(true);
 		field.set(target, value);
 	}
@@ -86,9 +86,9 @@ public class TestUtils {
 
 		if (method == null)
 			throw new IllegalArgumentException("Cannot find method '" + method + "' in the class hierarchy of "
-					+ target.getClass());
+		+ target.getClass());
 		method.setAccessible(true);
-		return (T) ReflectionUtils.invokeMethod(method, target, args);
+		return (T)ReflectionUtils.invokeMethod(method, target, args);
 	}
 
 }

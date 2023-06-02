@@ -45,7 +45,7 @@ public class TransitionVoter<S, E> implements AccessDecisionVoter<Transition<S, 
 	@Override
 	public boolean supports(ConfigAttribute attribute) {
 		if ((attribute.getAttribute() != null) && (attribute.getAttribute().startsWith(getTransitionSourcePrefix())
-				|| attribute.getAttribute().startsWith(getTransitionTargetPrefix()))) {
+	|| attribute.getAttribute().startsWith(getTransitionTargetPrefix()))) {
 			return true;
 		} else {
 			return false;
@@ -72,10 +72,10 @@ public class TransitionVoter<S, E> implements AccessDecisionVoter<Transition<S, 
 				result = ACCESS_DENIED;
 				String attr = attribute.getAttribute();
 				if (attr.startsWith(getTransitionSourcePrefix())
-						&& attr.equals(getTransitionSourcePrefix() + source.toString())) {
+			&& attr.equals(getTransitionSourcePrefix() + source.toString())) {
 					return ACCESS_GRANTED;
 				} else if (attr.startsWith(getTransitionTargetPrefix())
-						&& attr.equals(getTransitionTargetPrefix() + target.toString())) {
+			&& attr.equals(getTransitionTargetPrefix() + target.toString())) {
 					return ACCESS_GRANTED;
 				}
 			}

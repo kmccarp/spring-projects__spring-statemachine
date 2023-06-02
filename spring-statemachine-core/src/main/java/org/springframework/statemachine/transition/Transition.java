@@ -58,14 +58,14 @@ public interface Transition<S, E> {
 	 *
 	 * @return the source state
 	 */
-	State<S,E> getSource();
+	State<S, E> getSource();
 
 	/**
 	 * Gets the target state of this transition.
 	 *
 	 * @return the target state
 	 */
-	State<S,E> getTarget();
+	State<S, E> getTarget();
 
 	/**
 	 * Gets the guard of this transition.

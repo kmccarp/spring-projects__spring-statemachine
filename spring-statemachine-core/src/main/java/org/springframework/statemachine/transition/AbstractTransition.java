@@ -64,8 +64,8 @@ public abstract class AbstractTransition<S, E> implements Transition<S, E> {
 	 * @param trigger the trigger
 	 */
 	public AbstractTransition(State<S, E> source, State<S, E> target,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event, TransitionKind kind,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event, TransitionKind kind,
+Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger) {
 		this(source, target, actions, event, kind, guard, trigger, null, null);
 	}
 
@@ -82,8 +82,8 @@ public abstract class AbstractTransition<S, E> implements Transition<S, E> {
 	 * @param securityRule the security rule
 	 */
 	public AbstractTransition(State<S, E> source, State<S, E> target,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event, TransitionKind kind,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger, SecurityRule securityRule, String name) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions, E event, TransitionKind kind,
+Function<StateContext<S, E>, Mono<Boolean>> guard, Trigger<S, E> trigger, SecurityRule securityRule, String name) {
 		Assert.notNull(kind, "Transition type must be set");
 		this.source = source;
 		this.target = target;
@@ -109,10 +109,10 @@ public abstract class AbstractTransition<S, E> implements Transition<S, E> {
 	public Mono<Boolean> transit(StateContext<S, E> context) {
 		if (guard != null) {
 			return guard.apply(context)
-				.doOnError(e -> {
-					log.warn("Deny guard due to throw as GUARD should not error", e);
-				})
-				.onErrorReturn(false);
+		.doOnError(e -> {
+			log.warn("Deny guard due to throw as GUARD should not error", e);
+		})
+		.onErrorReturn(false);
 		}
 		return Mono.just(true);
 	}
@@ -172,20 +172,20 @@ public abstract class AbstractTransition<S, E> implements Transition<S, E> {
 			return Mono.empty();
 		}
 		return Flux.fromIterable(getActions())
-			.flatMap(a -> {
-				long now = System.currentTimeMillis();
-				return a.apply(context)
-					.thenEmpty(Mono.fromRunnable(() -> {
-						if (this.actionListener != null) {
-							try {
-								this.actionListener.onExecute(context.getStateMachine(), a, System.currentTimeMillis() - now);
-							} catch (Exception e) {
-								log.warn("Error with actionListener", e);
-							}
-						}
-					}));
-			})
-			.then();
+	.flatMap(a -> {
+		long now = System.currentTimeMillis();
+		return a.apply(context)
+.thenEmpty(Mono.fromRunnable(() -> {
+	if (this.actionListener != null) {
+		try {
+			this.actionListener.onExecute(context.getStateMachine(), a, System.currentTimeMillis() - now);
+		} catch (Exception e) {
+			log.warn("Error with actionListener", e);
+		}
+	}
+}));
+	})
+	.then();
 	}
 
 	@Override

@@ -26,9 +26,9 @@ package org.springframework.statemachine.state;
 public class DefaultPseudoStateContext<S, E> implements PseudoStateContext<S, E> {
 
 	private final PseudoState<S, E> pseudoState;
-	
+
 	private final PseudoAction pseudoAction;
-	
+
 	/**
 	 * Instantiates a new default pseudo state context.
 	 *
@@ -44,7 +44,7 @@ public class DefaultPseudoStateContext<S, E> implements PseudoStateContext<S, E>
 	public PseudoState<S, E> getPseudoState() {
 		return pseudoState;
 	}
-	
+
 	@Override
 	public PseudoAction getPseudoAction() {
 		return pseudoAction;

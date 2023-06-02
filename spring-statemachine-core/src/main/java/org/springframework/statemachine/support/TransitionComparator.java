@@ -48,7 +48,7 @@ class TransitionComparator<S, E> implements Comparator<Transition<S, E>> {
 	@Override
 	public int compare(Transition<S, E> left, Transition<S, E> right) {
 		if (log.isTraceEnabled()) {
-			log.trace("Compare left='" + left + "' right='" + right +"'");
+			log.trace("Compare left='" + left + "' right='" + right + "'");
 		}
 		if (left == right) {
 			return 0;

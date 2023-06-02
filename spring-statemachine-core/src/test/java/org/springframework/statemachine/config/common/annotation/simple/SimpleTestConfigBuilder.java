@@ -29,8 +29,7 @@ import org.springframework.statemachine.config.common.annotation.configurers.Pro
  * @author Janne Valkealahti
  *
  */
-public class SimpleTestConfigBuilder extends AbstractConfiguredAnnotationBuilder<SimpleTestConfig, SimpleTestConfigBuilder,SimpleTestConfigBuilder>
-		implements PropertiesConfigurerAware {
+public class SimpleTestConfigBuilder extends AbstractConfiguredAnnotationBuilder<SimpleTestConfig, SimpleTestConfigBuilder, SimpleTestConfigBuilder>implements PropertiesConfigurerAware {
 
 	private final Properties properties = new Properties();
 
@@ -51,8 +50,8 @@ public class SimpleTestConfigBuilder extends AbstractConfiguredAnnotationBuilder
 		return properties;
 	}
 
-	public DefaultPropertiesConfigurer<SimpleTestConfig, SimpleTestConfigBuilder,SimpleTestConfigBuilder> withProperties() throws Exception {
-		return getOrApply(new DefaultPropertiesConfigurer<SimpleTestConfig, SimpleTestConfigBuilder,SimpleTestConfigBuilder>());
+	public DefaultPropertiesConfigurer<SimpleTestConfig, SimpleTestConfigBuilder, SimpleTestConfigBuilder> withProperties() throws Exception {
+		return getOrApply(new DefaultPropertiesConfigurer<SimpleTestConfig, SimpleTestConfigBuilder, SimpleTestConfigBuilder>());
 	}
 
 }

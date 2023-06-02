@@ -56,7 +56,7 @@ public class BootStateMachineMonitor<S, E> extends AbstractStateMachineMonitor<S
 	 * @param stateMachineTraceRepository the statemachine trace repository
 	 */
 	public BootStateMachineMonitor(MeterRegistry meterRegistry,
-			StateMachineTraceRepository stateMachineTraceRepository) {
+StateMachineTraceRepository stateMachineTraceRepository) {
 		this.meterRegistry = meterRegistry;
 		this.traceRepository = stateMachineTraceRepository;
 	}
@@ -87,16 +87,16 @@ public class BootStateMachineMonitor<S, E> extends AbstractStateMachineMonitor<S
 	private Counter.Builder getTransitionCounterBuilder(Transition<S, E> transition) {
 		String transitionName = transitionToName(transition);
 		Counter.Builder builder = Counter.builder("ssm.transition.transit")
-				.tags("transitionName", transitionName)
-				.description("Counter of Transition");
+	.tags("transitionName", transitionName)
+	.description("Counter of Transition");
 		return builder;
 	}
 
 	private Timer.Builder getTransitionTimerBuilder(Transition<S, E> transition) {
 		String transitionName = transitionToName(transition);
 		Timer.Builder builder = Timer.builder("ssm.transition.duration")
-				.tags("transitionName", transitionName)
-				.description("Timer of Transition");
+	.tags("transitionName", transitionName)
+	.description("Timer of Transition");
 		builder.publishPercentileHistogram();
 		return builder;
 	}
@@ -104,16 +104,16 @@ public class BootStateMachineMonitor<S, E> extends AbstractStateMachineMonitor<S
 	private Counter.Builder getActionCounterBuilder(Function<StateContext<S, E>, Mono<Void>> action) {
 		String actionName = actionToName(action);
 		Counter.Builder builder = Counter.builder("ssm.action.execute")
-				.tags("actionName", actionName)
-				.description("Counter of Action");
+	.tags("actionName", actionName)
+	.description("Counter of Action");
 		return builder;
 	}
 
 	private Timer.Builder getActionTimerBuilder(Function<StateContext<S, E>, Mono<Void>> action) {
 		String actionName = actionToName(action);
 		Timer.Builder builder = Timer.builder("ssm.action.duration")
-				.tags("actionName", actionName)
-				.description("Timer of Action");
+	.tags("actionName", actionName)
+	.description("Timer of Action");
 		builder.publishPercentileHistogram();
 		return builder;
 	}

@@ -56,9 +56,7 @@ import org.springframework.statemachine.transition.TransitionConflictPolicy;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class StateMachineConfigurationBuilder<S, E>
-		extends AbstractConfiguredAnnotationBuilder<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>
-		implements StateMachineConfigurationConfigurer<S, E> {
+public class StateMachineConfigurationBuilder<S, E>extends AbstractConfiguredAnnotationBuilder<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>implements StateMachineConfigurationConfigurer<S, E> {
 
 	private String machineId;
 	private BeanFactory beanFactory;
@@ -94,7 +92,7 @@ public class StateMachineConfigurationBuilder<S, E>
 	 * @param allowConfigurersOfSameType the allow configurers of same type
 	 */
 	public StateMachineConfigurationBuilder(ObjectPostProcessor<Object> objectPostProcessor,
-			boolean allowConfigurersOfSameType) {
+boolean allowConfigurersOfSameType) {
 		super(objectPostProcessor, allowConfigurersOfSameType);
 	}
 
@@ -147,9 +145,9 @@ public class StateMachineConfigurationBuilder<S, E>
 			}
 		}
 		return new ConfigurationData<S, E>(beanFactory, autoStart, ensemble, listeners, securityEnabled,
-				transitionSecurityAccessDecisionManager, eventSecurityAccessDecisionManager, eventSecurityRule,
-				transitionSecurityRule, verifierEnabled, verifier, machineId, stateMachineMonitor, interceptorsCopy,
-				transitionConflictPolicy, stateDoActionPolicy, stateDoActionPolicyTimeout, regionExecutionPolicy);
+	transitionSecurityAccessDecisionManager, eventSecurityAccessDecisionManager, eventSecurityRule,
+	transitionSecurityRule, verifierEnabled, verifier, machineId, stateMachineMonitor, interceptorsCopy,
+	transitionConflictPolicy, stateDoActionPolicy, stateDoActionPolicyTimeout, regionExecutionPolicy);
 	}
 
 	/**

@@ -29,9 +29,7 @@ import org.springframework.statemachine.monitor.StateMachineMonitor;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultMonitoringConfigurer <S, E>
-		extends AnnotationConfigurerAdapter<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>
-		implements MonitoringConfigurer<S, E> {
+public class DefaultMonitoringConfigurer<S, E>extends AnnotationConfigurerAdapter<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>implements MonitoringConfigurer<S, E> {
 
 	private StateMachineMonitor<S, E> monitor;
 

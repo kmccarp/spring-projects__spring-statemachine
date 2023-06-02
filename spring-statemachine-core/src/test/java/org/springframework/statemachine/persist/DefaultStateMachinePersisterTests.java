@@ -102,12 +102,12 @@ public class DefaultStateMachinePersisterTests {
 		assertThat(context.getId()).isNull();
 		assertThat(context.getChilds()).hasSize(2);
 		assertThat(context.getChilds().get(0).getState()).satisfiesAnyOf(
-			state -> assertThat(state).isEqualTo("S111"),
-			state -> assertThat(state).isEqualTo("S21")
+	state -> assertThat(state).isEqualTo("S111"),
+	state -> assertThat(state).isEqualTo("S21")
 		);
 		assertThat(context.getChilds().get(1).getState()).satisfiesAnyOf(
-			state -> assertThat(state).isEqualTo("S111"),
-			state -> assertThat(state).isEqualTo("S21")
+	state -> assertThat(state).isEqualTo("S111"),
+	state -> assertThat(state).isEqualTo("S21")
 		);
 
 		doSendEventAndConsumeAll(machine, "E1");
@@ -115,12 +115,12 @@ public class DefaultStateMachinePersisterTests {
 		context = persist.contexts.get("xxx");
 		assertThat(context.getChilds()).hasSize(2);
 		assertThat(context.getChilds().get(0).getState()).satisfiesAnyOf(
-			state -> assertThat(state).isEqualTo("S12"),
-			state -> assertThat(state).isEqualTo("S21")
+	state -> assertThat(state).isEqualTo("S12"),
+	state -> assertThat(state).isEqualTo("S21")
 		);
 		assertThat(context.getChilds().get(1).getState()).satisfiesAnyOf(
-			state -> assertThat(state).isEqualTo("S12"),
-			state -> assertThat(state).isEqualTo("S21")
+	state -> assertThat(state).isEqualTo("S12"),
+	state -> assertThat(state).isEqualTo("S21")
 		);
 
 		doSendEventAndConsumeAll(machine, "E2");
@@ -128,12 +128,12 @@ public class DefaultStateMachinePersisterTests {
 		context = persist.contexts.get("xxx");
 		assertThat(context.getChilds()).hasSize(2);
 		assertThat(context.getChilds().get(0).getState()).satisfiesAnyOf(
-			state -> assertThat(state).isEqualTo("S12"),
-			state -> assertThat(state).isEqualTo("S221")
+	state -> assertThat(state).isEqualTo("S12"),
+	state -> assertThat(state).isEqualTo("S221")
 		);
 		assertThat(context.getChilds().get(1).getState()).satisfiesAnyOf(
-			state -> assertThat(state).isEqualTo("S12"),
-			state -> assertThat(state).isEqualTo("S221")
+	state -> assertThat(state).isEqualTo("S12"),
+	state -> assertThat(state).isEqualTo("S221")
 		);
 
 		doSendEventAndConsumeAll(machine, "E3");
@@ -141,12 +141,12 @@ public class DefaultStateMachinePersisterTests {
 		context = persist.contexts.get("xxx");
 		assertThat(context.getChilds()).hasSize(2);
 		assertThat(context.getChilds().get(0).getState()).satisfiesAnyOf(
-			state -> assertThat(state).isEqualTo("S12"),
-			state -> assertThat(state).isEqualTo("S222")
+	state -> assertThat(state).isEqualTo("S12"),
+	state -> assertThat(state).isEqualTo("S222")
 		);
 		assertThat(context.getChilds().get(1).getState()).satisfiesAnyOf(
-			state -> assertThat(state).isEqualTo("S12"),
-			state -> assertThat(state).isEqualTo("S222")
+	state -> assertThat(state).isEqualTo("S12"),
+	state -> assertThat(state).isEqualTo("S222")
 		);
 	}
 
@@ -200,91 +200,91 @@ public class DefaultStateMachinePersisterTests {
 	private StateMachine<String, String> buildSimpleFlat() throws Exception {
 		Builder<String, String> builder = StateMachineBuilder.builder();
 		builder.configureStates()
-			.withStates()
-				.initial("SI")
-				.state("S1");
+	.withStates()
+	.initial("SI")
+	.state("S1");
 		builder.configureTransitions()
-			.withExternal()
-				.source("SI")
-				.target("S1")
-				.event("E1");
+	.withExternal()
+	.source("SI")
+	.target("S1")
+	.event("E1");
 		return builder.build();
 	}
 
 	private StateMachine<String, String> buildDeepNested() throws Exception {
 		Builder<String, String> builder = StateMachineBuilder.builder();
 		builder.configureStates()
-			.withStates()
-				.initial("SI")
-				.state("S1")
-				.and()
-					.withStates()
-						.parent("S1")
-						.initial("S1I")
-						.state("S11")
-						.and()
-							.withStates()
-								.parent("S11")
-								.initial("S11I")
-								.state("S111");
+	.withStates()
+	.initial("SI")
+	.state("S1")
+	.and()
+	.withStates()
+	.parent("S1")
+	.initial("S1I")
+	.state("S11")
+	.and()
+	.withStates()
+	.parent("S11")
+	.initial("S11I")
+	.state("S111");
 		builder.configureTransitions()
-			.withExternal()
-				.source("SI")
-				.target("S1")
-				.event("E1")
-				.and()
-			.withExternal()
-				.source("S1I")
-				.target("S11")
-				.event("E2")
-				.and()
-			.withExternal()
-				.source("S11I")
-				.target("S111")
-				.event("E3");
+	.withExternal()
+	.source("SI")
+	.target("S1")
+	.event("E1")
+	.and()
+	.withExternal()
+	.source("S1I")
+	.target("S11")
+	.event("E2")
+	.and()
+	.withExternal()
+	.source("S11I")
+	.target("S111")
+	.event("E3");
 		return builder.build();
 	}
 
 	private StateMachine<String, String> buildDeepNestedRegions() throws Exception {
 		Builder<String, String> builder = StateMachineBuilder.builder();
 		builder.configureStates()
-			.withStates()
-				.initial("S11")
-				.state("S12")
-				.state("S13")
-				.and()
-					.withStates()
-						.parent("S11")
-						.initial("S111")
-						.state("S111")
-						.state("S112")
-						.and()
-			.withStates()
-				.initial("S21")
-				.state("S22")
-				.state("S23")
-				.and()
-					.withStates()
-						.parent("S22")
-						.initial("S221")
-						.state("S221")
-						.state("S222");
+	.withStates()
+	.initial("S11")
+	.state("S12")
+	.state("S13")
+	.and()
+	.withStates()
+	.parent("S11")
+	.initial("S111")
+	.state("S111")
+	.state("S112")
+	.and()
+	.withStates()
+	.initial("S21")
+	.state("S22")
+	.state("S23")
+	.and()
+	.withStates()
+	.parent("S22")
+	.initial("S221")
+	.state("S221")
+	.state("S222");
 
 		builder.configureTransitions()
-			.withExternal()
-				.source("S11")
-				.target("S12")
-				.event("E1")
-				.and()
-			.withExternal()
-				.source("S21")
-				.target("S22")
-				.event("E2")
-				.and()
-			.withExternal()
-				.source("S221")
-				.target("S222")
-				.event("E3");
+	.withExternal()
+	.source("S11")
+	.target("S12")
+	.event("E1")
+	.and()
+	.withExternal()
+	.source("S21")
+	.target("S22")
+	.event("E2")
+	.and()
+	.withExternal()
+	.source("S221")
+	.target("S222")
+	.event("E3");
 
 		return builder.build();
 	}
@@ -292,71 +292,71 @@ public class DefaultStateMachinePersisterTests {
 	private StateMachine<String, String> buildDeepNestedRegionsAndFork() throws Exception {
 		Builder<String, String> builder = StateMachineBuilder.builder();
 		builder.configureStates()
-		   	.withStates()
-			   	.initial("S1")
-			   	.and()
-				   	.withStates()
-					   	.parent("S1")
-					   	.initial("S2")
-					   	.state("S22")
-					   	.fork("F1")
-					   	.state("S3")
-						.join("J1")
-						.end("END")
-					   	.and()
-						   	.withStates()
-							   	.parent("S3")
-									.initial("S4")
-									.state("S41")
-									.end("S4E")
-									.and()
-							.withStates()
-								.parent("S3")
-									.initial("S5")
-									.state("S51")
-									.end("S5E");
+	.withStates()
+	.initial("S1")
+	.and()
+	.withStates()
+	.parent("S1")
+	.initial("S2")
+	.state("S22")
+	.fork("F1")
+	.state("S3")
+	.join("J1")
+	.end("END")
+	.and()
+	.withStates()
+	.parent("S3")
+	.initial("S4")
+	.state("S41")
+	.end("S4E")
+	.and()
+	.withStates()
+	.parent("S3")
+	.initial("S5")
+	.state("S51")
+	.end("S5E");
 
 		builder.configureTransitions()
-		   	.withExternal()
-			   	.source("S2")
-			   	.target("S22")
-			   	.event("E1")
-			   	.and()
-		   	.withExternal()
-			   	.source("S22")
-			   	.target("F1")
-		   	.and()
-		   	.withFork()
-			   	.source("F1")
-			   	.target("S3")
-			   	.and()
-		   	.withExternal()
-				.source("S4")
-				.target("S41")
-				.event("E2")
-				.and()
-		   	.withExternal()
-				.source("S41")
-				.target("S4E")
-				.event("E3")
-				.and()
-		   	.withExternal()
-				.source("S5")
-				.target("S51")
-				.event("E4")
-				.and()
-		   	.withExternal()
-				.source("S51")
-				.target("S5E")
-				.event("E5")
-				.and()
-			.withJoin()
-				.source("S3")
-				.target("J1")
-				.and()
-			.withExternal()
-				.source("J1")
-				.target("END");
+	.withExternal()
+	.source("S2")
+	.target("S22")
+	.event("E1")
+	.and()
+	.withExternal()
+	.source("S22")
+	.target("F1")
+	.and()
+	.withFork()
+	.source("F1")
+	.target("S3")
+	.and()
+	.withExternal()
+	.source("S4")
+	.target("S41")
+	.event("E2")
+	.and()
+	.withExternal()
+	.source("S41")
+	.target("S4E")
+	.event("E3")
+	.and()
+	.withExternal()
+	.source("S5")
+	.target("S51")
+	.event("E4")
+	.and()
+	.withExternal()
+	.source("S51")
+	.target("S5E")
+	.event("E5")
+	.and()
+	.withJoin()
+	.source("S3")
+	.target("J1")
+	.and()
+	.withExternal()
+	.source("J1")
+	.target("END");
 
 		return builder.build();
 	}

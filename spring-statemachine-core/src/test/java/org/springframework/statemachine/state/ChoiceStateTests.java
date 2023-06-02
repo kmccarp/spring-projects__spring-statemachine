@@ -53,8 +53,8 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 	public void testFirst() {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).setHeader("choice", "s30").build());
@@ -67,8 +67,8 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 	public void testThen1() {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).setHeader("choice", "s31").build());
@@ -81,8 +81,8 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 	public void testThen2() {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).setHeader("choice", "s32").build());
@@ -95,8 +95,8 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 	public void testLast() {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).build());
@@ -109,8 +109,8 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 	public void testOnlyLast() {
 		context.register(Config2.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).build());
@@ -123,8 +123,8 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 	public void testSubsequentChoiceStates() {
 		context.register(Config3.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).setHeader("choice", "s2").build());
@@ -137,8 +137,8 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 	public void testBackToItself() {
 		context.register(Config4.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		TestStateEntryExitListener listener = new TestStateEntryExitListener();
 		machine.addStateListener(listener);
@@ -161,8 +161,8 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 	public void testTransitionToChoiceActionCalled1() throws InterruptedException {
 		context.register(Config5.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		LatchAction sIToChoice = context.getBean("sIToChoice", LatchAction.class);
 		LatchAction choiceToS30 = context.getBean("choiceToS30", LatchAction.class);
 		LatchAction choiceToS33 = context.getBean("choiceToS33", LatchAction.class);
@@ -180,8 +180,8 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 	public void testTransitionToChoiceActionCalled2() throws InterruptedException {
 		context.register(Config5.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		LatchAction sIToChoice = context.getBean("sIToChoice", LatchAction.class);
 		LatchAction choiceToS30 = context.getBean("choiceToS30", LatchAction.class);
 		LatchAction choiceToS33 = context.getBean("choiceToS33", LatchAction.class);
@@ -201,27 +201,27 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class))
-					.choice(TestStates.S3)
-					.end(TestStates.SF);
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class))
+		.choice(TestStates.S3)
+		.end(TestStates.SF);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S3)
-					.event(TestEvents.E1)
-					.and()
-				.withChoice()
-					.source(TestStates.S3)
-					.first(TestStates.S30, s30Guard())
-					.then(TestStates.S31, s31Guard())
-					.then(TestStates.S32, s32Guard())
-					.last(TestStates.S33);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S3)
+		.event(TestEvents.E1)
+		.and()
+		.withChoice()
+		.source(TestStates.S3)
+		.first(TestStates.S30, s30Guard())
+		.then(TestStates.S31, s31Guard())
+		.then(TestStates.S32, s32Guard())
+		.last(TestStates.S33);
 		}
 
 		@Bean
@@ -248,24 +248,24 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class))
-					.choice(TestStates.S3)
-					.end(TestStates.SF);
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class))
+		.choice(TestStates.S3)
+		.end(TestStates.SF);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S3)
-					.event(TestEvents.E1)
-					.and()
-				.withChoice()
-					.source(TestStates.S3)
-					.last(TestStates.S33);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S3)
+		.event(TestEvents.E1)
+		.and()
+		.withChoice()
+		.source(TestStates.S3)
+		.last(TestStates.S33);
 		}
 
 		@Bean
@@ -292,31 +292,31 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class))
-					.choice(TestStates.S3)
-					.choice(TestStates.S2)
-					.end(TestStates.SF);
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class))
+		.choice(TestStates.S3)
+		.choice(TestStates.S2)
+		.end(TestStates.SF);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S3)
-					.event(TestEvents.E1)
-					.and()
-				.withChoice()
-					.source(TestStates.S3)
-					.first(TestStates.S2, s2Guard())
-					.last(TestStates.S33)
-					.and()
-				.withChoice()
-					.source(TestStates.S2)
-					.first(TestStates.S20, s20Guard())
-					.last(TestStates.S21);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S3)
+		.event(TestEvents.E1)
+		.and()
+		.withChoice()
+		.source(TestStates.S3)
+		.first(TestStates.S2, s2Guard())
+		.last(TestStates.S33)
+		.and()
+		.withChoice()
+		.source(TestStates.S2)
+		.first(TestStates.S20, s20Guard())
+		.last(TestStates.S21);
 		}
 
 		@Bean
@@ -337,28 +337,28 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class))
-					.choice(TestStates.S2);
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class))
+		.choice(TestStates.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S4)
-					.event(TestEvents.E2)
-					.and()
-				.withChoice()
-					.source(TestStates.S2)
-					.last(TestStates.SI);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S4)
+		.event(TestEvents.E2)
+		.and()
+		.withChoice()
+		.source(TestStates.S2)
+		.last(TestStates.SI);
 		}
 	}
 
@@ -369,28 +369,28 @@ public class ChoiceStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class))
-					.choice(TestStates.S3)
-					.end(TestStates.SF);
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class))
+		.choice(TestStates.S3)
+		.end(TestStates.SF);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S3)
-					.action(sIToChoice())
-					.event(TestEvents.E1)
-					.and()
-				.withChoice()
-					.source(TestStates.S3)
-					.first(TestStates.S30, s30Guard(), choiceToS30())
-					.then(TestStates.S31, s31Guard())
-					.then(TestStates.S32, s32Guard())
-					.last(TestStates.S33, choiceToS33(), choiceToS33Error());
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S3)
+		.action(sIToChoice())
+		.event(TestEvents.E1)
+		.and()
+		.withChoice()
+		.source(TestStates.S3)
+		.first(TestStates.S30, s30Guard(), choiceToS30())
+		.then(TestStates.S31, s31Guard())
+		.then(TestStates.S32, s32Guard())
+		.last(TestStates.S33, choiceToS33(), choiceToS33Error());
 		}
 
 		@Bean

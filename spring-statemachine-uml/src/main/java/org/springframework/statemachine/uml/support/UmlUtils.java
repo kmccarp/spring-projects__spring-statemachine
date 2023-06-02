@@ -71,7 +71,7 @@ public abstract class UmlUtils {
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
 		resourceSet.createResource(modelUri);
 		Resource resource = resourceSet.getResource(modelUri, true);
-		Model m = (Model) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.MODEL);
+		Model m = (Model)EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.MODEL);
 		return m;
 	}
 
@@ -127,7 +127,7 @@ public abstract class UmlUtils {
 	 * @return the collection of actions
 	 */
 	public static Collection<Action<String, String>> resolveTransitionActions(Transition transition,
-			StateMachineComponentResolver<String, String> resolver) {
+StateMachineComponentResolver<String, String> resolver) {
 		ArrayList<Action<String, String>> actions = new ArrayList<Action<String, String>>();
 		Action<String, String> action = resolveTransitionAction(transition, resolver);
 		if (action != null) {
@@ -144,7 +144,7 @@ public abstract class UmlUtils {
 	 * @return the action
 	 */
 	public static Action<String, String> resolveTransitionAction(Transition transition,
-			StateMachineComponentResolver<String, String> resolver) {
+StateMachineComponentResolver<String, String> resolver) {
 		Action<String, String> action = null;
 		if (transition.getEffect() instanceof OpaqueBehavior) {
 			String beanId = UmlUtils.resolveBodyByLanguage(UmlModelParser.LANGUAGE_BEAN, (OpaqueBehavior)transition.getEffect());
@@ -157,7 +157,7 @@ public abstract class UmlUtils {
 				String expression = UmlUtils.resolveBodyByLanguage(UmlModelParser.LANGUAGE_SPEL, (OpaqueBehavior)transition.getEffect());
 				if (StringUtils.hasText(expression)) {
 					SpelExpressionParser parser = new SpelExpressionParser(
-							new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
+				new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
 					action = new SpelExpressionAction<String, String>(parser.parseExpression(expression));
 				}
 			}
@@ -173,7 +173,7 @@ public abstract class UmlUtils {
 	 * @return the collection of actions
 	 */
 	public static Collection<Function<StateContext<String, String>, Mono<Void>>> resolveTransitionActionFunctions(
-			Transition transition, StateMachineComponentResolver<String, String> resolver) {
+Transition transition, StateMachineComponentResolver<String, String> resolver) {
 		ArrayList<Function<StateContext<String, String>, Mono<Void>>> actions = new ArrayList<>();
 		Function<StateContext<String, String>, Mono<Void>> action = resolveTransitionActionFunction(transition, resolver);
 		if (action != null) {
@@ -190,7 +190,7 @@ public abstract class UmlUtils {
 	 * @return the action
 	 */
 	public static Function<StateContext<String, String>, Mono<Void>> resolveTransitionActionFunction(Transition transition,
-			StateMachineComponentResolver<String, String> resolver) {
+StateMachineComponentResolver<String, String> resolver) {
 		Action<String, String> action = null;
 		if (transition.getEffect() instanceof OpaqueBehavior) {
 			String beanId = UmlUtils.resolveBodyByLanguage(UmlModelParser.LANGUAGE_BEAN, (OpaqueBehavior)transition.getEffect());
@@ -203,7 +203,7 @@ public abstract class UmlUtils {
 				String expression = UmlUtils.resolveBodyByLanguage(UmlModelParser.LANGUAGE_SPEL, (OpaqueBehavior)transition.getEffect());
 				if (StringUtils.hasText(expression)) {
 					SpelExpressionParser parser = new SpelExpressionParser(
-							new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
+				new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
 					action = new SpelExpressionAction<String, String>(parser.parseExpression(expression));
 				}
 			}

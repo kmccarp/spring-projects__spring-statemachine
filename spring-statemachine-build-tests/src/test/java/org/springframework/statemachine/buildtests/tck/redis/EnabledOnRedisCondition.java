@@ -27,7 +27,7 @@ public class EnabledOnRedisCondition implements ExecutionCondition {
 
 	static final ConditionEvaluationResult ENABLED_ON_REDIS = enabled("Redis found");
 
-	static final ConditionEvaluationResult DISABLED_ON_REDIS =	disabled("Redis not found");
+	static final ConditionEvaluationResult DISABLED_ON_REDIS = disabled("Redis not found");
 
 	@Override
 	public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext context) {

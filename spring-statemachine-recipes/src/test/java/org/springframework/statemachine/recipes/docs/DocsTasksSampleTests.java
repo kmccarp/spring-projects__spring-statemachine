@@ -24,10 +24,10 @@ public class DocsTasksSampleTests {
 	public void sample1() {
 // tag::snippetB[]
 		TasksHandler handler = TasksHandler.builder()
-				.task("1", sleepRunnable())
-				.task("2", sleepRunnable())
-				.task("3", sleepRunnable())
-				.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", sleepRunnable())
+	.build();
 
 		handler.runTasks();
 // end::snippetB[]
@@ -39,11 +39,11 @@ public class DocsTasksSampleTests {
 		MyTasksListener listener2 = new MyTasksListener();
 
 		TasksHandler handler = TasksHandler.builder()
-				.task("1", sleepRunnable())
-				.task("2", sleepRunnable())
-				.task("3", sleepRunnable())
-				.listener(listener1)
-				.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", sleepRunnable())
+	.listener(listener1)
+	.build();
 
 		handler.addTasksListener(listener2);
 		handler.removeTasksListener(listener2);
@@ -55,16 +55,16 @@ public class DocsTasksSampleTests {
 	public void sample3() {
 // tag::snippetD[]
 		TasksHandler handler = TasksHandler.builder()
-				.task("1", sleepRunnable())
-				.task("1", "12", sleepRunnable())
-				.task("1", "13", sleepRunnable())
-				.task("2", sleepRunnable())
-				.task("2", "22", sleepRunnable())
-				.task("2", "23", sleepRunnable())
-				.task("3", sleepRunnable())
-				.task("3", "32", sleepRunnable())
-				.task("3", "33", sleepRunnable())
-				.build();
+	.task("1", sleepRunnable())
+	.task("1", "12", sleepRunnable())
+	.task("1", "13", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("2", "22", sleepRunnable())
+	.task("2", "23", sleepRunnable())
+	.task("3", sleepRunnable())
+	.task("3", "32", sleepRunnable())
+	.task("3", "33", sleepRunnable())
+	.build();
 
 		handler.runTasks();
 // end::snippetD[]
@@ -73,14 +73,14 @@ public class DocsTasksSampleTests {
 	public void sample4() {
 // tag::snippetE[]
 		TasksHandler handler = TasksHandler.builder()
-				.task("1", sleepRunnable())
-				.task("2", sleepRunnable())
-				.task("3", sleepRunnable())
-				.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", sleepRunnable())
+	.build();
 
-				handler.runTasks();
-				handler.fixCurrentProblems();
-				handler.continueFromError();
+		handler.runTasks();
+		handler.fixCurrentProblems();
+		handler.continueFromError();
 // end::snippetE[]
 	}
 
@@ -97,6 +97,7 @@ public class DocsTasksSampleTests {
 			}
 		};
 	}
+
 // end::snippetAA[]
 
 // tag::snippetAB[]

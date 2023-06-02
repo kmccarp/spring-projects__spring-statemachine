@@ -81,7 +81,7 @@ public interface StateMachineEventResult<S, E> {
 	 * @return the state machine event result
 	 */
 	public static <S, E> StateMachineEventResult<S, E> from(Region<S, E> region, Message<E> message,
-			ResultType resultType) {
+ResultType resultType) {
 		return new DefaultStateMachineEventResult<>(region, message, resultType, null);
 	}
 
@@ -99,7 +99,7 @@ public interface StateMachineEventResult<S, E> {
 	 * @return the state machine event result
 	 */
 	public static <S, E> StateMachineEventResult<S, E> from(Region<S, E> region, Message<E> message,
-			ResultType resultType, Mono<Void> complete) {
+ResultType resultType, Mono<Void> complete) {
 		return new DefaultStateMachineEventResult<>(region, message, resultType, complete);
 	}
 
@@ -111,7 +111,7 @@ public interface StateMachineEventResult<S, E> {
 		private Mono<Void> complete;
 
 		DefaultStateMachineEventResult(Region<S, E> region, Message<E> message, ResultType resultType,
-				Mono<Void> complete) {
+	Mono<Void> complete) {
 			this.region = region;
 			this.message = message;
 			this.resultType = resultType;
@@ -141,7 +141,7 @@ public interface StateMachineEventResult<S, E> {
 		@Override
 		public String toString() {
 			return "DefaultStateMachineEventResult [region=" + region + ", message=" + message + ", resultType="
-					+ resultType + "]";
+		+ resultType + "]";
 		}
 	}
 }

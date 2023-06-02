@@ -27,5 +27,5 @@ import org.springframework.data.repository.Repository;
  * @param <T> the transition entity type
  */
 @NoRepositoryBean
-public interface ActionRepository <T extends RepositoryAction> extends CrudRepository<T, Long> {
+public interface ActionRepository<T extends RepositoryAction> extends CrudRepository<T, Long> {
 }

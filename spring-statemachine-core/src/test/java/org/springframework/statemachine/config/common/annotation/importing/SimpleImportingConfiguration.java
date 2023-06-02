@@ -30,20 +30,19 @@ import org.springframework.statemachine.config.common.annotation.AbstractImporti
 import org.springframework.statemachine.config.common.annotation.AnnotationConfigurer;
 
 @Configuration
-public class SimpleImportingConfiguration extends
-		AbstractImportingAnnotationConfiguration<ImportingTestConfigBuilder, ImportingTestConfig> {
+public class SimpleImportingConfiguration extendsAbstractImportingAnnotationConfiguration<ImportingTestConfigBuilder, ImportingTestConfig> {
 
 	private final ImportingTestConfigBuilder builder = new ImportingTestConfigBuilder();
 
 	@Override
 	protected BeanDefinition buildBeanDefinition(AnnotationMetadata importingClassMetadata,
-			Class<? extends Annotation> namedAnnotation) throws Exception {
+Class<? extends Annotation> namedAnnotation) throws Exception {
 		List<Class<? extends Annotation>> annotationTypes = getAnnotations();
 		String[] names = null;
 		if (annotationTypes != null) {
 			for (Class<?> annotationType : annotationTypes) {
 				AnnotationAttributes attributes = AnnotationAttributes.fromMap(importingClassMetadata.getAnnotationAttributes(
-						annotationType.getName(), false));
+			annotationType.getName(), false));
 				if (attributes.containsKey("name")) {
 					names = attributes.getStringArray("name");
 					break;
@@ -52,7 +51,7 @@ public class SimpleImportingConfiguration extends
 		}
 
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
-				.rootBeanDefinition(SimpleUUIDDelegatingFactoryBean.class);
+	.rootBeanDefinition(SimpleUUIDDelegatingFactoryBean.class);
 		beanDefinitionBuilder.addConstructorArgValue(builder);
 		beanDefinitionBuilder.addConstructorArgValue(UUID.class);
 		beanDefinitionBuilder.addConstructorArgValue(names);
@@ -68,7 +67,7 @@ public class SimpleImportingConfiguration extends
 	}
 
 	private static class SimpleUUIDDelegatingFactoryBean extends
-			BeanDelegatingFactoryBean<UUID, ImportingTestConfigBuilder, ImportingTestConfig> {
+BeanDelegatingFactoryBean<UUID, ImportingTestConfigBuilder, ImportingTestConfig> {
 
 		private final String[] beanNames;
 

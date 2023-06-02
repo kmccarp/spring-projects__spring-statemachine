@@ -50,8 +50,8 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 	public void testFirst() {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).setHeader("junction", "s30").build());
@@ -64,8 +64,8 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 	public void testThen1() {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).setHeader("junction", "s31").build());
@@ -78,8 +78,8 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 	public void testThen2() {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).setHeader("junction", "s32").build());
@@ -92,8 +92,8 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 	public void testLast() {
 		context.register(Config1.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).build());
@@ -106,8 +106,8 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 	public void testOnlyLast() {
 		context.register(Config2.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).build());
@@ -120,8 +120,8 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 	public void testSubsequentJunctionStates() {
 		context.register(Config3.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		machine.start();
 		machine.sendEvent(MessageBuilder.withPayload(TestEvents.E1).setHeader("junction", "s2").build());
@@ -134,8 +134,8 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 	public void testTransitionToJunctionActionCalled1() throws InterruptedException {
 		context.register(Config4.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		LatchAction sIToJunction = context.getBean("sIToJunction", LatchAction.class);
 		LatchAction junctionToS30 = context.getBean("junctionToS30", LatchAction.class);
 		LatchAction junctionToS33 = context.getBean("junctionToS33", LatchAction.class);
@@ -153,8 +153,8 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 	public void testTransitionToJunctionActionCalled2() throws InterruptedException {
 		context.register(Config4.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		LatchAction sIToJunction = context.getBean("sIToJunction", LatchAction.class);
 		LatchAction junctionToS30 = context.getBean("junctionToS30", LatchAction.class);
 		LatchAction junctionToS33 = context.getBean("junctionToS33", LatchAction.class);
@@ -174,27 +174,27 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class))
-					.junction(TestStates.S3)
-					.end(TestStates.SF);
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class))
+		.junction(TestStates.S3)
+		.end(TestStates.SF);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S3)
-					.event(TestEvents.E1)
-					.and()
-				.withJunction()
-					.source(TestStates.S3)
-					.first(TestStates.S30, s30Guard())
-					.then(TestStates.S31, s31Guard())
-					.then(TestStates.S32, s32Guard())
-					.last(TestStates.S33);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S3)
+		.event(TestEvents.E1)
+		.and()
+		.withJunction()
+		.source(TestStates.S3)
+		.first(TestStates.S30, s30Guard())
+		.then(TestStates.S31, s31Guard())
+		.then(TestStates.S32, s32Guard())
+		.last(TestStates.S33);
 		}
 
 		@Bean
@@ -221,24 +221,24 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class))
-					.junction(TestStates.S3)
-					.end(TestStates.SF);
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class))
+		.junction(TestStates.S3)
+		.end(TestStates.SF);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S3)
-					.event(TestEvents.E1)
-					.and()
-				.withJunction()
-					.source(TestStates.S3)
-					.last(TestStates.S33);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S3)
+		.event(TestEvents.E1)
+		.and()
+		.withJunction()
+		.source(TestStates.S3)
+		.last(TestStates.S33);
 		}
 
 		@Bean
@@ -265,31 +265,31 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class))
-					.junction(TestStates.S3)
-					.junction(TestStates.S2)
-					.end(TestStates.SF);
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class))
+		.junction(TestStates.S3)
+		.junction(TestStates.S2)
+		.end(TestStates.SF);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S3)
-					.event(TestEvents.E1)
-					.and()
-				.withJunction()
-					.source(TestStates.S3)
-					.first(TestStates.S2, s2Guard())
-					.last(TestStates.S33)
-					.and()
-				.withJunction()
-					.source(TestStates.S2)
-					.first(TestStates.S20, s20Guard())
-					.last(TestStates.S21);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S3)
+		.event(TestEvents.E1)
+		.and()
+		.withJunction()
+		.source(TestStates.S3)
+		.first(TestStates.S2, s2Guard())
+		.last(TestStates.S33)
+		.and()
+		.withJunction()
+		.source(TestStates.S2)
+		.first(TestStates.S20, s20Guard())
+		.last(TestStates.S21);
 		}
 
 		@Bean
@@ -310,28 +310,28 @@ public class JunctionStateTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.SI)
-					.states(EnumSet.allOf(TestStates.class))
-					.junction(TestStates.S3)
-					.end(TestStates.SF);
+		.withStates()
+		.initial(TestStates.SI)
+		.states(EnumSet.allOf(TestStates.class))
+		.junction(TestStates.S3)
+		.end(TestStates.SF);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S3)
-					.action(sIToJunction())
-					.event(TestEvents.E1)
-					.and()
-				.withJunction()
-					.source(TestStates.S3)
-					.first(TestStates.S30, s30Guard(), junctionToS30())
-					.then(TestStates.S31, s31Guard())
-					.then(TestStates.S32, s32Guard())
-					.last(TestStates.S33, junctionToS33(), junctionToS33Error());
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S3)
+		.action(sIToJunction())
+		.event(TestEvents.E1)
+		.and()
+		.withJunction()
+		.source(TestStates.S3)
+		.first(TestStates.S30, s30Guard(), junctionToS30())
+		.then(TestStates.S31, s31Guard())
+		.then(TestStates.S32, s32Guard())
+		.last(TestStates.S33, junctionToS33(), junctionToS33Error());
 		}
 
 		@Bean

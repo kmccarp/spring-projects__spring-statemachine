@@ -1092,9 +1092,9 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		assertThat(stateDatas.size()).isEqualTo(4);
 
 		StateData<String, String> choiceStateData = stateDatas.stream()
-				.filter(sd -> "CHOICE".equals(sd.getState()))
-				.findFirst()
-				.get();
+	.filter(sd -> "CHOICE".equals(sd.getState()))
+	.findFirst()
+	.get();
 		assertThat(choiceStateData).isNotNull();
 		assertThat(choiceStateData.getParent()).isEqualTo("S1");
 	}
@@ -1112,9 +1112,9 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		assertThat(stateDatas.size()).isEqualTo(4);
 
 		StateData<String, String> choiceStateData = stateDatas.stream()
-				.filter(sd -> "CHOICE".equals(sd.getState()))
-				.findFirst()
-				.get();
+	.filter(sd -> "CHOICE".equals(sd.getState()))
+	.findFirst()
+	.get();
 		assertThat(choiceStateData).isNotNull();
 		assertThat(choiceStateData.getParent()).isEqualTo("S1");
 	}
@@ -1151,8 +1151,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1174,8 +1174,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1192,8 +1192,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1210,8 +1210,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1228,8 +1228,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1256,8 +1256,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1284,8 +1284,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1302,8 +1302,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1320,8 +1320,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1338,8 +1338,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1366,8 +1366,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1398,8 +1398,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1415,8 +1415,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1442,8 +1442,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1464,8 +1464,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1486,8 +1486,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1503,8 +1503,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1520,8 +1520,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1537,8 +1537,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1554,8 +1554,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1572,8 +1572,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1589,8 +1589,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1616,8 +1616,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1633,8 +1633,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1651,8 +1651,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1719,8 +1719,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1788,8 +1788,8 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -1806,20 +1806,21 @@ public class UmlStateMachineModelFactoryTests extends AbstractUmlTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
 		public StateMachineModelFactory<String, String> modelFactory() {
 			Resource mainModel = new ClassPathResource("org/springframework/statemachine/uml/import-main/import-main.uml");
 			Resource subModel = new ClassPathResource("org/springframework/statemachine/uml/import-sub/import-sub.uml");
-			return new UmlStateMachineModelFactory(mainModel, new Resource[] { subModel });
+			return new UmlStateMachineModelFactory(mainModel, new Resource[]{subModel});
 		}
 	}
 
 	public static class LatchAction implements Action<String, String> {
 		CountDownLatch latch = new CountDownLatch(1);
+
 		@Override
 		public void execute(StateContext<String, String> context) {
 			latch.countDown();

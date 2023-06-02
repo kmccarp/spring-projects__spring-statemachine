@@ -71,16 +71,16 @@ public class StateMachinePersistTests2 extends AbstractStateMachineTests {
 		context.refresh();
 		StateMachinePersist<String, String, String> stateMachinePersist = new InMemoryStateMachinePersist();
 		StateMachinePersister<String, String, String> persister = new DefaultStateMachinePersister<String, String, String>(
-				stateMachinePersist);
+	stateMachinePersist);
 
 		StateMachineFactory<String, String> factory = resolveFactory("LOG_RECORD", context);
-		StateMachine<String,String> m = factory.getStateMachine();
+		StateMachine<String, String> m = factory.getStateMachine();
 
 		assertThat(m.getState().getId()).isEqualTo(RECORD_AWAITING_CONTENT);
 
 		m = loadStateMachine(factory, persister, "xxx");
 		doSendEventAndConsumeAll(m, UPLOAD_RECORD);
-		assertThat(m.getState().getIds()).containsOnly(new String[] { RECORD_LOGGING_ACTIVE, RECORD_AWAITING_LOGGING });
+		assertThat(m.getState().getIds()).containsOnly(new String[]{RECORD_LOGGING_ACTIVE, RECORD_AWAITING_LOGGING});
 		persister.persist(m, "xxx");
 
 		m = loadStateMachine(factory, persister, "xxx");
@@ -141,7 +141,7 @@ public class StateMachinePersistTests2 extends AbstractStateMachineTests {
 	}
 
 	private static StateMachine<String, String> loadStateMachine(StateMachineFactory<String, String> factory,
-			StateMachinePersister<String, String, String> persister, final String id) throws Exception {
+StateMachinePersister<String, String, String> persister, final String id) throws Exception {
 		StateMachine<String, String> stateMachine = factory.getStateMachine();
 		persister.restore(stateMachine, id);
 		return stateMachine;
@@ -149,139 +149,139 @@ public class StateMachinePersistTests2 extends AbstractStateMachineTests {
 
 	@Configuration
 	@EnableStateMachineFactory(name = "LOG_RECORD", contextEvents = false)
-	static class Config1 extends StateMachineConfigurerAdapter<String,String> {
+	static class Config1 extends StateMachineConfigurerAdapter<String, String> {
 
 		@Override
-		public void configure(StateMachineConfigurationConfigurer<String,String> config) throws Exception {
+		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
-		public void configure(StateMachineStateConfigurer<String,String> states) throws Exception {
+		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states.withStates()
-				.initial(RECORD_AWAITING_CONTENT)
-				.state(RECORD_LOGGING_ON_HOLD_WITH_ERROR)
-				.state(RECORD_LOGGING_ACTIVE)
-				.state(RECORD_LOGGING_IN_PROGRESS)
-				.end(RECORD_LOGGED)
-				.end(RECORD_DISCARDED)
-				.and()
-				.withStates()
-					.parent(RECORD_LOGGING_ACTIVE)
-					.initial(RECORD_AWAITING_LOGGING)
-					.state(RECORD_LOGGING_ON_HOLD)
-					.history(HISTORY, StateConfigurer.History.DEEP);
+		.initial(RECORD_AWAITING_CONTENT)
+		.state(RECORD_LOGGING_ON_HOLD_WITH_ERROR)
+		.state(RECORD_LOGGING_ACTIVE)
+		.state(RECORD_LOGGING_IN_PROGRESS)
+		.end(RECORD_LOGGED)
+		.end(RECORD_DISCARDED)
+		.and()
+		.withStates()
+		.parent(RECORD_LOGGING_ACTIVE)
+		.initial(RECORD_AWAITING_LOGGING)
+		.state(RECORD_LOGGING_ON_HOLD)
+		.history(HISTORY, StateConfigurer.History.DEEP);
 		}
 
 		@Override
-		public void configure(StateMachineTransitionConfigurer<String,String> transitions) throws Exception {
+		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				/* ****************************************************************************** */
-				/*                          FROM RECORD_AWAITING_CONTENT                          */
-				/* ****************************************************************************** */
-				.withExternal()
-					.source(RECORD_AWAITING_CONTENT)
-					.event(UPLOAD_RECORD)
-					.target(RECORD_LOGGING_ACTIVE)
-					.and()
-				.withExternal()
-					.source(RECORD_AWAITING_CONTENT)
-					.event(SUSPEND_RECORD_LOGGING_WITH_ERROR)
-					.target(RECORD_LOGGING_ON_HOLD_WITH_ERROR)
-					.and()
-				.withExternal()
-					.source(RECORD_AWAITING_CONTENT)
-					.event(DISCARD_RECORD)
-					.target(RECORD_DISCARDED)
-					.and()
-				/* ****************************************************************************** */
-				/*                          FROM RECORD_LOGGING_ACTIVE                            */
-				/* ****************************************************************************** */
-				.withExternal()
-					.source(RECORD_LOGGING_ACTIVE)
-					.event(SUSPEND_RECORD_LOGGING_WITH_ERROR)
-					.target(RECORD_LOGGING_ON_HOLD_WITH_ERROR)
-					.and()
-				.withExternal()
-					.source(RECORD_LOGGING_ACTIVE)
-					.event(DISCARD_RECORD)
-					.target(RECORD_DISCARDED)
-					.and()
+		/* ****************************************************************************** */
+		/*                          FROM RECORD_AWAITING_CONTENT                          */
+		/* ****************************************************************************** */
+		.withExternal()
+		.source(RECORD_AWAITING_CONTENT)
+		.event(UPLOAD_RECORD)
+		.target(RECORD_LOGGING_ACTIVE)
+		.and()
+		.withExternal()
+		.source(RECORD_AWAITING_CONTENT)
+		.event(SUSPEND_RECORD_LOGGING_WITH_ERROR)
+		.target(RECORD_LOGGING_ON_HOLD_WITH_ERROR)
+		.and()
+		.withExternal()
+		.source(RECORD_AWAITING_CONTENT)
+		.event(DISCARD_RECORD)
+		.target(RECORD_DISCARDED)
+		.and()
+		/* ****************************************************************************** */
+		/*                          FROM RECORD_LOGGING_ACTIVE                            */
+		/* ****************************************************************************** */
+		.withExternal()
+		.source(RECORD_LOGGING_ACTIVE)
+		.event(SUSPEND_RECORD_LOGGING_WITH_ERROR)
+		.target(RECORD_LOGGING_ON_HOLD_WITH_ERROR)
+		.and()
+		.withExternal()
+		.source(RECORD_LOGGING_ACTIVE)
+		.event(DISCARD_RECORD)
+		.target(RECORD_DISCARDED)
+		.and()
 
-				/* ****************************************************************************** */
-				/*                       FROM RECORD_LOGGING_IN_PROGRESS                          */
-				/* ****************************************************************************** */
-				.withExternal()
-					.source(RECORD_LOGGING_IN_PROGRESS)
-					.event(CANCEL_RECORD_LOGGING)
-					.target(HISTORY)
-					.and()
-				.withExternal()
-					.source(RECORD_LOGGING_IN_PROGRESS)
-					.event(DISCARD_RECORD)
-					.target(RECORD_DISCARDED)
-					.and()
-				.withExternal()
-					.source(RECORD_LOGGING_IN_PROGRESS)
-					.event(LOG_RECORD)
-					.target(RECORD_LOGGED)
-					.and()
-
-
-				/* ****************************************************************************** */
-				/*                       FROM RECORD_AWAITING_LOGGING                          */
-				/* ****************************************************************************** */
-				.withExternal()
-					.source(RECORD_AWAITING_LOGGING)
-					.event(SUSPEND_RECORD_LOGGING)
-					.target(RECORD_LOGGING_ON_HOLD)
-					.and()
-				.withExternal()
-					.source(RECORD_AWAITING_LOGGING)
-					.event(START_LOGGING_RECORD)
-					.target(RECORD_LOGGING_IN_PROGRESS)
-					.and()
+		/* ****************************************************************************** */
+		/*                       FROM RECORD_LOGGING_IN_PROGRESS                          */
+		/* ****************************************************************************** */
+		.withExternal()
+		.source(RECORD_LOGGING_IN_PROGRESS)
+		.event(CANCEL_RECORD_LOGGING)
+		.target(HISTORY)
+		.and()
+		.withExternal()
+		.source(RECORD_LOGGING_IN_PROGRESS)
+		.event(DISCARD_RECORD)
+		.target(RECORD_DISCARDED)
+		.and()
+		.withExternal()
+		.source(RECORD_LOGGING_IN_PROGRESS)
+		.event(LOG_RECORD)
+		.target(RECORD_LOGGED)
+		.and()
 
 
-				/* ****************************************************************************** */
-				/*                       FROM RECORD_LOGGING_ON_HOLD                              */
-				/* ****************************************************************************** */
-				.withExternal()
-					.source(RECORD_LOGGING_ON_HOLD)
-					.event(START_LOGGING_RECORD)
-					.target(RECORD_LOGGING_IN_PROGRESS)
-					.and()
-				.withExternal()
-					.source(RECORD_LOGGING_ON_HOLD)
-					.event(RESUME_RECORD_LOGGING)
-					.target(RECORD_AWAITING_LOGGING)
-					.and()
+		/* ****************************************************************************** */
+		/*                       FROM RECORD_AWAITING_LOGGING                          */
+		/* ****************************************************************************** */
+		.withExternal()
+		.source(RECORD_AWAITING_LOGGING)
+		.event(SUSPEND_RECORD_LOGGING)
+		.target(RECORD_LOGGING_ON_HOLD)
+		.and()
+		.withExternal()
+		.source(RECORD_AWAITING_LOGGING)
+		.event(START_LOGGING_RECORD)
+		.target(RECORD_LOGGING_IN_PROGRESS)
+		.and()
 
 
-				/* ****************************************************************************** */
-				/*                       FROM RECORD_LOGGING_ON_HOLD_WITH_ERROR                   */
-				/* ****************************************************************************** */
-				.withExternal()
-					.source(RECORD_LOGGING_ON_HOLD_WITH_ERROR)
-					.event(RESUME_RECORD_LOGGING)
-					.target(HISTORY)
-					.and()
-				.withExternal()
-					.source(RECORD_LOGGING_ON_HOLD_WITH_ERROR)
-					.event(DISCARD_RECORD)
-					.target(RECORD_DISCARDED)
-					.and();
+		/* ****************************************************************************** */
+		/*                       FROM RECORD_LOGGING_ON_HOLD                              */
+		/* ****************************************************************************** */
+		.withExternal()
+		.source(RECORD_LOGGING_ON_HOLD)
+		.event(START_LOGGING_RECORD)
+		.target(RECORD_LOGGING_IN_PROGRESS)
+		.and()
+		.withExternal()
+		.source(RECORD_LOGGING_ON_HOLD)
+		.event(RESUME_RECORD_LOGGING)
+		.target(RECORD_AWAITING_LOGGING)
+		.and()
+
+
+		/* ****************************************************************************** */
+		/*                       FROM RECORD_LOGGING_ON_HOLD_WITH_ERROR                   */
+		/* ****************************************************************************** */
+		.withExternal()
+		.source(RECORD_LOGGING_ON_HOLD_WITH_ERROR)
+		.event(RESUME_RECORD_LOGGING)
+		.target(HISTORY)
+		.and()
+		.withExternal()
+		.source(RECORD_LOGGING_ON_HOLD_WITH_ERROR)
+		.event(DISCARD_RECORD)
+		.target(RECORD_DISCARDED)
+		.and();
 		}
 	}
 
 	static class InMemoryStateMachinePersist implements StateMachinePersist<String, String, String> {
-		private final Map<Object,StateMachineContext<String, String>> contexts = new HashMap<>();
+		private final Map<Object, StateMachineContext<String, String>> contexts = new HashMap<>();
 
 		@Override
 		public void write(StateMachineContext<String, String> stateMachineContext, String contextObj) throws Exception {
-			contexts.put(contextObj,stateMachineContext);
+			contexts.put(contextObj, stateMachineContext);
 		}
 
 		@Override

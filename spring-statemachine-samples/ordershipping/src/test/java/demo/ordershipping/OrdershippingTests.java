@@ -34,7 +34,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { Application.class})
+@SpringBootTest(classes = {Application.class})
 @WebAppConfiguration
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class OrdershippingTests {
@@ -47,43 +47,43 @@ public class OrdershippingTests {
 	@Test
 	public void testHome() throws Exception {
 		mvc.
-			perform(get("/state")).
-			andExpect(status().isOk()).
-			andExpect(content().string(containsString("Machines:")));
+	perform(get("/state")).
+	andExpect(status().isOk()).
+	andExpect(content().string(containsString("Machines:")));
 	}
 
 	@Test
 	public void testCreateOrder() throws Exception {
 		mvc.
-			perform(get("/state").
-					param("action", "order").
-					param("customer", "customer1").
-					param("order", "order1")).
-			andExpect(status().isOk()).
-			andExpect(content().string(containsString("customer1:order1"))).
-			andExpect(content().string(containsString("[WAIT_NEW_ORDER]")));
+	perform(get("/state").
+	param("action", "order").
+	param("customer", "customer1").
+	param("order", "order1")).
+	andExpect(status().isOk()).
+	andExpect(content().string(containsString("customer1:order1"))).
+	andExpect(content().string(containsString("[WAIT_NEW_ORDER]")));
 
 		mvc.
-		perform(get("/state").
-				param("action", "event").
-				param("event", "PLACE_ORDER").
-				param("customer", "customer1").
-				param("order", "order1")).
-		andExpect(status().isOk()).
-		andExpect(content().string(containsString("customer1:order1"))).
-		andExpect(content().string(containsString("[HANDLE_ORDER, WAIT_PRODUCT, WAIT_PAYMENT]")));
+	perform(get("/state").
+	param("action", "event").
+	param("event", "PLACE_ORDER").
+	param("customer", "customer1").
+	param("order", "order1")).
+	andExpect(status().isOk()).
+	andExpect(content().string(containsString("customer1:order1"))).
+	andExpect(content().string(containsString("[HANDLE_ORDER, WAIT_PRODUCT, WAIT_PAYMENT]")));
 
 
 		mvc.
-		perform(get("/state").
-				param("action", "event").
-				param("event", "RECEIVE_PAYMENT").
-				param("guide", "payment").
-				param("customer", "customer1").
-				param("order", "order1")).
-		andExpect(status().isOk()).
-		andExpect(content().string(containsString("customer1:order1"))).
-		andExpect(content().string(containsString("[ORDER_SHIPPED]")));
+	perform(get("/state").
+	param("action", "event").
+	param("event", "RECEIVE_PAYMENT").
+	param("guide", "payment").
+	param("customer", "customer1").
+	param("order", "order1")).
+	andExpect(status().isOk()).
+	andExpect(content().string(containsString("customer1:order1"))).
+	andExpect(content().string(containsString("[ORDER_SHIPPED]")));
 	}
 
 	@BeforeEach

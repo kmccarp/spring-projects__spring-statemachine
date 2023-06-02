@@ -469,11 +469,11 @@ public class StateMachineTestPlanBuilder<S, E> {
 		 */
 		public StateMachineTestPlanBuilder<S, E> and() {
 			steps.add(new StateMachineTestPlanStep<S, E>(sendEvent, sendMessage, sendEventMachineId, sendEventToAll,
-					sendEventParallel, expectStates, expectStateChanged, expectStateEntered, expectStateExited,
-					expectEventNotAccepted, expectTransition, expectTransitionStarted, expectTransitionEnded,
-					expectStateMachineStarted, expectStateMachineStopped, expectVariableKeys,
-					expectVariableMatchers, expectVariables, expectExtendedStateChanged,
-					expectStatesEntrered, expectStatesExited));
+		sendEventParallel, expectStates, expectStateChanged, expectStateEntered, expectStateExited,
+		expectEventNotAccepted, expectTransition, expectTransitionStarted, expectTransitionEnded,
+		expectStateMachineStarted, expectStateMachineStopped, expectVariableKeys,
+		expectVariableMatchers, expectVariables, expectExtendedStateChanged,
+		expectStatesEntrered, expectStatesExited));
 			return StateMachineTestPlanBuilder.this;
 		}
 
@@ -503,14 +503,14 @@ public class StateMachineTestPlanBuilder<S, E> {
 		final Map<Object, Object> expectVariables;
 
 		public StateMachineTestPlanStep(List<E> sendEvent, List<Message<E>> sendMessage, Object sendEventMachineId,
-				boolean sendEventToAll, boolean sendEventParallel, Collection<S> expectStates,
-				Integer expectStateChanged, Integer expectStateEntered, Integer expectStateExited,
-				Integer expectEventNotAccepted, Integer expectTransition, Integer expectTransitionStarted,
-				Integer expectTransitionEnded, Integer expectStateMachineStarted, Integer expectStateMachineStopped,
-				Collection<Object> expectVariableKeys, Collection<Matcher<Map<? extends Object, ?>>> expectVariableMatchers,
-				Map<Object, Object> expectVariables,
-				Integer expectExtendedStateChanged, Collection<S> expectStatesEntrered,
-				Collection<S> expectStatesExited) {
+	boolean sendEventToAll, boolean sendEventParallel, Collection<S> expectStates,
+	Integer expectStateChanged, Integer expectStateEntered, Integer expectStateExited,
+	Integer expectEventNotAccepted, Integer expectTransition, Integer expectTransitionStarted,
+	Integer expectTransitionEnded, Integer expectStateMachineStarted, Integer expectStateMachineStopped,
+	Collection<Object> expectVariableKeys, Collection<Matcher<Map<? extends Object, ?>>> expectVariableMatchers,
+	Map<Object, Object> expectVariables,
+	Integer expectExtendedStateChanged, Collection<S> expectStatesEntrered,
+	Collection<S> expectStatesExited) {
 			this.sendEvent = sendEvent;
 			this.sendMessage = sendMessage;
 			this.sendEventMachineId = sendEventMachineId;

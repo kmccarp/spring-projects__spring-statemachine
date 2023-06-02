@@ -70,8 +70,7 @@ public class InMemoryStateMachineTraceRepository implements StateMachineTraceRep
 			}
 			if (this.reverse) {
 				this.traces.add(0, trace);
-			}
-			else {
+			}else {
 				this.traces.add(trace);
 			}
 		}

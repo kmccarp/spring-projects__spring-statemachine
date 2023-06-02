@@ -28,9 +28,7 @@ import org.springframework.statemachine.config.model.TransitionsData;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultEntryTransitionConfigurer<S, E>
-		extends	AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>
-		implements EntryTransitionConfigurer<S, E> {
+public class DefaultEntryTransitionConfigurer<S, E>extends	AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>implements EntryTransitionConfigurer<S, E> {
 
 	private S source;
 	private S target;

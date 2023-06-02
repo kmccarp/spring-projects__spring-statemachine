@@ -40,7 +40,7 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
  *
  */
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(loader=AnnotationConfigContextLoader.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class)
 public class XmlImportDependenciesTests {
 
 	@Autowired
@@ -65,26 +65,26 @@ public class XmlImportDependenciesTests {
 		@Override
 		public void configure(SimpleTestConfigBuilder config) throws Exception {
 			config
-				.withProperties()
-					.property("simpleKey1", "simpleValue1");
+		.withProperties()
+		.property("simpleKey1", "simpleValue1");
 		}
 
 		@Override
 		public void configure(SimpleTestConfigBeanABuilder beanA) throws Exception {
 			beanA
-				.withResources()
-					.resource("simpleResourceA1")
-					.resource("simpleResourceA2")
-					.and()
-				.setData("simpleDataA");
+		.withResources()
+		.resource("simpleResourceA1")
+		.resource("simpleResourceA2")
+		.and()
+		.setData("simpleDataA");
 		}
 
 		@Override
 		public void configure(SimpleTestConfigBeanBConfigurer beanB) throws Exception {
 			beanB
-				.setData("simpleDataB")
-				.setDataBB("simpleDataBB")
-				.withResources().and();
+		.setData("simpleDataB")
+		.setDataBB("simpleDataBB")
+		.withResources().and();
 		}
 
 	}

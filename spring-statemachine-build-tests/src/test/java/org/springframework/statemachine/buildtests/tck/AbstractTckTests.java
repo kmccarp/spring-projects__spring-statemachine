@@ -76,14 +76,9 @@ public abstract class AbstractTckTests {
 
 	@Test
 	public void testSimpleMachine() throws Exception {
-		StateMachine<String,String> stateMachine = getSimpleMachine();
+		StateMachine<String, String> stateMachine = getSimpleMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S1").and()
-					.step().sendEvent("E1").expectStates("S2").and()
-					.step().sendEvent("E2").expectStates("S3").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S1").and().step().sendEvent("E1").expectStates("S2").and().step().sendEvent("E2").expectStates("S3").and().build();
 		plan.test();
 	}
 
@@ -96,15 +91,9 @@ public abstract class AbstractTckTests {
 
 	@Test
 	public void testSimpleSubMachine() throws Exception {
-		StateMachine<String,String> stateMachine = getSimpleSubMachine();
+		StateMachine<String, String> stateMachine = getSimpleSubMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S1").and()
-					.step().sendEvent("E1").expectStates("S2", "S21").and()
-					.step().sendEvent("E2").expectStates("S2", "S22").and()
-					.step().sendEvent("E3").expectStates("S3").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S1").and().step().sendEvent("E1").expectStates("S2", "S21").and().step().sendEvent("E2").expectStates("S2", "S22").and().step().sendEvent("E3").expectStates("S3").and().build();
 		plan.test();
 	}
 
@@ -117,299 +106,129 @@ public abstract class AbstractTckTests {
 
 	@Test
 	public void testShowcaseMachineInitialState() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineA() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("A")
-						.expectStateChanged(0)
-						.expectStateEntered(0)
-						.expectStateExited(0)
-						.expectStates("S0", "S1", "S11").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("A").expectStateChanged(0).expectStateEntered(0).expectStateExited(0).expectStates("S0", "S1", "S11").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineB() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("B")
-						.expectStateChanged(2)
-						.expectStateEntered(2)
-						.expectStateExited(2)
-						.expectStates("S0", "S1", "S11").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("B").expectStateChanged(2).expectStateEntered(2).expectStateExited(2).expectStates("S0", "S1", "S11").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineCHKA() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("C")
-						.expectStateEntered(3)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.step()
-						.sendEvent("H")
-						.expectVariable("foo", 1)
-						.expectTransition(1)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.step()
-						.sendEvent("K")
-						.expectStateEntered(2)
-						.expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("A")
-						.expectStateChanged(2)
-						.expectStateEntered(2)
-						.expectStateExited(2)
-						.expectStates("S0", "S1", "S11").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("C").expectStateEntered(3).expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("H").expectVariable("foo", 1).expectTransition(1).expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("K").expectStateEntered(2).expectStates("S0", "S1", "S11").and().step().sendEvent("A").expectStateChanged(2).expectStateEntered(2).expectStateExited(2).expectStates("S0", "S1", "S11").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineC() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("C")
-						.expectStateEntered(3)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("C").expectStateEntered(3).expectStates("S0", "S2", "S21", "S211").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineCK() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("C")
-						.expectStateEntered(3)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.step()
-						.sendEvent("K")
-						.expectStateEntered(2)
-						.expectStates("S0", "S1", "S11").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("C").expectStateEntered(3).expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("K").expectStateEntered(2).expectStates("S0", "S1", "S11").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineD() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("D")
-						.expectStateEntered(3)
-						.expectStates("S0", "S1", "S11").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("D").expectStateEntered(3).expectStates("S0", "S1", "S11").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineCD() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("C")
-						.expectStateEntered(3)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.step()
-						.sendEvent("D")
-						.expectStateEntered(2)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("C").expectStateEntered(3).expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("D").expectStateEntered(2).expectStates("S0", "S2", "S21", "S211").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineI() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("I")
-						.expectStateEntered(1)
-						.expectStates("S0", "S1", "S12").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("I").expectStateEntered(1).expectStates("S0", "S1", "S12").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineII() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("I")
-						.expectStateEntered(1)
-						.expectStateEntered(1)
-						.expectStateExited(1)
-						.expectStates("S0", "S1", "S12").and()
-					.step()
-						.sendEvent("I")
-						.expectStateChanged(2)
-						.expectStateEntered(3)
-						.expectStateExited(2)
-						.expectStates("S0", "S2", "S21", "S212").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("I").expectStateEntered(1).expectStateEntered(1).expectStateExited(1).expectStates("S0", "S1", "S12").and().step().sendEvent("I").expectStateChanged(2).expectStateEntered(3).expectStateExited(2).expectStates("S0", "S2", "S21", "S212").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineH() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step()
-						.expectStates("S0", "S1", "S11")
-						.expectVariable("foo", 0).and()
-					.step()
-						.sendEvent("H")
-						.expectTransition(1)
-						.expectVariable("foo", 0)
-						.expectStates("S0", "S1", "S11").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").expectVariable("foo", 0).and().step().sendEvent("H").expectTransition(1).expectVariable("foo", 0).expectStates("S0", "S1", "S11").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineCH() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step()
-						.expectStates("S0", "S1", "S11")
-						.expectVariable("foo", 0).and()
-					.step()
-						.sendEvent("C")
-						.expectStateEntered(3)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.step()
-						.sendEvent("H")
-						.expectVariable("foo", 1)
-						.expectTransition(1)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").expectVariable("foo", 0).and().step().sendEvent("C").expectStateEntered(3).expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("H").expectVariable("foo", 1).expectTransition(1).expectStates("S0", "S2", "S21", "S211").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineACH() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("A")
-						.expectStateChanged(0)
-						.expectStateEntered(0)
-						.expectStateExited(0)
-						.expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("C")
-						.expectStateEntered(3)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.step()
-						.sendEvent("H")
-						.expectVariable("foo", 1)
-						.expectTransition(1)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("A").expectStateChanged(0).expectStateEntered(0).expectStateExited(0).expectStates("S0", "S1", "S11").and().step().sendEvent("C").expectStateEntered(3).expectStates("S0", "S2", "S21", "S211").and().step().sendEvent("H").expectVariable("foo", 1).expectTransition(1).expectStates("S0", "S2", "S21", "S211").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineE() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("E")
-						.expectStateChanged(3)
-						.expectStateEntered(4)
-						.expectStateExited(3)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("E").expectStateChanged(3).expectStateEntered(4).expectStateExited(3).expectStates("S0", "S2", "S21", "S211").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineF() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("F")
-						.expectStateChanged(2)
-						.expectStateEntered(3)
-						.expectStateExited(2)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("F").expectStateChanged(2).expectStateEntered(3).expectStateExited(2).expectStates("S0", "S2", "S21", "S211").and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testShowcaseMachineG() throws Exception {
-		StateMachine<String,String> stateMachine = getShowcaseMachine();
+		StateMachine<String, String> stateMachine = getShowcaseMachine();
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectStates("S0", "S1", "S11").and()
-					.step()
-						.sendEvent("G")
-						.expectStateChanged(2)
-						.expectStateEntered(3)
-						.expectStateExited(2)
-						.expectStates("S0", "S2", "S21", "S211").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectStates("S0", "S1", "S11").and().step().sendEvent("G").expectStateChanged(2).expectStateEntered(3).expectStateExited(2).expectStates("S0", "S2", "S21", "S211").and().build();
 		plan.test();
 	}
 

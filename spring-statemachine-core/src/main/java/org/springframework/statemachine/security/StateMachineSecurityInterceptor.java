@@ -87,7 +87,7 @@ public class StateMachineSecurityInterceptor<S, E> extends StateMachineIntercept
 	 * @param eventSecurityRule the event security rule
 	 */
 	public StateMachineSecurityInterceptor(AccessDecisionManager transitionAccessDecisionManager,
-			AccessDecisionManager eventAccessDecisionManager, SecurityRule eventSecurityRule) {
+AccessDecisionManager eventAccessDecisionManager, SecurityRule eventSecurityRule) {
 		this.transitionAccessDecisionManager = transitionAccessDecisionManager;
 		this.eventAccessDecisionManager = eventAccessDecisionManager;
 		this.eventSecurityRule = eventSecurityRule;
@@ -185,14 +185,14 @@ public class StateMachineSecurityInterceptor<S, E> extends StateMachineIntercept
 	}
 
 	private void decide(AccessDecisionManager manager, Authentication authentication, Transition<S, E> object,
-			Collection<ConfigAttribute> configAttributes) {
+Collection<ConfigAttribute> configAttributes) {
 		if (manager.supports(object.getClass())) {
 			manager.decide(authentication, object, configAttributes);
 		}
 	}
 
 	private void decide(AccessDecisionManager manager, Authentication authentication, Message<E> object,
-			Collection<ConfigAttribute> configAttributes) {
+Collection<ConfigAttribute> configAttributes) {
 		if (manager.supports(object.getClass())) {
 			manager.decide(authentication, object, configAttributes);
 		}
@@ -233,7 +233,7 @@ public class StateMachineSecurityInterceptor<S, E> extends StateMachineIntercept
 	@Override
 	public String toString() {
 		return "StateMachineSecurityInterceptor [transitionAccessDecisionManager=" + transitionAccessDecisionManager
-				+ ", eventAccessDecisionManager=" + eventAccessDecisionManager + ", eventSecurityRule=" + eventSecurityRule + "]";
+	+ ", eventAccessDecisionManager=" + eventAccessDecisionManager + ", eventSecurityRule=" + eventSecurityRule + "]";
 	}
 
 }

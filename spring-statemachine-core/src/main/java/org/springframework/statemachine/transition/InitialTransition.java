@@ -51,7 +51,7 @@ public class InitialTransition<S, E> extends AbstractTransition<S, E> {
 	 */
 	public InitialTransition(State<S, E> target, Function<StateContext<S, E>, Mono<Void>> action) {
 		super(null, target, action != null ? Collections.singleton(action) : null, null, TransitionKind.INITIAL, null,
-				null, null, null);
+	null, null, null);
 	}
 
 	/**

@@ -33,18 +33,19 @@ import org.springframework.core.GenericTypeResolver;
  * @param <I> The interface of type B
  * @param <B> The Builder that is building O and is configured by {@link AnnotationConfigurerAdapter}
  */
-public abstract class AnnotationConfigurerAdapter<O,I,B extends AnnotationBuilder<O>>
-		implements AnnotationConfigurer<O,B> {
+public abstract class AnnotationConfigurerAdapter<O, I, B extends AnnotationBuilder<O>>implements AnnotationConfigurer<O, B> {
 
 	private B builder;
 
 	private CompositeObjectPostProcessor objectPostProcessor = new CompositeObjectPostProcessor();
 
 	@Override
-	public void init(B builder) throws Exception {}
+	public void init(B builder) throws Exception {
+	}
 
 	@Override
-	public void configure(B builder) throws Exception {}
+	public void configure(B builder) throws Exception {
+	}
 
 	/**
 	 * Return the {@link AnnotationBuilder} when done using the
@@ -55,7 +56,7 @@ public abstract class AnnotationConfigurerAdapter<O,I,B extends AnnotationBuilde
 	@SuppressWarnings("unchecked")
 	public I and() {
 		// we're either casting to itself or its interface
-		return (I) getBuilder();
+		return (I)getBuilder();
 	}
 
 	/**
@@ -65,7 +66,7 @@ public abstract class AnnotationConfigurerAdapter<O,I,B extends AnnotationBuilde
 	 * @throws IllegalStateException if AnnotationBuilder is null
 	 */
 	protected final B getBuilder() {
-		if(builder == null) {
+		if (builder == null) {
 			throw new IllegalStateException("annotationBuilder cannot be null");
 		}
 		return builder;
@@ -96,17 +97,17 @@ public abstract class AnnotationConfigurerAdapter<O,I,B extends AnnotationBuilde
 	 * An {@link ObjectPostProcessor} that delegates work to numerous
 	 * {@link ObjectPostProcessor} implementations.
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	private static final class CompositeObjectPostProcessor implements ObjectPostProcessor<Object> {
 
 		private List<ObjectPostProcessor<? extends Object>> postProcessors = new ArrayList<ObjectPostProcessor<?>>();
 
 		@Override
 		public Object postProcess(Object object) {
-			for(ObjectPostProcessor opp : postProcessors) {
+			for (ObjectPostProcessor opp : postProcessors) {
 				Class<?> oppClass = opp.getClass();
-				Class<?> oppType = GenericTypeResolver.resolveTypeArgument(oppClass,ObjectPostProcessor.class);
-				if(oppType == null || oppType.isAssignableFrom(object.getClass())) {
+				Class<?> oppType = GenericTypeResolver.resolveTypeArgument(oppClass, ObjectPostProcessor.class);
+				if (oppType == null || oppType.isAssignableFrom(object.getClass())) {
 					object = opp.postProcess(object);
 				}
 			}

@@ -92,8 +92,8 @@ public class StateMachineState<S, E> extends AbstractState<S, E> {
 	 * @param pseudoState the pseudo state
 	 */
 	public StateMachineState(S id, StateMachine<S, E> submachine, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState) {
 		super(id, deferred, entryActions, exitActions, pseudoState, submachine);
 		this.ids = new ArrayList<S>();
 		this.ids.add(id);
@@ -109,8 +109,8 @@ public class StateMachineState<S, E> extends AbstractState<S, E> {
 	 * @param exitActions the exit actions
 	 */
 	public StateMachineState(S id, StateMachine<S, E> submachine, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions) {
 		super(id, deferred, entryActions, exitActions, null, submachine);
 		this.ids = new ArrayList<S>();
 		this.ids.add(id);
@@ -145,18 +145,18 @@ public class StateMachineState<S, E> extends AbstractState<S, E> {
 			// enable default transition and state
 			Mono<Void> mono = null;
 			if (getSubmachine().getState() != null && context.getTransition() != null
-					&& context.getTransition().getSource().getId() != getSubmachine().getState().getId()) {
+		&& context.getTransition().getSource().getId() != getSubmachine().getState().getId()) {
 				mono = getSubmachine().stopReactively();
 			} else if (context.getTransition() != null && !StateMachineUtils.isSubstate(context.getTransition().getTarget(), context.getTransition()
-					.getSource())) {
+		.getSource())) {
 				mono = getSubmachine().stopReactively();
 			} else {
 				mono = Mono.empty();
 			}
 			if (!isLocal(context)) {
 				Mono<Void> actions = Flux.fromIterable(getExitActions())
-					.flatMap(a -> executeAction(a, context))
-					.then();
+			.flatMap(a -> executeAction(a, context))
+			.then();
 				mono = mono.then(actions);
 			}
 			return mono;
@@ -168,8 +168,8 @@ public class StateMachineState<S, E> extends AbstractState<S, E> {
 		Mono<Void> mono = super.entry(context);
 		if (!isLocal(context)) {
 			Mono<Void> actions = Flux.fromIterable(getEntryActions())
-				.flatMap(a -> executeAction(a, context))
-				.then();
+		.flatMap(a -> executeAction(a, context))
+		.then();
 			mono = mono.then(actions);
 		}
 		mono = mono.and(Mono.fromRunnable(() -> {
@@ -179,33 +179,33 @@ public class StateMachineState<S, E> extends AbstractState<S, E> {
 
 				if (context.getEvent() != null) {
 					getSubmachine().getStateMachineAccessor()
-							.doWithRegion(function -> function.setForwardedInitialEvent(MessageBuilder.withPayload(context.getEvent())
-									.copyHeaders(context.getMessageHeaders()).build()));
+				.doWithRegion(function -> function.setForwardedInitialEvent(MessageBuilder.withPayload(context.getEvent())
+		.copyHeaders(context.getMessageHeaders()).build()));
 				}
 
 				// disable initial state where needed
 				if (immediateDeepParent != null && immediateDeepParent.isSubmachineState() && (!isInitial(target))) {
 
-					((StateMachineState<S, E>) immediateDeepParent).getSubmachine().getStateMachineAccessor()
-							.doWithRegion(function -> function.setInitialEnabled(false));
+					((StateMachineState<S, E>)immediateDeepParent).getSubmachine().getStateMachineAccessor()
+				.doWithRegion(function -> function.setInitialEnabled(false));
 
 				}
 				if (immediateDeepParent != null && !isInitial(immediateDeepParent)) {
 					getSubmachine().getStateMachineAccessor()
-							.doWithRegion(function -> function.setInitialEnabled(false));
+				.doWithRegion(function -> function.setInitialEnabled(false));
 				} else if (immediateDeepParent != null && isInitial(immediateDeepParent) && isInitial(target)) {
-					((StateMachineState<S, E>) immediateDeepParent).getSubmachine().getStateMachineAccessor()
-							.doWithRegion(function -> function.setInitialEnabled(false));
+					((StateMachineState<S, E>)immediateDeepParent).getSubmachine().getStateMachineAccessor()
+				.doWithRegion(function -> function.setInitialEnabled(false));
 				}
 				if (immediateDeepParent == null && getSubmachine().getStates().contains(target) && !isInitial(target)
-						&& StateMachineUtils.isSubstate(context.getTransition().getSource(),
-								context.getTransition().getTarget())) {
+			&& StateMachineUtils.isSubstate(context.getTransition().getSource(),
+			context.getTransition().getTarget())) {
 					getSubmachine().getStateMachineAccessor()
-							.doWithRegion(function -> function.setInitialEnabled(false));
+				.doWithRegion(function -> function.setInitialEnabled(false));
 				}
 				if (immediateDeepParent == null && getSubmachine().getStates().contains(target) && isEntry(target)) {
 					getSubmachine().getStateMachineAccessor()
-							.doWithRegion(function -> function.setInitialEnabled(false));
+				.doWithRegion(function -> function.setInitialEnabled(false));
 				}
 			}
 		}));
@@ -266,6 +266,6 @@ public class StateMachineState<S, E> extends AbstractState<S, E> {
 	@Override
 	public String toString() {
 		return "StateMachineState [getIds()=" + getIds() + ", toString()=" + super.toString() + ", getClass()="
-				+ getClass() + "]";
+	+ getClass() + "]";
 	}
 }

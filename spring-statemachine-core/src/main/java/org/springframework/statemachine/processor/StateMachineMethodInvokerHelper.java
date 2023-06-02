@@ -110,8 +110,8 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 	}
 
 	public StateMachineMethodInvokerHelper(Object targetObject, Class<? extends Annotation> annotationType,
-			Class<?> expectedType) {
-		this(targetObject, annotationType, (String) null, expectedType);
+Class<?> expectedType) {
+		this(targetObject, annotationType, (String)null, expectedType);
 	}
 
 	public T process(StateMachineRuntime<S, E> stateMachineRuntime) throws Exception {
@@ -125,13 +125,13 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 	}
 
 	private StateMachineMethodInvokerHelper(Object targetObject, Class<? extends Annotation> annotationType,
-			Method method, Class<?> expectedType) {
+Method method, Class<?> expectedType) {
 		Assert.notNull(method, "method must not be null");
 		this.expectedType = expectedType;
 		this.requiresReply = expectedType != null;
 		if (expectedType != null) {
 			Assert.isTrue(method.getReturnType() != Void.class && method.getReturnType() != Void.TYPE,
-					"method must have a return type");
+		"method must have a return type");
 		}
 		Assert.notNull(targetObject, "targetObject must not be null");
 		this.targetObject = targetObject;
@@ -148,17 +148,17 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 	}
 
 	private StateMachineMethodInvokerHelper(Object targetObject, Class<? extends Annotation> annotationType,
-			String methodName, Class<?> expectedType) {
+String methodName, Class<?> expectedType) {
 		Assert.notNull(targetObject, "targetObject must not be null");
 		this.expectedType = expectedType;
 		this.targetObject = targetObject;
 		this.requiresReply = expectedType != null;
 		Map<String, Map<Class<?>, HandlerMethod>> handlerMethodsForTarget = this.findHandlerMethodsForTarget(
-				targetObject, annotationType, methodName, requiresReply);
+	targetObject, annotationType, methodName, requiresReply);
 		Map<Class<?>, HandlerMethod> handlerMethods = handlerMethodsForTarget.get(CANDIDATE_METHODS);
 		Map<Class<?>, HandlerMethod> handlerMessageMethods = handlerMethodsForTarget.get(CANDIDATE_MESSAGE_METHODS);
 		if ((handlerMethods.size() == 1 && handlerMessageMethods.isEmpty())
-				|| (handlerMessageMethods.size() == 1 && handlerMethods.isEmpty())) {
+	|| (handlerMessageMethods.size() == 1 && handlerMethods.isEmpty())) {
 			if (handlerMethods.size() == 1) {
 				this.handlerMethod = handlerMethods.values().iterator().next();
 			} else {
@@ -189,7 +189,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 	private void setDisplayString(Object targetObject, Object targetMethod) {
 		StringBuilder sb = new StringBuilder(targetObject.getClass().getName());
 		if (targetMethod instanceof Method) {
-			sb.append("." + ((Method) targetMethod).getName());
+			sb.append("." + ((Method)targetMethod).getName());
 		} else if (targetMethod instanceof String) {
 			sb.append("." + targetMethod);
 		}
@@ -197,27 +197,27 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 	}
 
 	private void prepareEvaluationContext(StandardEvaluationContext context, Object method,
-			Class<? extends Annotation> annotationType) throws Exception {
+Class<? extends Annotation> annotationType) throws Exception {
 		Class<?> targetType = AopUtils.getTargetClass(this.targetObject);
 		if (method instanceof Method) {
-			context.registerMethodFilter(targetType, new FixedMethodFilter((Method) method));
+			context.registerMethodFilter(targetType, new FixedMethodFilter((Method)method));
 			if (expectedType != null) {
 				Assert.state(
-						context.getTypeConverter().canConvert(
-								TypeDescriptor.valueOf(((Method) method).getReturnType()),
-								TypeDescriptor.valueOf(expectedType)), "Cannot convert to expected type ("
-								+ expectedType + ") from " + method);
+			context.getTypeConverter().canConvert(
+	TypeDescriptor.valueOf(((Method)method).getReturnType()),
+	TypeDescriptor.valueOf(expectedType)), "Cannot convert to expected type ("
+			+ expectedType + ") from " + method);
 			}
 		} else if (method == null || method instanceof String) {
-			AnnotatedMethodFilter filter = new AnnotatedMethodFilter(annotationType, (String) method,
-					this.requiresReply);
+			AnnotatedMethodFilter filter = new AnnotatedMethodFilter(annotationType, (String)method,
+		this.requiresReply);
 			Assert.state(canReturnExpectedType(filter, targetType, context.getTypeConverter()),
-					"Cannot convert to expected type (" + expectedType + ") from " + method);
+		"Cannot convert to expected type (" + expectedType + ") from " + method);
 			context.registerMethodFilter(targetType, filter);
 		}
 		context.setVariable("target", targetObject);
-        context.registerFunction("requiredHeader", ParametersWrapper.class.getDeclaredMethod("getHeader",
-                Map.class, String.class));
+		context.registerFunction("requiredHeader", ParametersWrapper.class.getDeclaredMethod("getHeader",
+	Map.class, String.class));
 	}
 
 	private boolean canReturnExpectedType(AnnotatedMethodFilter filter, Class<?> targetType, TypeConverter typeConverter) {
@@ -240,7 +240,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 		Class<?> expectedType = this.expectedType != null ? this.expectedType : candidate.method.getReturnType();
 		try {
 			@SuppressWarnings("unchecked")
-			T result = (T) this.evaluateExpression(expression, parameters, expectedType);
+			T result = (T)this.evaluateExpression(expression, parameters, expectedType);
 			if (this.requiresReply) {
 				Assert.notNull(result, "Expression evaluation result was null, but this processor requires a reply.");
 			}
@@ -251,7 +251,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 				evaluationException = e.getCause();
 			}
 			if (evaluationException instanceof Exception) {
-				throw (Exception) evaluationException;
+				throw (Exception)evaluationException;
 			} else {
 				throw new IllegalStateException("Cannot process message", evaluationException);
 			}
@@ -259,7 +259,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 	}
 
 	private Map<String, Map<Class<?>, HandlerMethod>> findHandlerMethodsForTarget(final Object targetObject,
-			final Class<? extends Annotation> annotationType, final String methodName, final boolean requiresReply) {
+final Class<? extends Annotation> annotationType, final String methodName, final boolean requiresReply) {
 
 		Map<String, Map<Class<?>, HandlerMethod>> handlerMethods = new HashMap<String, Map<Class<?>, HandlerMethod>>();
 
@@ -307,7 +307,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 					if (handlerMethod.isMessageMethod()) {
 						if (candidateMessageMethods.containsKey(targetParameterType)) {
 							throw new IllegalArgumentException("Found more than one method match for type " +
-									"[Message<" + targetParameterType + ">]");
+						"[Message<" + targetParameterType + ">]");
 						}
 						candidateMessageMethods.put(targetParameterType, handlerMethod);
 					} else {
@@ -333,7 +333,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 		}
 
 		Assert.state(!handlerMethods.isEmpty(), "Target object of type [" + this.targetObject.getClass()
-				+ "] has no eligible methods for handling Container.");
+	+ "] has no eligible methods for handling Container.");
 
 		return handlerMethods;
 	}
@@ -345,7 +345,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 			if (targetClass == targetObject.getClass()) {
 				try {
 					// Maybe a proxy with no target - e.g. gateway
-					Class<?>[] interfaces = ((Advised) targetObject).getProxiedInterfaces();
+					Class<?>[] interfaces = ((Advised)targetObject).getProxiedInterfaces();
 					if (interfaces != null && interfaces.length == 1) {
 						targetClass = interfaces[0];
 					}
@@ -356,8 +356,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 					}
 				}
 			}
-		}
-		else if (AopUtils.isCglibProxy(targetClass)) {
+		}else if (AopUtils.isCglibProxy(targetClass)) {
 			Class<?> superClass = targetObject.getClass().getSuperclass();
 			if (!Object.class.equals(superClass)) {
 				targetClass = superClass;
@@ -382,7 +381,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 			return true;
 		}
 		if (ReflectionUtils.isEqualsMethod(method) || ReflectionUtils.isHashCodeMethod(method)
-				|| ReflectionUtils.isToStringMethod(method) || AopUtils.isFinalizeMethod(method)) {
+	|| ReflectionUtils.isToStringMethod(method) || AopUtils.isFinalizeMethod(method)) {
 			return true;
 		}
 		return (method.getName().equals("clone") && method.getParameterTypes().length == 0);
@@ -436,7 +435,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 			Class<?>[] parameterTypes = method.getParameterTypes();
 			Annotation[][] parameterAnnotations = method.getParameterAnnotations();
 			boolean hasUnqualifiedMapParameter = false;
-			for (int i = 0; i < parameterTypes.length; i++) {
+			for (int i = 0;i < parameterTypes.length;i++) {
 				if (i != 0) {
 					sb.append(", ");
 				}
@@ -453,7 +452,7 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 						sb.append(this.determineHeaderExpression(mappingAnnotation, methodParameter));
 					} else if (annotationType.equals(ExtendedStateVariable.class)) {
 						AnnotationAttributes annotationAttributes = AnnotationAttributes
-								.fromMap(AnnotationUtils.getAnnotationAttributes(mappingAnnotation));
+					.fromMap(AnnotationUtils.getAnnotationAttributes(mappingAnnotation));
 						String key = annotationAttributes.getString("value");
 						sb.append("variables.get('" + key + "')");
 					}
@@ -473,8 +472,8 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 			if (hasUnqualifiedMapParameter) {
 				if (targetParameterType != null && Map.class.isAssignableFrom(this.targetParameterType)) {
 					throw new IllegalArgumentException(
-							"Unable to determine payload matching parameter due to ambiguous Map typed parameters. "
-									+ "Consider adding the @EventHeaders and or @ExtendedStateVariable annotations as appropriate.");
+				"Unable to determine payload matching parameter due to ambiguous Map typed parameters. "
+		+ "Consider adding the @EventHeaders and or @ExtendedStateVariable annotations as appropriate.");
 				}
 			}
 			sb.append(")");
@@ -494,9 +493,9 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 				if (type.equals(EventHeaders.class)) {
 					if (match != null) {
 						throw new IllegalArgumentException(
-								"At most one parameter annotation can be provided for message mapping, "
-										+ "but found two: [" + match.annotationType().getName() + "] and ["
-										+ annotation.annotationType().getName() + "]");
+					"At most one parameter annotation can be provided for message mapping, "
+			+ "but found two: [" + match.annotationType().getName() + "] and ["
+			+ annotation.annotationType().getName() + "]");
 					}
 					match = annotation;
 				} else if (type.equals(EventHeader.class)) {
@@ -504,9 +503,9 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 				} else if (type.equals(ExtendedStateVariable.class)) {
 					if (match != null) {
 						throw new IllegalArgumentException(
-								"At most one parameter annotation can be provided for message mapping, "
-										+ "but found two: [" + match.annotationType().getName() + "] and ["
-										+ annotation.annotationType().getName() + "]");
+					"At most one parameter annotation can be provided for message mapping, "
+			+ "but found two: [" + match.annotationType().getName() + "] and ["
+			+ annotation.annotationType().getName() + "]");
 					}
 					match = annotation;
 				}
@@ -518,8 +517,8 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 			methodParameter.initParameterNameDiscovery(PARAMETER_NAME_DISCOVERER);
 			String headerName = null;
 			String relativeExpression = "";
-			AnnotationAttributes annotationAttributes = (AnnotationAttributes) AnnotationUtils
-					.getAnnotationAttributes(headerAnnotation);
+			AnnotationAttributes annotationAttributes = (AnnotationAttributes)AnnotationUtils
+		.getAnnotationAttributes(headerAnnotation);
 			String valueAttribute = annotationAttributes.getString(AnnotationUtils.VALUE);
 			if (!StringUtils.hasText(valueAttribute)) {
 				headerName = methodParameter.getParameterName();
@@ -533,11 +532,11 @@ public class StateMachineMethodInvokerHelper<T, S, E> extends AbstractExpression
 				headerName = valueAttribute;
 			}
 			Assert.notNull(headerName, "Cannot determine header name. Possible reasons: -debug is "
-					+ "disabled or header name is not explicitly provided via @EventHeader annotation.");
+		+ "disabled or header name is not explicitly provided via @EventHeader annotation.");
 			String headerRetrievalExpression = "headers['" + headerName + "']";
 			String fullHeaderExpression = headerRetrievalExpression + relativeExpression;
 			if (annotationAttributes.getBoolean("required")
-					&& !methodParameter.getParameterType().getName().equals("java.util.Optional")) {
+		&& !methodParameter.getParameterType().getName().equals("java.util.Optional")) {
 				return "#requiredHeader(headers, '" + headerName + "')" + relativeExpression;
 			} else if (!StringUtils.hasLength(relativeExpression)) {
 				return headerRetrievalExpression + " ?: null";

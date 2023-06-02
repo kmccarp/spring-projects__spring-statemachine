@@ -45,10 +45,10 @@ public class StateMachineJpaRepositoriesAutoConfigurationTests {
 		context = new AnnotationConfigApplicationContext();
 		context.register(TestConfiguration.class);
 		context.register(
-				EmbeddedDataSourceConfiguration.class,
-				HibernateJpaAutoConfiguration.class,
-				JpaRepositoriesAutoConfiguration.class,
-				StateMachineJpaRepositoriesAutoConfiguration.class);
+	EmbeddedDataSourceConfiguration.class,
+	HibernateJpaAutoConfiguration.class,
+	JpaRepositoriesAutoConfiguration.class,
+	StateMachineJpaRepositoriesAutoConfiguration.class);
 
 		context.refresh();
 		assertThat(context.containsBean("jpaStateRepository")).isTrue();

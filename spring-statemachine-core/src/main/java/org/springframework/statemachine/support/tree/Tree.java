@@ -48,7 +48,7 @@ public class Tree<T> {
 	private void tryMapping() {
 		int size = notMapped.size();
 		Iterator<DataWrap<T>> iter = notMapped.iterator();
-		while(iter.hasNext()) {
+		while (iter.hasNext()) {
 			DataWrap<T> next = iter.next();
 			if (next.parent == null) {
 				Node<T> n = new Node<T>(next.data);
@@ -97,6 +97,7 @@ public class Tree<T> {
 		final T data;
 		final Object id;
 		final Object parent;
+
 		public DataWrap(T data, Object id, Object parent) {
 			this.data = data;
 			this.id = id;

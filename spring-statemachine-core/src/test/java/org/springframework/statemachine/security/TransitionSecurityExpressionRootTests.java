@@ -53,7 +53,7 @@ public class TransitionSecurityExpressionRootTests {
 		root.setTrustResolver(trustResolver);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Test
 	public void testSourceTarget() throws Exception {
 		State source = mock(State.class);

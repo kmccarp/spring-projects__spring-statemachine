@@ -92,8 +92,8 @@ public class UmlModelParser {
 	private final Collection<EntryData<String, String>> entrys = new ArrayList<EntryData<String, String>>();
 	private final Collection<ExitData<String, String>> exits = new ArrayList<ExitData<String, String>>();
 	private final Collection<HistoryData<String, String>> historys = new ArrayList<HistoryData<String, String>>();
-	private final Map<String, LinkedList<ChoiceData<String, String>>> choices = new HashMap<String, LinkedList<ChoiceData<String,String>>>();
-	private final Map<String, LinkedList<JunctionData<String, String>>> junctions = new HashMap<String, LinkedList<JunctionData<String,String>>>();
+	private final Map<String, LinkedList<ChoiceData<String, String>>> choices = new HashMap<String, LinkedList<ChoiceData<String, String>>>();
+	private final Map<String, LinkedList<JunctionData<String, String>>> junctions = new HashMap<String, LinkedList<JunctionData<String, String>>>();
 	private final Map<String, List<String>> forks = new HashMap<String, List<String>>();
 	private final Map<String, List<String>> joins = new HashMap<String, List<String>>();
 
@@ -148,7 +148,7 @@ public class UmlModelParser {
 		HashMap<String, List<JunctionData<String, String>>> junctionsCopy = new HashMap<String, List<JunctionData<String, String>>>();
 		junctionsCopy.putAll(junctions);
 		return new DataHolder(new StatesData<>(stateDatas),
-				new TransitionsData<String, String>(transitionDatas, choicesCopy, junctionsCopy, forks, joins, entrys, exits, historys));
+	new TransitionsData<String, String>(transitionDatas, choicesCopy, junctionsCopy, forks, joins, entrys, exits, historys));
 	}
 
 	private void handleStateMachine(StateMachine stateMachine) {
@@ -234,7 +234,7 @@ public class UmlModelParser {
 				}
 				boolean isInitialState = UmlUtils.isInitialState(state);
 				StateData<String, String> stateData = handleActions(
-						new StateData<String, String>(parent, regionId, state.getName(), isInitialState), state);
+			new StateData<String, String>(parent, regionId, state.getName(), isInitialState), state);
 				if (isInitialState) {
 					// set possible initial transition
 					stateData.setInitialAction(resolveInitialTransitionAction(state));
@@ -301,10 +301,10 @@ public class UmlModelParser {
 					// same name.
 					StateMachine owningMachine = (StateMachine)state.getContainer().getOwner();
 					parent = owningMachine.getSubmachineStates().stream()
-							.filter(m -> owningMachine == m.getSubmachine())
-							.map(s -> s.getName())
-							.findFirst()
-							.orElse(null);
+				.filter(m -> owningMachine == m.getSubmachine())
+				.map(s -> s.getName())
+				.findFirst()
+				.orElse(null);
 				}
 				if (state.getOwner() instanceof Region) {
 					regionId = ((Region)state.getOwner()).getName();
@@ -372,7 +372,7 @@ public class UmlModelParser {
 						choices.put(resolveName(transition.getSource()), list);
 					}
 					Guard<String, String> guard = resolveGuard(transition);
-					Collection<Action<String,String>> actions = UmlUtils.resolveTransitionActions(transition, resolver);
+					Collection<Action<String, String>> actions = UmlUtils.resolveTransitionActions(transition, resolver);
 					// we want null guards to be at the end
 					if (guard == null) {
 						list.addLast(new ChoiceData<String, String>(resolveName(transition.getSource()), resolveName(transition.getTarget()), guard, actions));
@@ -386,7 +386,7 @@ public class UmlModelParser {
 						junctions.put(resolveName(transition.getSource()), list);
 					}
 					Guard<String, String> guard = resolveGuard(transition);
-					Collection<Action<String,String>> actions = UmlUtils.resolveTransitionActions(transition, resolver);
+					Collection<Action<String, String>> actions = UmlUtils.resolveTransitionActions(transition, resolver);
 					// we want null guards to be at the end
 					if (guard == null) {
 						list.addLast(new JunctionData<String, String>(resolveName(transition.getSource()), resolveName(transition.getTarget()), guard, actions));
@@ -430,15 +430,15 @@ public class UmlModelParser {
 							EList<Pseudostate> cprentries = ((ConnectionPointReference)transition.getTarget()).getEntries();
 							if (cprentries != null && cprentries.size() == 1) {
 								addTransitionData(new TransitionData<String, String>(resolveName(transition.getSource()),
-										cprentries.get(0).getName(), signal.getName(),
-										UmlUtils.resolveTransitionActionFunctions(transition, resolver), Guards.from(guard),
-										UmlUtils.mapUmlTransitionType(transition), transition.getName()));
+							cprentries.get(0).getName(), signal.getName(),
+							UmlUtils.resolveTransitionActionFunctions(transition, resolver), Guards.from(guard),
+							UmlUtils.mapUmlTransitionType(transition), transition.getName()));
 							}
 						} else {
 							addTransitionData(new TransitionData<String, String>(resolveName(transition.getSource()),
-									resolveName(transition.getTarget()), signal.getName(),
-									UmlUtils.resolveTransitionActionFunctions(transition, resolver), Guards.from(guard),
-									UmlUtils.mapUmlTransitionType(transition), transition.getName()));
+						resolveName(transition.getTarget()), signal.getName(),
+						UmlUtils.resolveTransitionActionFunctions(transition, resolver), Guards.from(guard),
+						UmlUtils.mapUmlTransitionType(transition), transition.getName()));
 						}
 					}
 				} else if (event instanceof TimeEvent) {
@@ -450,8 +450,8 @@ public class UmlModelParser {
 							count = 1;
 						}
 						addTransitionData(new TransitionData<String, String>(resolveName(transition.getSource()),
-								resolveName(transition.getTarget()), period, count, UmlUtils.resolveTransitionActionFunctions(transition, resolver),
-								Guards.from(guard), UmlUtils.mapUmlTransitionType(transition), transition.getName()));
+					resolveName(transition.getTarget()), period, count, UmlUtils.resolveTransitionActionFunctions(transition, resolver),
+					Guards.from(guard), UmlUtils.mapUmlTransitionType(transition), transition.getName()));
 					}
 				}
 			}
@@ -459,9 +459,9 @@ public class UmlModelParser {
 			// create anonymous transition if needed
 			if (shouldCreateAnonymousTransition(transition)) {
 				addTransitionData(new TransitionData<String, String>(resolveName(transition.getSource()),
-						resolveName(transition.getTarget()), null,
-						UmlUtils.resolveTransitionActionFunctions(transition, resolver),
-						Guards.from(resolveGuard(transition)), UmlUtils.mapUmlTransitionType(transition), transition.getName()));
+			resolveName(transition.getTarget()), null,
+			UmlUtils.resolveTransitionActionFunctions(transition, resolver),
+			Guards.from(resolveGuard(transition)), UmlUtils.mapUmlTransitionType(transition), transition.getName()));
 			}
 		}
 	}
@@ -477,7 +477,7 @@ public class UmlModelParser {
 					String expression = UmlUtils.resolveBodyByLanguage(LANGUAGE_SPEL, (OpaqueExpression)c.getSpecification());
 					if (StringUtils.hasText(expression)) {
 						SpelExpressionParser parser = new SpelExpressionParser(
-								new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
+					new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
 						guard = new SpelExpressionGuard<String, String>(parser.parseExpression(expression));
 					}
 				}
@@ -544,7 +544,7 @@ public class UmlModelParser {
 				String expression = UmlUtils.resolveBodyByLanguage(LANGUAGE_SPEL, (OpaqueBehavior)state.getEntry());
 				if (StringUtils.hasText(expression)) {
 					SpelExpressionParser parser = new SpelExpressionParser(
-							new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
+				new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
 					ArrayList<Function<StateContext<String, String>, Mono<Void>>> entrys = new ArrayList<>();
 					entrys.add(Actions.from(new SpelExpressionAction<String, String>(parser.parseExpression(expression))));
 					stateData.setEntryActions(entrys);
@@ -564,7 +564,7 @@ public class UmlModelParser {
 				String expression = UmlUtils.resolveBodyByLanguage(LANGUAGE_SPEL, (OpaqueBehavior)state.getExit());
 				if (StringUtils.hasText(expression)) {
 					SpelExpressionParser parser = new SpelExpressionParser(
-							new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
+				new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
 					ArrayList<Function<StateContext<String, String>, Mono<Void>>> exits = new ArrayList<>();
 					exits.add(Actions.from(new SpelExpressionAction<String, String>(parser.parseExpression(expression))));
 					stateData.setExitActions(exits);
@@ -584,7 +584,7 @@ public class UmlModelParser {
 				String expression = UmlUtils.resolveBodyByLanguage(LANGUAGE_SPEL, (OpaqueBehavior)state.getDoActivity());
 				if (StringUtils.hasText(expression)) {
 					SpelExpressionParser parser = new SpelExpressionParser(
-							new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
+				new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
 					ArrayList<Function<StateContext<String, String>, Mono<Void>>> stateActions = new ArrayList<>();
 					stateActions.add(Actions.from(new SpelExpressionAction<String, String>(parser.parseExpression(expression))));
 					stateData.setStateActions(stateActions);

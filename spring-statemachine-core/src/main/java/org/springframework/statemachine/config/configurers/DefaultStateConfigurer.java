@@ -47,9 +47,7 @@ import reactor.core.publisher.Mono;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultStateConfigurer<S, E>
-		extends AnnotationConfigurerAdapter<StatesData<S, E>, StateMachineStateConfigurer<S, E>, StateMachineStateBuilder<S, E>>
-		implements StateConfigurer<S, E> {
+public class DefaultStateConfigurer<S, E>extends AnnotationConfigurerAdapter<StatesData<S, E>, StateMachineStateConfigurer<S, E>, StateMachineStateBuilder<S, E>>implements StateConfigurer<S, E> {
 
 	private Object parent;
 	private Object region = UUID.randomUUID().toString();
@@ -221,7 +219,7 @@ public class DefaultStateConfigurer<S, E>
 
 	@Override
 	public StateConfigurer<S, E> state(S state, Collection<? extends Action<S, E>> entryActions,
-			Collection<? extends Action<S, E>> exitActions) {
+Collection<? extends Action<S, E>> exitActions) {
 		Collection<Function<StateContext<S, E>, Mono<Void>>> rEntryActions = null;
 		Collection<Function<StateContext<S, E>, Mono<Void>>> rExitActions = null;
 		if (entryActions != null) {
@@ -351,9 +349,9 @@ public class DefaultStateConfigurer<S, E>
 	}
 
 	private void addIncomplete(Object parent, S state, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> stateActions) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> stateActions) {
 		StateData<S, E> stateData = incomplete.get(state);
 		if (stateData == null) {
 			stateData = new StateData<S, E>(parent, region, state, deferred, entryActions, exitActions);

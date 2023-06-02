@@ -31,9 +31,7 @@ import org.springframework.statemachine.config.model.TransitionsData;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class StateMachineConfigBuilder<S, E>
-		extends
-		AbstractConfiguredAnnotationBuilder<StateMachineConfig<S, E>, StateMachineConfigBuilder<S, E>, StateMachineConfigBuilder<S, E>> {
+public class StateMachineConfigBuilder<S, E>extendsAbstractConfiguredAnnotationBuilder<StateMachineConfig<S, E>, StateMachineConfigBuilder<S, E>, StateMachineConfigBuilder<S, E>> {
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -43,12 +41,12 @@ public class StateMachineConfigBuilder<S, E>
 		StateMachineConfigurationBuilder<?, ?> configurationBuilder = getSharedObject(StateMachineConfigurationBuilder.class);
 		StateMachineTransitionBuilder<?, ?> transitionBuilder = getSharedObject(StateMachineTransitionBuilder.class);
 		StateMachineStateBuilder<?, ?> stateBuilder = getSharedObject(StateMachineStateBuilder.class);
-		ModelData<S, E> model = (ModelData<S, E>) modelBuilder.build();
+		ModelData<S, E> model = (ModelData<S, E>)modelBuilder.build();
 		ConfigurationData<S, E> stateMachineConfigurationConfig = null;
-		stateMachineConfigurationConfig = (ConfigurationData<S, E>) configurationBuilder.build();
+		stateMachineConfigurationConfig = (ConfigurationData<S, E>)configurationBuilder.build();
 		transitionBuilder.setSharedObject(ConfigurationData.class, stateMachineConfigurationConfig);
-		TransitionsData<S, E> transitions = (TransitionsData<S, E>) transitionBuilder.build();
-		StatesData<S, E> states = (StatesData<S, E>) stateBuilder.build();
+		TransitionsData<S, E> transitions = (TransitionsData<S, E>)transitionBuilder.build();
+		StatesData<S, E> states = (StatesData<S, E>)stateBuilder.build();
 		return new StateMachineConfig<S, E>(stateMachineConfigurationConfig, transitions, states, model);
 	}
 }

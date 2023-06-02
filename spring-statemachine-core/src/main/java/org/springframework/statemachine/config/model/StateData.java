@@ -96,8 +96,8 @@ public class StateData<S, E> {
 	 * @param exitActions the exit actions
 	 */
 	public StateData(Object parent, Object region, S state, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions) {
 		this(parent, region, state, deferred, entryActions, exitActions, false);
 	}
 
@@ -113,8 +113,8 @@ public class StateData<S, E> {
 	 * @param initial the initial
 	 */
 	public StateData(Object parent, Object region, S state, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, boolean initial) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, boolean initial) {
 		this(parent, region, state, deferred, entryActions, exitActions, initial, null);
 	}
 
@@ -131,9 +131,9 @@ public class StateData<S, E> {
 	 * @param initialAction the initial action
 	 */
 	public StateData(Object parent, Object region, S state, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, boolean initial,
-			Action<S, E> initialAction) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, boolean initial,
+Action<S, E> initialAction) {
 		this.state = state;
 		this.deferred = deferred;
 		this.entryActions = entryActions;
@@ -394,8 +394,8 @@ public class StateData<S, E> {
 	@Override
 	public String toString() {
 		return "StateData [parent=" + parent + ", region=" + region + ", state=" + state + ", deferred=" + deferred
-				+ ", entryActions=" + entryActions + ", exitActions=" + exitActions + ", initial=" + initial
-				+ ", initialAction=" + initialAction + ", end=" + end + ", pseudoStateKind=" + pseudoStateKind + "]";
+	+ ", entryActions=" + entryActions + ", exitActions=" + exitActions + ", initial=" + initial
+	+ ", initialAction=" + initialAction + ", end=" + end + ", pseudoStateKind=" + pseudoStateKind + "]";
 	}
 
 }

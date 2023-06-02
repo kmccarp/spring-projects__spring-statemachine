@@ -24,56 +24,57 @@ import org.springframework.statemachine.config.builders.StateMachineTransitionCo
 import org.springframework.statemachine.config.configurers.StateConfigurer.History;
 
 @Configuration
-public class Application  {
+public class Application {
 
 	@Configuration
 	@EnableStateMachine
 	static class StateMachineConfig
-			extends EnumStateMachineConfigurerAdapter<States, Events> {
+extends EnumStateMachineConfigurerAdapter<States, Events> {
 
 //tag::snippetAA[]
 		@Override
 		public void configure(StateMachineStateConfigurer<States, Events> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial(States.RUNNING)
-					.state(States.POWEROFF)
-					.end(States.END)
-					.and()
-					.withStates()
-						.parent(States.RUNNING)
-						.initial(States.WASHING)
-						.state(States.RINSING)
-						.state(States.DRYING)
-						.history(States.HISTORY, History.SHALLOW);
+		.withStates()
+		.initial(States.RUNNING)
+		.state(States.POWEROFF)
+		.end(States.END)
+		.and()
+		.withStates()
+		.parent(States.RUNNING)
+		.initial(States.WASHING)
+		.state(States.RINSING)
+		.state(States.DRYING)
+		.history(States.HISTORY, History.SHALLOW);
 		}
+
 //end::snippetAA[]
 
 //tag::snippetAB[]
 		@Override
 		public void configure(StateMachineTransitionConfigurer<States, Events> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source(States.WASHING).target(States.RINSING)
-					.event(Events.RINSE)
-					.and()
-				.withExternal()
-					.source(States.RINSING).target(States.DRYING)
-					.event(Events.DRY)
-					.and()
-				.withExternal()
-					.source(States.RUNNING).target(States.POWEROFF)
-					.event(Events.CUTPOWER)
-					.and()
-				.withExternal()
-					.source(States.POWEROFF).target(States.HISTORY)
-					.event(Events.RESTOREPOWER)
-					.and()
-				.withExternal()
-					.source(States.RUNNING).target(States.END)
-					.event(Events.STOP);
+		.withExternal()
+		.source(States.WASHING).target(States.RINSING)
+		.event(Events.RINSE)
+		.and()
+		.withExternal()
+		.source(States.RINSING).target(States.DRYING)
+		.event(Events.DRY)
+		.and()
+		.withExternal()
+		.source(States.RUNNING).target(States.POWEROFF)
+		.event(Events.CUTPOWER)
+		.and()
+		.withExternal()
+		.source(States.POWEROFF).target(States.HISTORY)
+		.event(Events.RESTOREPOWER)
+		.and()
+		.withExternal()
+		.source(States.RUNNING).target(States.END)
+		.event(Events.STOP);
 		}
 //end::snippetAB[]
 
@@ -81,17 +82,19 @@ public class Application  {
 
 //tag::snippetB[]
 	public enum States {
-	    RUNNING, HISTORY, END,
-	    WASHING, RINSING, DRYING,
-	    POWEROFF
+		RUNNING, HISTORY, END,
+		WASHING, RINSING, DRYING,
+		POWEROFF
 	}
+
 //end::snippetB[]
 
 //tag::snippetC[]
 	public enum Events {
-	    RINSE, DRY, STOP,
-	    RESTOREPOWER, CUTPOWER
+		RINSE, DRY, STOP,
+		RESTOREPOWER, CUTPOWER
 	}
+
 //end::snippetC[]
 
 	public static void main(String[] args) throws Exception {

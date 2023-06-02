@@ -134,8 +134,8 @@ public class DistributedStateMachine<S, E> extends LifecycleObjectSupport implem
 
 	private Function<Message<E>, Message<E>> addMachineIdentifier() {
 		return e -> MessageBuilder.fromMessage(e)
-			.setHeader(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER, delegate.getUuid())
-			.build();
+	.setHeader(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER, delegate.getUuid())
+	.build();
 	}
 
 	@Override
@@ -222,22 +222,22 @@ public class DistributedStateMachine<S, E> extends LifecycleObjectSupport implem
 
 		@Override
 		public void preStateChange(State<S, E> state, Message<E> message, Transition<S, E> transition,
-				StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
+	StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
 			if (log.isTraceEnabled()) {
 				log.trace("Received preStateChange from " + stateMachine + " for delegate " + delegate);
 			}
 			// only handle if state change originates from this dist machine
 			if (message != null
-					&& ObjectUtils.nullSafeEquals(delegate.getUuid(),
-							message.getHeaders().get(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER))) {
+		&& ObjectUtils.nullSafeEquals(delegate.getUuid(),
+		message.getHeaders().get(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER))) {
 				ensemble.setState(new DefaultStateMachineContext<S, E>(transition.getTarget().getId(), message
-						.getPayload(), message.getHeaders(), stateMachine.getExtendedState()));
+			.getPayload(), message.getHeaders(), stateMachine.getExtendedState()));
 			}
 		}
 
 		@Override
 		public void postStateChange(State<S, E> state, Message<E> message, Transition<S, E> transition,
-				StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
+	StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
 		}
 
 		@Override
@@ -249,19 +249,19 @@ public class DistributedStateMachine<S, E> extends LifecycleObjectSupport implem
 		public StateContext<S, E> postTransition(StateContext<S, E> stateContext) {
 			// only handle if state change originates from this dist machine
 			if (stateContext.getTransition() != null
-					&& stateContext.getTransition().getKind() == TransitionKind.INTERNAL
-					&& ObjectUtils.nullSafeEquals(delegate.getUuid(),
-							stateContext.getMessageHeader(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER))) {
+		&& stateContext.getTransition().getKind() == TransitionKind.INTERNAL
+		&& ObjectUtils.nullSafeEquals(delegate.getUuid(),
+		stateContext.getMessageHeader(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER))) {
 				StateMachineContext<S, E> current = ensemble.getState();
 				if (current != null) {
 					ensemble.setState(new DefaultStateMachineContext<S, E>(
-							current.getState(), stateContext.getEvent(), stateContext
-									.getMessageHeaders(), stateContext.getStateMachine().getExtendedState()));
+				current.getState(), stateContext.getEvent(), stateContext
+		.getMessageHeaders(), stateContext.getStateMachine().getExtendedState()));
 				} else if (stateContext.getStateMachine().getState() != null) {
 					// if current ensemble state is null, get it from sm itself
 					ensemble.setState(new DefaultStateMachineContext<S, E>(stateContext.getStateMachine().getState()
-							.getId(), stateContext.getEvent(), stateContext.getMessageHeaders(), stateContext
-							.getStateMachine().getExtendedState()));
+				.getId(), stateContext.getEvent(), stateContext.getMessageHeaders(), stateContext
+				.getStateMachine().getExtendedState()));
 				}
 			}
 			return stateContext;
@@ -316,10 +316,10 @@ public class DistributedStateMachine<S, E> extends LifecycleObjectSupport implem
 		public void stateChanged(StateMachineContext<S, E> context) {
 			// do not pass if state change was originated from this dist machine
 			if (!ObjectUtils.nullSafeEquals(delegate.getUuid(),
-					context.getEventHeaders().get(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER))) {
+		context.getEventHeaders().get(StateMachineSystemConstants.STATEMACHINE_IDENTIFIER))) {
 				Message<E> m = MessageBuilder.withPayload(context.getEvent())
-						.copyHeaders(context.getEventHeaders())
-						.build();
+			.copyHeaders(context.getEventHeaders())
+			.build();
 				delegate.sendEvent(Mono.just(m)).subscribe();
 			}
 		}

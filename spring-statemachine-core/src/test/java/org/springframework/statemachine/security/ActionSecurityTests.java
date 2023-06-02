@@ -73,7 +73,7 @@ public class ActionSecurityTests extends AbstractStateMachineTests {
 	TestSecAction action1;
 
 	@Test
-	@WithMockUser(roles = { "FOO" })
+	@WithMockUser(roles = {"FOO"})
 	public void testActionExecutionDenied() throws Exception {
 		assertThat(listener.stateChangedLatch.await(2, TimeUnit.SECONDS)).isTrue();
 		assertThat(listener.stateChangedCount).isEqualTo(1);
@@ -109,8 +109,8 @@ public class ActionSecurityTests extends AbstractStateMachineTests {
 		@Autowired
 		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 			auth
-				.inMemoryAuthentication()
-					.withUser("user").password("password").roles("USER");
+		.inMemoryAuthentication()
+		.withUser("user").password("password").roles("USER");
 		}
 
 	}
@@ -121,34 +121,34 @@ public class ActionSecurityTests extends AbstractStateMachineTests {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<States, Events> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withConfiguration()
-					.listener(testListener())
-					.autoStartup(true)
-					.and()
-				.withSecurity()
-					.enabled(true);
+		.withConfiguration()
+		.listener(testListener())
+		.autoStartup(true)
+		.and()
+		.withSecurity()
+		.enabled(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<States, Events> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial(States.S0)
-					.state(States.S0)
-					.state(States.S1, action1(), null);
+		.withStates()
+		.initial(States.S0)
+		.state(States.S0)
+		.state(States.S1, action1(), null);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<States, Events> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source(States.S0)
-					.target(States.S1)
-					.event(Events.A);
+		.withExternal()
+		.source(States.S0)
+		.target(States.S1)
+		.event(Events.A);
 
 		}
 
@@ -166,11 +166,11 @@ public class ActionSecurityTests extends AbstractStateMachineTests {
 	}
 
 	public static enum States {
-	    S0, S1;
+		S0, S1;
 	}
 
 	public static enum Events {
-	    A;
+		A;
 	}
 
 	private static class TestSecAction implements Action<States, Events> {

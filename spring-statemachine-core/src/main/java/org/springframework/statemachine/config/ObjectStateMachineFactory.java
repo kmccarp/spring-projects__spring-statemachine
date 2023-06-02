@@ -65,18 +65,18 @@ public class ObjectStateMachineFactory<S, E> extends AbstractStateMachineFactory
 	 * @param stateMachineModelFactory the state machine model factory
 	 */
 	public ObjectStateMachineFactory(StateMachineModel<S, E> defaultStateMachineModel,
-			StateMachineModelFactory<S, E> stateMachineModelFactory) {
+StateMachineModelFactory<S, E> stateMachineModelFactory) {
 		super(defaultStateMachineModel, stateMachineModelFactory);
 	}
 
 	@Override
 	protected StateMachine<S, E> buildStateMachineInternal(Collection<State<S, E>> states,
-			Collection<Transition<S, E>> transitions, State<S, E> initialState, Transition<S, E> initialTransition,
-			Message<E> initialEvent, ExtendedState extendedState, PseudoState<S, E> historyState,
-			Boolean contextEventsEnabled, BeanFactory beanFactory, String beanName, String machineId, UUID uuid,
-			StateMachineModel<S, E> stateMachineModel) {
+Collection<Transition<S, E>> transitions, State<S, E> initialState, Transition<S, E> initialTransition,
+Message<E> initialEvent, ExtendedState extendedState, PseudoState<S, E> historyState,
+Boolean contextEventsEnabled, BeanFactory beanFactory, String beanName, String machineId, UUID uuid,
+StateMachineModel<S, E> stateMachineModel) {
 		ObjectStateMachine<S, E> machine = new ObjectStateMachine<S, E>(states, transitions, initialState, initialTransition, initialEvent,
-				extendedState, uuid);
+	extendedState, uuid);
 		machine.setId(machineId);
 		machine.setHistoryState(historyState);
 		machine.setTransitionConflightPolicy(stateMachineModel.getConfigurationData().getTransitionConflictPolicy());
@@ -100,11 +100,11 @@ public class ObjectStateMachineFactory<S, E> extends AbstractStateMachineFactory
 
 	@Override
 	protected State<S, E> buildStateInternal(S id, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> stateActions, PseudoState<S, E> pseudoState,
-			StateMachineModel<S, E> stateMachineModel) {
-		ObjectState<S,E> objectState = new ObjectState<S, E>(id, deferred, entryActions, exitActions, stateActions, pseudoState, null, null);
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> stateActions, PseudoState<S, E> pseudoState,
+StateMachineModel<S, E> stateMachineModel) {
+		ObjectState<S, E> objectState = new ObjectState<S, E>(id, deferred, entryActions, exitActions, stateActions, pseudoState, null, null);
 		BeanFactory beanFactory = resolveBeanFactory(stateMachineModel);
 		if (beanFactory != null) {
 			objectState.setBeanFactory(beanFactory);
@@ -116,10 +116,10 @@ public class ObjectStateMachineFactory<S, E> extends AbstractStateMachineFactory
 
 	@Override
 	protected RegionState<S, E> buildRegionStateInternal(S id, Collection<Region<S, E>> regions, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
-			StateMachineModel<S, E> stateMachineModel) {
-		RegionState<S,E> regionState = new RegionState<S, E>(id, regions, deferred, entryActions, exitActions, pseudoState);
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
+StateMachineModel<S, E> stateMachineModel) {
+		RegionState<S, E> regionState = new RegionState<S, E>(id, regions, deferred, entryActions, exitActions, pseudoState);
 		regionState.setStateDoActionPolicy(stateMachineModel.getConfigurationData().getStateDoActionPolicy());
 		regionState.setStateDoActionPolicyTimeout(stateMachineModel.getConfigurationData().getStateDoActionPolicyTimeout());
 		return regionState;

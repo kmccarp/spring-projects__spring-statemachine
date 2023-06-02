@@ -177,39 +177,39 @@ public class TransitionOrderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
+		.withConfiguration()
+		.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S10)
-					.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S1011)
-						.state(TestStates.S1012);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S10)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S1011)
+		.state(TestStates.S1012);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S10)
-					.event(TestEvents.E1)
-					.and()
-					// Config1 vs. Config2, next 2 transitions are defined in different order
-				.withExternal()
-					.source(TestStates.S1011)
-					.target(TestStates.S1012)
-					.and()
-				.withExternal()
-					.source(TestStates.S10)
-					.target(TestStates.S1);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S10)
+		.event(TestEvents.E1)
+		.and()
+		// Config1 vs. Config2, next 2 transitions are defined in different order
+		.withExternal()
+		.source(TestStates.S1011)
+		.target(TestStates.S1012)
+		.and()
+		.withExternal()
+		.source(TestStates.S10)
+		.target(TestStates.S1);
 		}
 	}
 
@@ -220,39 +220,39 @@ public class TransitionOrderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
+		.withConfiguration()
+		.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S10)
-					.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S1011)
-						.state(TestStates.S1012);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S10)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S1011)
+		.state(TestStates.S1012);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S10)
-					.event(TestEvents.E1)
-					.and()
-					// Config1 vs. Config2, next 2 transitions are defined in different order
-				.withExternal()
-					.source(TestStates.S10)
-					.target(TestStates.S1)
-					.and()
-				.withExternal()
-					.source(TestStates.S1011)
-					.target(TestStates.S1012);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S10)
+		.event(TestEvents.E1)
+		.and()
+		// Config1 vs. Config2, next 2 transitions are defined in different order
+		.withExternal()
+		.source(TestStates.S10)
+		.target(TestStates.S1)
+		.and()
+		.withExternal()
+		.source(TestStates.S1011)
+		.target(TestStates.S1012);
 		}
 	}
 
@@ -263,38 +263,38 @@ public class TransitionOrderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.transitionConflictPolicy(TransitionConflictPolicy.CHILD);
+		.withConfiguration()
+		.transitionConflictPolicy(TransitionConflictPolicy.CHILD);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S10)
-					.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S1011)
-						.state(TestStates.S1012);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S10)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S1011)
+		.state(TestStates.S1012);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S10)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S10)
-					.target(TestStates.S1)
-					.and()
-				.withExternal()
-					.source(TestStates.S1011)
-					.target(TestStates.S1012);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S10)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S10)
+		.target(TestStates.S1)
+		.and()
+		.withExternal()
+		.source(TestStates.S1011)
+		.target(TestStates.S1012);
 		}
 	}
 
@@ -305,40 +305,40 @@ public class TransitionOrderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
+		.withConfiguration()
+		.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S10)
-					.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S1011)
-						.stateEntry(TestStates.S1011, c -> c.getExtendedState().getVariables().put("error", true))
-						.state(TestStates.S1012);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S10)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S1011)
+		.stateEntry(TestStates.S1011, c -> c.getExtendedState().getVariables().put("error", true))
+		.state(TestStates.S1012);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S10)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S10)
-					.target(TestStates.S1)
-					.guard(c -> c.getExtendedState().getVariables().containsKey("error"))
-					.and()
-				.withExternal()
-					.source(TestStates.S1011)
-					.target(TestStates.S1012);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S10)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S10)
+		.target(TestStates.S1)
+		.guard(c -> c.getExtendedState().getVariables().containsKey("error"))
+		.and()
+		.withExternal()
+		.source(TestStates.S1011)
+		.target(TestStates.S1012);
 		}
 	}
 
@@ -349,39 +349,39 @@ public class TransitionOrderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
+		.withConfiguration()
+		.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S10)
-					.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S1011)
-						.state(TestStates.S1012);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S10)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S1011)
+		.state(TestStates.S1012);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S10)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S10)
-					.target(TestStates.S1)
-					.guard(c -> c.getExtendedState().getVariables().containsKey("error"))
-					.and()
-				.withExternal()
-					.source(TestStates.S1011)
-					.target(TestStates.S1012);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S10)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S10)
+		.target(TestStates.S1)
+		.guard(c -> c.getExtendedState().getVariables().containsKey("error"))
+		.and()
+		.withExternal()
+		.source(TestStates.S1011)
+		.target(TestStates.S1012);
 		}
 	}
 
@@ -392,43 +392,43 @@ public class TransitionOrderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
+		.withConfiguration()
+		.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S10)
-					.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S1011)
-						.state(TestStates.S1012)
-						.state(TestStates.S2011);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S10)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S1011)
+		.state(TestStates.S1012)
+		.state(TestStates.S2011);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S10)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S10)
-					.target(TestStates.S1)
-					.and()
-				.withExternal()
-					.source(TestStates.S1011)
-					.target(TestStates.S1012)
-					.and()
-				.withExternal()
-					.source(TestStates.S1012)
-					.target(TestStates.S2011);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S10)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S10)
+		.target(TestStates.S1)
+		.and()
+		.withExternal()
+		.source(TestStates.S1011)
+		.target(TestStates.S1012)
+		.and()
+		.withExternal()
+		.source(TestStates.S1012)
+		.target(TestStates.S2011);
 		}
 	}
 
@@ -439,43 +439,43 @@ public class TransitionOrderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.transitionConflictPolicy(TransitionConflictPolicy.CHILD);
+		.withConfiguration()
+		.transitionConflictPolicy(TransitionConflictPolicy.CHILD);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S10)
-					.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S1011)
-						.state(TestStates.S1012)
-						.state(TestStates.S2011);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S10)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S1011)
+		.state(TestStates.S1012)
+		.state(TestStates.S2011);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S10)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S10)
-					.target(TestStates.S1)
-					.and()
-				.withExternal()
-					.source(TestStates.S1011)
-					.target(TestStates.S1012)
-					.and()
-				.withExternal()
-					.source(TestStates.S1012)
-					.target(TestStates.S2011);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S10)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S10)
+		.target(TestStates.S1)
+		.and()
+		.withExternal()
+		.source(TestStates.S1011)
+		.target(TestStates.S1012)
+		.and()
+		.withExternal()
+		.source(TestStates.S1012)
+		.target(TestStates.S2011);
 		}
 	}
 
@@ -486,48 +486,48 @@ public class TransitionOrderTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withConfiguration()
-					.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
+		.withConfiguration()
+		.transitionConflictPolicy(TransitionConflictPolicy.PARENT);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S10)
-					.junction(TestStates.SF)
-					.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S1011)
-						.state(TestStates.S1012)
-						.state(TestStates.S2011);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S10)
+		.junction(TestStates.SF)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S1011)
+		.state(TestStates.S1012)
+		.state(TestStates.S2011);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withJunction()
-					.source(TestStates.SF)
-					.last(TestStates.S1)
-					.and()
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S10)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S1011)
-					.target(TestStates.S1012)
-					.and()
-				.withExternal()
-					.source(TestStates.S10)
-					.target(TestStates.SF)
-					.and()
-				.withExternal()
-					.source(TestStates.S1012)
-					.target(TestStates.S2011);
+		.withJunction()
+		.source(TestStates.SF)
+		.last(TestStates.S1)
+		.and()
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S10)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S1011)
+		.target(TestStates.S1012)
+		.and()
+		.withExternal()
+		.source(TestStates.S10)
+		.target(TestStates.SF)
+		.and()
+		.withExternal()
+		.source(TestStates.S1012)
+		.target(TestStates.S2011);
 		}
 	}
 

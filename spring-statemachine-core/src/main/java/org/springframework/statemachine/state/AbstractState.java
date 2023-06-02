@@ -106,8 +106,8 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 	 * @param exitActions the exit actions
 	 */
 	public AbstractState(S id, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions) {
 		this(id, deferred, entryActions, exitActions, null);
 	}
 
@@ -121,8 +121,8 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 	 * @param pseudoState the pseudo state
 	 */
 	public AbstractState(S id, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState) {
 		this(id, deferred, entryActions, exitActions, pseudoState, null, null);
 	}
 
@@ -137,9 +137,9 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 	 * @param submachine the submachine
 	 */
 	public AbstractState(S id, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
-			StateMachine<S, E> submachine) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
+StateMachine<S, E> submachine) {
 		this(id, deferred, entryActions, exitActions, pseudoState, null, submachine);
 	}
 
@@ -154,9 +154,9 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 	 * @param regions the regions
 	 */
 	public AbstractState(S id, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
-			Collection<Region<S, E>> regions) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
+Collection<Region<S, E>> regions) {
 		this(id, deferred, entryActions, exitActions, pseudoState, regions, null);
 	}
 
@@ -172,9 +172,9 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 	 * @param submachine the submachine
 	 */
 	public AbstractState(S id, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
-			Collection<Region<S, E>> regions, StateMachine<S, E> submachine) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
+Collection<Region<S, E>> regions, StateMachine<S, E> submachine) {
 		this(id, deferred, entryActions, exitActions, null, pseudoState, regions, submachine);
 	}
 
@@ -191,10 +191,10 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 	 * @param submachine the submachine
 	 */
 	public AbstractState(S id, Collection<E> deferred,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> stateActions, PseudoState<S, E> pseudoState,
-			Collection<Region<S, E>> regions, StateMachine<S, E> submachine) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> stateActions, PseudoState<S, E> pseudoState,
+Collection<Region<S, E>> regions, StateMachine<S, E> submachine) {
 		this.id = id;
 		this.deferred = deferred != null ? deferred : Collections.<E>emptySet();
 		this.entryActions = entryActions != null ? entryActions : Collections.emptySet();
@@ -236,15 +236,15 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 			}
 			return Mono.empty();
 		})
-		.then(Mono.<Void>fromRunnable(() -> {
-			completionListeners.clear();
-		}))
-		.then(cancelStateActions())
-		.then(Mono.<Void>fromRunnable(() -> {
-			stateListener.onExit(context);
-			disarmTriggers();
-		}))
-		.doFinally(signal -> disposeDisposables());
+	.then(Mono.<Void>fromRunnable(() -> {
+		completionListeners.clear();
+	}))
+	.then(cancelStateActions())
+	.then(Mono.<Void>fromRunnable(() -> {
+		stateListener.onExit(context);
+		disarmTriggers();
+	}))
+	.doFinally(signal -> disposeDisposables());
 	}
 
 	@Override
@@ -252,25 +252,25 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 		return Mono.defer(() -> {
 			if (submachine != null) {
 				Disposable disposable = Mono.just(submachine)
-					.flatMap(submachine -> completionStateListenerSink(submachine))
-					// TODO: REACTOR this is causing cancel which breaks some things
-					// .then(handleStateDoOnComplete(context))
-					.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)))
-					.subscribe();
+			.flatMap(submachine -> completionStateListenerSink(submachine))
+			// TODO: REACTOR this is causing cancel which breaks some things
+			// .then(handleStateDoOnComplete(context))
+			.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)))
+			.subscribe();
 				disposables.add(disposable);
 			} else if (!regions.isEmpty()) {
 				// TODO: REACTOR we should handle disposable
 				Flux.fromIterable(regions)
-					.flatMap(region -> completionStateListenerSink(region))
-					.then(handleStateDoOnComplete(context))
-					.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)))
-					.subscribe();
+			.flatMap(region -> completionStateListenerSink(region))
+			.then(handleStateDoOnComplete(context))
+			.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)))
+			.subscribe();
 			}
 			stateListener.onEntry(context);
 			armTriggers();
 			return Mono.empty();
 		})
-		.then(scheduleStateActions(context));
+	.then(scheduleStateActions(context));
 	}
 
 	@Override
@@ -451,7 +451,7 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 			};
 			completionListeners.add(listener);
 			region.addStateListener(listener);
-			});
+		});
 	}
 
 	private void disposeDisposables() {
@@ -466,20 +466,20 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 			final AtomicInteger completionCount = new AtomicInteger(stateActions.size());
 			Long timeout = resolveDoActionTimeout(context);
 			return Flux.fromIterable(stateActions)
-				.doOnNext(stateAction -> {
-					executeAction(stateAction, context)
-						.onErrorResume(t -> Mono.empty())
-						.subscribeOn(Schedulers.parallel())
-						.doOnSubscribe(subscription -> {
-							if (log.isDebugEnabled()) {
-								log.debug("Adding new scheduled action with subscription=" + subscription);
-							}
-							scheduledActions.add(new ScheduledAction(subscription, timeout, System.currentTimeMillis()));
-						})
-						.then(handleCompleteOrEmpty1(context, completionCount))
-						.subscribe();
-				})
-				.then(handleCompleteOrEmpty2(context, completionCount));
+		.doOnNext(stateAction -> {
+			executeAction(stateAction, context)
+	.onErrorResume(t -> Mono.empty())
+	.subscribeOn(Schedulers.parallel())
+	.doOnSubscribe(subscription -> {
+		if (log.isDebugEnabled()) {
+			log.debug("Adding new scheduled action with subscription=" + subscription);
+		}
+		scheduledActions.add(new ScheduledAction(subscription, timeout, System.currentTimeMillis()));
+	})
+	.then(handleCompleteOrEmpty1(context, completionCount))
+	.subscribe();
+		})
+		.then(handleCompleteOrEmpty2(context, completionCount));
 		});
 	}
 
@@ -488,7 +488,7 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 			log.debug("handleCompleteOrEmpty1 " + completionCount + " " + stateActions);
 			if (completionCount.decrementAndGet() <= 0 && stateActions.size() > 0) {
 				return handleStateDoOnComplete(context)
-					.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)));
+			.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)));
 			} else {
 				return Mono.empty();
 			}
@@ -499,7 +499,7 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 		return Mono.defer(() -> {
 			if (isSimple() && stateActions.size() == 0) {
 				return handleStateDoOnComplete(context)
-					.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)));
+			.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)));
 			} else {
 				return Mono.empty();
 			}
@@ -508,26 +508,26 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 
 	private Mono<Void> cancelStateActions() {
 		return Flux.fromIterable(scheduledActions)
-			// state action tells us how long it needs for timeout, delay
-			.flatMap(stateAction -> {
-				// check delay and prevent unnecessary thread switch with Mono.delay()
-				if (stateAction.getNeededDelayNow().toMillis() > 0) {
-					return Mono.delay(stateAction.getNeededDelayNow()).thenReturn(stateAction);
-				} else {
-					return Mono.just(stateAction);
-				}
-			})
-			// then dispose which i.e. should interrupt blocking threads or cancel reactive code
-			.doOnNext(stateAction -> {
-				if (stateAction.subscription != null) {
-					log.debug("About to dispose subscription " + stateAction.subscription);
-					stateAction.subscription.cancel();
-				}
-			})
-			// we're done, clear state scheduled state actions
-			.thenEmpty(Mono.fromRunnable(() -> {
-				scheduledActions.clear();
-			}));
+	// state action tells us how long it needs for timeout, delay
+	.flatMap(stateAction -> {
+		// check delay and prevent unnecessary thread switch with Mono.delay()
+		if (stateAction.getNeededDelayNow().toMillis() > 0) {
+			return Mono.delay(stateAction.getNeededDelayNow()).thenReturn(stateAction);
+		} else {
+			return Mono.just(stateAction);
+		}
+	})
+	// then dispose which i.e. should interrupt blocking threads or cancel reactive code
+	.doOnNext(stateAction -> {
+		if (stateAction.subscription != null) {
+			log.debug("About to dispose subscription " + stateAction.subscription);
+			stateAction.subscription.cancel();
+		}
+	})
+	// we're done, clear state scheduled state actions
+	.thenEmpty(Mono.fromRunnable(() -> {
+		scheduledActions.clear();
+	}));
 	}
 
 	/**
@@ -539,19 +539,19 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 	 */
 	protected Mono<Void> executeAction(Function<StateContext<S, E>, Mono<Void>> action, StateContext<S, E> context) {
 		return Mono.just(action)
-			.flatMap(a -> {
-				long now = System.currentTimeMillis();
-				return a.apply(context)
-					.thenEmpty(Mono.fromRunnable(() -> {
-						if (this.actionListener != null) {
-							try {
-								this.actionListener.onExecute(context.getStateMachine(), action, System.currentTimeMillis() - now);
-							} catch (Exception e) {
-								log.warn("Error with actionListener", e);
-							}
-						}
-					}));
-			});
+	.flatMap(a -> {
+		long now = System.currentTimeMillis();
+		return a.apply(context)
+.thenEmpty(Mono.fromRunnable(() -> {
+	if (this.actionListener != null) {
+		try {
+			this.actionListener.onExecute(context.getStateMachine(), action, System.currentTimeMillis() - now);
+		} catch (Exception e) {
+			log.warn("Error with actionListener", e);
+		}
+	}
+}));
+	});
 	}
 
 	protected Mono<Void> handleStateDoOnComplete(StateContext<S, E> context) {
@@ -598,7 +598,7 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 	@Override
 	public String toString() {
 		return "AbstractState [id=" + id + ", pseudoState=" + pseudoState + ", deferred=" + deferred + ", entryActions="
-				+ entryActions + ", exitActions=" + exitActions + ", stateActions=" + stateActions + ", regions="
-				+ regions + ", submachine=" + submachine + "]";
+	+ entryActions + ", exitActions=" + exitActions + ", stateActions=" + stateActions + ", regions="
+	+ regions + ", submachine=" + submachine + "]";
 	}
 }

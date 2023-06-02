@@ -52,7 +52,7 @@ public class StateContextExpressionMethods {
 	 * @throws EvaluationException the evaluation exception
 	 */
 	public <T> T getValue(Expression expression, StateContext<?, ?> stateContext, Class<T> desiredResultType)
-			throws EvaluationException {
+throws EvaluationException {
 		Assert.notNull(expression, "Expression cannot be null");
 		return expression.getValue(context, stateContext, desiredResultType);
 	}

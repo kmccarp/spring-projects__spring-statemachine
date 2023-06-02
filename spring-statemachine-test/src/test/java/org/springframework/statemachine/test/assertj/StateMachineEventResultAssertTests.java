@@ -35,7 +35,7 @@ public class StateMachineEventResultAssertTests {
 		assertThat(assertions.hasResultType(ResultType.ACCEPTED));
 
 		assertThatExceptionOfType(AssertionError.class)
-			.isThrownBy(() -> assertThat(assertions.hasResultType(ResultType.DENIED)))
-			.withMessageContaining("Expected result's type to be <DENIED> but was <ACCEPTED>");
+	.isThrownBy(() -> assertThat(assertions.hasResultType(ResultType.DENIED)))
+	.withMessageContaining("Expected result's type to be <DENIED> but was <ACCEPTED>");
 	}
 }

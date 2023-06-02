@@ -27,8 +27,7 @@ import org.springframework.statemachine.config.model.StateMachineModelFactory;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface ModelConfigurer<S, E> extends
-		AnnotationConfigurerBuilder<StateMachineModelConfigurer<S, E>> {
+public interface ModelConfigurer<S, E> extendsAnnotationConfigurerBuilder<StateMachineModelConfigurer<S, E>> {
 
 	/**
 	 * Specify a state machine model factory.

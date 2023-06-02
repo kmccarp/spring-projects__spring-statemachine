@@ -25,8 +25,7 @@ import org.springframework.statemachine.transition.Transition;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface LocalTransitionConfigurer<S, E> extends
-		TransitionConfigurer<LocalTransitionConfigurer<S, E>, S, E> {
+public interface LocalTransitionConfigurer<S, E> extendsTransitionConfigurer<LocalTransitionConfigurer<S, E>, S, E> {
 
 	/**
 	 * Specify a target state {@code S} for this {@link Transition}.

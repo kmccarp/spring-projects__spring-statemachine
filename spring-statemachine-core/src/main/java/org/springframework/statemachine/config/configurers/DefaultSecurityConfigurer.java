@@ -31,9 +31,7 @@ import org.springframework.statemachine.security.SecurityRule.ComparisonType;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultSecurityConfigurer<S, E>
-		extends AnnotationConfigurerAdapter<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>
-		implements SecurityConfigurer<S, E> {
+public class DefaultSecurityConfigurer<S, E>extends AnnotationConfigurerAdapter<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>implements SecurityConfigurer<S, E> {
 
 	private boolean enabled = true;
 	private AccessDecisionManager transitionAccessDecisionManager;

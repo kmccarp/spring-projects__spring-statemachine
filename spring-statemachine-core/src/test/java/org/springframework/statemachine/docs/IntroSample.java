@@ -47,6 +47,7 @@ public class IntroSample {
 	public enum Events {
 		EVENT1, EVENT2
 	}
+
 // end::snippetA[]
 
 // tag::snippetB[]
@@ -56,26 +57,27 @@ public class IntroSample {
 
 		@Override
 		public void configure(StateMachineStateConfigurer<States, Events> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial(States.STATE1)
-					.states(EnumSet.allOf(States.class));
+		.withStates()
+		.initial(States.STATE1)
+		.states(EnumSet.allOf(States.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<States, Events> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source(States.STATE1).target(States.STATE2)
-					.event(Events.EVENT1)
-					.and()
-				.withExternal()
-					.source(States.STATE2).target(States.STATE1)
-					.event(Events.EVENT2);
+		.withExternal()
+		.source(States.STATE1).target(States.STATE2)
+		.event(Events.EVENT1)
+		.and()
+		.withExternal()
+		.source(States.STATE2).target(States.STATE1)
+		.event(Events.EVENT2);
 		}
 	}
+
 // end::snippetB[]
 
 // tag::snippetC[]
@@ -90,6 +92,7 @@ public class IntroSample {
 		void toState2() {
 		}
 	}
+
 // end::snippetC[]
 
 // tag::snippetD[]
@@ -100,15 +103,16 @@ public class IntroSample {
 
 		void doSignals() {
 			stateMachine
-				.sendEvent(Mono.just(MessageBuilder
-					.withPayload(Events.EVENT1).build()))
-				.subscribe();
+		.sendEvent(Mono.just(MessageBuilder
+.withPayload(Events.EVENT1).build()))
+		.subscribe();
 			stateMachine
-				.sendEvent(Mono.just(MessageBuilder
-					.withPayload(Events.EVENT2).build()))
-				.subscribe();
+		.sendEvent(Mono.just(MessageBuilder
+.withPayload(Events.EVENT2).build()))
+		.subscribe();
 		}
 	}
+
 // end::snippetD[]
 
 	@Test
@@ -125,17 +129,17 @@ public class IntroSample {
 	public StateMachine<States, Events> buildMachine() throws Exception {
 		Builder<States, Events> builder = StateMachineBuilder.builder();
 		builder.configureStates()
-			.withStates()
-				.initial(States.STATE1)
-				.states(EnumSet.allOf(States.class));
+	.withStates()
+	.initial(States.STATE1)
+	.states(EnumSet.allOf(States.class));
 		builder.configureTransitions()
-			.withExternal()
-				.source(States.STATE1).target(States.STATE2)
-				.event(Events.EVENT1)
-				.and()
-			.withExternal()
-				.source(States.STATE2).target(States.STATE1)
-				.event(Events.EVENT2);
+	.withExternal()
+	.source(States.STATE1).target(States.STATE2)
+	.event(Events.EVENT1)
+	.and()
+	.withExternal()
+	.source(States.STATE2).target(States.STATE1)
+	.event(Events.EVENT2);
 		return builder.build();
 	}
 }

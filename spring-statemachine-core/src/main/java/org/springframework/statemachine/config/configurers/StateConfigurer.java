@@ -37,8 +37,7 @@ import reactor.core.publisher.Mono;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public interface StateConfigurer<S, E> extends
-		AnnotationConfigurerBuilder<StateMachineStateConfigurer<S, E>> {
+public interface StateConfigurer<S, E> extendsAnnotationConfigurerBuilder<StateMachineStateConfigurer<S, E>> {
 
 	/**
 	 * Specify a initial state {@code S}.
@@ -179,7 +178,7 @@ public interface StateConfigurer<S, E> extends
 	 * @return configurer for chaining
 	 */
 	StateConfigurer<S, E> state(S state, Collection<? extends Action<S, E>> entryActions,
-			Collection<? extends Action<S, E>> exitActions);
+Collection<? extends Action<S, E>> exitActions);
 
 	/**
 	 * Specify a state {@code S} with entry and exit {@link Action}.

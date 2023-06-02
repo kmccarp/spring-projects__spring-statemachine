@@ -44,9 +44,9 @@ public class StateMachineRedisRepositoriesAutoConfigurationTests {
 		context = new AnnotationConfigApplicationContext();
 		context.register(TestConfiguration.class);
 		context.register(
-				RedisAutoConfiguration.class,
-				RedisRepositoriesAutoConfiguration.class,
-				StateMachineRedisRepositoriesAutoConfiguration.class);
+	RedisAutoConfiguration.class,
+	RedisRepositoriesAutoConfiguration.class,
+	StateMachineRedisRepositoriesAutoConfiguration.class);
 
 		context.refresh();
 		assertThat(context.containsBean("redisStateRepository")).isTrue();

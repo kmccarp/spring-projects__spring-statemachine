@@ -97,8 +97,8 @@ public abstract class StateMachineObjectSupport<S, E> extends LifecycleObjectSup
 	 * @return the state machine event publisher
 	 */
 	protected StateMachineEventPublisher getStateMachineEventPublisher() {
-		if(stateMachineEventPublisher == null && getBeanFactory() != null) {
-			if(log.isTraceEnabled()) {
+		if (stateMachineEventPublisher == null && getBeanFactory() != null) {
+			if (log.isTraceEnabled()) {
 				log.trace("getting stateMachineEventPublisher service from bean factory " + getBeanFactory());
 			}
 			stateMachineEventPublisher = StateMachineContextUtils.getEventPublisher(getBeanFactory());
@@ -331,7 +331,7 @@ public abstract class StateMachineObjectSupport<S, E> extends LifecycleObjectSup
 	}
 
 	protected void notifyActionMonitor(StateMachine<S, E> stateMachine, Function<StateContext<S, E>, Mono<Void>> action,
-			long duration) {
+long duration) {
 		try {
 			stateMachineMonitor.action(stateMachine, action, duration);
 		} catch (Exception e) {
@@ -343,7 +343,7 @@ public abstract class StateMachineObjectSupport<S, E> extends LifecycleObjectSup
 		return interceptors;
 	}
 
-	protected void setStateMachineInterceptors(List<StateMachineInterceptor<S,E>> interceptors) {
+	protected void setStateMachineInterceptors(List<StateMachineInterceptor<S, E>> interceptors) {
 		Collections.sort(interceptors, new OrderComparator());
 		this.interceptors.set(interceptors);
 	}
@@ -353,7 +353,7 @@ public abstract class StateMachineObjectSupport<S, E> extends LifecycleObjectSup
 	 * as its own listener context. User only connects to main root machine and
 	 * expects to get events for all machines from there.
 	 */
-	protected class StateMachineListenerRelay implements StateMachineListener<S,E> {
+	protected class StateMachineListenerRelay implements StateMachineListener<S, E> {
 
 		@Override
 		public void stateChanged(State<S, E> from, State<S, E> to) {

@@ -19,8 +19,7 @@ import java.util.UUID;
 
 import org.springframework.statemachine.config.common.annotation.AbstractConfiguredAnnotationBuilder;
 
-public class ImportingTestConfigBuilder extends
-		AbstractConfiguredAnnotationBuilder<ImportingTestConfig, ImportingTestConfigBuilder, ImportingTestConfigBuilder> {
+public class ImportingTestConfigBuilder extendsAbstractConfiguredAnnotationBuilder<ImportingTestConfig, ImportingTestConfigBuilder, ImportingTestConfigBuilder> {
 
 	private UUID uuid;
 

@@ -40,7 +40,7 @@ public class EventExpressionVoter<T> implements AccessDecisionVoter<Message<T>> 
 	private SecurityExpressionHandler<Message<T>> expressionHandler = new DefaultEventSecurityExpressionHandler<T>();
 
 	public int vote(Authentication authentication, Message<T> message,
-			Collection<ConfigAttribute> attributes) {
+Collection<ConfigAttribute> attributes) {
 		assert authentication != null;
 		assert message != null;
 		assert attributes != null;
@@ -52,17 +52,17 @@ public class EventExpressionVoter<T> implements AccessDecisionVoter<Message<T>> 
 		}
 
 		EvaluationContext ctx = expressionHandler.createEvaluationContext(authentication,
-				message);
+	message);
 
 		return ExpressionUtils.evaluateAsBoolean(attr.getAuthorizeExpression(), ctx) ? ACCESS_GRANTED
-				: ACCESS_DENIED;
+	: ACCESS_DENIED;
 	}
 
 	private EventExpressionConfigAttribute findConfigAttribute(
-			Collection<ConfigAttribute> attributes) {
+Collection<ConfigAttribute> attributes) {
 		for (ConfigAttribute attribute : attributes) {
 			if (attribute instanceof EventExpressionConfigAttribute) {
-				return (EventExpressionConfigAttribute) attribute;
+				return (EventExpressionConfigAttribute)attribute;
 			}
 		}
 		return null;
@@ -79,7 +79,7 @@ public class EventExpressionVoter<T> implements AccessDecisionVoter<Message<T>> 
 	}
 
 	public void setExpressionHandler(
-			SecurityExpressionHandler<Message<T>> expressionHandler) {
+SecurityExpressionHandler<Message<T>> expressionHandler) {
 		Assert.notNull(expressionHandler, "expressionHandler cannot be null");
 		this.expressionHandler = expressionHandler;
 	}

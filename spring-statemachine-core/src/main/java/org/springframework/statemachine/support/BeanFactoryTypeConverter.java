@@ -68,9 +68,9 @@ public class BeanFactoryTypeConverter implements TypeConverter, BeanFactoryAware
 
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		if (beanFactory instanceof ConfigurableBeanFactory) {
-			Object typeConverter = ((ConfigurableBeanFactory) beanFactory).getTypeConverter();
+			Object typeConverter = ((ConfigurableBeanFactory)beanFactory).getTypeConverter();
 			if (typeConverter instanceof SimpleTypeConverter) {
-				delegate = (SimpleTypeConverter) typeConverter;
+				delegate = (SimpleTypeConverter)typeConverter;
 			}
 		}
 	}

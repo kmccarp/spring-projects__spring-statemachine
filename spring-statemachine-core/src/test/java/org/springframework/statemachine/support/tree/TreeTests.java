@@ -32,10 +32,10 @@ public class TreeTests {
 		tree.add("S21", "S21", "S2");
 
 		TreeTraverser<Node<String>> traverser = new TreeTraverser<Node<String>>() {
-		    @Override
-		    public Iterable<Node<String>> children(Node<String> root) {
-		        return root.getChildren();
-		    }
+			@Override
+			public Iterable<Node<String>> children(Node<String> root) {
+				return root.getChildren();
+			}
 		};
 
 		for (Node<String> node : traverser.postOrderTraversal(tree.getRoot())) {
@@ -55,10 +55,10 @@ public class TreeTests {
 		tree.add("S1", "S1", "S");
 
 		TreeTraverser<Node<String>> traverser = new TreeTraverser<Node<String>>() {
-		    @Override
-		    public Iterable<Node<String>> children(Node<String> root) {
-		        return root.getChildren();
-		    }
+			@Override
+			public Iterable<Node<String>> children(Node<String> root) {
+				return root.getChildren();
+			}
 		};
 
 		for (Node<String> node : traverser.postOrderTraversal(tree.getRoot())) {
@@ -73,10 +73,10 @@ public class TreeTests {
 		tree.add("S2", "S2", null);
 
 		TreeTraverser<Node<String>> traverser = new TreeTraverser<Node<String>>() {
-		    @Override
-		    public Iterable<Node<String>> children(Node<String> root) {
-		        return root.getChildren();
-		    }
+			@Override
+			public Iterable<Node<String>> children(Node<String> root) {
+				return root.getChildren();
+			}
 		};
 
 		for (Node<String> node : traverser.postOrderTraversal(tree.getRoot())) {

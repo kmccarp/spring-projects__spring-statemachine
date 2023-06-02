@@ -27,8 +27,7 @@ public class StateMachineTestPlanBuilderJUnit5Tests {
 	@Test
 	public void testBuilderNoSteps() throws Exception {
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().build();
 		assertThat(plan).isNotNull();
 		List<StateMachineTestPlanStep<?, ?>> steps = TestUtils.readField("steps", plan);
 		assertThat(steps).isEmpty();
@@ -37,9 +36,7 @@ public class StateMachineTestPlanBuilderJUnit5Tests {
 	@Test
 	public void testBuilderOneStep() throws Exception {
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.step().expectState("SI").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().step().expectState("SI").and().build();
 		assertThat(plan).isNotNull();
 		List<StateMachineTestPlanStep<?, ?>> steps = TestUtils.readField("steps", plan);
 		assertThat(steps).hasSize(1);

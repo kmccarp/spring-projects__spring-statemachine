@@ -24,7 +24,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.annotation.OrderUtils;
 
-public class StateMachineActivatorAnnotationPostProcessor<T extends Annotation> implements MethodAnnotationPostProcessor<T>{
+public class StateMachineActivatorAnnotationPostProcessor<T extends Annotation> implements MethodAnnotationPostProcessor<T> {
 
 	protected final BeanFactory beanFactory;
 

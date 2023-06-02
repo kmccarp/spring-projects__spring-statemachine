@@ -42,14 +42,15 @@ public class DocsConfigurationSampleTests3 {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withSecurity()
-					.enabled(true)
-					.event("true")
-					.event("ROLE_ANONYMOUS", ComparisonType.ANY);
+		.withSecurity()
+		.enabled(true)
+		.event("true")
+		.event("ROLE_ANONYMOUS", ComparisonType.ANY);
 		}
 	}
+
 // end::snippetA[]
 
 // tag::snippetB[]
@@ -59,16 +60,17 @@ public class DocsConfigurationSampleTests3 {
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S0")
-					.target("S1")
-					.event("A")
-					.secured("ROLE_ANONYMOUS", ComparisonType.ANY)
-					.secured("hasTarget('S1')");
+		.withExternal()
+		.source("S0")
+		.target("S1")
+		.event("A")
+		.secured("ROLE_ANONYMOUS", ComparisonType.ANY)
+		.secured("hasTarget('S1')");
 		}
 	}
+
 // end::snippetB[]
 
 
@@ -79,30 +81,30 @@ public class DocsConfigurationSampleTests3 {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withSecurity()
-					.enabled(true);
+		.withSecurity()
+		.enabled(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial("S0")
-					.state("S1");
+		.withStates()
+		.initial("S0")
+		.state("S1");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source("S0")
-					.target("S1")
-					.action(securedAction())
-					.event("A");
+		.withExternal()
+		.source("S0")
+		.target("S1")
+		.action(securedAction())
+		.event("A");
 		}
 
 		@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -118,54 +120,57 @@ public class DocsConfigurationSampleTests3 {
 		}
 
 	}
+
 // end::snippetC[]
 
 // tag::snippetD[]
-		@Configuration
-		@EnableStateMachine
-		static class Config4 extends StateMachineConfigurerAdapter<String, String> {
+	@Configuration
+	@EnableStateMachine
+	static class Config4 extends StateMachineConfigurerAdapter<String, String> {
 
-			@Override
-			public void configure(StateMachineConfigurationConfigurer<String, String> config)
-					throws Exception {
-				config
-					.withSecurity()
-						.enabled(true)
-						.transitionAccessDecisionManager(null)
-						.eventAccessDecisionManager(null);
-			}
+		@Override
+		public void configure(StateMachineConfigurationConfigurer<String, String> config)
+	throws Exception {
+			config
+		.withSecurity()
+		.enabled(true)
+		.transitionAccessDecisionManager(null)
+		.eventAccessDecisionManager(null);
 		}
+	}
+
 // end::snippetD[]
 
 // tag::snippetE[]
-		@Configuration
-		@EnableGlobalMethodSecurity(securedEnabled = true)
-		public static class Config5 extends WebSecurityConfigurerAdapter {
+	@Configuration
+	@EnableGlobalMethodSecurity(securedEnabled = true)
+	public static class Config5 extends WebSecurityConfigurerAdapter {
 
-			@Autowired
-			public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-				auth
-					.inMemoryAuthentication()
-						.withUser("user").password("password").roles("USER");
-			}
+		@Autowired
+		public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+			auth
+		.inMemoryAuthentication()
+		.withUser("user").password("password").roles("USER");
 		}
+	}
+
 // end::snippetE[]
 
 // tag::snippetF[]
-		@Configuration
-		@EnableStateMachine
-		static class Config6 extends StateMachineConfigurerAdapter<String, String> {
+	@Configuration
+	@EnableStateMachine
+	static class Config6 extends StateMachineConfigurerAdapter<String, String> {
 
-			@Override
-			public void configure(StateMachineConfigurationConfigurer<String, String> config)
-					throws Exception {
-				config
-					.withSecurity()
-						.enabled(true)
-						.transition("true")
-						.transition("ROLE_ANONYMOUS", ComparisonType.ANY);
-			}
+		@Override
+		public void configure(StateMachineConfigurationConfigurer<String, String> config)
+	throws Exception {
+			config
+		.withSecurity()
+		.enabled(true)
+		.transition("true")
+		.transition("ROLE_ANONYMOUS", ComparisonType.ANY);
 		}
+	}
 // end::snippetF[]
 
 }

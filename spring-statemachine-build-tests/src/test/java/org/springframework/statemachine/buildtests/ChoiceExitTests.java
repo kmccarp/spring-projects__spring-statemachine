@@ -39,12 +39,7 @@ public class ChoiceExitTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent("E1").expectStateChanged(2).expectStates("DOSTUFF", "START").and()
-					.step().sendEvent("E2").expectStateChanged(2).expectState("READY").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent("E1").expectStateChanged(2).expectStates("DOSTUFF", "START").and().step().sendEvent("E2").expectStateChanged(2).expectState("READY").and().build();
 		plan.test();
 	}
 
@@ -56,12 +51,7 @@ public class ChoiceExitTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent("E1").expectStateChanged(2).expectStates("DOSTUFF", "START").and()
-					.step().sendEvent("E2").expectStateChanged(1).expectState("READY").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent("E1").expectStateChanged(2).expectStates("DOSTUFF", "START").and().step().sendEvent("E2").expectStateChanged(1).expectState("READY").and().build();
 		plan.test();
 	}
 
@@ -73,12 +63,7 @@ public class ChoiceExitTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("READY").and()
-					.step().sendEvent("E1").expectStateChanged(2).expectStates("DOSTUFF", "START").and()
-					.step().sendEvent("E3").expectStateChanged(1).expectStateExited(1).expectStates("DOSTUFF", "S1").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("READY").and().step().sendEvent("E1").expectStateChanged(2).expectStates("DOSTUFF", "START").and().step().sendEvent("E3").expectStateChanged(1).expectStateExited(1).expectStates("DOSTUFF", "S1").and().build();
 		plan.test();
 	}
 
@@ -89,8 +74,8 @@ public class ChoiceExitTests extends AbstractBuildTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -113,8 +98,8 @@ public class ChoiceExitTests extends AbstractBuildTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean

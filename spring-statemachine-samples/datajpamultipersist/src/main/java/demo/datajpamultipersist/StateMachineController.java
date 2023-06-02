@@ -41,7 +41,7 @@ public class StateMachineController {
 	public final static String MACHINE_ID_2 = "datajpamultipersist2";
 	public final static String MACHINE_ID_2R1 = "datajpamultipersist2#R1";
 	public final static String MACHINE_ID_2R2 = "datajpamultipersist2#R2";
-	private final static String[] MACHINES = new String[] { MACHINE_ID_1, MACHINE_ID_2 };
+	private final static String[] MACHINES = new String[]{MACHINE_ID_1, MACHINE_ID_2};
 	private final StateMachineLogListener listener = new StateMachineLogListener();
 
 	@Autowired
@@ -62,18 +62,18 @@ public class StateMachineController {
 
 	@RequestMapping("/state")
 	public String feedAndGetStates(
-			@RequestParam(value = "events", required = false) List<String> events,
-			@RequestParam(value = "machine", required = false, defaultValue = MACHINE_ID_1) String machine,
-			Model model) throws Exception {
+@RequestParam(value = "events", required = false) List<String> events,
+@RequestParam(value = "machine", required = false, defaultValue = MACHINE_ID_1) String machine,
+Model model) throws Exception {
 
 
 		StateMachine<String, String> stateMachine = getStateMachine(machine);
 		if (events != null) {
 			for (String event : events) {
 				stateMachine
-					.sendEvent(Mono.just(MessageBuilder
-						.withPayload(event).build()))
-					.blockLast();
+			.sendEvent(Mono.just(MessageBuilder
+	.withPayload(event).build()))
+			.blockLast();
 			}
 		}
 

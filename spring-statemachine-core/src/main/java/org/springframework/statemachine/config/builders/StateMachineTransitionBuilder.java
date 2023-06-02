@@ -67,10 +67,7 @@ import reactor.core.publisher.Mono;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class StateMachineTransitionBuilder<S, E>
-		extends
-		AbstractConfiguredAnnotationBuilder<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>
-		implements StateMachineTransitionConfigurer<S, E> {
+public class StateMachineTransitionBuilder<S, E>extendsAbstractConfiguredAnnotationBuilder<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>implements StateMachineTransitionConfigurer<S, E> {
 
 	private final Collection<TransitionData<S, E>> transitionData = new ArrayList<TransitionData<S, E>>();
 	private final Map<S, List<ChoiceData<S, E>>> choices = new HashMap<S, List<ChoiceData<S, E>>>();
@@ -95,7 +92,7 @@ public class StateMachineTransitionBuilder<S, E>
 	 * @param allowConfigurersOfSameType the allow configurers of same type
 	 */
 	public StateMachineTransitionBuilder(ObjectPostProcessor<Object> objectPostProcessor,
-			boolean allowConfigurersOfSameType) {
+boolean allowConfigurersOfSameType) {
 		super(objectPostProcessor, allowConfigurersOfSameType);
 	}
 
@@ -179,9 +176,9 @@ public class StateMachineTransitionBuilder<S, E>
 	 * @param name the name
 	 */
 	public void addTransition(S source, S target, S state, E event, Long period, Integer count,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
-			Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind, SecurityRule securityRule,
-			String name) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> actions,
+Function<StateContext<S, E>, Mono<Boolean>> guard, TransitionKind kind, SecurityRule securityRule,
+String name) {
 		// if rule not given, get it from global
 		if (securityRule == null) {
 			@SuppressWarnings("unchecked")

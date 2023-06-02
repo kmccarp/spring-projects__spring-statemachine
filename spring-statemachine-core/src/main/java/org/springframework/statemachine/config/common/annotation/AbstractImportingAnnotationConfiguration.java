@@ -53,8 +53,7 @@ import org.springframework.util.ObjectUtils;
  * @param <O> The object that used builder returns
  * @param <B> The type of the builder
  */
-public abstract class AbstractImportingAnnotationConfiguration<B extends AnnotationBuilder<O>, O> implements
-		ImportBeanDefinitionRegistrar, BeanFactoryAware, EnvironmentAware {
+public abstract class AbstractImportingAnnotationConfiguration<B extends AnnotationBuilder<O>, O> implementsImportBeanDefinitionRegistrar, BeanFactoryAware, EnvironmentAware {
 
 	private BeanFactory beanFactory;
 
@@ -71,7 +70,7 @@ public abstract class AbstractImportingAnnotationConfiguration<B extends Annotat
 		if (annotationTypes != null) {
 			for (Class<? extends Annotation> annotationType : annotationTypes) {
 				AnnotationAttributes attributes = AnnotationAttributes.fromMap(importingClassMetadata.getAnnotationAttributes(
-						annotationType.getName(), false));
+			annotationType.getName(), false));
 				if (attributes != null && attributes.containsKey("name")) {
 					names = attributes.getStringArray("name");
 					namedAnnotation = annotationType;
@@ -82,7 +81,7 @@ public abstract class AbstractImportingAnnotationConfiguration<B extends Annotat
 
 		// check if Scope annotation is defined and get proxyMode from it
 		AnnotationAttributes scopeAttributes = AnnotationAttributes.fromMap(importingClassMetadata.getAnnotationAttributes(
-				Scope.class.getName(), false));
+	Scope.class.getName(), false));
 		if (scopeAttributes != null) {
 			proxyMode = scopeAttributes.getEnum("proxyMode");
 		}
@@ -101,12 +100,12 @@ public abstract class AbstractImportingAnnotationConfiguration<B extends Annotat
 
 		if (ObjectUtils.isEmpty(names)) {
 			// ok, name(s) not given, generate one
-			names = new String[] { beanNameGenerator.generateBeanName(beanDefinition, registry) };
+			names = new String[]{beanNameGenerator.generateBeanName(beanDefinition, registry)};
 		}
 
 		registry.registerBeanDefinition(names[0], beanDefinition);
 		if (names.length > 1) {
-			for (int i = 1; i < names.length; i++) {
+			for (int i = 1;i < names.length;i++) {
 				registry.registerAlias(names[0], names[i]);
 			}
 		}
@@ -146,7 +145,7 @@ public abstract class AbstractImportingAnnotationConfiguration<B extends Annotat
 	 * @throws Exception if error occurred
 	 */
 	protected abstract BeanDefinition buildBeanDefinition(AnnotationMetadata importingClassMetadata,
-			Class<? extends Annotation> namedAnnotation) throws Exception;
+Class<? extends Annotation> namedAnnotation) throws Exception;
 
 	/**
 	 * Gets the annotations specific for this configurer.
@@ -174,7 +173,7 @@ public abstract class AbstractImportingAnnotationConfiguration<B extends Annotat
 	}
 
 	protected abstract static class BeanDelegatingFactoryBean<T, B extends AnnotationBuilder<O>, O> implements
-			FactoryBean<T>, BeanFactoryAware, InitializingBean, DisposableBean {
+FactoryBean<T>, BeanFactoryAware, InitializingBean, DisposableBean {
 
 		private final B builder;
 

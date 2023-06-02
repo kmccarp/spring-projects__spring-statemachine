@@ -27,7 +27,7 @@ public class EnabledOnMongoDbCondition implements ExecutionCondition {
 
 	static final ConditionEvaluationResult ENABLED_ON_MONGO = enabled("Mongo DB found");
 
-	static final ConditionEvaluationResult DISABLED_ON_MONGO =	disabled("Mongo DB not found");
+	static final ConditionEvaluationResult DISABLED_ON_MONGO = disabled("Mongo DB not found");
 
 	@Override
 	public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext context) {

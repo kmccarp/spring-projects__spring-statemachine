@@ -76,7 +76,7 @@ public class StateMachineHandler<T extends Annotation, S, E> implements Ordered 
 	 * @param processor the processor
 	 */
 	public StateMachineHandler(Class<?> beanClass, T metaAnnotation, Annotation annotation,
-			MethodInvokingStateMachineRuntimeProcessor<T, S, E> processor) {
+MethodInvokingStateMachineRuntimeProcessor<T, S, E> processor) {
 		this.beanClass = beanClass;
 		this.processor = processor;
 		this.metaAnnotation = metaAnnotation;

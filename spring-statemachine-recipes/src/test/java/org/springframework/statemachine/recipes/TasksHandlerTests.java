@@ -44,10 +44,10 @@ public class TasksHandlerTests {
 	@Test
 	public void testRunOnceSimpleNoFailures() throws InterruptedException {
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", sleepRunnable())
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", sleepRunnable())
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(9, 0, 0);
@@ -68,10 +68,10 @@ public class TasksHandlerTests {
 	@Test
 	public void testRunFail() throws InterruptedException {
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", failRunnable())
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", failRunnable())
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(11, 0, 0);
@@ -92,10 +92,10 @@ public class TasksHandlerTests {
 	@Test
 	public void testRunFailAndFixAndContinue() throws InterruptedException {
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", failRunnable())
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", failRunnable())
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(11, 0, 0);
@@ -124,10 +124,10 @@ public class TasksHandlerTests {
 	@Test
 	public void testRunFailAndAutomaticFix() throws InterruptedException {
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", failRunnable())
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", failRunnable())
+	.build();
 
 		TestTasksListener tasksListener = new TestTasksListener();
 		tasksListener.fix = true;
@@ -153,10 +153,10 @@ public class TasksHandlerTests {
 	@Test
 	public void testDagSingleRoot() throws InterruptedException {
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("1", "12", sleepRunnable())
-			.task("1", "13", sleepRunnable())
-			.build();
+	.task("1", sleepRunnable())
+	.task("1", "12", sleepRunnable())
+	.task("1", "13", sleepRunnable())
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(9, 0, 0);
@@ -177,16 +177,16 @@ public class TasksHandlerTests {
 	@Test
 	public void testDagMultiRoot() throws InterruptedException {
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("1", "12", sleepRunnable())
-			.task("1", "13", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("2", "22", sleepRunnable())
-			.task("2", "23", sleepRunnable())
-			.task("3", sleepRunnable())
-			.task("3", "32", sleepRunnable())
-			.task("3", "33", sleepRunnable())
-			.build();
+	.task("1", sleepRunnable())
+	.task("1", "12", sleepRunnable())
+	.task("1", "13", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("2", "22", sleepRunnable())
+	.task("2", "23", sleepRunnable())
+	.task("3", sleepRunnable())
+	.task("3", "32", sleepRunnable())
+	.task("3", "33", sleepRunnable())
+	.build();
 
 		TestListener listener = new TestListener();
 		StateMachine<String, String> machine = handler.getStateMachine();
@@ -212,11 +212,11 @@ public class TasksHandlerTests {
 	public void testEvents1() throws InterruptedException {
 		TestTasksListener tasksListener = new TestTasksListener();
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", sleepRunnable())
-			.listener(tasksListener)
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", sleepRunnable())
+	.listener(tasksListener)
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(9, 0, 0);
@@ -249,11 +249,11 @@ public class TasksHandlerTests {
 	public void testEvents2() throws InterruptedException {
 		TestTasksListener tasksListener = new TestTasksListener();
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", failRunnable())
-			.listener(tasksListener)
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", failRunnable())
+	.listener(tasksListener)
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(11, 0, 0);
@@ -283,11 +283,11 @@ public class TasksHandlerTests {
 	public void testEvents3() throws InterruptedException {
 		TestTasksListener tasksListener = new TestTasksListener();
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", failRunnable())
-			.listener(tasksListener)
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", failRunnable())
+	.listener(tasksListener)
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(11, 0, 0);
@@ -318,11 +318,11 @@ public class TasksHandlerTests {
 	public void testPersist1() throws InterruptedException {
 		TestStateMachinePersist persist = new TestStateMachinePersist();
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", sleepRunnable())
-			.persist(persist)
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", sleepRunnable())
+	.persist(persist)
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(9, 0, 0);
@@ -357,11 +357,11 @@ public class TasksHandlerTests {
 	public void testPersist2() throws InterruptedException {
 		TestStateMachinePersist persist = new TestStateMachinePersist();
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", failRunnable())
-			.persist(persist)
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", failRunnable())
+	.persist(persist)
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(11, 0, 0);
@@ -398,11 +398,11 @@ public class TasksHandlerTests {
 	public void testReset1() throws InterruptedException {
 		TestStateMachinePersist persist = new TestStateMachinePersist();
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", sleepRunnable())
-			.persist(persist)
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", sleepRunnable())
+	.persist(persist)
+	.build();
 
 		TestListener listener = new TestListener();
 		StateMachine<String, String> machine = handler.getStateMachine();
@@ -419,11 +419,11 @@ public class TasksHandlerTests {
 		DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<String, String>(childs, "ERROR", null, null, null);
 		TestStateMachinePersist persist = new TestStateMachinePersist(context);
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", sleepRunnable())
-			.persist(persist)
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", sleepRunnable())
+	.persist(persist)
+	.build();
 
 		TestListener listener = new TestListener();
 		StateMachine<String, String> machine = handler.getStateMachine();
@@ -442,11 +442,11 @@ public class TasksHandlerTests {
 		DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<String, String>(childs, "ERROR", null, null, null);
 		TestStateMachinePersist persist = new TestStateMachinePersist(context);
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", sleepRunnable())
-			.persist(persist)
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", sleepRunnable())
+	.persist(persist)
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(2, 0, 0);
@@ -473,11 +473,11 @@ public class TasksHandlerTests {
 		DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<String, String>(childs, "ERROR", null, null, null);
 		TestStateMachinePersist persist = new TestStateMachinePersist(context);
 		TasksHandler handler = TasksHandler.builder()
-			.task("1", sleepRunnable())
-			.task("2", sleepRunnable())
-			.task("3", sleepRunnable())
-			.persist(persist)
-			.build();
+	.task("1", sleepRunnable())
+	.task("2", sleepRunnable())
+	.task("3", sleepRunnable())
+	.persist(persist)
+	.build();
 
 		TestListener listener = new TestListener();
 		listener.reset(2, 0, 0);

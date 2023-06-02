@@ -30,7 +30,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = { StateMachineConfig.class})
+@SpringBootTest(classes = {StateMachineConfig.class})
 @DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
 public class StateMachineTests {
 
@@ -44,7 +44,7 @@ public class StateMachineTests {
 		stateMachine = stateMachineFactory.getStateMachine();
 		// plan don't know how to wait if machine is started
 		// automatically so wait here.
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0;i < 10;i++) {
 			if (stateMachine.getState() != null) {
 				break;
 			} else {
@@ -56,12 +56,7 @@ public class StateMachineTests {
 	@Test
 	public void testInitial() throws Exception {
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step()
-						.expectState("WAIT_NEW_ORDER")
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("WAIT_NEW_ORDER").and().build();
 		plan.test();
 	}
 
@@ -69,19 +64,8 @@ public class StateMachineTests {
 	public void testNoCustomerOrOrder() throws Exception {
 		// TODO: REACTOR check if less changes is good
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step()
-						.expectState("WAIT_NEW_ORDER")
-						.and()
-					.step()
-						.sendEvent("PLACE_ORDER")
-						.expectStates("CUSTOMER_ERROR")
-//						.expectStateChanged(2)
-						.expectStateChanged(1)
-						.expectStateMachineStopped(1)
-						.and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("WAIT_NEW_ORDER").and().step().sendEvent("PLACE_ORDER").expectStates("CUSTOMER_ERROR")
+//						.expectStateChanged(2).expectStateChanged(1).expectStateMachineStopped(1).and().build();
 		plan.test();
 	}
 
@@ -89,73 +73,29 @@ public class StateMachineTests {
 	public void testPlaceOrder() throws Exception {
 		// TODO: REACTOR check if less changes is good
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step()
-						.expectState("WAIT_NEW_ORDER")
-						.and()
-					.step()
-						.sendEvent(MessageBuilder.withPayload("PLACE_ORDER")
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("WAIT_NEW_ORDER").and().step().sendEvent(MessageBuilder.withPayload("PLACE_ORDER")
 								.setHeader("customer", "customer1")
-								.setHeader("order", "order1").build())
-						.expectStates("HANDLE_ORDER", "WAIT_PAYMENT", "WAIT_PRODUCT")
-						.expectStateChanged(8)
-						.and()
-					.step()
-						.sendEvent(MessageBuilder.withPayload("RECEIVE_PAYMENT")
-								.setHeader("payment", "1000").build())
-						.expectStates("ORDER_SHIPPED")
-//						.expectStateChanged(4)
-						.expectStateChanged(2)
-						.expectStateMachineStopped(3)
-						.and()
-					.build();
+								.setHeader("order", "order1").build()).expectStates("HANDLE_ORDER", "WAIT_PAYMENT", "WAIT_PRODUCT").expectStateChanged(8).and().step().sendEvent(MessageBuilder.withPayload("RECEIVE_PAYMENT")
+								.setHeader("payment", "1000").build()).expectStates("ORDER_SHIPPED")
+//						.expectStateChanged(4).expectStateChanged(2).expectStateMachineStopped(3).and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testNoPayment() throws Exception {
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step()
-						.expectState("WAIT_NEW_ORDER")
-						.and()
-					.step()
-						.sendEvent(MessageBuilder.withPayload("PLACE_ORDER")
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("WAIT_NEW_ORDER").and().step().sendEvent(MessageBuilder.withPayload("PLACE_ORDER")
 								.setHeader("customer", "customer1")
-								.setHeader("order", "order1").build())
-						.expectStates("HANDLE_ORDER", "WAIT_PAYMENT", "WAIT_PRODUCT")
-						.expectStateChanged(8)
-						.and()
-					.step()
-						.sendEvent(MessageBuilder.withPayload("RECEIVE_PAYMENT").build())
-						.expectStates("HANDLE_ORDER", "WAIT_PAYMENT", "WAIT_PRODUCT")
-						.expectStateChanged(4)
-						.and()
-					.build();
+								.setHeader("order", "order1").build()).expectStates("HANDLE_ORDER", "WAIT_PAYMENT", "WAIT_PRODUCT").expectStateChanged(8).and().step().sendEvent(MessageBuilder.withPayload("RECEIVE_PAYMENT").build()).expectStates("HANDLE_ORDER", "WAIT_PAYMENT", "WAIT_PRODUCT").expectStateChanged(4).and().build();
 		plan.test();
 	}
 
 	@Test
 	public void testReminder() throws Exception {
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step()
-						.expectState("WAIT_NEW_ORDER")
-						.and()
-					.step()
-						.sendEvent(MessageBuilder.withPayload("PLACE_ORDER")
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("WAIT_NEW_ORDER").and().step().sendEvent(MessageBuilder.withPayload("PLACE_ORDER")
 								.setHeader("customer", "customer1")
-								.setHeader("order", "order1").build())
-						.expectStates("HANDLE_ORDER", "WAIT_PAYMENT", "WAIT_PRODUCT")
-						.expectStateChanged(8)
-						.and()
-					.step()
-						.expectStateChanged(2)
-						.and()
-					.build();
+								.setHeader("order", "order1").build()).expectStates("HANDLE_ORDER", "WAIT_PAYMENT", "WAIT_PRODUCT").expectStateChanged(8).and().step().expectStateChanged(2).and().build();
 		plan.test();
 	}
 

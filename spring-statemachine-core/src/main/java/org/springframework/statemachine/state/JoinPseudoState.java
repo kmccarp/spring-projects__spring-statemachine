@@ -66,9 +66,9 @@ public class JoinPseudoState<S, E> extends AbstractPseudoState<S, E> {
 				return Mono.empty();
 			}
 			return Flux.fromIterable(joinTargets)
-				.filterWhen(jst -> evaluateInternal(jst.guard, context))
-				.next()
-				.map(jst -> jst.getState());
+		.filterWhen(jst -> evaluateInternal(jst.guard, context))
+		.next()
+		.map(jst -> jst.getState());
 		});
 	}
 
@@ -116,9 +116,9 @@ public class JoinPseudoState<S, E> extends AbstractPseudoState<S, E> {
 		private volatile boolean notified = false;
 
 		public JoinTracker() {
-			this.track = new ArrayList<List<State<S,E>>>(joins.size());
+			this.track = new ArrayList<List<State<S, E>>>(joins.size());
 			for (List<State<S, E>> list : joins) {
-				this.track.add(new ArrayList<State<S,E>>(list));
+				this.track.add(new ArrayList<State<S, E>>(list));
 				for (State<S, E> tt : list) {
 					final State<S, E> t = tt;
 					t.addStateListener(new StateListenerAdapter<S, E>() {
@@ -127,8 +127,8 @@ public class JoinPseudoState<S, E> extends AbstractPseudoState<S, E> {
 						public void onComplete(StateContext<S, E> context) {
 							synchronized (track) {
 								Iterator<List<State<S, E>>> iterator = track.iterator();
-								while(iterator.hasNext()) {
-									List<State<S,E>> next = iterator.next();
+								while (iterator.hasNext()) {
+									List<State<S, E>> next = iterator.next();
 									if (next.contains(t)) {
 										iterator.remove();
 									}
@@ -148,7 +148,7 @@ public class JoinPseudoState<S, E> extends AbstractPseudoState<S, E> {
 		void reset() {
 			track.clear();
 			for (List<State<S, E>> list : joins) {
-				track.add(new ArrayList<State<S,E>>(list));
+				track.add(new ArrayList<State<S, E>>(list));
 			}
 			notified = false;
 		}

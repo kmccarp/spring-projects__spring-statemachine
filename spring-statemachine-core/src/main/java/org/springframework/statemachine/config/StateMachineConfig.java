@@ -46,7 +46,7 @@ public class StateMachineConfig<S, E> {
 	 * @param states the states
 	 */
 	public StateMachineConfig(ConfigurationData<S, E> stateMachineConfigurationConfig, TransitionsData<S, E> transitions,
-			StatesData<S, E> states) {
+StatesData<S, E> states) {
 		this(stateMachineConfigurationConfig, transitions, states, null);
 	}
 
@@ -59,7 +59,7 @@ public class StateMachineConfig<S, E> {
 	 * @param model the model
 	 */
 	public StateMachineConfig(ConfigurationData<S, E> stateMachineConfigurationConfig, TransitionsData<S, E> transitions,
-			StatesData<S, E> states, ModelData<S, E> model) {
+StatesData<S, E> states, ModelData<S, E> model) {
 		this.stateMachineConfigurationConfig = stateMachineConfigurationConfig;
 		this.transitions = transitions;
 		this.states = states;

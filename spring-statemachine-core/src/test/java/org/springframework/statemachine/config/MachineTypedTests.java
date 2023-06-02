@@ -215,17 +215,17 @@ public class MachineTypedTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<MyTestStates1, MyTestEvents1> states) throws Exception {
 			states
-				.withStates()
-					.initial(MyTestStates1.S1)
-					.state(MyTestStates1.S2);
+		.withStates()
+		.initial(MyTestStates1.S1)
+		.state(MyTestStates1.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<MyTestStates1, MyTestEvents1> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(MyTestStates1.S1).target(MyTestStates1.S2)
-					.event(MyTestEvents1.E1);
+		.withExternal()
+		.source(MyTestStates1.S1).target(MyTestStates1.S2)
+		.event(MyTestEvents1.E1);
 		}
 	}
 
@@ -236,17 +236,17 @@ public class MachineTypedTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<MyTestStates2, MyTestEvents2> states) throws Exception {
 			states
-				.withStates()
-					.initial(MyTestStates2.S1)
-					.state(MyTestStates2.S2);
+		.withStates()
+		.initial(MyTestStates2.S1)
+		.state(MyTestStates2.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<MyTestStates2, MyTestEvents2> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(MyTestStates2.S1).target(MyTestStates2.S2)
-					.event(MyTestEvents2.E1);
+		.withExternal()
+		.source(MyTestStates2.S1).target(MyTestStates2.S2)
+		.event(MyTestEvents2.E1);
 		}
 	}
 
@@ -257,17 +257,17 @@ public class MachineTypedTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<MyTestStates1, MyTestEvents1> states) throws Exception {
 			states
-				.withStates()
-					.initial(MyTestStates1.S1)
-					.state(MyTestStates1.S2);
+		.withStates()
+		.initial(MyTestStates1.S1)
+		.state(MyTestStates1.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<MyTestStates1, MyTestEvents1> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(MyTestStates1.S1).target(MyTestStates1.S2)
-					.event(MyTestEvents1.E1);
+		.withExternal()
+		.source(MyTestStates1.S1).target(MyTestStates1.S2)
+		.event(MyTestEvents1.E1);
 		}
 	}
 
@@ -278,17 +278,17 @@ public class MachineTypedTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<MyTestStates2, MyTestEvents2> states) throws Exception {
 			states
-				.withStates()
-					.initial(MyTestStates2.S1)
-					.state(MyTestStates2.S2);
+		.withStates()
+		.initial(MyTestStates2.S1)
+		.state(MyTestStates2.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<MyTestStates2, MyTestEvents2> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(MyTestStates2.S1).target(MyTestStates2.S2)
-					.event(MyTestEvents2.E1);
+		.withExternal()
+		.source(MyTestStates2.S1).target(MyTestStates2.S2)
+		.event(MyTestEvents2.E1);
 		}
 	}
 
@@ -299,17 +299,17 @@ public class MachineTypedTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<MyTestStates1, MyTestEvents1> states) throws Exception {
 			states
-				.withStates()
-					.initial(MyTestStates1.S1)
-					.state(MyTestStates1.S2);
+		.withStates()
+		.initial(MyTestStates1.S1)
+		.state(MyTestStates1.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<MyTestStates1, MyTestEvents1> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(MyTestStates1.S1).target(MyTestStates1.S2)
-					.event(MyTestEvents1.E1);
+		.withExternal()
+		.source(MyTestStates1.S1).target(MyTestStates1.S2)
+		.event(MyTestEvents1.E1);
 		}
 	}
 
@@ -320,17 +320,17 @@ public class MachineTypedTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<MyTestStates2, MyTestEvents2> states) throws Exception {
 			states
-				.withStates()
-					.initial(MyTestStates2.S1)
-					.state(MyTestStates2.S2);
+		.withStates()
+		.initial(MyTestStates2.S1)
+		.state(MyTestStates2.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<MyTestStates2, MyTestEvents2> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(MyTestStates2.S1).target(MyTestStates2.S2)
-					.event(MyTestEvents2.E1);
+		.withExternal()
+		.source(MyTestStates2.S1).target(MyTestStates2.S2)
+		.event(MyTestEvents2.E1);
 		}
 	}
 
@@ -341,17 +341,17 @@ public class MachineTypedTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<MyTestStates1, MyTestEvents1> states) throws Exception {
 			states
-				.withStates()
-					.initial(MyTestStates1.S1)
-					.state(MyTestStates1.S2);
+		.withStates()
+		.initial(MyTestStates1.S1)
+		.state(MyTestStates1.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<MyTestStates1, MyTestEvents1> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(MyTestStates1.S1).target(MyTestStates1.S2)
-					.event(MyTestEvents1.E1);
+		.withExternal()
+		.source(MyTestStates1.S1).target(MyTestStates1.S2)
+		.event(MyTestEvents1.E1);
 		}
 	}
 
@@ -362,17 +362,17 @@ public class MachineTypedTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<MyTestStates2, MyTestEvents2> states) throws Exception {
 			states
-				.withStates()
-					.initial(MyTestStates2.S1)
-					.state(MyTestStates2.S2);
+		.withStates()
+		.initial(MyTestStates2.S1)
+		.state(MyTestStates2.S2);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<MyTestStates2, MyTestEvents2> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(MyTestStates2.S1).target(MyTestStates2.S2)
-					.event(MyTestEvents2.E1);
+		.withExternal()
+		.source(MyTestStates2.S1).target(MyTestStates2.S2)
+		.event(MyTestEvents2.E1);
 		}
 	}
 

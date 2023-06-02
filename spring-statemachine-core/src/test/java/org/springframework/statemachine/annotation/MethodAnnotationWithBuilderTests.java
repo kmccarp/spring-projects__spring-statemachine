@@ -134,7 +134,7 @@ public class MethodAnnotationWithBuilderTests extends AbstractStateMachineTests 
 		}
 
 		@Bean
-		public StateMachine<TestStates,TestEvents> stateMachine() throws Exception {
+		public StateMachine<TestStates, TestEvents> stateMachine() throws Exception {
 			return buildMachine(null);
 		}
 	}
@@ -148,7 +148,7 @@ public class MethodAnnotationWithBuilderTests extends AbstractStateMachineTests 
 		}
 
 		@Bean
-		public StateMachine<TestStates,TestEvents> stateMachine() throws Exception {
+		public StateMachine<TestStates, TestEvents> stateMachine() throws Exception {
 			return buildMachine(null);
 		}
 	}
@@ -162,8 +162,8 @@ public class MethodAnnotationWithBuilderTests extends AbstractStateMachineTests 
 		}
 	}
 
-	private static StateMachine<TestStates,TestEvents> buildMachine(BeanFactory beanFactory) throws Exception {
-		Builder<TestStates,TestEvents> builder = StateMachineBuilder.builder();
+	private static StateMachine<TestStates, TestEvents> buildMachine(BeanFactory beanFactory) throws Exception {
+		Builder<TestStates, TestEvents> builder = StateMachineBuilder.builder();
 
 		ConfigurationConfigurer<TestStates, TestEvents> withConfiguration = builder.configureConfiguration().withConfiguration();
 		withConfiguration.machineId("xxx");
@@ -172,15 +172,15 @@ public class MethodAnnotationWithBuilderTests extends AbstractStateMachineTests 
 		}
 
 		builder.configureStates()
-			.withStates()
-				.initial(TestStates.S1)
-				.states(EnumSet.allOf(TestStates.class));
+	.withStates()
+	.initial(TestStates.S1)
+	.states(EnumSet.allOf(TestStates.class));
 
 		builder.configureTransitions()
-			.withExternal()
-				.source(TestStates.S1)
-				.target(TestStates.S2)
-				.event(TestEvents.E1);
+	.withExternal()
+	.source(TestStates.S1)
+	.target(TestStates.S2)
+	.event(TestEvents.E1);
 
 		return builder.build();
 	}

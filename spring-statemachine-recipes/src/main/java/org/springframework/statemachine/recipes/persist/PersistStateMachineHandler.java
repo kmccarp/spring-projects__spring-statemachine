@@ -28,11 +28,11 @@ import org.springframework.statemachine.StateMachine;
  */
 public class PersistStateMachineHandler extends GenericPersistStateMachineHandler<String, String> {
 
-    public PersistStateMachineHandler(StateMachine<String, String> stateMachine) {
-        super(stateMachine);
-    }
+	public PersistStateMachineHandler(StateMachine<String, String> stateMachine) {
+		super(stateMachine);
+	}
 
-    public interface PersistStateChangeListener extends GenericPersistStateChangeListener<String, String> {
-    }
+	public interface PersistStateChangeListener extends GenericPersistStateChangeListener<String, String> {
+	}
 
 }

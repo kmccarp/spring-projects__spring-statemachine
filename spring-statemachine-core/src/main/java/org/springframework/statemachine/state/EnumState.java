@@ -72,7 +72,7 @@ public class EnumState<S extends Enum<S>, E extends Enum<E>> extends ObjectState
 	 * @param exitActions the exit actions
 	 */
 	public EnumState(S id, Collection<E> deferred, Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions) {
 		super(id, deferred, entryActions, exitActions);
 	}
 
@@ -86,7 +86,7 @@ public class EnumState<S extends Enum<S>, E extends Enum<E>> extends ObjectState
 	 * @param pseudoState the pseudo state
 	 */
 	public EnumState(S id, Collection<E> deferred, Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState) {
 		super(id, deferred, entryActions, exitActions, pseudoState);
 	}
 
@@ -101,8 +101,8 @@ public class EnumState<S extends Enum<S>, E extends Enum<E>> extends ObjectState
 	 * @param regions the regions
 	 */
 	public EnumState(S id, Collection<E> deferred, Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
-			Collection<Region<S, E>> regions) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
+Collection<Region<S, E>> regions) {
 		super(id, deferred, entryActions, exitActions, pseudoState, regions);
 	}
 
@@ -117,8 +117,8 @@ public class EnumState<S extends Enum<S>, E extends Enum<E>> extends ObjectState
 	 * @param submachine the submachine
 	 */
 	public EnumState(S id, Collection<E> deferred, Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
-			StateMachine<S, E> submachine) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
+StateMachine<S, E> submachine) {
 		super(id, deferred, entryActions, exitActions, pseudoState, submachine);
 	}
 

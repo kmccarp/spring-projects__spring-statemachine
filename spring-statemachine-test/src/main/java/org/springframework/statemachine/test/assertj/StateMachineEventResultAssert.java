@@ -27,8 +27,7 @@ import org.springframework.statemachine.StateMachineEventResult.ResultType;
  * @author Janne Valkealahti
  *
  */
-public class StateMachineEventResultAssert
-		extends AbstractAssert<StateMachineEventResultAssert, StateMachineEventResult<?, ?>> {
+public class StateMachineEventResultAssertextends AbstractAssert<StateMachineEventResultAssert, StateMachineEventResult<?, ?>> {
 
 	/**
 	 * Instantiates a new state machine event result assert.

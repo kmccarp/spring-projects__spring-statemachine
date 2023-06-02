@@ -24,7 +24,7 @@ public class StateMachineBlockHoundIntegration implements BlockHoundIntegration 
 	public void applyTo(Builder builder) {
 		// whitelisting some blocking calls in tests
 		builder
-			.allowBlockingCallsInside("java.util.concurrent.locks.LockSupport", "park")
-			.allowBlockingCallsInside("org.springframework.statemachine.recipes.TasksHandlerTests$1", "run");
+	.allowBlockingCallsInside("java.util.concurrent.locks.LockSupport", "park")
+	.allowBlockingCallsInside("org.springframework.statemachine.recipes.TasksHandlerTests$1", "run");
 	}
 }

@@ -71,7 +71,7 @@ public class StateMachineContextUtils {
 	 */
 	public static StateMachineEventPublisher getEventPublisher(BeanFactory beanFactory) {
 		return getBeanOfType(beanFactory, StateMachineSystemConstants.DEFAULT_ID_EVENT_PUBLISHER,
-				StateMachineEventPublisher.class);
+	StateMachineEventPublisher.class);
 	}
 
 	/**

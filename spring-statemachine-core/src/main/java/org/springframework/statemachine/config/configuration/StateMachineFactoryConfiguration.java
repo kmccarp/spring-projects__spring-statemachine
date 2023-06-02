@@ -54,24 +54,23 @@ import org.springframework.util.ClassUtils;
  * @param <E> the type of event
  */
 @Configuration
-public class StateMachineFactoryConfiguration<S, E> extends
-		AbstractImportingAnnotationConfiguration<StateMachineConfigBuilder<S, E>, StateMachineConfig<S, E>> {
+public class StateMachineFactoryConfiguration<S, E> extendsAbstractImportingAnnotationConfiguration<StateMachineConfigBuilder<S, E>, StateMachineConfig<S, E>> {
 
 	private final StateMachineConfigBuilder<S, E> builder = new StateMachineConfigBuilder<S, E>();
 
 	@Override
 	protected BeanDefinition buildBeanDefinition(AnnotationMetadata importingClassMetadata,
-			Class<? extends Annotation> namedAnnotation) throws Exception {
+Class<? extends Annotation> namedAnnotation) throws Exception {
 
 		String enableStateMachineEnclosingClassName = importingClassMetadata.getClassName();
 		// for below classloader, see gh122
 		Class<?> enableStateMachineEnclosingClass = ClassUtils.forName(enableStateMachineEnclosingClassName,
-				ClassUtils.getDefaultClassLoader());
+	ClassUtils.getDefaultClassLoader());
 
 		BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder
-				.rootBeanDefinition(StateMachineFactoryDelegatingFactoryBean.class);
+	.rootBeanDefinition(StateMachineFactoryDelegatingFactoryBean.class);
 		AnnotationAttributes attributes = AnnotationAttributes.fromMap(importingClassMetadata.getAnnotationAttributes(
-				EnableStateMachineFactory.class.getName(), false));
+	EnableStateMachineFactory.class.getName(), false));
 		Boolean contextEvents = attributes.getBoolean("contextEvents");
 		beanDefinitionBuilder.addConstructorArgValue(builder);
 		beanDefinitionBuilder.addConstructorArgValue(importingClassMetadata.getClassName());
@@ -108,7 +107,7 @@ public class StateMachineFactoryConfiguration<S, E> extends
 	}
 
 	private static class StateMachineFactoryDelegatingFactoryBean<S, E> implements
-			FactoryBean<StateMachineFactory<S, E>>, BeanFactoryAware, InitializingBean, BeanClassLoaderAware {
+FactoryBean<StateMachineFactory<S, E>>, BeanFactoryAware, InitializingBean, BeanClassLoaderAware {
 
 		private final StateMachineConfigBuilder<S, E> builder;
 		private BeanFactory beanFactory;
@@ -148,11 +147,11 @@ public class StateMachineFactoryConfiguration<S, E> extends
 		@Override
 		public void afterPropertiesSet() throws Exception {
 			AnnotationConfigurer<StateMachineConfig<S, E>, StateMachineConfigBuilder<S, E>> configurer =
-			        (AnnotationConfigurer<StateMachineConfig<S, E>, StateMachineConfigBuilder<S, E>>) beanFactory
-						.getBean(ClassUtils.forName(clazzName, classLoader));
-		    builder.apply(configurer);
+		(AnnotationConfigurer<StateMachineConfig<S, E>, StateMachineConfigBuilder<S, E>>)beanFactory
+.getBean(ClassUtils.forName(clazzName, classLoader));
+			builder.apply(configurer);
 
-			ObjectStateMachineFactory<S, E> objectStateMachineFactory =	StateMachineFactory.create(builder);
+			ObjectStateMachineFactory<S, E> objectStateMachineFactory = StateMachineFactory.create(builder);
 
 			objectStateMachineFactory.setBeanFactory(beanFactory);
 			objectStateMachineFactory.setContextEventsEnabled(contextEvents);

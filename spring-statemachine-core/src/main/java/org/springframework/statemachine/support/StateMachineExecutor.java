@@ -112,6 +112,7 @@ public interface StateMachineExecutor<S, E> extends StateMachineReactiveLifecycl
 	 */
 	public interface StateMachineExecutorCallback {
 		void complete();
+
 		void error(Throwable e);
 	}
 

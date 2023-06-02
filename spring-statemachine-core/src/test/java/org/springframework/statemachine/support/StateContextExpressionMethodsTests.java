@@ -97,7 +97,7 @@ public class StateContextExpressionMethodsTests {
 		extendedState.getVariables().put("boolean1", true);
 		extendedState.getVariables().put("boolean2", false);
 		StateContext<SpelStates, SpelEvents> stateContext = new DefaultStateContext<SpelStates, SpelEvents>(
-				null, MessageBuilder.withPayload(SpelEvents.E1).build(), messageHeaders, extendedState, new MockTransition(), stateMachine, null, null, null);
+	null, MessageBuilder.withPayload(SpelEvents.E1).build(), messageHeaders, extendedState, new MockTransition(), stateMachine, null, null, null);
 		return stateContext;
 	}
 
@@ -211,7 +211,7 @@ public class StateContextExpressionMethodsTests {
 
 		@Override
 		public Mono<List<StateMachineEventResult<SpelStates, SpelEvents>>> sendEventCollect(
-				Mono<Message<SpelEvents>> event) {
+	Mono<Message<SpelEvents>> event) {
 			return null;
 		}
 

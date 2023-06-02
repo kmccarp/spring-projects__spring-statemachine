@@ -58,44 +58,44 @@ public class LoggingListener implements ApplicationListener<StateMachineEvent> {
 		}
 		catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("Invalid log level '" + level
-					+ "'. The (case-insensitive) supported values are: "
-					+ StringUtils.arrayToCommaDelimitedString(Level.values()));
+		+ "'. The (case-insensitive) supported values are: "
+		+ StringUtils.arrayToCommaDelimitedString(Level.values()));
 		}
 	}
 
 	@Override
 	public void onApplicationEvent(StateMachineEvent event) {
 		switch (this.level) {
-		case FATAL:
-			if (log.isFatalEnabled()) {
-				log.fatal(event);
-			}
-			break;
-		case ERROR:
-			if (log.isErrorEnabled()) {
-				log.error(event);
-			}
-			break;
-		case WARN:
-			if (log.isWarnEnabled()) {
-				log.warn(event);
-			}
-			break;
-		case INFO:
-			if (log.isInfoEnabled()) {
-				log.info(event);
-			}
-			break;
-		case DEBUG:
-			if (log.isDebugEnabled()) {
-				log.debug(event);
-			}
-			break;
-		case TRACE:
-			if (log.isTraceEnabled()) {
-				log.trace(event);
-			}
-			break;
+			case FATAL:
+				if (log.isFatalEnabled()) {
+					log.fatal(event);
+				}
+				break;
+			case ERROR:
+				if (log.isErrorEnabled()) {
+					log.error(event);
+				}
+				break;
+			case WARN:
+				if (log.isWarnEnabled()) {
+					log.warn(event);
+				}
+				break;
+			case INFO:
+				if (log.isInfoEnabled()) {
+					log.info(event);
+				}
+				break;
+			case DEBUG:
+				if (log.isDebugEnabled()) {
+					log.debug(event);
+				}
+				break;
+			case TRACE:
+				if (log.isTraceEnabled()) {
+					log.trace(event);
+				}
+				break;
 		}
 	}
 

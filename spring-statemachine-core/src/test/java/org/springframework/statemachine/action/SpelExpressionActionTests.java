@@ -69,33 +69,33 @@ public class SpelExpressionActionTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1, TestEvents.E2)
-					.state(TestStates.S2)
-					.state(TestStates.S3);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1, TestEvents.E2)
+		.state(TestStates.S2)
+		.state(TestStates.S3);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.action(testAction1())
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.action(testAction1())
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2);
 		}
 
 		@Bean
 		public TestSpelAction testAction1() {
 			ExpressionParser parser = new SpelExpressionParser();
 			return new TestSpelAction(
-					parser.parseExpression("stateMachine.sendEvent(T(org.springframework.statemachine.AbstractStateMachineTests.TestEvents).E2)"));
+		parser.parseExpression("stateMachine.sendEvent(T(org.springframework.statemachine.AbstractStateMachineTests.TestEvents).E2)"));
 		}
 
 	}

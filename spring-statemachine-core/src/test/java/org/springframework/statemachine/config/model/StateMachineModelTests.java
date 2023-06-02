@@ -54,8 +54,8 @@ public class StateMachineModelTests {
 		StateMachineModelVerifier<String, String> verifier = new DefaultStateMachineModelVerifier<>();
 
 		ConfigurationData<String, String> configurationData = new ConfigurationData<>(beanFactory, autoStart, ensemble,
-				listeners, securityEnabled, transitionSecurityAccessDecisionManager, eventSecurityAccessDecisionManager,
-				eventSecurityRule, transitionSecurityRule, verifierEnabled, verifier, null, null, null);
+	listeners, securityEnabled, transitionSecurityAccessDecisionManager, eventSecurityAccessDecisionManager,
+	eventSecurityRule, transitionSecurityRule, verifierEnabled, verifier, null, null, null);
 
 		Collection<StateData<String, String>> stateData = new ArrayList<>();
 		StateData<String, String> stateData1 = new StateData<String, String>(null, null, "S1", null, null, null);
@@ -78,7 +78,7 @@ public class StateMachineModelTests {
 		StateMachineModel<String, String> stateMachineModel = new DefaultStateMachineModel<>(configurationData, statesData, transitionsData);
 		ObjectStateMachineFactory<String, String> factory = new ObjectStateMachineFactory<>(stateMachineModel);
 
-		StateMachine<String,String> stateMachine = factory.getStateMachine();
+		StateMachine<String, String> stateMachine = factory.getStateMachine();
 		doStartAndAssert(stateMachine);
 		assertThat(stateMachine.getState().getIds()).containsExactly("S1");
 		doSendEventAndConsumeAll(stateMachine, "E1");
@@ -101,7 +101,7 @@ public class StateMachineModelTests {
 		StateMachineModel<String, String> stateMachineModel = new DefaultStateMachineModel<>(configurationData, statesData, transitionsData);
 		ObjectStateMachineFactory<String, String> factory = new ObjectStateMachineFactory<>(stateMachineModel);
 
-		StateMachine<String,String> stateMachine = factory.getStateMachine();
+		StateMachine<String, String> stateMachine = factory.getStateMachine();
 		doStartAndAssert(stateMachine);
 		assertThat(stateMachine.getState().getIds()).containsExactly("S1");
 		doSendEventAndConsumeAll(stateMachine, "E1");
@@ -140,7 +140,7 @@ public class StateMachineModelTests {
 
 		ObjectStateMachineFactory<String, String> factory = new ObjectStateMachineFactory<>(stateMachineModel);
 
-		StateMachine<String,String> stateMachine = factory.getStateMachine();
+		StateMachine<String, String> stateMachine = factory.getStateMachine();
 		doStartAndAssert(stateMachine);
 
 		assertThat(stateMachine.getState().getIds()).containsOnly("S1");

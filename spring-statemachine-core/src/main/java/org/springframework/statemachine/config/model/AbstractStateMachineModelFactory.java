@@ -39,8 +39,7 @@ import org.springframework.util.Assert;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public abstract class AbstractStateMachineModelFactory<S, E>
-		implements StateMachineComponentResolver<S, E>, StateMachineModelFactory<S, E>, BeanFactoryAware, ResourceLoaderAware {
+public abstract class AbstractStateMachineModelFactory<S, E>implements StateMachineComponentResolver<S, E>, StateMachineModelFactory<S, E>, BeanFactoryAware, ResourceLoaderAware {
 
 	private BeanFactory beanFactory;
 	private ResourceLoader resourceLoader = new DefaultResourceLoader();
@@ -60,7 +59,7 @@ public abstract class AbstractStateMachineModelFactory<S, E>
 	 * @param stateMachineComponentResolver the state machine component resolver
 	 */
 	public AbstractStateMachineModelFactory(ResourceLoader resourceLoader,
-			StateMachineComponentResolver<S, E> stateMachineComponentResolver) {
+StateMachineComponentResolver<S, E> stateMachineComponentResolver) {
 		this.resourceLoader = resourceLoader;
 		this.stateMachineComponentResolver = stateMachineComponentResolver;
 	}

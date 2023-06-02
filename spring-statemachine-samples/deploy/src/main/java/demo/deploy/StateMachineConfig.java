@@ -35,19 +35,19 @@ public class StateMachineConfig {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true)
-					.listener(stateMachineLogListener());
+		.withConfiguration()
+		.autoStartup(true)
+		.listener(stateMachineLogListener());
 		}
 
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model)
-				throws Exception {
+	throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean

@@ -47,10 +47,11 @@ public class StateMachineConfig {
 
 		@Bean
 		public StateMachineRuntimePersister<States, Events, String> stateMachineRuntimePersister(
-				JpaStateMachineRepository jpaStateMachineRepository) {
+	JpaStateMachineRepository jpaStateMachineRepository) {
 			return new JpaPersistingStateMachineInterceptor<>(jpaStateMachineRepository);
 		}
 	}
+
 //end::snippetA[]
 
 //tag::snippetB[]
@@ -60,10 +61,11 @@ public class StateMachineConfig {
 
 		@Bean
 		public StateMachineRuntimePersister<States, Events, String> stateMachineRuntimePersister(
-				MongoDbStateMachineRepository jpaStateMachineRepository) {
+	MongoDbStateMachineRepository jpaStateMachineRepository) {
 			return new MongoDbPersistingStateMachineInterceptor<>(jpaStateMachineRepository);
 		}
 	}
+
 //end::snippetB[]
 
 //tag::snippetC[]
@@ -73,10 +75,11 @@ public class StateMachineConfig {
 
 		@Bean
 		public StateMachineRuntimePersister<States, Events, String> stateMachineRuntimePersister(
-				RedisStateMachineRepository jpaStateMachineRepository) {
+	RedisStateMachineRepository jpaStateMachineRepository) {
 			return new RedisPersistingStateMachineInterceptor<>(jpaStateMachineRepository);
 		}
 	}
+
 //end::snippetC[]
 
 	@Configuration
@@ -89,49 +92,50 @@ public class StateMachineConfig {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<States, Events> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withPersistence()
-					.runtimePersister(stateMachineRuntimePersister);
+		.withPersistence()
+		.runtimePersister(stateMachineRuntimePersister);
 		}
+
 //end::snippetD[]
 
 		@Override
 		public void configure(StateMachineStateConfigurer<States, Events> states)
-				throws Exception {
+	throws Exception {
 			states
-				.withStates()
-					.initial(States.S1)
-					.states(EnumSet.allOf(States.class));
+		.withStates()
+		.initial(States.S1)
+		.states(EnumSet.allOf(States.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<States, Events> transitions)
-				throws Exception {
+	throws Exception {
 			transitions
-				.withExternal()
-					.source(States.S1).target(States.S2)
-					.event(Events.E1)
-					.and()
-				.withExternal()
-					.source(States.S2).target(States.S3)
-					.event(Events.E2)
-					.and()
-				.withExternal()
-					.source(States.S3).target(States.S4)
-					.event(Events.E3)
-					.and()
-				.withExternal()
-					.source(States.S4).target(States.S5)
-					.event(Events.E4)
-					.and()
-				.withExternal()
-					.source(States.S5).target(States.S6)
-					.event(Events.E5)
-					.and()
-				.withExternal()
-					.source(States.S6).target(States.S1)
-					.event(Events.E6);
+		.withExternal()
+		.source(States.S1).target(States.S2)
+		.event(Events.E1)
+		.and()
+		.withExternal()
+		.source(States.S2).target(States.S3)
+		.event(Events.E2)
+		.and()
+		.withExternal()
+		.source(States.S3).target(States.S4)
+		.event(Events.E3)
+		.and()
+		.withExternal()
+		.source(States.S4).target(States.S5)
+		.event(Events.E4)
+		.and()
+		.withExternal()
+		.source(States.S5).target(States.S6)
+		.event(Events.E5)
+		.and()
+		.withExternal()
+		.source(States.S6).target(States.S1)
+		.event(Events.E6);
 		}
 	}
 
@@ -141,8 +145,8 @@ public class StateMachineConfig {
 //tag::snippetE[]
 		@Bean
 		public StateMachineService<States, Events> stateMachineService(
-				StateMachineFactory<States, Events> stateMachineFactory,
-				StateMachineRuntimePersister<States, Events, String> stateMachineRuntimePersister) {
+	StateMachineFactory<States, Events> stateMachineFactory,
+	StateMachineRuntimePersister<States, Events, String> stateMachineRuntimePersister) {
 			return new DefaultStateMachineService<States, Events>(stateMachineFactory, stateMachineRuntimePersister);
 		}
 //end::snippetE[]

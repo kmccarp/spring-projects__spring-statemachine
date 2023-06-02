@@ -24,11 +24,11 @@ public class StateMachineBlockHoundIntegration implements BlockHoundIntegration 
 	public void applyTo(Builder builder) {
 		// whitelisting some blocking calls in tests
 		builder
-			.allowBlockingCallsInside("org.springframework.statemachine.AbstractStateMachineTests$TestSleepAction", "execute")
-			.allowBlockingCallsInside("org.springframework.statemachine.monitor.StateMachineMonitorTests$LatchAction", "execute")
-			.allowBlockingCallsInside("org.springframework.statemachine.state.CompletionEventTests$Config1$1", "execute")
-			.allowBlockingCallsInside("org.apache.commons.logging.LogAdapter$Log4jLog", "debug")
-			.allowBlockingCallsInside("org.springframework.statemachine.state.ObjectStateTests$TestBlockingAction", "sleep")
-			.allowBlockingCallsInside("org.springframework.statemachine.action.ActionAndTimerTests$TestTimerAction", "execute");
+	.allowBlockingCallsInside("org.springframework.statemachine.AbstractStateMachineTests$TestSleepAction", "execute")
+	.allowBlockingCallsInside("org.springframework.statemachine.monitor.StateMachineMonitorTests$LatchAction", "execute")
+	.allowBlockingCallsInside("org.springframework.statemachine.state.CompletionEventTests$Config1$1", "execute")
+	.allowBlockingCallsInside("org.apache.commons.logging.LogAdapter$Log4jLog", "debug")
+	.allowBlockingCallsInside("org.springframework.statemachine.state.ObjectStateTests$TestBlockingAction", "sleep")
+	.allowBlockingCallsInside("org.springframework.statemachine.action.ActionAndTimerTests$TestTimerAction", "execute");
 	}
 }

@@ -42,8 +42,8 @@ public class DocsConfigurationSampleTests8 {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -51,6 +51,7 @@ public class DocsConfigurationSampleTests8 {
 			return new CustomStateMachineModelFactory();
 		}
 	}
+
 // end::snippetA[]
 
 // tag::snippetB[]
@@ -67,7 +68,7 @@ public class DocsConfigurationSampleTests8 {
 			transitionData.add(new TransitionData<String, String>("S1", "S2", "E1"));
 			TransitionsData<String, String> transitionsData = new TransitionsData<>(transitionData);
 			StateMachineModel<String, String> stateMachineModel = new DefaultStateMachineModel<String, String>(configurationData,
-					statesData, transitionsData);
+		statesData, transitionsData);
 			return stateMachineModel;
 		}
 

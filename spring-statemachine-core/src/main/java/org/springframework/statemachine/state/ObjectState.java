@@ -78,7 +78,7 @@ public class ObjectState<S, E> extends AbstractSimpleState<S, E> {
 	 * @param exitActions the exit actions
 	 */
 	public ObjectState(S id, Collection<E> deferred, Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions) {
 		super(id, deferred, entryActions, exitActions);
 	}
 
@@ -92,7 +92,7 @@ public class ObjectState<S, E> extends AbstractSimpleState<S, E> {
 	 * @param pseudoState the pseudo state
 	 */
 	public ObjectState(S id, Collection<E> deferred, Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState) {
 		super(id, deferred, entryActions, exitActions, pseudoState);
 	}
 
@@ -107,8 +107,8 @@ public class ObjectState<S, E> extends AbstractSimpleState<S, E> {
 	 * @param regions the regions
 	 */
 	public ObjectState(S id, Collection<E> deferred, Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
-			Collection<Region<S, E>> regions) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
+Collection<Region<S, E>> regions) {
 		super(id, deferred, entryActions, exitActions, pseudoState, regions);
 	}
 
@@ -123,8 +123,8 @@ public class ObjectState<S, E> extends AbstractSimpleState<S, E> {
 	 * @param submachine the submachine
 	 */
 	public ObjectState(S id, Collection<E> deferred, Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
-			StateMachine<S, E> submachine) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions, PseudoState<S, E> pseudoState,
+StateMachine<S, E> submachine) {
 		super(id, deferred, entryActions, exitActions, pseudoState, submachine);
 	}
 
@@ -141,39 +141,35 @@ public class ObjectState<S, E> extends AbstractSimpleState<S, E> {
 	 * @param submachine the submachine
 	 */
 	public ObjectState(S id, Collection<E> deferred, Collection<Function<StateContext<S, E>, Mono<Void>>> entryActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions,
-			Collection<Function<StateContext<S, E>, Mono<Void>>> stateActions, PseudoState<S, E> pseudoState,
-			Collection<Region<S, E>> regions, StateMachine<S, E> submachine) {
+Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions,
+Collection<Function<StateContext<S, E>, Mono<Void>>> stateActions, PseudoState<S, E> pseudoState,
+Collection<Region<S, E>> regions, StateMachine<S, E> submachine) {
 		super(id, deferred, entryActions, exitActions, stateActions, pseudoState, regions, submachine);
 	}
 
 	@Override
 	public Mono<Void> exit(StateContext<S, E> context) {
 		Mono<Void> actions = Flux.fromIterable(getExitActions())
-			.flatMap(a -> executeAction(a, context)
-				.doOnError(e -> {
-					log.warn("Exit action execution error", e);
-				}))
-			.onErrorResume(StateMachineUtils.resumeErrorToContext())
-			.then();
+	.flatMap(a -> executeAction(a, context).doOnError(e -> {
+log.warn("Exit action execution error", e);}))
+	.onErrorResume(StateMachineUtils.resumeErrorToContext())
+	.then();
 		return super.exit(context).and(actions);
 	}
 
 	@Override
 	public Mono<Void> entry(StateContext<S, E> context) {
-		Mono<Void> actions =  Flux.fromIterable(getEntryActions())
-			.flatMap(a -> executeAction(a, context)
-				.doOnError(e -> {
-					log.warn("Entry action execution error", e);
-				}))
-			.onErrorResume(StateMachineUtils.resumeErrorToContext())
-			.then();
+		Mono<Void> actions = Flux.fromIterable(getEntryActions())
+	.flatMap(a -> executeAction(a, context).doOnError(e -> {
+log.warn("Entry action execution error", e);}))
+	.onErrorResume(StateMachineUtils.resumeErrorToContext())
+	.then();
 		return actions.and(super.entry(context));
 	}
 
 	@Override
 	public String toString() {
 		return "ObjectState [getIds()=" + getIds() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+	+ ", toString()=" + super.toString() + "]";
 	}
 }

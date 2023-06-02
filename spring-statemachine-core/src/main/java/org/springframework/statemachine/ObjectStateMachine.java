@@ -42,7 +42,7 @@ public class ObjectStateMachine<S, E> extends AbstractStateMachine<S, E> {
 	 * @param initialState the initial state
 	 */
 	public ObjectStateMachine(Collection<State<S, E>> states, Collection<Transition<S, E>> transitions,
-			State<S, E> initialState) {
+State<S, E> initialState) {
 		super(states, transitions, initialState);
 	}
 
@@ -58,8 +58,8 @@ public class ObjectStateMachine<S, E> extends AbstractStateMachine<S, E> {
 	 * @param uuid the given uuid.
 	 */
 	public ObjectStateMachine(Collection<State<S, E>> states, Collection<Transition<S, E>> transitions,
-			State<S, E> initialState, Transition<S, E> initialTransition,
-			Message<E> initialEvent, ExtendedState extendedState, UUID uuid) {
+State<S, E> initialState, Transition<S, E> initialTransition,
+Message<E> initialEvent, ExtendedState extendedState, UUID uuid) {
 		super(states, transitions, initialState, initialTransition, initialEvent, extendedState, uuid);
 	}
 

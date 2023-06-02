@@ -39,6 +39,6 @@ public abstract class AbstractStateMachineMonitor<S, E> implements StateMachineM
 
 	@Override
 	public void action(StateMachine<S, E> stateMachine, Function<StateContext<S, E>, Mono<Void>> action,
-			long duration) {
+long duration) {
 	}
 }

@@ -43,18 +43,17 @@ import org.springframework.util.Assert;
  * @param <I> The interface of type B
  * @param <B> The type of this builder (that is returned by the base class)
  */
-public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends AnnotationBuilder<O>>
-		extends AbstractAnnotationBuilder<O> {
+public abstract class AbstractConfiguredAnnotationBuilder<O, I, B extends AnnotationBuilder<O>>extends AbstractAnnotationBuilder<O> {
 
 	private final static Log log = LogFactory.getLog(AbstractConfiguredAnnotationBuilder.class);
 
 	/** Configurers which are added to this builder before the configure step */
 	private final LinkedHashMap<Class<? extends AnnotationConfigurer<O, B>>, List<AnnotationConfigurer<O, B>>> mainConfigurers =
-			new LinkedHashMap<Class<? extends AnnotationConfigurer<O, B>>, List<AnnotationConfigurer<O, B>>>();
+new LinkedHashMap<Class<? extends AnnotationConfigurer<O, B>>, List<AnnotationConfigurer<O, B>>>();
 
 	/** Configurers which are added to this builder during the configuration phase */
 	private final LinkedHashMap<Class<? extends AnnotationConfigurer<O, B>>, List<AnnotationConfigurer<O, B>>> postConfigurers =
-			new LinkedHashMap<Class<? extends AnnotationConfigurer<O, B>>, List<AnnotationConfigurer<O, B>>>();
+new LinkedHashMap<Class<? extends AnnotationConfigurer<O, B>>, List<AnnotationConfigurer<O, B>>>();
 
 	private final Map<Class<Object>, Object> sharedObjects = new HashMap<Class<Object>, Object>();
 
@@ -78,7 +77,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 	 * @param objectPostProcessor the object post processor
 	 */
 	protected AbstractConfiguredAnnotationBuilder(ObjectPostProcessor<Object> objectPostProcessor) {
-		this(objectPostProcessor,false);
+		this(objectPostProcessor, false);
 	}
 
 	/**
@@ -147,10 +146,10 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 	 * @throws Exception if error occurred
 	 */
 	@SuppressWarnings("unchecked")
-	public <C extends AnnotationConfigurerAdapter<O,I,B>> C apply(C configurer) throws Exception {
+	public <C extends AnnotationConfigurerAdapter<O, I, B>> C apply(C configurer) throws Exception {
 		add(configurer);
 		configurer.addObjectPostProcessor(objectPostProcessor);
-		configurer.setBuilder((B) this);
+		configurer.setBuilder((B)this);
 		return configurer;
 	}
 
@@ -164,8 +163,8 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 	 * @throws Exception if error occurred
 	 */
 	@SuppressWarnings("unchecked")
-	public <C extends AnnotationConfigurerAdapter<O,I,B>> C getOrApply(C configurer) throws Exception {
-		C existing = (C) getConfigurer(configurer.getClass());
+	public <C extends AnnotationConfigurerAdapter<O, I, B>> C getOrApply(C configurer) throws Exception {
+		C existing = (C)getConfigurer(configurer.getClass());
 		if (existing != null) {
 			return existing;
 		}
@@ -196,7 +195,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 	 */
 	@SuppressWarnings("unchecked")
 	public <C> void setSharedObject(Class<C> sharedType, C object) {
-		this.sharedObjects.put((Class<Object>) sharedType, object);
+		this.sharedObjects.put((Class<Object>)sharedType, object);
 	}
 
 	/**
@@ -208,7 +207,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 	 */
 	@SuppressWarnings("unchecked")
 	public <C> C getSharedObject(Class<C> sharedType) {
-		return (C) this.sharedObjects.get(sharedType);
+		return (C)this.sharedObjects.get(sharedType);
 	}
 
 	/**
@@ -234,7 +233,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 		Assert.notNull(configurer, "configurer cannot be null");
 
 		Class<? extends AnnotationConfigurer<O, B>> clazz =
-				(Class<? extends AnnotationConfigurer<O, B>>) configurer.getClass();
+	(Class<? extends AnnotationConfigurer<O, B>>)configurer.getClass();
 
 		if (!buildState.isConfigured()) {
 			synchronized (mainConfigurers) {
@@ -245,7 +244,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 				configs.add(configurer);
 				this.mainConfigurers.put(clazz, configs);
 				if (buildState.isInitializing()) {
-					configurer.init((B) this);
+					configurer.init((B)this);
 				}
 			}
 		} else {
@@ -256,7 +255,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 				}
 				configs.add(configurer);
 				this.postConfigurers.put(clazz, configs);
-				configurer.init((B) this);
+				configurer.init((B)this);
 			}
 		}
 	}
@@ -271,7 +270,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 	 */
 	@SuppressWarnings("unchecked")
 	public <C extends AnnotationConfigurer<O, B>> List<C> getConfigurers(Class<C> clazz) {
-		List<C> configs = (List<C>) this.mainConfigurers.get(clazz);
+		List<C> configs = (List<C>)this.mainConfigurers.get(clazz);
 		if (configs == null) {
 			return new ArrayList<C>();
 		}
@@ -288,7 +287,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 	 */
 	@SuppressWarnings("unchecked")
 	public <C extends AnnotationConfigurer<O, B>> List<C> removeConfigurers(Class<C> clazz) {
-		List<C> configs = (List<C>) this.mainConfigurers.remove(clazz);
+		List<C> configs = (List<C>)this.mainConfigurers.remove(clazz);
 		if (configs == null) {
 			return new ArrayList<C>();
 		}
@@ -313,7 +312,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 		if (configs.size() != 1) {
 			throw new IllegalStateException("Only one configurer expected for type " + clazz + ", but got " + configs);
 		}
-		return (C) configs.get(0);
+		return (C)configs.get(0);
 	}
 
 	/**
@@ -334,7 +333,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 		if (configs.size() != 1) {
 			throw new IllegalStateException("Only one configurer expected for type " + clazz + ", but got " + configs);
 		}
-		return (C) configs.get(0);
+		return (C)configs.get(0);
 	}
 
 	/**
@@ -344,9 +343,9 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 	 */
 	@SuppressWarnings("unchecked")
 	public O objectPostProcessor(ObjectPostProcessor<Object> objectPostProcessor) {
-		Assert.notNull(objectPostProcessor,"objectPostProcessor cannot be null");
+		Assert.notNull(objectPostProcessor, "objectPostProcessor cannot be null");
 		this.objectPostProcessor = objectPostProcessor;
-		return (O) this;
+		return (O)this;
 	}
 
 	/**
@@ -358,7 +357,7 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 	 * @return the possibly modified Object to use
 	 */
 	protected <P> P postProcess(P object) {
-		return (P) this.objectPostProcessor.postProcess(object);
+		return (P)this.objectPostProcessor.postProcess(object);
 	}
 
 	/**
@@ -405,21 +404,21 @@ public abstract class AbstractConfiguredAnnotationBuilder<O,I,B extends Annotati
 	@SuppressWarnings("unchecked")
 	private void initMainConfigurers() throws Exception {
 		for (AnnotationConfigurer<O, B> configurer : getMainConfigurers()) {
-			configurer.init((B) this);
+			configurer.init((B)this);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	private void configureMainConfigurers() throws Exception {
 		for (AnnotationConfigurer<O, B> configurer : getMainConfigurers()) {
-			configurer.configure((B) this);
+			configurer.configure((B)this);
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	private void configurePostConfigurers() throws Exception {
 		for (AnnotationConfigurer<O, B> configurer : getPostConfigurers()) {
-			configurer.configure((B) this);
+			configurer.configure((B)this);
 		}
 	}
 

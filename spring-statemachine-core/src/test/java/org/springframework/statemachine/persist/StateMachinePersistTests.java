@@ -199,25 +199,25 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 
 	@Test
 	public void testSubsInRegions2() throws Exception {
-			context.register(Config51.class, Config52.class);
-			context.refresh();
+		context.register(Config51.class, Config52.class);
+		context.refresh();
 
-			InMemoryStateMachinePersist1 stateMachinePersist = new InMemoryStateMachinePersist1();
-			StateMachinePersister<String, String, String> persister = new DefaultStateMachinePersister<>(stateMachinePersist);
+		InMemoryStateMachinePersist1 stateMachinePersist = new InMemoryStateMachinePersist1();
+		StateMachinePersister<String, String, String> persister = new DefaultStateMachinePersister<>(stateMachinePersist);
 
-			StateMachine<String, String> stateMachine1 = resolveMachine("machine1", context);
-			StateMachine<String, String> stateMachine2 = resolveMachine("machine2", context);
-			doStartAndAssert(stateMachine1);
+		StateMachine<String, String> stateMachine1 = resolveMachine("machine1", context);
+		StateMachine<String, String> stateMachine2 = resolveMachine("machine2", context);
+		doStartAndAssert(stateMachine1);
 
-			doSendEventAndConsumeAll(stateMachine1, "E1");
-			assertThat(stateMachine1.getState().getIds()).containsOnly("S12", "S21");
-			doSendEventAndConsumeAll(stateMachine1, "E2");
-			assertThat(stateMachine1.getState().getIds()).containsOnly("S12", "S22", "S221");
-			doSendEventAndConsumeAll(stateMachine1, "E3");
-			assertThat(stateMachine1.getState().getIds()).containsOnly("S12", "S22", "S222");
-			persister.persist(stateMachine1, "xxx");
-			stateMachine2 = persister.restore(stateMachine2, "xxx");
-			assertThat(stateMachine2.getState().getIds()).containsOnly("S12", "S22", "S222");
+		doSendEventAndConsumeAll(stateMachine1, "E1");
+		assertThat(stateMachine1.getState().getIds()).containsOnly("S12", "S21");
+		doSendEventAndConsumeAll(stateMachine1, "E2");
+		assertThat(stateMachine1.getState().getIds()).containsOnly("S12", "S22", "S221");
+		doSendEventAndConsumeAll(stateMachine1, "E3");
+		assertThat(stateMachine1.getState().getIds()).containsOnly("S12", "S22", "S222");
+		persister.persist(stateMachine1, "xxx");
+		stateMachine2 = persister.restore(stateMachine2, "xxx");
+		assertThat(stateMachine2.getState().getIds()).containsOnly("S12", "S22", "S222");
 	}
 
 	@Test
@@ -295,7 +295,7 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 		StateMachinePersister<String, String, String> persister = new DefaultStateMachinePersister<>(stateMachinePersist);
 		StateMachineFactory<String, String> stateMachineFactory = resolveFactory(context);
 
-		StateMachine<String,String> stateMachine = stateMachineFactory.getStateMachine();
+		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 		assertThat(stateMachine).isNotNull();
 		assertThat(stateMachine.getState().getIds()).containsOnly("S1");
 
@@ -352,25 +352,25 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S1")
-					.state("S2")
-					.state("S3");
+		.withStates()
+		.initial("S1")
+		.state("S1")
+		.state("S2")
+		.state("S3");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S2")
-					.target("S3")
-					.event("E2");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S2")
+		.target("S3")
+		.event("E2");
 		}
 	}
 
@@ -381,25 +381,25 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2)
-					.state(TestStates.S3);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2)
+		.state(TestStates.S3);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.and()
-				.withExternal()
-					.source(TestStates.S2)
-					.target(TestStates.S3)
-					.event(TestEvents.E2);
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.and()
+		.withExternal()
+		.source(TestStates.S2)
+		.target(TestStates.S3)
+		.event(TestEvents.E2);
 		}
 	}
 
@@ -410,42 +410,42 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S1")
-					.state("S2")
-					.state("S3")
-					.and()
-					.withStates()
-						.parent("S2")
-						.initial("S21")
-						.state("S21")
-						.state("S22")
-					.and()
-					.withStates()
-						.parent("S3")
-						.initial("S31")
-						.state("S31")
-						.state("S32");
+		.withStates()
+		.initial("S1")
+		.state("S1")
+		.state("S2")
+		.state("S3")
+		.and()
+		.withStates()
+		.parent("S2")
+		.initial("S21")
+		.state("S21")
+		.state("S22")
+		.and()
+		.withStates()
+		.parent("S3")
+		.initial("S31")
+		.state("S31")
+		.state("S32");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S2")
-					.target("S3")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("S21")
-					.target("S22")
-					.event("E3");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S2")
+		.target("S3")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("S21")
+		.target("S22")
+		.event("E3");
 		}
 	}
 
@@ -456,57 +456,57 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S11")
-					.state("S11")
-					.state("S12")
-					.state("S13")
-					.and()
-				.withStates()
-					.initial("S21")
-					.state("S21")
-					.state("S22")
-					.state("S23")
-					.and()
-				.withStates()
-					.initial("S31")
-					.state("S31")
-					.state("S32")
-					.state("S33");
+		.withStates()
+		.initial("S11")
+		.state("S11")
+		.state("S12")
+		.state("S13")
+		.and()
+		.withStates()
+		.initial("S21")
+		.state("S21")
+		.state("S22")
+		.state("S23")
+		.and()
+		.withStates()
+		.initial("S31")
+		.state("S31")
+		.state("S32")
+		.state("S33");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S11")
-					.target("S12")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S21")
-					.target("S22")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("S31")
-					.target("S32")
-					.event("E3")
-					.and()
-				.withExternal()
-					.source("S12")
-					.target("S13")
-					.event("E4")
-					.and()
-				.withExternal()
-					.source("S22")
-					.target("S23")
-					.event("E5")
-					.and()
-				.withExternal()
-					.source("S32")
-					.target("S33")
-					.event("E6");
+		.withExternal()
+		.source("S11")
+		.target("S12")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S21")
+		.target("S22")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("S31")
+		.target("S32")
+		.event("E3")
+		.and()
+		.withExternal()
+		.source("S12")
+		.target("S13")
+		.event("E4")
+		.and()
+		.withExternal()
+		.source("S22")
+		.target("S23")
+		.event("E5")
+		.and()
+		.withExternal()
+		.source("S32")
+		.target("S33")
+		.event("E6");
 		}
 	}
 
@@ -515,48 +515,48 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S11")
-					.state("S11")
-					.state("S12")
-					.state("S13")
-					.and()
-					.withStates()
-						.parent("S11")
-						.initial("S111")
-						.state("S111")
-						.state("S112")
-						.and()
-				.withStates()
-					.initial("S21")
-					.state("S21")
-					.state("S22")
-					.state("S23")
-					.and()
-					.withStates()
-						.parent("S22")
-						.initial("S221")
-						.state("S221")
-						.state("S222");
+		.withStates()
+		.initial("S11")
+		.state("S11")
+		.state("S12")
+		.state("S13")
+		.and()
+		.withStates()
+		.parent("S11")
+		.initial("S111")
+		.state("S111")
+		.state("S112")
+		.and()
+		.withStates()
+		.initial("S21")
+		.state("S21")
+		.state("S22")
+		.state("S23")
+		.and()
+		.withStates()
+		.parent("S22")
+		.initial("S221")
+		.state("S221")
+		.state("S222");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S11")
-					.target("S12")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S21")
-					.target("S22")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("S221")
-					.target("S222")
-					.event("E3");
+		.withExternal()
+		.source("S11")
+		.target("S12")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S21")
+		.target("S22")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("S221")
+		.target("S222")
+		.event("E3");
 		}
 
 	}
@@ -586,41 +586,41 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S1")
-					.state("S2")
-					.state("S3")
-					.state("S4")
-					.history("SH", History.SHALLOW);
+		.withStates()
+		.initial("S1")
+		.state("S1")
+		.state("S2")
+		.state("S3")
+		.state("S4")
+		.history("SH", History.SHALLOW);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S3").event("E2")
-					.and()
-				.withExternal()
-					.source("S1").target("S4").event("E3")
-					.and()
-				.withExternal()
-					.source("S2").target("S4").event("E3")
-					.and()
-				.withExternal()
-					.source("S3").target("S4").event("E3")
-					.and()
-				.withExternal()
-					.source("S1").target("SH").event("EH")
-					.and()
-				.withExternal()
-					.source("S2").target("SH").event("EH")
-					.and()
-				.withExternal()
-					.source("S3").target("SH").event("EH");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S3").event("E2")
+		.and()
+		.withExternal()
+		.source("S1").target("S4").event("E3")
+		.and()
+		.withExternal()
+		.source("S2").target("S4").event("E3")
+		.and()
+		.withExternal()
+		.source("S3").target("S4").event("E3")
+		.and()
+		.withExternal()
+		.source("S1").target("SH").event("EH")
+		.and()
+		.withExternal()
+		.source("S2").target("SH").event("EH")
+		.and()
+		.withExternal()
+		.source("S3").target("SH").event("EH");
 		}
 	}
 
@@ -639,42 +639,42 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S1")
-					.state("S2")
-					.history("SH", History.SHALLOW)
-					.and()
-					.withStates()
-						.parent("S2")
-						.initial("S21")
-						.state("S22")
-						.history("S2H", History.SHALLOW);
+		.withStates()
+		.initial("S1")
+		.state("S1")
+		.state("S2")
+		.history("SH", History.SHALLOW)
+		.and()
+		.withStates()
+		.parent("S2")
+		.initial("S21")
+		.state("S22")
+		.history("S2H", History.SHALLOW);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("E2")
-					.and()
-				.withExternal()
-					.source("S21").target("S22").event("E3")
-					.and()
-				.withExternal()
-					.source("S1").target("SH").event("EH1")
-					.and()
-				.withExternal()
-					.source("S2").target("SH").event("EH2")
-					.and()
-				.withExternal()
-					.source("S1").target("S2H").event("EH3")
-					.and()
-				.withExternal()
-					.source("S2").target("S2H").event("EH3");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S1").event("E2")
+		.and()
+		.withExternal()
+		.source("S21").target("S22").event("E3")
+		.and()
+		.withExternal()
+		.source("S1").target("SH").event("EH1")
+		.and()
+		.withExternal()
+		.source("S2").target("SH").event("EH2")
+		.and()
+		.withExternal()
+		.source("S1").target("S2H").event("EH3")
+		.and()
+		.withExternal()
+		.source("S2").target("S2H").event("EH3");
 		}
 	}
 
@@ -685,25 +685,25 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.end("S2");
+		.withStates()
+		.initial("S1")
+		.end("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 
@@ -714,57 +714,57 @@ public class StateMachinePersistTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S11")
-					.state("S11")
-					.state("S12")
-					.state("S13")
-					.and()
-				.withStates()
-					.initial("S21")
-					.state("S21")
-					.state("S22")
-					.state("S23")
-					.and()
-				.withStates()
-					.initial("S31")
-					.state("S31")
-					.state("S32")
-					.state("S33");
+		.withStates()
+		.initial("S11")
+		.state("S11")
+		.state("S12")
+		.state("S13")
+		.and()
+		.withStates()
+		.initial("S21")
+		.state("S21")
+		.state("S22")
+		.state("S23")
+		.and()
+		.withStates()
+		.initial("S31")
+		.state("S31")
+		.state("S32")
+		.state("S33");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S11")
-					.target("S12")
-					.event("E1")
-					.and()
-				.withExternal()
-					.source("S21")
-					.target("S22")
-					.event("E2")
-					.and()
-				.withExternal()
-					.source("S31")
-					.target("S32")
-					.event("E3")
-					.and()
-				.withExternal()
-					.source("S12")
-					.target("S13")
-					.event("E4")
-					.and()
-				.withExternal()
-					.source("S22")
-					.target("S23")
-					.event("E5")
-					.and()
-				.withExternal()
-					.source("S32")
-					.target("S33")
-					.event("E6");
+		.withExternal()
+		.source("S11")
+		.target("S12")
+		.event("E1")
+		.and()
+		.withExternal()
+		.source("S21")
+		.target("S22")
+		.event("E2")
+		.and()
+		.withExternal()
+		.source("S31")
+		.target("S32")
+		.event("E3")
+		.and()
+		.withExternal()
+		.source("S12")
+		.target("S13")
+		.event("E4")
+		.and()
+		.withExternal()
+		.source("S22")
+		.target("S23")
+		.event("E5")
+		.and()
+		.withExternal()
+		.source("S32")
+		.target("S33")
+		.event("E6");
 		}
 	}
 

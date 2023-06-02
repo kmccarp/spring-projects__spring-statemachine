@@ -49,18 +49,18 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class TransitionSecurityExpressionTests extends AbstractStateMachineTests {
 
 	@Test
-	@WithMockUser(authorities = { "FOO" })
+	@WithMockUser(authorities = {"FOO"})
 	public void testAttr() throws Exception {
 		TestListener listener = new TestListener();
-		StateMachine<States,Events> machine = buildMachine(listener, "ROLE_ANONYMOUS", ComparisonType.ANY, null);
+		StateMachine<States, Events> machine = buildMachine(listener, "ROLE_ANONYMOUS", ComparisonType.ANY, null);
 		assertTransitionDenied(machine, listener);
 	}
 
 	@Test
-	@WithMockUser(roles = { "FOO" })
+	@WithMockUser(roles = {"FOO"})
 	public void testExpression() throws Exception {
 		TestListener listener = new TestListener();
-		StateMachine<States,Events> machine = buildMachine(listener, null, null, "hasRole('FOO')");
+		StateMachine<States, Events> machine = buildMachine(listener, null, null, "hasRole('FOO')");
 		assertTransitionAllowed(machine, listener);
 	}
 
@@ -122,21 +122,21 @@ public class TransitionSecurityExpressionTests extends AbstractStateMachineTests
 		Builder<States, Events> builder = StateMachineBuilder.<States, Events>builder();
 
 		builder.configureConfiguration()
-			.withConfiguration()
-				.listener(listener)
-				.autoStartup(true)
-				.and()
-			.withSecurity()
-				.enabled(true);
+	.withConfiguration()
+	.listener(listener)
+	.autoStartup(true)
+	.and()
+	.withSecurity()
+	.enabled(true);
 
 		builder.configureStates()
-			.withStates()
-				.initial(States.S0)
-				.state(States.S0)
-				.state(States.S1);
+	.withStates()
+	.initial(States.S0)
+	.state(States.S0)
+	.state(States.S1);
 
 		ExternalTransitionConfigurer<States, Events> withExternal = builder.configureTransitions()
-			.withExternal();
+	.withExternal();
 		if (attributes != null) {
 			withExternal.secured(attributes, match);
 		}

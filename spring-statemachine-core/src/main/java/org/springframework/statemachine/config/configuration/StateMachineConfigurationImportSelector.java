@@ -41,8 +41,8 @@ public class StateMachineConfigurationImportSelector implements ImportSelector {
 		}
 
 		if (attrMap != null && AnnotationAttributes.fromMap(attrMap).getBoolean("contextEvents")) {
-			return new String[] { "org.springframework.statemachine.event.StateMachineEventPublisherConfiguration",
-					"org.springframework.statemachine.config.configuration.StateMachineCommonConfiguration" };
+			return new String[]{"org.springframework.statemachine.event.StateMachineEventPublisherConfiguration",
+		"org.springframework.statemachine.config.configuration.StateMachineCommonConfiguration"};
 		} else {
 			return new String[0];
 		}

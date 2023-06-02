@@ -41,8 +41,7 @@ import reactor.core.publisher.Mono;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public abstract class AbstractTransitionConfigurer<S, E> extends
-		AnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>> {
+public abstract class AbstractTransitionConfigurer<S, E> extendsAnnotationConfigurerAdapter<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>> {
 
 	private S source;
 	private S target;

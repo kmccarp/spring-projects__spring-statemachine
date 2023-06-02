@@ -54,7 +54,7 @@ public class DocsConfigurationSampleTests6 {
 
 		// setup model
 		StateMachineModel<String, String> stateMachineModel = new DefaultStateMachineModel<>(configurationData, statesData,
-				transitionsData);
+	transitionsData);
 
 		// instantiate machine via factory
 		ObjectStateMachineFactory<String, String> factory = new ObjectStateMachineFactory<>(stateMachineModel);

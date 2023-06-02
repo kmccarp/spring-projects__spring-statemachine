@@ -38,8 +38,8 @@ public class DocsUmlSampleTests1 {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -47,6 +47,7 @@ public class DocsUmlSampleTests1 {
 			return new UmlStateMachineModelFactory("classpath:org/springframework/statemachine/uml/docs/simple-machine.uml");
 		}
 	}
+
 // end::snippetA[]
 
 // tag::snippetB[]
@@ -57,14 +58,14 @@ public class DocsUmlSampleTests1 {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
 		public StateMachineModelFactory<String, String> modelFactory() {
 			UmlStateMachineModelFactory factory = new UmlStateMachineModelFactory(
-					"classpath:org/springframework/statemachine/uml/docs/simple-machine.uml");
+		"classpath:org/springframework/statemachine/uml/docs/simple-machine.uml");
 			factory.setStateMachineComponentResolver(stateMachineComponentResolver());
 			return factory;
 		}
@@ -96,6 +97,7 @@ public class DocsUmlSampleTests1 {
 			};
 		}
 	}
+
 // end::snippetB[]
 
 // tag::snippetC[]
@@ -106,15 +108,15 @@ public class DocsUmlSampleTests1 {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
 		public StateMachineModelFactory<String, String> modelFactory() {
 			return new UmlStateMachineModelFactory(
-				"classpath:org/springframework/statemachine/uml/import-main/import-main.uml",
-				new String[] { "classpath:org/springframework/statemachine/uml/import-sub/import-sub.uml" });
+		"classpath:org/springframework/statemachine/uml/import-main/import-main.uml",
+		new String[]{"classpath:org/springframework/statemachine/uml/import-sub/import-sub.uml"});
 		}
 	}
 // end::snippetC[]

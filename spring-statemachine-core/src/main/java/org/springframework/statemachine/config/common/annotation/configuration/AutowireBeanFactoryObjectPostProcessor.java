@@ -57,22 +57,22 @@ final class AutowireBeanFactoryObjectPostProcessor implements ObjectPostProcesso
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T> T postProcess(T object) {
-		T result = (T) autowireBeanFactory.initializeBean(object, null);
-		if(result instanceof DisposableBean) {
-			disposableBeans.add((DisposableBean) result);
+		T result = (T)autowireBeanFactory.initializeBean(object, null);
+		if (result instanceof DisposableBean) {
+			disposableBeans.add((DisposableBean)result);
 		}
-		if(result instanceof Lifecycle) {
-			lifecycleBeans.add((Lifecycle) result);
+		if (result instanceof Lifecycle) {
+			lifecycleBeans.add((Lifecycle)result);
 		}
 		return result;
 	}
 
 	@Override
 	public void destroy() throws Exception {
-		for(DisposableBean disposable : disposableBeans) {
+		for (DisposableBean disposable : disposableBeans) {
 			try {
 				disposable.destroy();
-			} catch(Exception error) {
+			} catch (Exception error) {
 				log.error(error);
 			}
 		}

@@ -50,24 +50,24 @@ public class SpelExpressionGuardTests extends AbstractStateMachineTests {
 	@Test
 	public void testSimpleSpel() {
 		SpelExpressionParser parser = new SpelExpressionParser(
-				new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
+	new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
 		Expression expression = parser.parseExpression("messageHeaders.get('foo')=='bar'");
 		SpelExpressionGuard<TestStates, TestEvents> guard = new SpelExpressionGuard<TestStates, TestEvents>(expression);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("foo", "bar");
 		MessageHeaders headers = new MessageHeaders(map);
 		DefaultStateContext<TestStates, TestEvents> stateContext = new DefaultStateContext<TestStates, TestEvents>(null, null, headers,
-				null, null, null, null, null, null);
+	null, null, null, null, null, null);
 		assertThat(guard.evaluate(stateContext)).isTrue();
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testGuardDenyStateChange() throws Exception {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config1.class);
 		assertThat(ctx.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				ctx.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	ctx.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		machine.start();
 
 		assertThat(machine.getState().getIds()).containsExactly(TestStates.S1);
@@ -83,19 +83,19 @@ public class SpelExpressionGuardTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.guardExpression("false");
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.guardExpression("false");
 		}
 
 	}

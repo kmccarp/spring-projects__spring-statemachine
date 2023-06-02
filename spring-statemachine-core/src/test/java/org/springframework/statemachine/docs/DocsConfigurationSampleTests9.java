@@ -41,27 +41,27 @@ public class DocsConfigurationSampleTests9 {
 
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config)
-				throws Exception {
+	throws Exception {
 			config
-				.withMonitoring()
-					.monitor(stateMachineMonitor());
+		.withMonitoring()
+		.monitor(stateMachineMonitor());
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 
 		@Bean
@@ -69,6 +69,7 @@ public class DocsConfigurationSampleTests9 {
 			return new TestStateMachineMonitor();
 		}
 	}
+
 // end::snippetA[]
 
 // tag::snippetB[]
@@ -76,12 +77,12 @@ public class DocsConfigurationSampleTests9 {
 
 		@Override
 		public void transition(StateMachine<String, String> stateMachine, Transition<String, String> transition,
-				long duration) {
+	long duration) {
 		}
 
 		@Override
 		public void action(StateMachine<String, String> stateMachine,
-				Function<StateContext<String, String>, Mono<Void>> action, long duration) {
+	Function<StateContext<String, String>, Mono<Void>> action, long duration) {
 		}
 	}
 // end::snippetB[]

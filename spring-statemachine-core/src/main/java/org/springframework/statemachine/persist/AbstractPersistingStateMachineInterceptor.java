@@ -56,8 +56,7 @@ import org.springframework.util.Assert;
  * @param <E> the type of event
  * @param <T> the type of persister context object
  */
-public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends StateMachineInterceptorAdapter<S, E>
-		implements StateMachinePersist<S, E, T> {
+public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends StateMachineInterceptorAdapter<S, E>implements StateMachinePersist<S, E, T> {
 
 	private static final Log log = LogFactory.getLog(AbstractPersistingStateMachineInterceptor.class);
 	private Function<StateMachine<S, E>, Map<Object, Object>> extendedStateVariablesFunction = new AllVariablesFunction<>();
@@ -65,7 +64,7 @@ public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public void preStateChange(State<S, E> state, Message<E> message, Transition<S, E> transition,
-			StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
+StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
 		if (log.isDebugEnabled()) {
 			log.debug("preStateChange with stateMachine " + stateMachine);
 			log.debug("preStateChange with root stateMachine " + rootStateMachine);
@@ -84,7 +83,7 @@ public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends
 	@SuppressWarnings("unchecked")
 	@Override
 	public void postStateChange(State<S, E> state, Message<E> message, Transition<S, E> transition,
-			StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
+StateMachine<S, E> stateMachine, StateMachine<S, E> rootStateMachine) {
 		if (log.isDebugEnabled()) {
 			log.debug("postStateChange with stateMachine " + stateMachine);
 			log.debug("postStateChange with root stateMachine " + rootStateMachine);
@@ -126,7 +125,7 @@ public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends
 	 * @param extendedStateVariablesFunction the extended state variables function
 	 */
 	public void setExtendedStateVariablesFunction(
-			Function<StateMachine<S, E>, Map<Object, Object>> extendedStateVariablesFunction) {
+Function<StateMachine<S, E>, Map<Object, Object>> extendedStateVariablesFunction) {
 		Assert.notNull(extendedStateVariablesFunction, "'extendedStateVariablesFunction' cannot be null");
 		this.extendedStateVariablesFunction = extendedStateVariablesFunction;
 	}
@@ -144,7 +143,7 @@ public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends
 	 * @deprecated in favour of {@link #buildStateMachineContext(StateMachine, StateMachine, State, Message)}
 	 */
 	protected StateMachineContext<S, E> buildStateMachineContext(StateMachine<S, E> stateMachine,
-			StateMachine<S, E> rootStateMachine, State<S, E> state) {
+StateMachine<S, E> rootStateMachine, State<S, E> state) {
 		return buildStateMachineContext(stateMachine, rootStateMachine, state, null);
 	}
 
@@ -158,7 +157,7 @@ public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends
 	 * @return the state machine context
 	 */
 	protected StateMachineContext<S, E> buildStateMachineContext(StateMachine<S, E> stateMachine,
-			StateMachine<S, E> rootStateMachine, State<S, E> state, Message<E> message) {
+StateMachine<S, E> rootStateMachine, State<S, E> state, Message<E> message) {
 		ExtendedState extendedState = new DefaultExtendedState();
 		extendedState.getVariables().putAll(extendedStateVariablesFunction.apply(stateMachine));
 
@@ -183,15 +182,15 @@ public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends
 
 		// building history state mappings
 		Map<S, S> historyStates = new HashMap<S, S>();
-		PseudoState<S, E> historyState = ((AbstractStateMachine<S, E>) stateMachine).getHistoryState();
+		PseudoState<S, E> historyState = ((AbstractStateMachine<S, E>)stateMachine).getHistoryState();
 		if (historyState != null) {
 			historyStates.put(null, ((HistoryPseudoState<S, E>)historyState).getState().getId());
 		}
 		Collection<State<S, E>> states = stateMachine.getStates();
 		for (State<S, E> ss : states) {
 			if (ss.isSubmachineState()) {
-				StateMachine<S, E> submachine = ((AbstractState<S, E>) ss).getSubmachine();
-				PseudoState<S, E> ps = ((AbstractStateMachine<S, E>) submachine).getHistoryState();
+				StateMachine<S, E> submachine = ((AbstractState<S, E>)ss).getSubmachine();
+				PseudoState<S, E> ps = ((AbstractStateMachine<S, E>)submachine).getHistoryState();
 				if (ps != null) {
 					State<S, E> pss = ((HistoryPseudoState<S, E>)ps).getState();
 					if (pss != null) {
@@ -203,15 +202,15 @@ public abstract class AbstractPersistingStateMachineInterceptor<S, E, T> extends
 		E event = message != null ? message.getPayload() : null;
 		Map<String, Object> eventHeaders = message != null ? message.getHeaders() : null;
 		return new DefaultStateMachineContext<S, E>(childRefs, childs, id, event, eventHeaders, extendedState,
-				historyStates, stateMachine.getId());
+	historyStates, stateMachine.getId());
 	}
 
 	private S getDeepState(State<S, E> state) {
 		Collection<S> ids1 = state.getIds();
 		@SuppressWarnings("unchecked")
-		S[] ids2 = (S[]) ids1.toArray();
+		S[] ids2 = (S[])ids1.toArray();
 		// TODO: can this be empty as then we'd get error?
-		return ids2[ids2.length-1];
+		return ids2[ids2.length - 1];
 	}
 
 	private static class AllVariablesFunction<S, E> implements Function<StateMachine<S, E>, Map<Object, Object>> {

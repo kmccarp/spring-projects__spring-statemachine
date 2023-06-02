@@ -70,8 +70,7 @@ import org.springframework.util.ReflectionUtils;
  * @author Janne Valkealahti
  *
  */
-public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, BeanFactoryAware, InitializingBean,
-		Lifecycle, ApplicationListener<ApplicationEvent> {
+public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, BeanFactoryAware, InitializingBean,Lifecycle, ApplicationListener<ApplicationEvent> {
 
 	private final static Log log = LogFactory.getLog(StateMachineAnnotationPostProcessor.class);
 
@@ -80,7 +79,7 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 
 	/** Post processors map - annotation -> method post processor */
 	private final Map<Class<? extends Annotation>, MethodAnnotationPostProcessor<?>> postProcessors =
-			new HashMap<Class<? extends Annotation>, MethodAnnotationPostProcessor<?>>();
+new HashMap<Class<? extends Annotation>, MethodAnnotationPostProcessor<?>>();
 
 	/**
 	 * Application events for post processed beans (if bean instance of ApplicationListener) will
@@ -100,35 +99,35 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
 		Assert.isAssignable(ConfigurableListableBeanFactory.class, beanFactory.getClass(),
-				"a ConfigurableListableBeanFactory is required");
-		this.beanFactory = (ConfigurableListableBeanFactory) beanFactory;
+	"a ConfigurableListableBeanFactory is required");
+		this.beanFactory = (ConfigurableListableBeanFactory)beanFactory;
 	}
 
 	@Override
 	public void afterPropertiesSet() {
 		Assert.notNull(beanFactory, "BeanFactory must not be null");
 		postProcessors.put(OnTransition.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnTransition>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnTransition>(beanFactory));
 		postProcessors.put(OnTransitionStart.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnTransitionStart>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnTransitionStart>(beanFactory));
 		postProcessors.put(OnTransitionEnd.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnTransitionEnd>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnTransitionEnd>(beanFactory));
 		postProcessors.put(OnStateChanged.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateChanged>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnStateChanged>(beanFactory));
 		postProcessors.put(OnStateEntry.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateEntry>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnStateEntry>(beanFactory));
 		postProcessors.put(OnStateExit.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateExit>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnStateExit>(beanFactory));
 		postProcessors.put(OnStateMachineStart.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateMachineStart>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnStateMachineStart>(beanFactory));
 		postProcessors.put(OnStateMachineStop.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateMachineStop>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnStateMachineStop>(beanFactory));
 		postProcessors.put(OnEventNotAccepted.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnEventNotAccepted>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnEventNotAccepted>(beanFactory));
 		postProcessors.put(OnStateMachineError.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateMachineError>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnStateMachineError>(beanFactory));
 		postProcessors.put(OnExtendedStateChanged.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnExtendedStateChanged>(beanFactory));
+	new StateMachineActivatorAnnotationPostProcessor<OnExtendedStateChanged>(beanFactory));
 	}
 
 	@Override
@@ -149,7 +148,7 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 
 		ReflectionUtils.doWithMethods(beanClass, new ReflectionUtils.MethodCallback() {
 
-			@SuppressWarnings({ "unchecked", "rawtypes" })
+			@SuppressWarnings({"unchecked", "rawtypes"})
 			public void doWith(Method method) throws IllegalArgumentException, IllegalAccessException {
 
 				Map<Class<? extends Annotation>, List<Annotation>> annotationChains = new HashMap<>();
@@ -183,27 +182,27 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 							String endpointBeanName = generateBeanName(beanName, method, annotation.annotationType());
 
 							if (result instanceof BeanNameAware) {
-								((BeanNameAware) result).setBeanName(endpointBeanName);
+								((BeanNameAware)result).setBeanName(endpointBeanName);
 							}
 							beanFactory.registerSingleton(endpointBeanName, result);
 							if (result instanceof BeanFactoryAware) {
-								((BeanFactoryAware) result).setBeanFactory(beanFactory);
+								((BeanFactoryAware)result).setBeanFactory(beanFactory);
 							}
 							if (result instanceof InitializingBean) {
 								try {
-									((InitializingBean) result).afterPropertiesSet();
+									((InitializingBean)result).afterPropertiesSet();
 								} catch (Exception e) {
 									throw new BeanInitializationException("failed to initialize annotated component", e);
 								}
 							}
 							if (result instanceof Lifecycle) {
-								lifecycles.add((Lifecycle) result);
-								if (result instanceof SmartLifecycle && ((SmartLifecycle) result).isAutoStartup()) {
-									((SmartLifecycle) result).start();
+								lifecycles.add((Lifecycle)result);
+								if (result instanceof SmartLifecycle && ((SmartLifecycle)result).isAutoStartup()) {
+									((SmartLifecycle)result).start();
 								}
 							}
 							if (result instanceof ApplicationListener) {
-								listeners.add((ApplicationListener) result);
+								listeners.add((ApplicationListener)result);
 							}
 						}
 					}
@@ -221,7 +220,7 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 			} catch (ClassCastException e) {
 				if (log.isWarnEnabled() && event != null) {
 					log.warn("ApplicationEvent of type [" + event.getClass()
-							+ "] not accepted by ApplicationListener [" + listener + "]");
+				+ "] not accepted by ApplicationListener [" + listener + "]");
 				}
 			}
 		}
@@ -289,16 +288,16 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 	}
 
 	private boolean recursiveFindAnnotation(Class<? extends Annotation> annotationType, Annotation ann,
-			List<Annotation> annotationChain, Set<Annotation> visited) {
+List<Annotation> annotationChain, Set<Annotation> visited) {
 		if (ann.annotationType().equals(annotationType)) {
 			annotationChain.add(ann);
 			return true;
 		}
 		for (Annotation metaAnn : ann.annotationType().getAnnotations()) {
 			if (!ann.equals(metaAnn) && !visited.contains(metaAnn)
-					&& !(metaAnn.annotationType().getPackage().getName().startsWith("java.lang"))) {
+		&& !(metaAnn.annotationType().getPackage().getName().startsWith("java.lang"))) {
 				visited.add(metaAnn); // prevent infinite recursion if the same
-										// annotation is found again
+				// annotation is found again
 				if (this.recursiveFindAnnotation(annotationType, metaAnn, annotationChain, visited)) {
 					annotationChain.add(ann);
 					return true;

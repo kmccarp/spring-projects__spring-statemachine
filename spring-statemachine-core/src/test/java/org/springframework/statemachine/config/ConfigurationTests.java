@@ -60,14 +60,14 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		return new AnnotationConfigApplicationContext();
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testStates() {
 		context.register(Config1.class);
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 		TestAction testAction = context.getBean("testAction", TestAction.class);
 		TestGuard testGuard = context.getBean("testGuard", TestGuard.class);
@@ -75,79 +75,79 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		assertThat(testGuard).isNotNull();
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testSimpleSubmachine() throws Exception {
 		context.register(Config4.class);
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testRegions() throws Exception {
 		context.register(Config6.class);
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testSubmachineWithState() throws Exception {
 		context.register(Config7.class);
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testSubmachineWithRegion() throws Exception {
 		context.register(Config8.class);
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine).isNotNull();
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testAutoStartFlagOn() throws Exception {
 		context.register(Config9.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine.isAutoStartup()).isTrue();
 		assertThat(machine.isRunning()).isTrue();
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testAutoStartFlagOff() throws Exception {
 		context.register(Config11.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		assertThat(machine.isAutoStartup()).isFalse();
 		assertThat(machine.isRunning()).isFalse();
 	}
 
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({"unchecked"})
 	@Test
 	public void testRegisterListeners() throws Exception {
 		context.register(Config10.class);
 		context.refresh();
-		ObjectStateMachine<TestStates,TestEvents> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+		ObjectStateMachine<TestStates, TestEvents> machine =
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 		Object o1 = TestUtils.readField("stateListener", machine);
 		Object o2 = TestUtils.readField("listeners", o1);
 		Object o3 = TestUtils.readField("list", o2);
@@ -220,7 +220,7 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		context.refresh();
 		@SuppressWarnings("unchecked")
 		StateMachineFactory<String, String> stateMachineFactory = context.getBean(StateMachineFactory.class);
-		StateMachine<String,String> stateMachine = stateMachineFactory.getStateMachine();
+		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 		assertThat(stateMachine).isNotNull();
 		assertThat(stateMachine.getId()).isEqualTo("testid1");
 
@@ -236,7 +236,7 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		context.refresh();
 		assertThat(context.containsBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE)).isTrue();
 		ObjectStateMachine<String, String> machine =
-				context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
+	context.getBean(StateMachineSystemConstants.DEFAULT_ID_STATEMACHINE, ObjectStateMachine.class);
 
 		Collection<State<String, String>> states = machine.getStates();
 		for (State<String, String> s : states) {
@@ -258,10 +258,9 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		context.refresh();
 		@SuppressWarnings("unchecked")
 		StateMachineFactory<String, String> stateMachineFactory22 = context.getBean("stateMachineConfig22", StateMachineFactory.class);
-		StateMachine<String,String> stateMachine22 = stateMachineFactory22.getStateMachine();
+		StateMachine<String, String> stateMachine22 = stateMachineFactory22.getStateMachine();
 		assertThat(stateMachine22).isNotNull();
 	}
-
 
 
 	@Configuration
@@ -271,23 +270,23 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.state(TestStates.S2)
-					.state(TestStates.S3)
-					.state(TestStates.S4);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.state(TestStates.S2)
+		.state(TestStates.S3)
+		.state(TestStates.S4);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E1)
-					.guard(testGuard())
-					.action(testAction());
+		.withExternal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E1)
+		.guard(testGuard())
+		.action(testAction());
 		}
 
 		@Bean
@@ -308,9 +307,9 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 	}
@@ -322,10 +321,10 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.end(TestStates.SF)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.end(TestStates.SF)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 	}
@@ -337,35 +336,35 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.state(TestStates.S1)
-					.and()
-					.withStates()
-						.parent(TestStates.S1)
-						.initial(TestStates.S2)
-						.end(TestStates.SF)
-						.state(TestStates.SI)
-						.state(TestStates.S2)
-						.state(TestStates.S3);
+		.withStates()
+		.initial(TestStates.S1)
+		.state(TestStates.S1)
+		.and()
+		.withStates()
+		.parent(TestStates.S1)
+		.initial(TestStates.S2)
+		.end(TestStates.SF)
+		.state(TestStates.SI)
+		.state(TestStates.S2)
+		.state(TestStates.S3);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.SI)
-					.target(TestStates.S1)
-					.event(TestEvents.E1)
-					.and()
-				.withLocal()
-					.source(TestStates.S1)
-					.target(TestStates.S2)
-					.event(TestEvents.E2)
-					.and()
-				.withInternal()
-					.source(TestStates.S2)
-					.event(TestEvents.E3);
+		.withExternal()
+		.source(TestStates.SI)
+		.target(TestStates.S1)
+		.event(TestEvents.E1)
+		.and()
+		.withLocal()
+		.source(TestStates.S1)
+		.target(TestStates.S2)
+		.event(TestEvents.E2)
+		.and()
+		.withInternal()
+		.source(TestStates.S2)
+		.event(TestEvents.E3);
 		}
 
 	}
@@ -379,27 +378,27 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 			TestEntryAction action1 = action1();
 			Collection<TestEntryAction> actions1 = new ArrayList<TestEntryAction>();
 			actions1.add(action1);
-			Collection<Action<TestStates, TestEvents>> actions3 = new ArrayList<Action<TestStates,TestEvents>>();
+			Collection<Action<TestStates, TestEvents>> actions3 = new ArrayList<Action<TestStates, TestEvents>>();
 			actions3.add(action3());
 			states
-				.withStates()
-					.initial(TestStates.S11)
-					.state(TestStates.S11, actions1, Arrays.asList(action2()))
-					.state(TestStates.S12, action1(), action2())
-					.and()
-					.withStates()
-						.parent(TestStates.S11)
-						.initial(TestStates.S111)
-						.state(TestStates.S111, actions3, Arrays.asList(action4()));
+		.withStates()
+		.initial(TestStates.S11)
+		.state(TestStates.S11, actions1, Arrays.asList(action2()))
+		.state(TestStates.S12, action1(), action2())
+		.and()
+		.withStates()
+		.parent(TestStates.S11)
+		.initial(TestStates.S111)
+		.state(TestStates.S111, actions3, Arrays.asList(action4()));
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S111)
-					.target(TestStates.S1)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S111)
+		.target(TestStates.S1)
+		.event(TestEvents.E1);
 		}
 
 		public TestEntryAction action1() {
@@ -419,54 +418,55 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		}
 
 	}
-/*
-//              +-----------------------------------------------------------------------------------------------------------------+
-//              |                                                       SM                                                        |
-//              +-----------------------------------------------------------------------------------------------------------------+
-//              |                                                        |                                                        |
-//              |       +---------------------------------------+        |       +---------------------------------------+        |
-//              |   *-->|                    S10                |        |   *-->|                    S20                |        |
-//              |       +---------------------------------------+        |       +---------------------------------------+        |
-//              |       | entry/                                |        |       | entry/                                |        |
-//              |       | exit/                                 |        |       | exit/                                 |        |
-//              |       |        +--------------------------+   |        |       |        +--------------------------+   |        |
-//              |       |    *-->|           S101           |   |        |       |    *-->|           S201           |   |        |
-//              |       |        +--------------------------+   |        |       |        +--------------------------+   |        |
-//              |       |        | entry/                   |   |        |       |        | entry/                   |   |        |
-//              |       |        | exit/                    |   |        |       |        | exit/                    |   |        |
-//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
-//              |       |        |    *-->|   S1011   |     |   |        |       |        |    *-->|   S2011   |     |   |        |
-//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
-//              |       |        |        | entry/    |     |   |        |       |        |        | entry/    |     |   |        |
-//              |       |        |        | exit/     |     |   |        |       |        |        | exit/     |     |   |        |
-//              |       |        |        |           |     |   |        |       |        |        |           |     |   |        |
-//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
-//              |       |        |                          |   |        |       |        |                          |   |        |
-//              |       |        |                          |   |        |       |        |                          |   |        |
-//              |       |        |                          |   |        |       |        |                          |   |        |
-//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
-//              |       |        |        |   S1012   |     |   |        |       |        |        |   S2012   |     |   |        |
-//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
-//              |       |        |        | entry/    |     |   |        |       |        |        | entry/    |     |   |        |
-//              |       |        |        | exit/     |     |   |        |       |        |        | exit/     |     |   |        |
-//              |       |        |        |           |     |   |        |       |        |        |           |     |   |        |
-//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
-//              |       |        |                          |   |        |       |        |                          |   |        |
-//              |       |        +--------------------------+   |        |       |        +--------------------------+   |        |
-//              |       |                                       |        |       |                                       |        |
-//              |       |                                       |        |       |                                       |        |
-//              |       +---------------------------------------+        |       +---------------------------------------+        |
-//              |                                                        |                                                        |
-//              |       +---------------------------------------+        |       +---------------------------------------+        |
-//              |       |                    S11                |        |       |                    S21                |        |
-//              |       +---------------------------------------+        |       +---------------------------------------+        |
-//              |       |  entry/                               |        |       |  entry/                               |        |
-//              |       |  exit/                                |        |       |  exit/                                |        |
-//              |       |                                       |        |       |                                       |        |
-//              |       +---------------------------------------+        |       +---------------------------------------+        |
-//              |                                                        |                                                        |
-//              +--------------------------------------------------------+--------------------------------------------------------+
- */
+
+	/*
+	//              +-----------------------------------------------------------------------------------------------------------------+
+	//              |                                                       SM                                                        |
+	//              +-----------------------------------------------------------------------------------------------------------------+
+	//              |                                                        |                                                        |
+	//              |       +---------------------------------------+        |       +---------------------------------------+        |
+	//              |   *-->|                    S10                |        |   *-->|                    S20                |        |
+	//              |       +---------------------------------------+        |       +---------------------------------------+        |
+	//              |       | entry/                                |        |       | entry/                                |        |
+	//              |       | exit/                                 |        |       | exit/                                 |        |
+	//              |       |        +--------------------------+   |        |       |        +--------------------------+   |        |
+	//              |       |    *-->|           S101           |   |        |       |    *-->|           S201           |   |        |
+	//              |       |        +--------------------------+   |        |       |        +--------------------------+   |        |
+	//              |       |        | entry/                   |   |        |       |        | entry/                   |   |        |
+	//              |       |        | exit/                    |   |        |       |        | exit/                    |   |        |
+	//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
+	//              |       |        |    *-->|   S1011   |     |   |        |       |        |    *-->|   S2011   |     |   |        |
+	//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
+	//              |       |        |        | entry/    |     |   |        |       |        |        | entry/    |     |   |        |
+	//              |       |        |        | exit/     |     |   |        |       |        |        | exit/     |     |   |        |
+	//              |       |        |        |           |     |   |        |       |        |        |           |     |   |        |
+	//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
+	//              |       |        |                          |   |        |       |        |                          |   |        |
+	//              |       |        |                          |   |        |       |        |                          |   |        |
+	//              |       |        |                          |   |        |       |        |                          |   |        |
+	//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
+	//              |       |        |        |   S1012   |     |   |        |       |        |        |   S2012   |     |   |        |
+	//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
+	//              |       |        |        | entry/    |     |   |        |       |        |        | entry/    |     |   |        |
+	//              |       |        |        | exit/     |     |   |        |       |        |        | exit/     |     |   |        |
+	//              |       |        |        |           |     |   |        |       |        |        |           |     |   |        |
+	//              |       |        |        +-----------+     |   |        |       |        |        +-----------+     |   |        |
+	//              |       |        |                          |   |        |       |        |                          |   |        |
+	//              |       |        +--------------------------+   |        |       |        +--------------------------+   |        |
+	//              |       |                                       |        |       |                                       |        |
+	//              |       |                                       |        |       |                                       |        |
+	//              |       +---------------------------------------+        |       +---------------------------------------+        |
+	//              |                                                        |                                                        |
+	//              |       +---------------------------------------+        |       +---------------------------------------+        |
+	//              |       |                    S11                |        |       |                    S21                |        |
+	//              |       +---------------------------------------+        |       +---------------------------------------+        |
+	//              |       |  entry/                               |        |       |  entry/                               |        |
+	//              |       |  exit/                                |        |       |  exit/                                |        |
+	//              |       |                                       |        |       |                                       |        |
+	//              |       +---------------------------------------+        |       +---------------------------------------+        |
+	//              |                                                        |                                                        |
+	//              +--------------------------------------------------------+--------------------------------------------------------+
+	 */
 
 	@Configuration
 	@EnableStateMachine
@@ -475,46 +475,46 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S10)
-					.state(TestStates.S10)
-					.state(TestStates.S11)
-					.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S101)
-						.state(TestStates.S101)
-						.and()
-						.withStates()
-							.parent(TestStates.S101)
-							.initial(TestStates.S1011)
-							.state(TestStates.S1011)
-							.state(TestStates.S1012)
-							.and()
-				.withStates()
-					.initial(TestStates.S20)
-					.state(TestStates.S20)
-					.state(TestStates.S21)
-					.and()
-					.withStates()
-						.parent(TestStates.S20)
-						.initial(TestStates.S201)
-						.state(TestStates.S201)
-						.and()
-						.withStates()
-							.parent(TestStates.S201)
-							.initial(TestStates.S2011)
-							.state(TestStates.S2011)
-							.state(TestStates.S2012);
+		.withStates()
+		.initial(TestStates.S10)
+		.state(TestStates.S10)
+		.state(TestStates.S11)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S101)
+		.state(TestStates.S101)
+		.and()
+		.withStates()
+		.parent(TestStates.S101)
+		.initial(TestStates.S1011)
+		.state(TestStates.S1011)
+		.state(TestStates.S1012)
+		.and()
+		.withStates()
+		.initial(TestStates.S20)
+		.state(TestStates.S20)
+		.state(TestStates.S21)
+		.and()
+		.withStates()
+		.parent(TestStates.S20)
+		.initial(TestStates.S201)
+		.state(TestStates.S201)
+		.and()
+		.withStates()
+		.parent(TestStates.S201)
+		.initial(TestStates.S2011)
+		.state(TestStates.S2011)
+		.state(TestStates.S2012);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1011)
-					.target(TestStates.S11)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1011)
+		.target(TestStates.S11)
+		.event(TestEvents.E1);
 		}
 
 	}
@@ -526,30 +526,30 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-			.withStates()
-				.initial(TestStates.S10)
-				.state(TestStates.S10)
-				.state(TestStates.S11)
-				.and()
-				.withStates()
-					.parent(TestStates.S10)
-					.initial(TestStates.S101)
-					.state(TestStates.S101)
-					.and()
-					.withStates()
-						.parent(TestStates.S101)
-						.initial(TestStates.S1011)
-						.state(TestStates.S1011)
-						.state(TestStates.S1012);
+		.withStates()
+		.initial(TestStates.S10)
+		.state(TestStates.S10)
+		.state(TestStates.S11)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S101)
+		.state(TestStates.S101)
+		.and()
+		.withStates()
+		.parent(TestStates.S101)
+		.initial(TestStates.S1011)
+		.state(TestStates.S1011)
+		.state(TestStates.S1012);
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<TestStates, TestEvents> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source(TestStates.S1011)
-					.target(TestStates.S11)
-					.event(TestEvents.E1);
+		.withExternal()
+		.source(TestStates.S1011)
+		.target(TestStates.S11)
+		.event(TestEvents.E1);
 		}
 
 	}
@@ -561,27 +561,27 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withVerifier()
-					.enabled(false);
+		.withVerifier()
+		.enabled(false);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S10)
-					.state(TestStates.S10)
-					.state(TestStates.S11)
-					.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S101)
-						.state(TestStates.S101)
-						.and()
-					.withStates()
-						.parent(TestStates.S10)
-						.initial(TestStates.S111)
-						.state(TestStates.S111);
+		.withStates()
+		.initial(TestStates.S10)
+		.state(TestStates.S10)
+		.state(TestStates.S11)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S101)
+		.state(TestStates.S101)
+		.and()
+		.withStates()
+		.parent(TestStates.S10)
+		.initial(TestStates.S111)
+		.state(TestStates.S111);
 		}
 
 	}
@@ -593,19 +593,19 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withVerifier()
-					.enabled(false)
-					.and()
-				.withConfiguration()
-					.autoStartup(true);
+		.withVerifier()
+		.enabled(false)
+		.and()
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 	}
@@ -617,20 +617,20 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withVerifier()
-					.enabled(false)
-					.and()
-				.withConfiguration()
-					.listener(new StateMachineListenerAdapter<TestStates, TestEvents>())
-					.listener(new StateMachineListenerAdapter<TestStates, TestEvents>());
+		.withVerifier()
+		.enabled(false)
+		.and()
+		.withConfiguration()
+		.listener(new StateMachineListenerAdapter<TestStates, TestEvents>())
+		.listener(new StateMachineListenerAdapter<TestStates, TestEvents>());
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 	}
@@ -642,19 +642,19 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<TestStates, TestEvents> config) throws Exception {
 			config
-				.withVerifier()
-					.enabled(false)
-					.and()
-				.withConfiguration()
-					.autoStartup(false);
+		.withVerifier()
+		.enabled(false)
+		.and()
+		.withConfiguration()
+		.autoStartup(false);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			states
-				.withStates()
-					.initial(TestStates.S1)
-					.states(EnumSet.allOf(TestStates.class));
+		.withStates()
+		.initial(TestStates.S1)
+		.states(EnumSet.allOf(TestStates.class));
 		}
 
 	}
@@ -675,17 +675,17 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		StateMachine<String, String> stateMachine() throws Exception {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder.configureConfiguration()
-				.withConfiguration()
-					.autoStartup(false);
+		.withConfiguration()
+		.autoStartup(false);
 			builder.configureStates()
-				.withStates()
-					.initial("S1").state("S2");
+		.withStates()
+		.initial("S1").state("S2");
 			builder.configureTransitions()
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("E2");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S1").event("E2");
 			StateMachine<String, String> stateMachine = builder.build();
 			return stateMachine;
 		}
@@ -699,17 +699,17 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		StateMachine<String, String> stateMachine() throws Exception {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder.configureConfiguration()
-				.withConfiguration()
-					.autoStartup(false);
+		.withConfiguration()
+		.autoStartup(false);
 			builder.configureStates()
-				.withStates()
-					.initial("S1").state("S2");
+		.withStates()
+		.initial("S1").state("S2");
 			builder.configureTransitions()
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("E2");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S1").event("E2");
 			StateMachine<String, String> stateMachine = builder.build();
 			return stateMachine;
 		}
@@ -725,18 +725,18 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		StateMachine<String, String> stateMachine() throws Exception {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder.configureConfiguration()
-				.withConfiguration()
-					.autoStartup(false)
-					.beanFactory(beanFactory);
+		.withConfiguration()
+		.autoStartup(false)
+		.beanFactory(beanFactory);
 			builder.configureStates()
-				.withStates()
-					.initial("S1").state("S2");
+		.withStates()
+		.initial("S1").state("S2");
 			builder.configureTransitions()
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("E2");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S1").event("E2");
 			StateMachine<String, String> stateMachine = builder.build();
 			return stateMachine;
 		}
@@ -752,19 +752,19 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		StateMachine<String, String> stateMachine() throws Exception {
 			Builder<String, String> builder = StateMachineBuilder.builder();
 			builder.configureConfiguration()
-				.withConfiguration()
-					.machineId("testid1")
-					.autoStartup(false)
-					.beanFactory(beanFactory);
+		.withConfiguration()
+		.machineId("testid1")
+		.autoStartup(false)
+		.beanFactory(beanFactory);
 			builder.configureStates()
-				.withStates()
-					.initial("S1").state("S2");
+		.withStates()
+		.initial("S1").state("S2");
 			builder.configureTransitions()
-				.withExternal()
-					.source("S1").target("S2").event("E1")
-					.and()
-				.withExternal()
-					.source("S2").target("S1").event("E2");
+		.withExternal()
+		.source("S1").target("S2").event("E1")
+		.and()
+		.withExternal()
+		.source("S2").target("S1").event("E2");
 			StateMachine<String, String> stateMachine = builder.build();
 			return stateMachine;
 		}
@@ -778,26 +778,26 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.machineId("testid1")
-					.autoStartup(true);
+		.withConfiguration()
+		.machineId("testid1")
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 
@@ -808,25 +808,25 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineConfigurationConfigurer<String, String> config) throws Exception {
 			config
-				.withConfiguration()
-					.autoStartup(true);
+		.withConfiguration()
+		.autoStartup(true);
 		}
 
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.state("S2");
+		.withStates()
+		.initial("S1")
+		.state("S2");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 
@@ -837,47 +837,47 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.end("S2")
-					.end("S3");
+		.withStates()
+		.initial("S1")
+		.end("S2")
+		.end("S3");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 
 	@Configuration
-	@EnableStateMachineFactory(name="stateMachineConfig21")
+	@EnableStateMachineFactory(name = "stateMachineConfig21")
 	public static class Config21 extends StateMachineConfigurerAdapter<String, String> {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.end("S2")
-					.end("S3");
+		.withStates()
+		.initial("S1")
+		.end("S2")
+		.end("S3");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 
 
 	@Configuration
-	@EnableStateMachineFactory(name="stateMachineConfig22")
+	@EnableStateMachineFactory(name = "stateMachineConfig22")
 	public static class Config22 extends StateMachineConfigurerAdapter<String, String> {
 		@Autowired
 		Config22(@Qualifier("stateMachineConfig21") StateMachineFactory<String, String> otherStateMachine) {
@@ -886,19 +886,19 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<String, String> states) throws Exception {
 			states
-				.withStates()
-					.initial("S1")
-					.end("S2")
-					.end("S3");
+		.withStates()
+		.initial("S1")
+		.end("S2")
+		.end("S3");
 		}
 
 		@Override
 		public void configure(StateMachineTransitionConfigurer<String, String> transitions) throws Exception {
 			transitions
-				.withExternal()
-					.source("S1")
-					.target("S2")
-					.event("E1");
+		.withExternal()
+		.source("S1")
+		.target("S2")
+		.event("E1");
 		}
 	}
 }

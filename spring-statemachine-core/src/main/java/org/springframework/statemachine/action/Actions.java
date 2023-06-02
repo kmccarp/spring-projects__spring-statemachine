@@ -74,8 +74,8 @@ public final class Actions {
 					// notify something wrong is happening in actions execution.
 					try {
 						errorAction.execute(new DefaultStateContext<>(context.getStage(), context.getMessage(), context.getMessageHeaders(),
-								context.getExtendedState(), context.getTransition(), context.getStateMachine(), context.getSource(),
-								context.getTarget(), context.getSources(), context.getTargets(), exception));
+					context.getExtendedState(), context.getTransition(), context.getStateMachine(), context.getSource(),
+					context.getTarget(), context.getSources(), context.getTargets(), exception));
 					} catch (Exception e) {
 						// not interested
 					}

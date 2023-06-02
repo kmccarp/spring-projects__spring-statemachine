@@ -118,9 +118,9 @@ public class TimerTrigger<S, E> extends LifecycleObjectSupport implements Trigge
 	private void schedule() {
 		long initialDelay = count > 0 ? period : 0;
 		Flux<Long> interval = Flux.interval(Duration.ofMillis(initialDelay), Duration.ofMillis(period))
-			.doOnNext(c -> {
-				notifyTriggered();
-			});
+	.doOnNext(c -> {
+		notifyTriggered();
+	});
 		if (count > 0) {
 			interval = interval.take(count);
 		}

@@ -38,14 +38,7 @@ public class ForkJoinEntryExitTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("S1").and()
-					.step()
-						.sendEvent("E1")
-						.expectStateEntered(3)
-						.expectStates("S2", "S210", "S220").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("S1").and().step().sendEvent("E1").expectStateEntered(3).expectStates("S2", "S210", "S220").and().build();
 		plan.test();
 	}
 
@@ -57,14 +50,7 @@ public class ForkJoinEntryExitTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("S1").and()
-					.step()
-						.sendEvent("E1")
-						.expectStateEntered(3)
-						.expectStates("S2", "S210", "S220").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("S1").and().step().sendEvent("E1").expectStateEntered(3).expectStates("S2", "S210", "S220").and().build();
 		plan.test();
 	}
 
@@ -76,26 +62,7 @@ public class ForkJoinEntryExitTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("S1").and()
-					.step()
-						.sendEvent("E1")
-						.expectStateEntered(3)
-						.expectStateExited(1)
-						.expectStates("S2", "S210", "S220").and()
-					.step()
-						.sendEvent("E2")
-						.expectStateEntered(1)
-						.expectStateExited(1)
-						.expectStates("S2", "S211", "S220").and()
-					.step()
-						.sendEvent("E3")
-						.expectStateEntered(2)
-						.expectStateExited(4)
-						.expectStateExited("S220", "S211", "S221", "S2")
-						.expectStates("S3").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("S1").and().step().sendEvent("E1").expectStateEntered(3).expectStateExited(1).expectStates("S2", "S210", "S220").and().step().sendEvent("E2").expectStateEntered(1).expectStateExited(1).expectStates("S2", "S211", "S220").and().step().sendEvent("E3").expectStateEntered(2).expectStateExited(4).expectStateExited("S220", "S211", "S221", "S2").expectStates("S3").and().build();
 		plan.test();
 	}
 
@@ -107,26 +74,7 @@ public class ForkJoinEntryExitTests extends AbstractBuildTests {
 		StateMachine<String, String> stateMachine = context.getBean(StateMachine.class);
 
 		StateMachineTestPlan<String, String> plan =
-				StateMachineTestPlanBuilder.<String, String>builder()
-					.stateMachine(stateMachine)
-					.step().expectState("S1").and()
-					.step()
-						.sendEvent("E1")
-						.expectStateEntered(3)
-						.expectStateExited(1)
-						.expectStates("S2", "S210", "S220").and()
-					.step()
-						.sendEvent("E2")
-						.expectStateEntered(1)
-						.expectStateExited(1)
-						.expectStates("S2", "S211", "S220").and()
-					.step()
-						.sendEvent("E3")
-						.expectStateEntered(2)
-						.expectStateExited(4)
-						.expectStateExited("S220", "S211", "S221", "S2")
-						.expectStates("S3").and()
-					.build();
+	StateMachineTestPlanBuilder.<String, String>builder().stateMachine(stateMachine).step().expectState("S1").and().step().sendEvent("E1").expectStateEntered(3).expectStateExited(1).expectStates("S2", "S210", "S220").and().step().sendEvent("E2").expectStateEntered(1).expectStateExited(1).expectStates("S2", "S211", "S220").and().step().sendEvent("E3").expectStateEntered(2).expectStateExited(4).expectStateExited("S220", "S211", "S221", "S2").expectStates("S3").and().build();
 		plan.test();
 	}
 
@@ -137,8 +85,8 @@ public class ForkJoinEntryExitTests extends AbstractBuildTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean
@@ -154,8 +102,8 @@ public class ForkJoinEntryExitTests extends AbstractBuildTests {
 		@Override
 		public void configure(StateMachineModelConfigurer<String, String> model) throws Exception {
 			model
-				.withModel()
-					.factory(modelFactory());
+		.withModel()
+		.factory(modelFactory());
 		}
 
 		@Bean

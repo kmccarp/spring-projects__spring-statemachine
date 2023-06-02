@@ -35,10 +35,10 @@ public class ObjectStateTests {
 	public void testEntrySingleAction() {
 		TestAction action = new TestAction();
 		ObjectState<String, String> state = new ObjectState<>("TEST", null, Arrays.asList(action), null, null, null,
-				null, null);
+	null, null);
 		StepVerifier.create(state.entry(null))
-			.expectComplete()
-			.verify();
+	.expectComplete()
+	.verify();
 		assertThat(action.count).hasValue(1);
 	}
 
@@ -47,10 +47,10 @@ public class ObjectStateTests {
 		TestAction action1 = new TestAction();
 		TestAction action2 = new TestAction();
 		ObjectState<String, String> state = new ObjectState<>("TEST", null, Arrays.asList(action1, action2), null, null,
-				null, null, null);
+	null, null, null);
 		StepVerifier.create(state.entry(null))
-			.expectComplete()
-			.verify();
+	.expectComplete()
+	.verify();
 		assertThat(action1.count).hasValue(1);
 		assertThat(action2.count).hasValue(1);
 	}
@@ -59,10 +59,10 @@ public class ObjectStateTests {
 	public void testExitSingle() {
 		TestAction action = new TestAction();
 		ObjectState<String, String> state = new ObjectState<>("TEST", null, null, Arrays.asList(action), null, null,
-				null, null);
+	null, null);
 		StepVerifier.create(state.exit(null))
-			.expectComplete()
-			.verify();
+	.expectComplete()
+	.verify();
 		assertThat(action.count).hasValue(1);
 	}
 
@@ -71,10 +71,10 @@ public class ObjectStateTests {
 		TestAction action1 = new TestAction();
 		TestAction action2 = new TestAction();
 		ObjectState<String, String> state = new ObjectState<>("TEST", null, null, Arrays.asList(action1, action2), null,
-				null, null, null);
+	null, null, null);
 		StepVerifier.create(state.exit(null))
-			.expectComplete()
-			.verify();
+	.expectComplete()
+	.verify();
 		assertThat(action1.count).hasValue(1);
 		assertThat(action2.count).hasValue(1);
 	}
@@ -83,10 +83,10 @@ public class ObjectStateTests {
 	public void testStateAction() {
 		TestAction action = new TestAction();
 		ObjectState<String, String> state = new ObjectState<>("TEST", null, null, null, Arrays.asList(action), null,
-				null, null);
+	null, null);
 		StepVerifier.create(state.entry(null))
-			.expectComplete()
-			.verify();
+	.expectComplete()
+	.verify();
 		await().untilAtomic(action.count, is(1));
 	}
 
@@ -94,10 +94,10 @@ public class ObjectStateTests {
 	public void testEntrySingleActionBlocks() {
 		TestBlockingAction action = new TestBlockingAction();
 		ObjectState<String, String> state = new ObjectState<>("TEST", null, Arrays.asList(action), null, null, null,
-				null, null);
+	null, null);
 		StepVerifier.create(state.entry(null))
-			.expectComplete()
-			.verify();
+	.expectComplete()
+	.verify();
 		assertThat(action.countBefore).hasValue(1);
 		assertThat(action.countInterrupt).hasValue(0);
 		assertThat(action.countAfter).hasValue(1);
@@ -107,10 +107,10 @@ public class ObjectStateTests {
 	public void testStateActionBlocks() {
 		TestBlockingAction action = new TestBlockingAction();
 		ObjectState<String, String> state = new ObjectState<>("TEST", null, null, null, Arrays.asList(action), null,
-				null, null);
+	null, null);
 		StepVerifier.create(state.entry(null))
-			.expectComplete()
-			.verify();
+	.expectComplete()
+	.verify();
 		await().untilAtomic(action.countAfter, is(1));
 		assertThat(action.countBefore).hasValue(1);
 		assertThat(action.countInterrupt).hasValue(0);
@@ -121,10 +121,10 @@ public class ObjectStateTests {
 		TestBlockingAction action1 = new TestBlockingAction();
 		TestBlockingAction action2 = new TestBlockingAction();
 		ObjectState<String, String> state = new ObjectState<>("TEST", null, null, null, Arrays.asList(action1, action2),
-				null, null, null);
+	null, null, null);
 		StepVerifier.create(state.entry(null))
-			.expectComplete()
-			.verify();
+	.expectComplete()
+	.verify();
 		await().untilAtomic(action1.countAfter, is(1));
 		assertThat(action1.countBefore).hasValue(1);
 		assertThat(action1.countInterrupt).hasValue(0);

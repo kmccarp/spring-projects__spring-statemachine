@@ -142,8 +142,8 @@ public class LatchStateMachineListener<S, E> extends StateMachineListenerAdapter
 	}
 
 	public void reset(int stateChangedCount, int stateEnteredCount, int stateExitedCount, int eventNotAcceptedCount,
-			int transitionCount, int transitionStartedCount, int transitionEndedCount, int stateMachineStartedCount,
-			int stateMachineStoppedCount, int extendedStateChangedCount) {
+int transitionCount, int transitionStartedCount, int transitionEndedCount, int stateMachineStartedCount,
+int stateMachineStoppedCount, int extendedStateChangedCount) {
 		synchronized (lock) {
 			this.stateChangedLatch = new CountDownLatch(stateChangedCount);
 			this.stateEnteredLatch = new CountDownLatch(stateEnteredCount);

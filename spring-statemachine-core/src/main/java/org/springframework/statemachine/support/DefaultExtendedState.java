@@ -37,7 +37,7 @@ public class DefaultExtendedState implements ExtendedState {
 	 */
 	public DefaultExtendedState() {
 		this.variables = new ObservableMap<Object, Object>(new ConcurrentHashMap<Object, Object>(),
-				new LocalMapChangeListener());
+	new LocalMapChangeListener());
 	}
 
 	/**
@@ -63,9 +63,9 @@ public class DefaultExtendedState implements ExtendedState {
 		}
 		if (!type.isAssignableFrom(value.getClass())) {
 			throw new IllegalArgumentException("Incorrect type specified for variable '" +
-					key + "'. Expected [" + type + "] but actual type is [" + value.getClass() + "]");
+		key + "'. Expected [" + type + "] but actual type is [" + value.getClass() + "]");
 		}
-		return (T) value;
+		return (T)value;
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class DefaultExtendedState implements ExtendedState {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		DefaultExtendedState other = (DefaultExtendedState) obj;
+		DefaultExtendedState other = (DefaultExtendedState)obj;
 		if (variables == null) {
 			if (other.variables != null) {
 				return false;

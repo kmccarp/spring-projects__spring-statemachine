@@ -31,8 +31,7 @@ import org.springframework.statemachine.config.common.annotation.AnnotationConfi
  * @param <I> The type of interface or builder itself returned by the configurer
  * @param <B> The Builder that is building O and is configured by {@link AnnotationConfigurerAdapter}
  */
-public class DefaultPropertiesConfigurer<O,I,B extends AnnotationBuilder<O>>
-		extends AnnotationConfigurerAdapter<O,I,B> implements PropertiesConfigurer<I> {
+public class DefaultPropertiesConfigurer<O, I, B extends AnnotationBuilder<O>>extends AnnotationConfigurerAdapter<O, I, B> implements PropertiesConfigurer<I> {
 
 	private Properties properties = new Properties();
 
@@ -98,8 +97,8 @@ public class DefaultPropertiesConfigurer<O,I,B extends AnnotationBuilder<O>>
 	 * @param properties the properties
 	 * @return true, if properties configure is handled
 	 */
-	protected boolean configureProperties(B builder, Properties properties){
+	protected boolean configureProperties(B builder, Properties properties) {
 		return false;
-	};
+	}
 
 }

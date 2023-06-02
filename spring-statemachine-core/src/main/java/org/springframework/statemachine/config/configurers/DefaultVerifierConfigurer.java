@@ -30,9 +30,7 @@ import org.springframework.statemachine.config.model.verifier.StateMachineModelV
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class DefaultVerifierConfigurer <S, E>
-		extends AnnotationConfigurerAdapter<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>
-		implements VerifierConfigurer<S, E> {
+public class DefaultVerifierConfigurer<S, E>extends AnnotationConfigurerAdapter<ConfigurationData<S, E>, StateMachineConfigurationConfigurer<S, E>, StateMachineConfigurationBuilder<S, E>>implements VerifierConfigurer<S, E> {
 
 	private boolean enabled = true;
 	private StateMachineModelVerifier<S, E> verifier;

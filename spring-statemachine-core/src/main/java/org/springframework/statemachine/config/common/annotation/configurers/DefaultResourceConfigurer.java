@@ -35,8 +35,7 @@ import org.springframework.statemachine.config.common.annotation.AnnotationConfi
  * @param <B> The Builder that is building O and is configured by {@link AnnotationConfigurerAdapter}
  * @param <I> The type of an interface of B
  */
-public class DefaultResourceConfigurer<O,I,B extends AnnotationBuilder<O>>
-		extends AnnotationConfigurerAdapter<O,I,B> implements ResourceConfigurer<I> {
+public class DefaultResourceConfigurer<O, I, B extends AnnotationBuilder<O>>extends AnnotationConfigurerAdapter<O, I, B> implements ResourceConfigurer<I> {
 
 	private Set<Resource> resources = new HashSet<Resource>();
 	private final DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
@@ -119,8 +118,8 @@ public class DefaultResourceConfigurer<O,I,B extends AnnotationBuilder<O>>
 	 * @param resources the resources
 	 * @return true, if resources configure is handled
 	 */
-	protected boolean configureResources(B builder, Set<Resource> resources){
+	protected boolean configureResources(B builder, Set<Resource> resources) {
 		return false;
-	};
+	}
 
 }

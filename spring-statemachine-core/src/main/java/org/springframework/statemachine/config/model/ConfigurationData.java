@@ -66,7 +66,7 @@ public class ConfigurationData<S, E> {
 	 */
 	public ConfigurationData() {
 		this(null, false, null, new ArrayList<StateMachineListener<S, E>>(), false, null, null, null, null, true,
-				new DefaultStateMachineModelVerifier<S, E>(), null, null, null);
+	new DefaultStateMachineModelVerifier<S, E>(), null, null, null);
 	}
 
 	/**
@@ -88,15 +88,15 @@ public class ConfigurationData<S, E> {
 	 * @param interceptors the state machine interceptors.
 	 */
 	public ConfigurationData(BeanFactory beanFactory, boolean autoStart, StateMachineEnsemble<S, E> ensemble,
-			List<StateMachineListener<S, E>> listeners, boolean securityEnabled,
-			AccessDecisionManager transitionSecurityAccessDecisionManager,
-			AccessDecisionManager eventSecurityAccessDecisionManager, SecurityRule eventSecurityRule,
-			SecurityRule transitionSecurityRule, boolean verifierEnabled, StateMachineModelVerifier<S, E> verifier,
-			String machineId, StateMachineMonitor<S, E> stateMachineMonitor,
-			List<StateMachineInterceptor<S, E>> interceptors) {
+List<StateMachineListener<S, E>> listeners, boolean securityEnabled,
+AccessDecisionManager transitionSecurityAccessDecisionManager,
+AccessDecisionManager eventSecurityAccessDecisionManager, SecurityRule eventSecurityRule,
+SecurityRule transitionSecurityRule, boolean verifierEnabled, StateMachineModelVerifier<S, E> verifier,
+String machineId, StateMachineMonitor<S, E> stateMachineMonitor,
+List<StateMachineInterceptor<S, E>> interceptors) {
 		this(beanFactory, autoStart, ensemble, listeners, securityEnabled, transitionSecurityAccessDecisionManager,
-				eventSecurityAccessDecisionManager, eventSecurityRule, transitionSecurityRule, verifierEnabled,
-				verifier, machineId, stateMachineMonitor, interceptors, null, null, null, null);
+	eventSecurityAccessDecisionManager, eventSecurityRule, transitionSecurityRule, verifierEnabled,
+	verifier, machineId, stateMachineMonitor, interceptors, null, null, null, null);
 	}
 
 	/**
@@ -122,14 +122,14 @@ public class ConfigurationData<S, E> {
 	 * @param regionExecutionPolicy the region execution policy
 	 */
 	public ConfigurationData(BeanFactory beanFactory, boolean autoStart, StateMachineEnsemble<S, E> ensemble,
-			List<StateMachineListener<S, E>> listeners, boolean securityEnabled,
-			AccessDecisionManager transitionSecurityAccessDecisionManager,
-			AccessDecisionManager eventSecurityAccessDecisionManager, SecurityRule eventSecurityRule,
-			SecurityRule transitionSecurityRule, boolean verifierEnabled, StateMachineModelVerifier<S, E> verifier,
-			String machineId, StateMachineMonitor<S, E> stateMachineMonitor,
-			List<StateMachineInterceptor<S, E>> interceptors, TransitionConflictPolicy transitionConflightPolicy,
-			StateDoActionPolicy stateDoActionPolicy, Long stateDoActionPolicyTimeout,
-			RegionExecutionPolicy regionExecutionPolicy) {
+List<StateMachineListener<S, E>> listeners, boolean securityEnabled,
+AccessDecisionManager transitionSecurityAccessDecisionManager,
+AccessDecisionManager eventSecurityAccessDecisionManager, SecurityRule eventSecurityRule,
+SecurityRule transitionSecurityRule, boolean verifierEnabled, StateMachineModelVerifier<S, E> verifier,
+String machineId, StateMachineMonitor<S, E> stateMachineMonitor,
+List<StateMachineInterceptor<S, E>> interceptors, TransitionConflictPolicy transitionConflightPolicy,
+StateDoActionPolicy stateDoActionPolicy, Long stateDoActionPolicyTimeout,
+RegionExecutionPolicy regionExecutionPolicy) {
 		this.beanFactory = beanFactory;
 		this.autoStart = autoStart;
 		this.ensemble = ensemble;

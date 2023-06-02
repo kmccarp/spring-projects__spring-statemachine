@@ -28,8 +28,7 @@ import org.springframework.statemachine.support.AbstractCompositeItems;
  * @param <S> the type of state
  * @param <E> the type of event
  */
-public class CompositeStateMachineModelVerifier<S, E> extends AbstractCompositeItems<StateMachineModelVerifier<S, E>>
-		implements StateMachineModelVerifier<S, E> {
+public class CompositeStateMachineModelVerifier<S, E> extends AbstractCompositeItems<StateMachineModelVerifier<S, E>>implements StateMachineModelVerifier<S, E> {
 
 	public CompositeStateMachineModelVerifier() {
 		super();
@@ -38,7 +37,7 @@ public class CompositeStateMachineModelVerifier<S, E> extends AbstractCompositeI
 
 	@Override
 	public void verify(StateMachineModel<S, E> model) {
-		for (Iterator<StateMachineModelVerifier<S, E>> iterator = getItems().reverse(); iterator.hasNext();) {
+		for (Iterator<StateMachineModelVerifier<S, E>> iterator = getItems().reverse();iterator.hasNext();) {
 			StateMachineModelVerifier<S, E> verifier = iterator.next();
 			verifier.verify(model);
 		}

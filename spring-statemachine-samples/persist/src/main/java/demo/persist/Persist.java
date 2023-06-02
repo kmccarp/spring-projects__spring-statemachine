@@ -50,12 +50,12 @@ public class Persist {
 
 	public String listDbEntries() {
 		List<Order> orders = jdbcTemplate.query(
-		        "select id, state from orders",
-		        new RowMapper<Order>() {
-		            public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
-		            	return new Order(rs.getInt("id"), rs.getString("state"));
-		            }
-		        });
+	"select id, state from orders",
+	new RowMapper<Order>() {
+		public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return new Order(rs.getInt("id"), rs.getString("state"));
+		}
+	});
 		StringBuilder buf = new StringBuilder();
 		for (Order order : orders) {
 			buf.append(order);
@@ -67,14 +67,14 @@ public class Persist {
 //tag::snippetB[]
 	public void change(int order, String event) {
 		Order o = jdbcTemplate.queryForObject("select id, state from orders where id = ?",
-				new RowMapper<Order>() {
-					public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
-						return new Order(rs.getInt("id"), rs.getString("state"));
-					}
-				}, new Object[] { order });
+	new RowMapper<Order>() {
+		public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return new Order(rs.getInt("id"), rs.getString("state"));
+		}
+	}, new Object[]{order});
 		handler.handleEventWithStateReactively(MessageBuilder
-				.withPayload(event).setHeader("order", order).build(), o.state)
-			.subscribe();
+	.withPayload(event).setHeader("order", order).build(), o.state)
+	.subscribe();
 	}
 
 	//end::snippetB[]
@@ -84,7 +84,7 @@ public class Persist {
 
 		@Override
 		public void onPersist(State<String, String> state, Message<String> message,
-				Transition<String, String> transition, StateMachine<String, String> stateMachine) {
+	Transition<String, String> transition, StateMachine<String, String> stateMachine) {
 			if (message != null && message.getHeaders().containsKey("order")) {
 				Integer order = message.getHeaders().get("order", Integer.class);
 				jdbcTemplate.update("update orders set state = ? where id = ?", state.getId(), order);
