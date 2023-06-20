@@ -36,7 +36,7 @@ public class MessageHeadersSerializer extends Serializer<MessageHeaders> {
 
 	@Override
 	public void write(Kryo kryo, Output output, MessageHeaders object) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<>();
 		for (Entry<String, Object> entry : object.entrySet()) {
 			map.put(entry.getKey(), entry.getValue());
 		}
