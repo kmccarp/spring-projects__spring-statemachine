@@ -27,7 +27,7 @@ import demo.datapersist.StateMachineConfig.States;
 
 public class StateMachineLogListener extends StateMachineListenerAdapter<States, Events> {
 
-	private final LinkedList<String> messages = new LinkedList<String>();
+	private final LinkedList<String> messages = new LinkedList<>();
 
 	public List<String> getMessages() {
 		return messages;

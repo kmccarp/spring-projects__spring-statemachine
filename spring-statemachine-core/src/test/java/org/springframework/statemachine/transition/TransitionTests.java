@@ -51,7 +51,7 @@ import org.springframework.statemachine.state.State;
  */
 public class TransitionTests extends AbstractStateMachineTests {
 
-	private final static Log log = LogFactory.getLog(TransitionTests.class);
+	private static final Log log = LogFactory.getLog(TransitionTests.class);
 
 	@Override
 	protected AnnotationConfigApplicationContext buildContext() {
@@ -730,7 +730,7 @@ public class TransitionTests extends AbstractStateMachineTests {
 	private static class HeaderTestAction implements Action<TestStates, TestEvents> {
 
 		volatile CountDownLatch latch = new CountDownLatch(1);
-		String testHeader = null;
+		String testHeader;
 
 		@Override
 		public void execute(StateContext<TestStates, TestEvents> context) {
@@ -750,7 +750,7 @@ public class TransitionTests extends AbstractStateMachineTests {
 		volatile CountDownLatch stateMachineStartedLatch = new CountDownLatch(1);
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
 		volatile CountDownLatch s20Latch = new CountDownLatch(1);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 
 		@Override
 		public void stateMachineStarted(StateMachine<TestStates, TestEvents> stateMachine) {
@@ -781,9 +781,9 @@ public class TransitionTests extends AbstractStateMachineTests {
 	static class TestListener2 extends StateMachineListenerAdapter<TestStates2, TestEvents2> {
 
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 		volatile CountDownLatch stateEnteredLatch = new CountDownLatch(1);
-		volatile int stateEnteredCount = 0;
+		volatile int stateEnteredCount;
 
 		@Override
 		public void stateChanged(State<TestStates2, TestEvents2> from, State<TestStates2, TestEvents2> to) {

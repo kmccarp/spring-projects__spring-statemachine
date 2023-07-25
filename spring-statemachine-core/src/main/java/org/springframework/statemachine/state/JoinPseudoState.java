@@ -41,7 +41,7 @@ import reactor.core.publisher.Mono;
  */
 public class JoinPseudoState<S, E> extends AbstractPseudoState<S, E> {
 
-	private final static Log log = LogFactory.getLog(JoinPseudoState.class);
+	private static final Log log = LogFactory.getLog(JoinPseudoState.class);
 	private final List<List<State<S, E>>> joins;
 	private final JoinTracker tracker;
 	private final List<JoinStateData<S, E>> joinTargets;
@@ -68,15 +68,13 @@ public class JoinPseudoState<S, E> extends AbstractPseudoState<S, E> {
 			return Flux.fromIterable(joinTargets)
 				.filterWhen(jst -> evaluateInternal(jst.guard, context))
 				.next()
-				.map(jst -> jst.getState());
+				.map(org.springframework.statemachine.state.JoinPseudoState.JoinStateData::getState);
 		});
 	}
 
 	@Override
 	public Mono<Void> exit(StateContext<S, E> context) {
-		return Mono.fromRunnable(() -> {
-			tracker.reset();
-		});
+		return Mono.fromRunnable(tracker::reset);
 	}
 
 	/**
@@ -113,12 +111,12 @@ public class JoinPseudoState<S, E> extends AbstractPseudoState<S, E> {
 	private class JoinTracker {
 
 		private final List<List<State<S, E>>> track;
-		private volatile boolean notified = false;
+		private volatile boolean notified;
 
 		public JoinTracker() {
-			this.track = new ArrayList<List<State<S,E>>>(joins.size());
+			this.track = new ArrayList<>(joins.size());
 			for (List<State<S, E>> list : joins) {
-				this.track.add(new ArrayList<State<S,E>>(list));
+				this.track.add(new ArrayList<>(list));
 				for (State<S, E> tt : list) {
 					final State<S, E> t = tt;
 					t.addStateListener(new StateListenerAdapter<S, E>() {
@@ -137,7 +135,7 @@ public class JoinPseudoState<S, E> extends AbstractPseudoState<S, E> {
 							if (!notified && track.isEmpty()) {
 								log.debug("Join complete");
 								notified = true;
-								notifyContext(new DefaultPseudoStateContext<S, E>(JoinPseudoState.this, PseudoAction.JOIN_COMPLETED));
+								notifyContext(new DefaultPseudoStateContext<>(JoinPseudoState.this, PseudoAction.JOIN_COMPLETED));
 							}
 						}
 					});
@@ -148,7 +146,7 @@ public class JoinPseudoState<S, E> extends AbstractPseudoState<S, E> {
 		void reset() {
 			track.clear();
 			for (List<State<S, E>> list : joins) {
-				track.add(new ArrayList<State<S,E>>(list));
+				track.add(new ArrayList<>(list));
 			}
 			notified = false;
 		}

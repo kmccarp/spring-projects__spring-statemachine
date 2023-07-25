@@ -71,8 +71,7 @@ public abstract class UmlUtils {
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
 		resourceSet.createResource(modelUri);
 		Resource resource = resourceSet.getResource(modelUri, true);
-		Model m = (Model) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.MODEL);
-		return m;
+		return (Model) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.MODEL);
 	}
 
 	/**
@@ -128,7 +127,7 @@ public abstract class UmlUtils {
 	 */
 	public static Collection<Action<String, String>> resolveTransitionActions(Transition transition,
 			StateMachineComponentResolver<String, String> resolver) {
-		ArrayList<Action<String, String>> actions = new ArrayList<Action<String, String>>();
+		ArrayList<Action<String, String>> actions = new ArrayList<>();
 		Action<String, String> action = resolveTransitionAction(transition, resolver);
 		if (action != null) {
 			actions.add(action);
@@ -158,7 +157,7 @@ public abstract class UmlUtils {
 				if (StringUtils.hasText(expression)) {
 					SpelExpressionParser parser = new SpelExpressionParser(
 							new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
-					action = new SpelExpressionAction<String, String>(parser.parseExpression(expression));
+					action = new SpelExpressionAction<>(parser.parseExpression(expression));
 				}
 			}
 		}
@@ -204,7 +203,7 @@ public abstract class UmlUtils {
 				if (StringUtils.hasText(expression)) {
 					SpelExpressionParser parser = new SpelExpressionParser(
 							new SpelParserConfiguration(SpelCompilerMode.MIXED, null));
-					action = new SpelExpressionAction<String, String>(parser.parseExpression(expression));
+					action = new SpelExpressionAction<>(parser.parseExpression(expression));
 				}
 			}
 		}
@@ -243,7 +242,7 @@ public abstract class UmlUtils {
 	 * @return the collection of deferred events
 	 */
 	public static Collection<String> resolveDererredEvents(State state) {
-		ArrayList<String> events = new ArrayList<String>();
+		ArrayList<String> events = new ArrayList<>();
 		for (Trigger trigger : state.getDeferrableTriggers()) {
 			Event event = trigger.getEvent();
 			if (event instanceof SignalEvent) {

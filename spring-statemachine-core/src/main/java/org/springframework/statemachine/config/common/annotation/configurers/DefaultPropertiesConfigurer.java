@@ -34,7 +34,7 @@ import org.springframework.statemachine.config.common.annotation.AnnotationConfi
 public class DefaultPropertiesConfigurer<O,I,B extends AnnotationBuilder<O>>
 		extends AnnotationConfigurerAdapter<O,I,B> implements PropertiesConfigurer<I> {
 
-	private Properties properties = new Properties();
+	private final Properties properties = new Properties();
 
 	/**
 	 * Adds a {@link Properties} to this builder.

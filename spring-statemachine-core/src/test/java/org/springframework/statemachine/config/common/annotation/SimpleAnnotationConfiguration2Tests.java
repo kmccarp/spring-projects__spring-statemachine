@@ -69,8 +69,8 @@ public class SimpleAnnotationConfiguration2Tests {
 		String fileName1 = iterator.next().getFilename();
 		String fileName2 = iterator.next().getFilename();
 		String[] fileNames = new String[2];
-		fileNames[0] = fileName1.equals("simpleResourceA1") ? fileName1 : fileName2;
-		fileNames[1] = fileName2.equals("simpleResourceA2") ? fileName2 : fileName1;
+		fileNames[0] = "simpleResourceA1".equals(fileName1) ? fileName1 : fileName2;
+		fileNames[1] = "simpleResourceA2".equals(fileName2) ? fileName2 : fileName1;
 		assertThat(fileNames[0]).isEqualTo("simpleResourceA1");
 		assertThat(fileNames[1]).isEqualTo("simpleResourceA2");
 

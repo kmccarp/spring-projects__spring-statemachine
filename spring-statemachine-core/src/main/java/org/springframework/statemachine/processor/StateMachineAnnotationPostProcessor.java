@@ -73,26 +73,26 @@ import org.springframework.util.ReflectionUtils;
 public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, BeanFactoryAware, InitializingBean,
 		Lifecycle, ApplicationListener<ApplicationEvent> {
 
-	private final static Log log = LogFactory.getLog(StateMachineAnnotationPostProcessor.class);
+	private static final Log log = LogFactory.getLog(StateMachineAnnotationPostProcessor.class);
 
 	/** Factory from BeanFactoryAware */
 	private volatile ConfigurableListableBeanFactory beanFactory;
 
 	/** Post processors map - annotation -> method post processor */
 	private final Map<Class<? extends Annotation>, MethodAnnotationPostProcessor<?>> postProcessors =
-			new HashMap<Class<? extends Annotation>, MethodAnnotationPostProcessor<?>>();
+			new HashMap<>();
 
 	/**
 	 * Application events for post processed beans (if bean instance of ApplicationListener) will
 	 * be dispatched from here via callback in this class.
 	 */
-	private final Set<ApplicationListener<ApplicationEvent>> listeners = new HashSet<ApplicationListener<ApplicationEvent>>();
+	private final Set<ApplicationListener<ApplicationEvent>> listeners = new HashSet<>();
 
 	/**
 	 * Lifecycle callbacks for post processed bean (if bean instance of Lifecycle) will
 	 * be dispatched from here via callback in this class.
 	 */
-	private final Set<Lifecycle> lifecycles = new HashSet<Lifecycle>();
+	private final Set<Lifecycle> lifecycles = new HashSet<>();
 
 	/** Flag for Lifecycle in this class */
 	private volatile boolean running = true;
@@ -108,27 +108,27 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 	public void afterPropertiesSet() {
 		Assert.notNull(beanFactory, "BeanFactory must not be null");
 		postProcessors.put(OnTransition.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnTransition>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 		postProcessors.put(OnTransitionStart.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnTransitionStart>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 		postProcessors.put(OnTransitionEnd.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnTransitionEnd>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 		postProcessors.put(OnStateChanged.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateChanged>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 		postProcessors.put(OnStateEntry.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateEntry>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 		postProcessors.put(OnStateExit.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateExit>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 		postProcessors.put(OnStateMachineStart.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateMachineStart>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 		postProcessors.put(OnStateMachineStop.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateMachineStop>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 		postProcessors.put(OnEventNotAccepted.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnEventNotAccepted>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 		postProcessors.put(OnStateMachineError.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnStateMachineError>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 		postProcessors.put(OnExtendedStateChanged.class,
-				new StateMachineActivatorAnnotationPostProcessor<OnExtendedStateChanged>(beanFactory));
+				new StateMachineActivatorAnnotationPostProcessor<>(beanFactory));
 	}
 
 	@Override
@@ -156,7 +156,7 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 				for (Class<? extends Annotation> annotationType : postProcessors.keySet()) {
 					if (AnnotatedElementUtils.isAnnotated(method, annotationType.getName())) {
 						List<Annotation> annotationChain = getAnnotationChain(method, annotationType);
-						if (annotationChain.size() > 0) {
+						if (!annotationChain.isEmpty()) {
 							annotationChains.put(annotationType, annotationChain);
 						}
 					}
@@ -276,11 +276,11 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 	}
 
 	private List<Annotation> getAnnotationChain(Method method, Class<? extends Annotation> annotationType) {
-		List<Annotation> annotationChain = new LinkedList<Annotation>();
+		List<Annotation> annotationChain = new LinkedList<>();
 		Set<Annotation> visited = new HashSet<>();
 		for (MergedAnnotation<Annotation> mergedAnnotation : MergedAnnotations.from(method)) {
 			recursiveFindAnnotation(annotationType, mergedAnnotation.synthesize(), annotationChain, visited);
-			if (annotationChain.size() > 0) {
+			if (!annotationChain.isEmpty()) {
 				Collections.reverse(annotationChain);
 				return annotationChain;
 			}

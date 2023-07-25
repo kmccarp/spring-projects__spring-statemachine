@@ -37,11 +37,11 @@ import reactor.core.publisher.Mono;
 @Controller
 public class StateMachineController {
 
-	public final static String MACHINE_ID_1 = "datajpamultipersist1";
-	public final static String MACHINE_ID_2 = "datajpamultipersist2";
-	public final static String MACHINE_ID_2R1 = "datajpamultipersist2#R1";
-	public final static String MACHINE_ID_2R2 = "datajpamultipersist2#R2";
-	private final static String[] MACHINES = new String[] { MACHINE_ID_1, MACHINE_ID_2 };
+	public static final String MACHINE_ID_1 = "datajpamultipersist1";
+	public static final String MACHINE_ID_2 = "datajpamultipersist2";
+	public static final String MACHINE_ID_2R1 = "datajpamultipersist2#R1";
+	public static final String MACHINE_ID_2R2 = "datajpamultipersist2#R2";
+	private static final String[] MACHINES = new String[] { MACHINE_ID_1, MACHINE_ID_2 };
 	private final StateMachineLogListener listener = new StateMachineLogListener();
 
 	@Autowired

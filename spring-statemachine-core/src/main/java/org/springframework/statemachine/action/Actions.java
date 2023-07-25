@@ -112,7 +112,7 @@ public final class Actions {
 	 */
 	public static <S, E> Collection<Function<StateContext<S, E>, Mono<Void>>> from(Collection<Action<S, E>> actions) {
 		if (actions != null) {
-			return actions.stream().map(action -> from(action)).collect(Collectors.toList());
+			return actions.stream().map(Actions::from).collect(Collectors.toList());
 		} else {
 			return Collections.emptyList();
 		}

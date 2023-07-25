@@ -108,7 +108,7 @@ public class DistributedLeaderActionTests extends AbstractStateMachineTests {
 
 		@Bean
 		public StateMachineEnsemble<String, String> ensemble() {
-			return new InMemoryStateMachineEnsemble<String, String>();
+			return new InMemoryStateMachineEnsemble<>();
 		}
 
 		@Bean
@@ -126,7 +126,7 @@ public class DistributedLeaderActionTests extends AbstractStateMachineTests {
 	static class TestLeaderAction implements Action<String, String> {
 
 		CountDownLatch latch = new CountDownLatch(2);
-		int count = 0;
+		int count;
 
 		@Override
 		public void execute(StateContext<String, String> context) {
