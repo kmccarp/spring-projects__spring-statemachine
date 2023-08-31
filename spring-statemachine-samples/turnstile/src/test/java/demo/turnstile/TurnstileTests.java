@@ -87,10 +87,10 @@ public class TurnstileTests {
 		volatile CountDownLatch stateEnteredLatch = new CountDownLatch(2);
 		volatile CountDownLatch stateExitedLatch = new CountDownLatch(0);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
-		volatile List<Transition<States, Events>> transitions = new ArrayList<Transition<States,Events>>();
-		List<State<States, Events>> statesEntered = new ArrayList<State<States,Events>>();
-		List<State<States, Events>> statesExited = new ArrayList<State<States,Events>>();
-		volatile int transitionCount = 0;
+		volatile List<Transition<States, Events>> transitions = new ArrayList<>();
+		List<State<States, Events>> statesEntered = new ArrayList<>();
+		List<State<States, Events>> statesExited = new ArrayList<>();
+		volatile int transitionCount;
 
 		@Override
 		public void stateChanged(State<States, Events> from, State<States, Events> to) {

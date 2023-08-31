@@ -29,7 +29,7 @@ import org.springframework.statemachine.uml.ResourcerResolver.Holder;
 
 public class ResourcerResolverTests {
 
-	private ResourceLoader resourceLoader = new DefaultResourceLoader();
+	private final ResourceLoader resourceLoader = new DefaultResourceLoader();
 	// private String[] EMPTY_LOCATIONS = new String[0];
 
 	// in a below tests,

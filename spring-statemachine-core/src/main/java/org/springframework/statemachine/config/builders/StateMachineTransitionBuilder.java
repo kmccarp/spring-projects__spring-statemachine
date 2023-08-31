@@ -72,14 +72,14 @@ public class StateMachineTransitionBuilder<S, E>
 		AbstractConfiguredAnnotationBuilder<TransitionsData<S, E>, StateMachineTransitionConfigurer<S, E>, StateMachineTransitionBuilder<S, E>>
 		implements StateMachineTransitionConfigurer<S, E> {
 
-	private final Collection<TransitionData<S, E>> transitionData = new ArrayList<TransitionData<S, E>>();
-	private final Map<S, List<ChoiceData<S, E>>> choices = new HashMap<S, List<ChoiceData<S, E>>>();
-	private final Map<S, List<JunctionData<S, E>>> junctions = new HashMap<S, List<JunctionData<S, E>>>();
-	private final Map<S, List<S>> forks = new HashMap<S, List<S>>();
-	private final Map<S, List<S>> joins = new HashMap<S, List<S>>();
-	private final Collection<EntryData<S, E>> entryData = new ArrayList<EntryData<S, E>>();
-	private final Collection<ExitData<S, E>> exitData = new ArrayList<ExitData<S, E>>();
-	private final Collection<HistoryData<S, E>> historyData = new ArrayList<HistoryData<S, E>>();
+	private final Collection<TransitionData<S, E>> transitionData = new ArrayList<>();
+	private final Map<S, List<ChoiceData<S, E>>> choices = new HashMap<>();
+	private final Map<S, List<JunctionData<S, E>>> junctions = new HashMap<>();
+	private final Map<S, List<S>> forks = new HashMap<>();
+	private final Map<S, List<S>> joins = new HashMap<>();
+	private final Collection<EntryData<S, E>> entryData = new ArrayList<>();
+	private final Collection<ExitData<S, E>> exitData = new ArrayList<>();
+	private final Collection<HistoryData<S, E>> historyData = new ArrayList<>();
 
 	/**
 	 * Instantiates a new state machine transition builder.

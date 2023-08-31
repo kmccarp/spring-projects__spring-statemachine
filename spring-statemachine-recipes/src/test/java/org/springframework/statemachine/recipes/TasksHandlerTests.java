@@ -39,7 +39,7 @@ import org.springframework.statemachine.transition.Transition;
 
 public class TasksHandlerTests {
 
-	private final static Log log = LogFactory.getLog(TasksHandlerTests.class);
+	private static final Log log = LogFactory.getLog(TasksHandlerTests.class);
 
 	@Test
 	public void testRunOnceSimpleNoFailures() throws InterruptedException {
@@ -345,7 +345,7 @@ public class TasksHandlerTests {
 		assertThat(persist.contexts.size()).isEqualTo(5);
 
 		for (StateMachineContext<String, String> context : persist.getContexts()) {
-			if (context.getState() == "TASKS") {
+			if ("TASKS".equals(context.getState())) {
 				assertThat(context.getChilds().size()).isEqualTo(3);
 			} else {
 				assertThat(context.getChilds().size()).isEqualTo(0);
@@ -384,9 +384,9 @@ public class TasksHandlerTests {
 		assertThat(persist.contexts.size()).isEqualTo(6);
 
 		for (StateMachineContext<String, String> context : persist.getContexts()) {
-			if (context.getState() == "TASKS") {
+			if ("TASKS".equals(context.getState())) {
 				assertThat(context.getChilds().size()).isEqualTo(3);
-			} else if (context.getState() == "ERROR") {
+			} else if ("ERROR".equals(context.getState())) {
 				assertThat(context.getChilds().size()).isEqualTo(1);
 			} else {
 				assertThat(context.getChilds().size()).isEqualTo(0);
@@ -413,10 +413,10 @@ public class TasksHandlerTests {
 
 	@Test
 	public void testReset2() throws InterruptedException {
-		DefaultStateMachineContext<String, String> child = new DefaultStateMachineContext<String, String>("MANUAL", null, null, null);
-		List<StateMachineContext<String, String>> childs = new ArrayList<StateMachineContext<String, String>>();
+		DefaultStateMachineContext<String, String> child = new DefaultStateMachineContext<>("MANUAL", null, null, null);
+		List<StateMachineContext<String, String>> childs = new ArrayList<>();
 		childs.add(child);
-		DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<String, String>(childs, "ERROR", null, null, null);
+		DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<>(childs, "ERROR", null, null, null);
 		TestStateMachinePersist persist = new TestStateMachinePersist(context);
 		TasksHandler handler = TasksHandler.builder()
 			.task("1", sleepRunnable())
@@ -438,8 +438,8 @@ public class TasksHandlerTests {
 	@Test
 	public void testReset3() throws InterruptedException {
 		log.info("testReset3 start");
-		List<StateMachineContext<String, String>> childs = new ArrayList<StateMachineContext<String, String>>();
-		DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<String, String>(childs, "ERROR", null, null, null);
+		List<StateMachineContext<String, String>> childs = new ArrayList<>();
+		DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<>(childs, "ERROR", null, null, null);
 		TestStateMachinePersist persist = new TestStateMachinePersist(context);
 		TasksHandler handler = TasksHandler.builder()
 			.task("1", sleepRunnable())
@@ -467,10 +467,10 @@ public class TasksHandlerTests {
 	//@Test
 	public void testReset4() throws InterruptedException {
 		// TODO: automaticAction() is not executed when state is reset
-		DefaultStateMachineContext<String, String> child = new DefaultStateMachineContext<String, String>("AUTOMATIC", null, null, null);
-		List<StateMachineContext<String, String>> childs = new ArrayList<StateMachineContext<String, String>>();
+		DefaultStateMachineContext<String, String> child = new DefaultStateMachineContext<>("AUTOMATIC", null, null, null);
+		List<StateMachineContext<String, String>> childs = new ArrayList<>();
 		childs.add(child);
-		DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<String, String>(childs, "ERROR", null, null, null);
+		DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<>(childs, "ERROR", null, null, null);
 		TestStateMachinePersist persist = new TestStateMachinePersist(context);
 		TasksHandler handler = TasksHandler.builder()
 			.task("1", sleepRunnable())
@@ -526,11 +526,11 @@ public class TasksHandlerTests {
 		volatile CountDownLatch stateExitedLatch = new CountDownLatch(0);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
 		volatile CountDownLatch extendedStateChangedLatch = new CountDownLatch(0);
-		volatile int stateChangedCount = 0;
-		volatile int transitionCount = 0;
-		volatile int extendedStateChangedCount = 0;
-		List<State<String, String>> statesEntered = new ArrayList<State<String, String>>();
-		List<State<String, String>> statesExited = new ArrayList<State<String, String>>();
+		volatile int stateChangedCount;
+		volatile int transitionCount;
+		volatile int extendedStateChangedCount;
+		List<State<String, String>> statesEntered = new ArrayList<>();
+		List<State<String, String>> statesExited = new ArrayList<>();
 
 		@Override
 		public void stateMachineStarted(StateMachine<String, String> stateMachine) {
@@ -627,7 +627,7 @@ public class TasksHandlerTests {
 		volatile int onTasksSuccess;
 		volatile int onTasksError;
 
-		volatile boolean fix = false;
+		volatile boolean fix;
 
 		@Override
 		public void onTasksStarted() {

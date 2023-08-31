@@ -190,7 +190,7 @@ public class TimerTriggerTests extends AbstractStateMachineTests {
 
 		@Bean
 		public TimerTrigger<TestStates, TestEvents> timerTrigger() {
-			return new TimerTrigger<TestStates, TestEvents>(100);
+			return new TimerTrigger<>(100);
 		}
 	}
 
@@ -313,7 +313,7 @@ public class TimerTriggerTests extends AbstractStateMachineTests {
 
 	private static class TestTimerAction implements Action<TestStates, TestEvents> {
 
-		int count = 0;
+		int count;
 		volatile CountDownLatch latch = new CountDownLatch(1);
 
 		@Override
@@ -330,7 +330,7 @@ public class TimerTriggerTests extends AbstractStateMachineTests {
 
 	private static class TestTimerAction2 implements Action<String, String> {
 
-		int count = 0;
+		int count;
 		volatile CountDownLatch latch = new CountDownLatch(1);
 
 		@Override
@@ -351,7 +351,7 @@ public class TimerTriggerTests extends AbstractStateMachineTests {
 		volatile CountDownLatch stateMachineStartedLatch = new CountDownLatch(1);
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 
 		@Override
 		public void stateMachineStarted(StateMachine<TestStates, TestEvents> stateMachine) {
@@ -386,7 +386,7 @@ public class TimerTriggerTests extends AbstractStateMachineTests {
 		volatile CountDownLatch stateMachineStartedLatch = new CountDownLatch(1);
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 
 		@Override
 		public void stateMachineStarted(StateMachine<String, String> stateMachine) {

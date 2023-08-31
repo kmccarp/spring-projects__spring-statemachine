@@ -24,7 +24,7 @@ import org.springframework.statemachine.listener.StateMachineListenerAdapter;
 
 public class StateMachineLogListener extends StateMachineListenerAdapter<String, String> {
 
-	private final LinkedList<String> messages = new LinkedList<String>();
+	private final LinkedList<String> messages = new LinkedList<>();
 
 	public List<String> getMessages() {
 		return messages;

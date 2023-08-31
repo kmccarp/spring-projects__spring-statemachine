@@ -217,7 +217,7 @@ public class Application  {
 
 //tag::snippetC[]
 	public enum Events {
-	    RUN, FALLBACK, CONTINUE, FIX;
+	    RUN, FALLBACK, CONTINUE, FIX
 	}
 //end::snippetC[]
 

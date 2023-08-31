@@ -64,26 +64,26 @@ import reactor.core.publisher.Mono;
  * @author Janne Valkealahti
  *
  */
-public class TasksHandler {
+public final class TasksHandler {
 
-	private final static Log log = LogFactory.getLog(TasksHandler.class);
+	private static final Log log = LogFactory.getLog(TasksHandler.class);
 
-	public final static String STATE_READY = "READY";
-	public final static String STATE_FORK = "FORK";
-	public final static String STATE_TASKS = "TASKS";
-	public final static String STATE_JOIN = "JOIN";
-	public final static String STATE_CHOICE = "CHOICE";
-	public final static String STATE_ERROR = "ERROR";
-	public final static String STATE_AUTOMATIC = "AUTOMATIC";
-	public final static String STATE_MANUAL = "MANUAL";
+	public static final String STATE_READY = "READY";
+	public static final String STATE_FORK = "FORK";
+	public static final String STATE_TASKS = "TASKS";
+	public static final String STATE_JOIN = "JOIN";
+	public static final String STATE_CHOICE = "CHOICE";
+	public static final String STATE_ERROR = "ERROR";
+	public static final String STATE_AUTOMATIC = "AUTOMATIC";
+	public static final String STATE_MANUAL = "MANUAL";
 
-	public final static String STATE_TASKS_PREFIX = "TASK_";
-	public final static String STATE_TASKS_INITIAL_POSTFIX = "_INITIAL";
+	public static final String STATE_TASKS_PREFIX = "TASK_";
+	public static final String STATE_TASKS_INITIAL_POSTFIX = "_INITIAL";
 
-	public final static String EVENT_RUN = "RUN";
-	public final static String EVENT_FALLBACK = "FALLBACK";
-	public final static String EVENT_CONTINUE = "CONTINUE";
-	public final static String EVENT_FIX = "FIX";
+	public static final String EVENT_RUN = "RUN";
+	public static final String EVENT_FALLBACK = "FALLBACK";
+	public static final String EVENT_CONTINUE = "CONTINUE";
+	public static final String EVENT_FIX = "FIX";
 
 	private StateMachine<String, String> stateMachine;
 	private final CompositeTasksListener listener = new CompositeTasksListener();
@@ -254,7 +254,7 @@ public class TasksHandler {
 
 		Iterator<Node<TaskWrapper>> iterator = buildTasksIterator(tasks);
 		String parent = null;
-		Collection<String> joinStates = new ArrayList<String>();
+		Collection<String> joinStates = new ArrayList<>();
 		while (iterator.hasNext()) {
 			Node<TaskWrapper> node = iterator.next();
 			if (node.getData() == null) {
@@ -319,7 +319,7 @@ public class TasksHandler {
 	}
 
 	private static int topLevelTaskCount(List<TaskWrapper> tasks) {
-		Tree<TaskWrapper> tree = new Tree<TaskWrapper>();
+		Tree<TaskWrapper> tree = new Tree<>();
 		for (TaskWrapper wrapper : tasks) {
 			tree.add(wrapper, wrapper.id, wrapper.parent);
 		}
@@ -327,7 +327,7 @@ public class TasksHandler {
 	}
 
 	private static Iterator<Node<TaskWrapper>> buildTasksIterator(List<TaskWrapper> tasks) {
-		Tree<TaskWrapper> tree = new Tree<TaskWrapper>();
+		Tree<TaskWrapper> tree = new Tree<>();
 		for (TaskWrapper wrapper : tasks) {
 			tree.add(wrapper, wrapper.id, wrapper.parent);
 		}
@@ -341,8 +341,7 @@ public class TasksHandler {
 
 
 		Iterable<Node<TaskWrapper>> postOrderTraversal = traverser.postOrderTraversal(tree.getRoot());
-		Iterator<Node<TaskWrapper>> iterator = postOrderTraversal.iterator();
-		return iterator;
+		return postOrderTraversal.iterator();
 	}
 
 	/**
@@ -350,7 +349,7 @@ public class TasksHandler {
 	 */
 	public static class Builder {
 
-		private final List<TaskWrapper> tasks = new ArrayList<TaskWrapper>();
+		private final List<TaskWrapper> tasks = new ArrayList<>();
 		private TasksListener listener;
 		private TaskExecutor taskExecutor;
 		private StateMachinePersist<String, String, Void> persist;
@@ -839,7 +838,7 @@ public class TasksHandler {
 		private final StateMachinePersist<String, String, Void> persist;
 		private DefaultStateMachineContext<String, String> currentContext;
 		private State<String, String> currentContextState;
-		private final List<StateMachineContext<String, String>> childs = new ArrayList<StateMachineContext<String, String>>();
+		private final List<StateMachineContext<String, String>> childs = new ArrayList<>();
 
 		public LocalStateMachineInterceptor(StateMachinePersist<String, String, Void> persist) {
 			this.persist = persist;
@@ -857,13 +856,13 @@ public class TasksHandler {
 
 			// track root state here and update childs
 			if (currentContext != null && StateMachineUtils.isSubstate(currentContextState, state)) {
-				DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<String, String>(
+				DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<>(
 						transition != null ? transition.getTarget().getId() : null, message != null ? message.getPayload()
 								: null, message != null ? message.getHeaders() : null, stateMachine.getExtendedState());
 				currentContext.getChilds().add(context);
 			} else {
 				childs.clear();
-				DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<String, String>(
+				DefaultStateMachineContext<String, String> context = new DefaultStateMachineContext<>(
 						new ArrayList<StateMachineContext<String, String>>(childs), state.getId(), message != null ? message.getPayload()
 								: null, message != null ? message.getHeaders() : null, stateMachine.getExtendedState());
 				currentContext = context;

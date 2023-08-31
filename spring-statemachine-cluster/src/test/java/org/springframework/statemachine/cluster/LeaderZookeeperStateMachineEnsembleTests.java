@@ -109,7 +109,7 @@ public class LeaderZookeeperStateMachineEnsembleTests extends AbstractZookeeperT
 
 		@Bean
 		public StateMachineEnsemble<String, String> stateMachineEnsemble() throws Exception {
-			LeaderZookeeperStateMachineEnsemble<String,String> ensemble = new LeaderZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+			LeaderZookeeperStateMachineEnsemble<String,String> ensemble = new LeaderZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 			ensemble.addEnsembleListener(testEnsembleListener());
 			return ensemble;
 		}

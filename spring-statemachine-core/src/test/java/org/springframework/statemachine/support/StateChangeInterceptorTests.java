@@ -554,11 +554,11 @@ public class StateChangeInterceptorTests extends AbstractStateMachineTests {
 		}
 	}
 
-	public static enum States {
-		S0, S1, S11, S12, S2, S21, S211, S212, S3;
+	public enum States {
+		S0, S1, S11, S12, S2, S21, S211, S212, S3
 	}
 
-	public static enum Events {
+	public enum Events {
 		A, B, C, D, E, F, G, H, I
 	}
 
@@ -610,7 +610,7 @@ public class StateChangeInterceptorTests extends AbstractStateMachineTests {
 	private static class TestListener extends StateMachineListenerAdapter<States, Events> {
 
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 
 		@Override
 		public void stateChanged(State<States, Events> from, State<States, Events> to) {
@@ -629,8 +629,8 @@ public class StateChangeInterceptorTests extends AbstractStateMachineTests {
 
 		volatile CountDownLatch preStateChangeLatch2 = new CountDownLatch(1);
 		volatile CountDownLatch postStateChangeLatch2 = new CountDownLatch(1);
-		volatile int preStateChangeCount2 = 0;
-		volatile int postStateChangeCount2 = 0;
+		volatile int preStateChangeCount2;
+		volatile int postStateChangeCount2;
 		ArrayList<State<States, Events>> preStateChangeStates2 = new ArrayList<>();
 		ArrayList<State<States, Events>> postStateChangeStates2 = new ArrayList<>();
 

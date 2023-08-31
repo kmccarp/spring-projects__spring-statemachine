@@ -57,7 +57,7 @@ import org.springframework.util.ClassUtils;
 public class StateMachineFactoryConfiguration<S, E> extends
 		AbstractImportingAnnotationConfiguration<StateMachineConfigBuilder<S, E>, StateMachineConfig<S, E>> {
 
-	private final StateMachineConfigBuilder<S, E> builder = new StateMachineConfigBuilder<S, E>();
+	private final StateMachineConfigBuilder<S, E> builder = new StateMachineConfigBuilder<>();
 
 	@Override
 	protected BeanDefinition buildBeanDefinition(AnnotationMetadata importingClassMetadata,
@@ -102,7 +102,7 @@ public class StateMachineFactoryConfiguration<S, E> extends
 
 	@Override
 	protected List<Class<? extends Annotation>> getAnnotations() {
-		List<Class<? extends Annotation>> types = new ArrayList<Class<? extends Annotation>>();
+		List<Class<? extends Annotation>> types = new ArrayList<>();
 		types.add(EnableStateMachineFactory.class);
 		return types;
 	}

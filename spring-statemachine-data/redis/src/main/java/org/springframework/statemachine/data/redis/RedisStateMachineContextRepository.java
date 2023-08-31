@@ -79,7 +79,7 @@ public class RedisStateMachineContextRepository<S, E> implements StateMachineCon
 	}
 
 	private static RedisTemplate<String,byte[]> createDefaultTemplate(RedisConnectionFactory connectionFactory) {
-		RedisTemplate<String,byte[]> template = new RedisTemplate<String,byte[]>();
+		RedisTemplate<String,byte[]> template = new RedisTemplate<>();
 		template.setKeySerializer(new StringRedisSerializer());
 		template.setHashKeySerializer(new StringRedisSerializer());
 		template.setConnectionFactory(connectionFactory);

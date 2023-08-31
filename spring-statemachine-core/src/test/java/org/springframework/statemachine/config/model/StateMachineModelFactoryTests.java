@@ -289,16 +289,15 @@ public class StateMachineModelFactoryTests extends AbstractStateMachineTests {
 			ConfigurationData<String, String> configurationData = new ConfigurationData<>();
 
 			Collection<StateData<String, String>> stateData = new ArrayList<>();
-			stateData.add(new StateData<String, String>(state1, true));
-			stateData.add(new StateData<String, String>(null, null, state2, null, s2Actions, null));
+			stateData.add(new StateData<>(state1, true));
+			stateData.add(new StateData<>(null, null, state2, null, s2Actions, null));
 			StatesData<String, String> statesData = new StatesData<>(stateData);
 
 			Collection<TransitionData<String, String>> transitionData = new ArrayList<>();
-			transitionData.add(new TransitionData<String, String>(state1, state2, event1));
+			transitionData.add(new TransitionData<>(state1, state2, event1));
 			TransitionsData<String, String> transitionsData = new TransitionsData<>(transitionData);
 
-			StateMachineModel<String, String> stateMachineModel = new DefaultStateMachineModel<>(configurationData, statesData, transitionsData);
-			return stateMachineModel;
+			return new DefaultStateMachineModel<>(configurationData, statesData, transitionsData);
 		}
 
 		@Override
@@ -327,16 +326,15 @@ public class StateMachineModelFactoryTests extends AbstractStateMachineTests {
 			s2Actions.add(Actions.from(action1));
 
 			Collection<StateData<String, String>> stateData = new ArrayList<>();
-			stateData.add(new StateData<String, String>(state1, true));
-			stateData.add(new StateData<String, String>(null, null, state2, null, s2Actions, null));
+			stateData.add(new StateData<>(state1, true));
+			stateData.add(new StateData<>(null, null, state2, null, s2Actions, null));
 			StatesData<String, String> statesData = new StatesData<>(stateData);
 
 			Collection<TransitionData<String, String>> transitionData = new ArrayList<>();
-			transitionData.add(new TransitionData<String, String>(state1, state2, event1));
+			transitionData.add(new TransitionData<>(state1, state2, event1));
 			TransitionsData<String, String> transitionsData = new TransitionsData<>(transitionData);
 
-			StateMachineModel<String, String> stateMachineModel = new DefaultStateMachineModel<>(null, statesData, transitionsData);
-			return stateMachineModel;
+			return new DefaultStateMachineModel<>(null, statesData, transitionsData);
 		}
 
 		@Override

@@ -107,7 +107,7 @@ public class DocsConfigurationSampleTests extends AbstractStateMachineTests {
 				.withStates()
 					.initial("S1")
 					.end("SF")
-					.states(new HashSet<String>(Arrays.asList("S1","S2","S3","S4")));
+					.states(new HashSet<>(Arrays.asList("S1","S2","S3","S4")));
 		}
 
 	}
@@ -427,7 +427,7 @@ public class DocsConfigurationSampleTests extends AbstractStateMachineTests {
 			.withStates()
 				.initial("S1")
 				.end("SF")
-				.states(new HashSet<String>(Arrays.asList("S1","S2","S3","S4")));
+				.states(new HashSet<>(Arrays.asList("S1","S2","S3","S4")));
 		return builder.build();
 	}
 // end::snippetFB[]
@@ -842,9 +842,7 @@ public class DocsConfigurationSampleTests extends AbstractStateMachineTests {
 					.and()
 				.withChoice()
 					.source(States.S1)
-					.first(States.S2, c -> {
-							return true;
-						})
+					.first(States.S2, c -> true)
 					.last(States.S3, c -> {
 							// action with S1-S3
 						}, c -> {
@@ -1281,7 +1279,7 @@ public class DocsConfigurationSampleTests extends AbstractStateMachineTests {
 
 		public class AccessorSamples {
 
-			StateMachine<String, String> stateMachine = null;
+			StateMachine<String, String> stateMachine;
 
 			void s1() {
 // tag::snippetZA[]
@@ -1323,7 +1321,7 @@ public class DocsConfigurationSampleTests extends AbstractStateMachineTests {
 
 		public class InterceptorSamples {
 
-			StateMachine<String, String> stateMachine = null;
+			StateMachine<String, String> stateMachine;
 
 			void s1() {
 // tag::snippetZH[]

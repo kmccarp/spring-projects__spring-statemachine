@@ -133,8 +133,7 @@ public class DocsConfigurationSampleTests2 extends AbstractStateMachineTests {
 					.source("S1")
 					.target("S2")
 					.event("E1");
-			StateMachine<String, String> stateMachine = builder.build();
-			return stateMachine;
+			return builder.build();
 		}
 
 	}
@@ -186,7 +185,7 @@ public class DocsConfigurationSampleTests2 extends AbstractStateMachineTests {
 				.sendEvent(Mono.just(MessageBuilder
 					.withPayload(event).build()))
 				.subscribe();
-			return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+			return new ResponseEntity<>(HttpStatus.ACCEPTED);
 		}
 
 		@RequestMapping(path="/state", method=RequestMethod.GET)
@@ -352,7 +351,7 @@ public class DocsConfigurationSampleTests2 extends AbstractStateMachineTests {
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
 		volatile CountDownLatch stateMachineStartedLatch = new CountDownLatch(1);
 		volatile CountDownLatch readyStateEnteredLatch = new CountDownLatch(1);
-		volatile int readyStateEnteredCount = 0;
+		volatile int readyStateEnteredCount;
 
 		@Override
 		public void stateChanged(State<String, String> from, State<String, String> to) {
@@ -361,7 +360,7 @@ public class DocsConfigurationSampleTests2 extends AbstractStateMachineTests {
 
 		@Override
 		public void stateEntered(State<String, String> state) {
-			if (state.getId().equals("READY")) {
+			if ("READY".equals(state.getId())) {
 				readyStateEnteredCount++;
 				readyStateEnteredLatch.countDown();
 			}

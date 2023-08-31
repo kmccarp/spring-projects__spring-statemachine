@@ -38,7 +38,7 @@ public class StateMachineStateBuilder<S, E>
 		extends AbstractConfiguredAnnotationBuilder<StatesData<S, E>, StateMachineStateConfigurer<S, E>, StateMachineStateBuilder<S, E>>
 		implements StateMachineStateConfigurer<S, E> {
 
-	private final Collection<StateData<S, E>> stateDatas = new ArrayList<StateData<S,E>>();
+	private final Collection<StateData<S, E>> stateDatas = new ArrayList<>();
 
 	public StateMachineStateBuilder() {
 		super();
@@ -55,7 +55,7 @@ public class StateMachineStateBuilder<S, E>
 
 	@Override
 	protected StatesData<S, E> performBuild() throws Exception {
-		return new StatesData<S, E>(stateDatas);
+		return new StatesData<>(stateDatas);
 	}
 
 	@Override

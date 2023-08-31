@@ -73,8 +73,7 @@ public class EventExpressionVoter<T> implements AccessDecisionVoter<Message<T>> 
 	}
 
 	public boolean supports(Class<?> clazz) {
-		boolean foo = Message.class.isAssignableFrom(clazz);
-		return foo;
+		return Message.class.isAssignableFrom(clazz);
 //		return Message.class.isAssignableFrom(clazz);
 	}
 

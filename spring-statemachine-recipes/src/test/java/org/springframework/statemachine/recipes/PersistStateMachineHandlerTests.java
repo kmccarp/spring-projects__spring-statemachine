@@ -117,7 +117,7 @@ public class PersistStateMachineHandlerTests {
 	public void testFactoryPersistStateMachineHandler() throws Exception {
 		StateMachineBuilder.Builder<String, String> builder = testStateMachineBuilder();
 
-		FactoryPersistStateMachineHandler<String, String> handler = new FactoryPersistStateMachineHandler<String, String>(builder);
+		FactoryPersistStateMachineHandler<String, String> handler = new FactoryPersistStateMachineHandler<>(builder);
 
 		TestPersistStateChangeListener listener = new TestPersistStateChangeListener();
 		handler.addPersistStateChangeListener(listener);
@@ -132,7 +132,7 @@ public class PersistStateMachineHandlerTests {
 	public void testConcurrentFactoryPersistStateMachineHandler() throws Exception {
 		StateMachineBuilder.Builder<String, String> builder = testStateMachineBuilder();
 
-		FactoryPersistStateMachineHandler<String, String> handler = new FactoryPersistStateMachineHandler<String, String>(builder);
+		FactoryPersistStateMachineHandler<String, String> handler = new FactoryPersistStateMachineHandler<>(builder);
 
 		ArrayList<TestPersistStateChangeListener> listeners = new ArrayList<>();
 		for (int i = 0; i < 8; i++) {

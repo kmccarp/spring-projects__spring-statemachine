@@ -67,10 +67,10 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 	private final Collection<Function<StateContext<S, E>, Mono<Void>>> exitActions;
 	private final Collection<Function<StateContext<S, E>, Mono<Void>>> stateActions;
 	private final List<ScheduledAction> scheduledActions = new ArrayList<>();
-	private final Collection<Region<S, E>> regions = new ArrayList<Region<S, E>>();
+	private final Collection<Region<S, E>> regions = new ArrayList<>();
 	private final StateMachine<S, E> submachine;
-	private List<Trigger<S, E>> triggers = new ArrayList<Trigger<S, E>>();
-	private final CompositeStateListener<S, E> stateListener = new CompositeStateListener<S, E>();
+	private List<Trigger<S, E>> triggers = new ArrayList<>();
+	private final CompositeStateListener<S, E> stateListener = new CompositeStateListener<>();
 	private CompositeActionListener<S, E> actionListener;
 	private final List<StateMachineListener<S, E>> completionListeners = new CopyOnWriteArrayList<>();
 	private StateDoActionPolicy stateDoActionPolicy;
@@ -236,9 +236,7 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 			}
 			return Mono.empty();
 		})
-		.then(Mono.<Void>fromRunnable(() -> {
-			completionListeners.clear();
-		}))
+		.then(Mono.<Void>fromRunnable(completionListeners::clear))
 		.then(cancelStateActions())
 		.then(Mono.<Void>fromRunnable(() -> {
 			stateListener.onExit(context);
@@ -252,7 +250,7 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 		return Mono.defer(() -> {
 			if (submachine != null) {
 				Disposable disposable = Mono.just(submachine)
-					.flatMap(submachine -> completionStateListenerSink(submachine))
+					.flatMap(this::completionStateListenerSink)
 					// TODO: REACTOR this is causing cancel which breaks some things
 					// .then(handleStateDoOnComplete(context))
 					.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)))
@@ -261,7 +259,7 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 			} else if (!regions.isEmpty()) {
 				// TODO: REACTOR we should handle disposable
 				Flux.fromIterable(regions)
-					.flatMap(region -> completionStateListenerSink(region))
+					.flatMap(this::completionStateListenerSink)
 					.then(handleStateDoOnComplete(context))
 					.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)))
 					.subscribe();
@@ -360,12 +358,12 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 
 	@Override
 	protected Mono<Void> doPreStartReactively() {
-		return Mono.fromRunnable(() -> armTriggers());
+		return Mono.fromRunnable(this::armTriggers);
 	}
 
 	@Override
 	protected Mono<Void> doPreStopReactively() {
-		return Mono.fromRunnable(() -> disarmTriggers());
+		return Mono.fromRunnable(this::disarmTriggers);
 	}
 
 	/**
@@ -486,7 +484,7 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 	private Mono<Void> handleCompleteOrEmpty1(StateContext<S, E> context, AtomicInteger completionCount) {
 		return Mono.defer(() -> {
 			log.debug("handleCompleteOrEmpty1 " + completionCount + " " + stateActions);
-			if (completionCount.decrementAndGet() <= 0 && stateActions.size() > 0) {
+			if (completionCount.decrementAndGet() <= 0 && !stateActions.isEmpty()) {
 				return handleStateDoOnComplete(context)
 					.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)));
 			} else {
@@ -497,7 +495,7 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 
 	private Mono<Void> handleCompleteOrEmpty2(StateContext<S, E> context, AtomicInteger completionCount) {
 		return Mono.defer(() -> {
-			if (isSimple() && stateActions.size() == 0) {
+			if (isSimple() && stateActions.isEmpty()) {
 				return handleStateDoOnComplete(context)
 					.then(Mono.fromRunnable(() -> notifyStateOnComplete(context)));
 			} else {
@@ -525,9 +523,7 @@ public abstract class AbstractState<S, E> extends LifecycleObjectSupport impleme
 				}
 			})
 			// we're done, clear state scheduled state actions
-			.thenEmpty(Mono.fromRunnable(() -> {
-				scheduledActions.clear();
-			}));
+			.thenEmpty(Mono.fromRunnable(scheduledActions::clear));
 	}
 
 	/**

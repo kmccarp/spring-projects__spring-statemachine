@@ -51,7 +51,7 @@ public class ZookeeperStateMachinePersistTests extends AbstractZookeeperTests {
 				curatorClient, "/KryoStateMachinePersistTests");
 
 		StateMachineContext<String, String> contextOut =
-				new DefaultStateMachineContext<String, String>("S1", "E1", new HashMap<String, Object>(), new DefaultExtendedState());
+				new DefaultStateMachineContext<>("S1", "E1", new HashMap<String, Object>(), new DefaultExtendedState());
 		persist.write(contextOut, new Stat());
 		StateMachineContext<String, String> contextIn = persist.read(new Stat());
 
@@ -68,7 +68,7 @@ public class ZookeeperStateMachinePersistTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 		curatorClient.create().forPath("/KryoStateMachinePersistTests");
 
-		ZookeeperStateMachinePersist<String, String> persist = new ZookeeperStateMachinePersist<String, String>(
+		ZookeeperStateMachinePersist<String, String> persist = new ZookeeperStateMachinePersist<>(
 				curatorClient, "/KryoStateMachinePersistTests", "/KryoStateMachinePersistTestsLogs", 32);
 
 		for (int i = 0; i < 10; i++) {
@@ -79,7 +79,7 @@ public class ZookeeperStateMachinePersistTests extends AbstractZookeeperTests {
 			Stat stat = new Stat();
 			stat.setVersion(i);
 			StateMachineContext<String, String> contextOut =
-					new DefaultStateMachineContext<String, String>("S" + i, "E" + i, new HashMap<String, Object>(), new DefaultExtendedState());
+					new DefaultStateMachineContext<>("S" + i, "E" + i, new HashMap<String, Object>(), new DefaultExtendedState());
 			persist.write(contextOut, stat);
 		}
 
@@ -102,11 +102,11 @@ public class ZookeeperStateMachinePersistTests extends AbstractZookeeperTests {
 		StateMachinePersist<String, String, Stat> persist = new ZookeeperStateMachinePersist<String, String>(
 				curatorClient, "/KryoStateMachinePersistTests");
 
-		HashMap<String, Object> eventHeaders = new HashMap<String, Object>();
+		HashMap<String, Object> eventHeaders = new HashMap<>();
 		eventHeaders.put("foo", "jee");
 
 		StateMachineContext<String, String> contextOut =
-				new DefaultStateMachineContext<String, String>("S1", "E1", eventHeaders, new DefaultExtendedState());
+				new DefaultStateMachineContext<>("S1", "E1", eventHeaders, new DefaultExtendedState());
 		persist.write(contextOut, new Stat());
 		StateMachineContext<String, String> contextIn = persist.read(new Stat());
 
@@ -127,12 +127,12 @@ public class ZookeeperStateMachinePersistTests extends AbstractZookeeperTests {
 		StateMachinePersist<String, String, Stat> persist = new ZookeeperStateMachinePersist<String, String>(
 				curatorClient, "/KryoStateMachinePersistTests");
 
-		HashMap<String, Object> eventHeaders = new HashMap<String, Object>();
+		HashMap<String, Object> eventHeaders = new HashMap<>();
 		eventHeaders.put("foo", "jee");
 		MessageHeaders messageHeaders = new MessageHeaders(eventHeaders);
 
 		StateMachineContext<String, String> contextOut =
-				new DefaultStateMachineContext<String, String>("S1", "E1", messageHeaders, new DefaultExtendedState());
+				new DefaultStateMachineContext<>("S1", "E1", messageHeaders, new DefaultExtendedState());
 		persist.write(contextOut, new Stat());
 		StateMachineContext<String, String> contextIn = persist.read(new Stat());
 
@@ -153,12 +153,12 @@ public class ZookeeperStateMachinePersistTests extends AbstractZookeeperTests {
 		StateMachinePersist<String, String, Stat> persist = new ZookeeperStateMachinePersist<String, String>(
 				curatorClient, "/KryoStateMachinePersistTests");
 
-		HashMap<String, Object> eventHeaders = new HashMap<String, Object>();
-		HashMap<Object, Object> variables = new HashMap<Object, Object>();
+		HashMap<String, Object> eventHeaders = new HashMap<>();
+		HashMap<Object, Object> variables = new HashMap<>();
 		variables.put("foo", "jee");
 
 		StateMachineContext<String, String> contextOut =
-				new DefaultStateMachineContext<String, String>("S1", "E1", eventHeaders, new DefaultExtendedState(variables));
+				new DefaultStateMachineContext<>("S1", "E1", eventHeaders, new DefaultExtendedState(variables));
 		persist.write(contextOut, new Stat());
 		StateMachineContext<String, String> contextIn = persist.read(new Stat());
 
@@ -180,11 +180,11 @@ public class ZookeeperStateMachinePersistTests extends AbstractZookeeperTests {
 				curatorClient, "/KryoStateMachinePersistTests");
 
 		StateMachineContext<String, String> child =
-				new DefaultStateMachineContext<String, String>("S2", "E2", new HashMap<String, Object>(), new DefaultExtendedState());
-		List<StateMachineContext<String, String>> childs = new ArrayList<StateMachineContext<String, String>>();
+				new DefaultStateMachineContext<>("S2", "E2", new HashMap<String, Object>(), new DefaultExtendedState());
+		List<StateMachineContext<String, String>> childs = new ArrayList<>();
 		childs.add(child);
 		StateMachineContext<String, String> contextOut =
-				new DefaultStateMachineContext<String, String>(childs, "S1", "E1", new HashMap<String, Object>(), new DefaultExtendedState());
+				new DefaultStateMachineContext<>(childs, "S1", "E1", new HashMap<String, Object>(), new DefaultExtendedState());
 		persist.write(contextOut, new Stat());
 		StateMachineContext<String, String> contextIn = persist.read(new Stat());
 

@@ -65,7 +65,7 @@ public class StateMachineModelBuilder<S, E>
 
 	@Override
 	protected ModelData<S, E> performBuild() throws Exception {
-		return new ModelData<S, E>(factory);
+		return new ModelData<>(factory);
 	}
 
 	@Override

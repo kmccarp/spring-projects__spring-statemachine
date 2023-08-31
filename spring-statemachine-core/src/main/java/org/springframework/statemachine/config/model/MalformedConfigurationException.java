@@ -84,7 +84,9 @@ public class MalformedConfigurationException extends StateMachineException {
 
 	@Override
 	public String getMessage() {
-		if (trace == null) return super.getMessage();
+		if (trace == null) {
+			return super.getMessage();
+		}
 		StringBuilder buffer = new StringBuilder(512);
 		buffer.append(super.getMessage());
 		if (buffer.length() > 0) {

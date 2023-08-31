@@ -71,18 +71,18 @@ public abstract class AbstractSecurityTests extends AbstractStateMachineTests {
 		assertThat(machine.getState().getIds()).containsOnly(States.S0);
 	}
 
-	protected static enum States {
-		S0, S1;
+	protected enum States {
+		S0, S1
 	}
 
-	protected static enum Events {
-		A;
+	protected enum Events {
+		A
 	}
 
 	protected static class TestListener extends StateMachineListenerAdapter<States, Events> {
 
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 
 		@Override
 		public void stateChanged(State<States, Events> from, State<States, Events> to) {
@@ -103,7 +103,7 @@ public abstract class AbstractSecurityTests extends AbstractStateMachineTests {
 
 	protected static StateMachine<States, Events> buildMachine(TestListener listener, String attributes, ComparisonType match,
 			String expression, String eventAttributes, ComparisonType eventMatch, String eventExpression) throws Exception {
-		Builder<States, Events> builder = StateMachineBuilder.<States, Events>builder();
+		Builder<States, Events> builder = StateMachineBuilder.builder();
 
 		StateMachineConfigurationConfigurer<States, Events> configureConfiguration = builder.configureConfiguration();
 		configureConfiguration.withConfiguration()

@@ -33,7 +33,7 @@ import reactor.core.publisher.Mono;
 @Controller
 public class StateMachineController {
 
-	private final static Log log = LogFactory.getLog(StateMachineController.class);
+	private static final Log log = LogFactory.getLog(StateMachineController.class);
 
 	@Autowired
 	private StateMachine<States, Events> stateMachine;
