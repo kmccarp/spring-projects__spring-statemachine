@@ -56,7 +56,7 @@ import reactor.core.publisher.Mono;
  */
 public class StateMachineTestPlan<S, E> {
 
-	private final static Log log = LogFactory.getLog(StateMachineTestPlan.class);
+	private static final Log log = LogFactory.getLog(StateMachineTestPlan.class);
 	private final Map<Object, StateMachine<S, E>> stateMachines;
 	private final List<StateMachineTestPlanStep<S, E>> steps;
 	private Integer defaultAwaitTime = 10;
@@ -85,9 +85,9 @@ public class StateMachineTestPlan<S, E> {
 	public void test() throws Exception {
 
 		Map<StateMachine<S, E>, LatchStateMachineListener<S, E>> listeners =
-				new HashMap<StateMachine<S,E>, LatchStateMachineListener<S,E>>();
+				new HashMap<>();
 		for (StateMachine<S, E> stateMachine : stateMachines.values()) {
-			LatchStateMachineListener<S, E> listener = new LatchStateMachineListener<S, E>();
+			LatchStateMachineListener<S, E> listener = new LatchStateMachineListener<>();
 			listeners.put(stateMachine, listener);
 			stateMachine.addStateListener(listener);
 		}
@@ -126,7 +126,7 @@ public class StateMachineTestPlan<S, E> {
 			}
 
 			if (!step.sendEvent.isEmpty()) {
-				ArrayList<StateMachine<S, E>> sendVia = new ArrayList<StateMachine<S, E>>();
+				ArrayList<StateMachine<S, E>> sendVia = new ArrayList<>();
 				if (step.sendEventMachineId != null) {
 					sendVia.add(stateMachines.get(step.sendEventMachineId));
 				} else if (step.sendEventToAll) {
@@ -148,7 +148,7 @@ public class StateMachineTestPlan<S, E> {
 					}
 				}
 			} else if (!step.sendMessage.isEmpty()) {
-				ArrayList<StateMachine<S, E>> sendVia = new ArrayList<StateMachine<S, E>>();
+				ArrayList<StateMachine<S, E>> sendVia = new ArrayList<>();
 				if (step.sendEventMachineId != null) {
 					sendVia.add(stateMachines.get(step.sendEventMachineId));
 				} else if (step.sendEventToAll) {
@@ -226,7 +226,7 @@ public class StateMachineTestPlan<S, E> {
 			if (!step.expectStates.isEmpty()) {
 				for (StateMachine<S, E> stateMachine : stateMachines.values()) {
 					assertThat(stateMachine.getState(), notNullValue());
-					Collection<Matcher<? super S>> itemMatchers = new ArrayList<Matcher<? super S>>();
+					Collection<Matcher<? super S>> itemMatchers = new ArrayList<>();
 					for (S expectState : step.expectStates) {
 						itemMatchers.add(is(expectState));
 					}
@@ -236,7 +236,7 @@ public class StateMachineTestPlan<S, E> {
 
 			if (!step.expectStatesEntrered.isEmpty()) {
 				for (LatchStateMachineListener<S, E> listener : listeners.values()) {
-					Collection<S> states = new ArrayList<S>();
+					Collection<S> states = new ArrayList<>();
 					for (State<S, E> s : listener.getStateEntered()) {
 						states.add(s.getId());
 					}
@@ -246,7 +246,7 @@ public class StateMachineTestPlan<S, E> {
 
 			if (!step.expectStatesExited.isEmpty()) {
 				for (LatchStateMachineListener<S, E> listener : listeners.values()) {
-					Collection<S> states = new ArrayList<S>();
+					Collection<S> states = new ArrayList<>();
 					for (State<S, E> s : listener.getStateExited()) {
 						states.add(s.getId());
 					}
@@ -303,7 +303,7 @@ public class StateMachineTestPlan<S, E> {
 	 */
 	private void sendEventParallel(final List<StateMachine<S, E>> machines, final E event) {
 		final CountDownLatch latch = new CountDownLatch(1);
-		final ArrayList<Thread> joins = new ArrayList<Thread>();
+		final ArrayList<Thread> joins = new ArrayList<>();
 		int threadCount = machines.size();
 		for (int i = 0; i < threadCount; ++i) {
 			final StateMachine<S,E> machine = machines.get(i);

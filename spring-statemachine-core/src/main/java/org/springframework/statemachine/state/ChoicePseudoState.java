@@ -38,7 +38,7 @@ import reactor.core.publisher.Mono;
  */
 public class ChoicePseudoState<S, E> implements PseudoState<S, E> {
 
-	private final static Log log = LogFactory.getLog(ChoicePseudoState.class);
+	private static final Log log = LogFactory.getLog(ChoicePseudoState.class);
 	private final List<ChoiceStateData<S, E>> choices;
 
 	/**
@@ -67,11 +67,9 @@ public class ChoicePseudoState<S, E> implements PseudoState<S, E> {
 			}
 			return Mono.justOrEmpty(csd);
 		})
-		.flatMap(csd -> {
-			return Flux.fromIterable(csd.getActions())
+		.flatMap(csd -> Flux.fromIterable(csd.getActions())
 				.flatMap(a -> a.apply(context))
-				.then(Mono.just(csd.getState()));
-		});
+				.then(Mono.just(csd.getState())));
 	}
 
 	@Override

@@ -341,7 +341,7 @@ public abstract class AbstractRepositoryTests {
 		Iterator<State<String, String>> iterator = stateMachine.getStates().iterator();
 		while (iterator.hasNext()) {
 			State<String, String> next = iterator.next();
-			if (next.getId().equals("SF")) {
+			if ("SF".equals(next.getId())) {
 				endState = next;
 				break;
 			}
@@ -439,11 +439,11 @@ public abstract class AbstractRepositoryTests {
 		StateMachineFactory<String, String> stateMachineFactory = context.getBean(StateMachineFactory.class);
 		StateMachine<String, String> stateMachine = stateMachineFactory.getStateMachine();
 
-		Map<String, State<String, String>> states = stateMachine.getStates().stream().collect(Collectors.toMap((State<String, String> s1) -> s1.getId(), s2 -> s2));
+		Map<String, State<String, String>> states = stateMachine.getStates().stream().collect(Collectors.toMap(org.springframework.statemachine.state.State::getId, s2 -> s2));
 		assertThat(states.size()).isEqualTo(2);
 
-		State<String,String> S1 = (State<String, String>) states.get("S1");
-		assertThat(S1.getExitActions().size()).isEqualTo(1);
+		State<String,String> s1 = (State<String, String>) states.get("S1");
+		assertThat(s1.getExitActions().size()).isEqualTo(1);
 
 		State<String,String> S2 = (State<String,String>)states.get("S2");
 		assertThat(S2.getEntryActions().size()).isEqualTo(1);

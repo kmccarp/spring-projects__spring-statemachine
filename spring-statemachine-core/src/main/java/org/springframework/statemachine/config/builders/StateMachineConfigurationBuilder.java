@@ -62,14 +62,14 @@ public class StateMachineConfigurationBuilder<S, E>
 
 	private String machineId;
 	private BeanFactory beanFactory;
-	private boolean autoStart = false;
+	private boolean autoStart;
 	private TransitionConflictPolicy transitionConflictPolicy;
 	private StateDoActionPolicy stateDoActionPolicy;
 	private Long stateDoActionPolicyTimeout;
 	private RegionExecutionPolicy regionExecutionPolicy;
 	private StateMachineEnsemble<S, E> ensemble;
-	private final List<StateMachineListener<S, E>> listeners = new ArrayList<StateMachineListener<S, E>>();
-	private boolean securityEnabled = false;
+	private final List<StateMachineListener<S, E>> listeners = new ArrayList<>();
+	private boolean securityEnabled;
 	private boolean verifierEnabled = true;
 	private StateMachineModelVerifier<S, E> verifier;
 	private AccessDecisionManager transitionSecurityAccessDecisionManager;
@@ -77,7 +77,7 @@ public class StateMachineConfigurationBuilder<S, E>
 	private SecurityRule eventSecurityRule;
 	private SecurityRule transitionSecurityRule;
 	private StateMachineMonitor<S, E> stateMachineMonitor;
-	private final List<StateMachineInterceptor<S, E>> interceptors = new ArrayList<StateMachineInterceptor<S, E>>();
+	private final List<StateMachineInterceptor<S, E>> interceptors = new ArrayList<>();
 	private StateMachineRuntimePersister<S, E, ?> persister;
 
 	/**
@@ -139,14 +139,14 @@ public class StateMachineConfigurationBuilder<S, E>
 
 	@Override
 	protected ConfigurationData<S, E> performBuild() throws Exception {
-		ArrayList<StateMachineInterceptor<S, E>> interceptorsCopy = new ArrayList<StateMachineInterceptor<S, E>>(interceptors);
+		ArrayList<StateMachineInterceptor<S, E>> interceptorsCopy = new ArrayList<>(interceptors);
 		if (persister != null) {
 			StateMachineInterceptor<S, E> interceptor = persister.getInterceptor();
 			if (interceptor != null) {
 				interceptorsCopy.add(interceptor);
 			}
 		}
-		return new ConfigurationData<S, E>(beanFactory, autoStart, ensemble, listeners, securityEnabled,
+		return new ConfigurationData<>(beanFactory, autoStart, ensemble, listeners, securityEnabled,
 				transitionSecurityAccessDecisionManager, eventSecurityAccessDecisionManager, eventSecurityRule,
 				transitionSecurityRule, verifierEnabled, verifier, machineId, stateMachineMonitor, interceptorsCopy,
 				transitionConflictPolicy, stateDoActionPolicy, stateDoActionPolicyTimeout, regionExecutionPolicy);

@@ -35,8 +35,7 @@ public class SimpleTestConfiguration extends AbstractAnnotationConfiguration<Sim
 
 	@Bean(name="simpleConfig")
 	public SimpleTestConfig simpleTestConfig() {
-		SimpleTestConfig config = builder.getOrBuild();
-		return config;
+		return builder.getOrBuild();
 	}
 
 	@Bean(name="simpleConfigData")

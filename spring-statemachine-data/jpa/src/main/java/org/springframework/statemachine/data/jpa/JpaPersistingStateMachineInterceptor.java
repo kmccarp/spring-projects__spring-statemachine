@@ -42,7 +42,7 @@ public class JpaPersistingStateMachineInterceptor<S, E, T> extends AbstractPersi
 	 */
 	public JpaPersistingStateMachineInterceptor(JpaStateMachineRepository jpaStateMachineRepository) {
 		Assert.notNull(jpaStateMachineRepository, "'jpaStateMachineRepository' must be set");
-		this.persist = new JpaRepositoryStateMachinePersist<S, E>(jpaStateMachineRepository);
+		this.persist = new JpaRepositoryStateMachinePersist<>(jpaStateMachineRepository);
 	}
 
 	/**

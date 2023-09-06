@@ -24,6 +24,7 @@ import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.StateMachineEventResult;
 import org.springframework.statemachine.region.Region;
 import org.springframework.statemachine.region.RegionExecutionPolicy;
+import org.springframework.statemachine.support.StateMachineReactiveLifecycle;
 import org.springframework.statemachine.support.StateMachineUtils;
 
 import reactor.core.publisher.Flux;
@@ -143,7 +144,7 @@ public class RegionState<S, E> extends AbstractState<S, E> {
 			.flatMap(a -> executeAction(a, context))
 			.then();
 		Mono<Void> regionsThenActions = Flux.fromIterable(getRegions())
-			.flatMap(r -> r.stopReactively())
+			.flatMap(StateMachineReactiveLifecycle::stopReactively)
 			.then(actions);
 		return super.exit(context)
 			.then(regionsThenActions);
@@ -156,13 +157,13 @@ public class RegionState<S, E> extends AbstractState<S, E> {
 					.filter(r -> !StateMachineUtils.containsAtleastOne(r.getStates(), context.getTargets()))
 					.parallel()
 					.runOn(Schedulers.parallel())
-					.flatMap(r -> r.startReactively())
+					.flatMap(StateMachineReactiveLifecycle::startReactively)
 					.sequential()
 					.then();
 			} else {
 				return Flux.fromIterable(getRegions())
 					.filter(r -> !StateMachineUtils.containsAtleastOne(r.getStates(), context.getTargets()))
-					.flatMap(r -> r.startReactively())
+					.flatMap(StateMachineReactiveLifecycle::startReactively)
 					.then();
 
 			}
@@ -186,7 +187,7 @@ public class RegionState<S, E> extends AbstractState<S, E> {
 
 	@Override
 	public Collection<S> getIds() {
-		ArrayList<S> ids = new ArrayList<S>();
+		ArrayList<S> ids = new ArrayList<>();
 		if (getId() != null) {
 			ids.add(getId());
 		}
@@ -201,7 +202,7 @@ public class RegionState<S, E> extends AbstractState<S, E> {
 
 	@Override
 	public Collection<State<S, E>> getStates() {
-		ArrayList<State<S, E>> states = new ArrayList<State<S, E>>();
+		ArrayList<State<S, E>> states = new ArrayList<>();
 		states.add(this);
 		for (Region<S, E> r : getRegions()) {
 			for (State<S, E> s : r.getStates()) {

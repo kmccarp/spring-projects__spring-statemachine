@@ -111,7 +111,7 @@ public abstract class AbstractKryoStateMachineSerialisationService<S, E> impleme
 	private void encode(final Object object, OutputStream outputStream) throws IOException {
 		Assert.notNull(object, "cannot encode a null object");
 		Assert.notNull(outputStream, "'outputSteam' cannot be null");
-		final Output output = (outputStream instanceof Output ? (Output) outputStream : new Output(outputStream));
+		final Output output = outputStream instanceof Output ? (Output) outputStream : new Output(outputStream);
 		this.pool.run(new KryoCallback<Void>() {
 
 			@Override
@@ -137,7 +137,7 @@ public abstract class AbstractKryoStateMachineSerialisationService<S, E> impleme
 	private <T> T decode(InputStream inputStream, final Class<T> type) throws IOException {
 		Assert.notNull(inputStream, "'inputStream' cannot be null");
 		Assert.notNull(type, "'type' cannot be null");
-		final Input input = (inputStream instanceof Input ? (Input) inputStream : new Input(inputStream));
+		final Input input = inputStream instanceof Input ? (Input) inputStream : new Input(inputStream);
 		T result = null;
 		try {
 			result = this.pool.run(new KryoCallback<T>(){

@@ -41,7 +41,7 @@ import org.springframework.statemachine.guard.Guard;
 @Configuration
 public class StateMachineConfig {
 
-	private final static Log log = LogFactory.getLog(Application.class);
+	private static final Log log = LogFactory.getLog(Application.class);
 
 	@Configuration
 	@EnableStateMachine
@@ -192,7 +192,7 @@ public class StateMachineConfig {
 
 		@Bean
 		public StateMachineEnsemble<States, Events> stateMachineEnsemble() throws Exception {
-			return new LeaderZookeeperStateMachineEnsemble<States, Events>(curatorClient(), "/foo");
+			return new LeaderZookeeperStateMachineEnsemble<>(curatorClient(), "/foo");
 		}
 
 		@Bean

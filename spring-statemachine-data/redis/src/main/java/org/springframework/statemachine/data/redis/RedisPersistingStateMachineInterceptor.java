@@ -42,7 +42,7 @@ public class RedisPersistingStateMachineInterceptor<S, E, T> extends AbstractPer
 	 */
 	public RedisPersistingStateMachineInterceptor(RedisStateMachineRepository redisStateMachineRepository) {
 		Assert.notNull(redisStateMachineRepository, "'redisStateMachineRepository' must be set");
-		this.persist = new RedisRepositoryStateMachinePersist<S, E>(redisStateMachineRepository);
+		this.persist = new RedisRepositoryStateMachinePersist<>(redisStateMachineRepository);
 	}
 
 	/**

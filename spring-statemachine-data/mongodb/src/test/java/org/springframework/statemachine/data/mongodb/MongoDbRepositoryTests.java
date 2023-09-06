@@ -251,10 +251,10 @@ public class MongoDbRepositoryTests extends AbstractRepositoryTests {
 	}
 
 	public enum PersistTestStates {
-		S1, S2;
+		S1, S2
 	}
 
 	public enum PersistTestEvents {
-		E1, E2;
+		E1, E2
 	}
 }

@@ -33,7 +33,7 @@ import org.springframework.statemachine.transition.TransitionConflictPolicy;
  */
 class TransitionComparator<S, E> implements Comparator<Transition<S, E>> {
 
-	private final static Log log = LogFactory.getLog(TransitionComparator.class);
+	private static final Log log = LogFactory.getLog(TransitionComparator.class);
 	private final TransitionConflictPolicy transitionConflictPolicy;
 
 	/**

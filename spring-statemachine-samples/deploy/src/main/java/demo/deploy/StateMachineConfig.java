@@ -62,49 +62,49 @@ public class StateMachineConfig {
 
 		@Bean
 		public Action<String, String> errorEntryAction() {
-			return (context) -> {
+			return context -> {
 				System.out.println("Should handle error " + context.getMessageHeader("error"));
 			};
 		}
 
 		@Bean
 		public Action<String, String> readyEntryAction() {
-			return (context) -> {
+			return context -> {
 				context.getExtendedState().getVariables().clear();
 			};
 		}
 
 		@Bean
 		public Action<String, String> prepareDeployEntryAction() {
-			return (context) -> {
+			return context -> {
 				System.out.println("Handle deploy prepare here");
 			};
 		}
 
 		@Bean
 		public Action<String, String> installEntryAction() {
-			return (context) -> {
+			return context -> {
 				System.out.println("Handle install here");
 			};
 		}
 
 		@Bean
 		public Action<String, String> startEntryAction() {
-			return (context) -> {
+			return context -> {
 				System.out.println("Handle start here");
 			};
 		}
 
 		@Bean
 		public Action<String, String> stopEntryAction() {
-			return (context) -> {
+			return context -> {
 				System.out.println("Handle stop here");
 			};
 		}
 
 		@Bean
 		public Action<String, String> exitErrorAction() {
-			return (context) -> {
+			return context -> {
 				if (context.getMessageHeaders().containsKey("hasError")) {
 					context.getExtendedState().getVariables().put("hasError", true);
 					context.getExtendedState().getVariables().put("error", new RuntimeException("Exception set in machine"));
@@ -123,30 +123,22 @@ public class StateMachineConfig {
 
 		@Bean
 		public Guard<String, String> isInstalledGuard() {
-			return (context) -> {
-				return context.getExtendedState().getVariables().containsKey("isInstalled");
-			};
+			return context -> context.getExtendedState().getVariables().containsKey("isInstalled");
 		}
 
 		@Bean
 		public Guard<String, String> installedOkGuard() {
-			return (context) -> {
-				return context.getExtendedState().getVariables().containsKey("installedOk");
-			};
+			return context -> context.getExtendedState().getVariables().containsKey("installedOk");
 		}
 
 		@Bean
 		public Guard<String, String> isRunningGuard() {
-			return (context) -> {
-				return context.getExtendedState().getVariables().containsKey("isRunning");
-			};
+			return context -> context.getExtendedState().getVariables().containsKey("isRunning");
 		}
 
 		@Bean
 		public Guard<String, String> hasErrorGuard() {
-			return (context) -> {
-				return context.getExtendedState().getVariables().containsKey("hasError");
-			};
+			return context -> context.getExtendedState().getVariables().containsKey("hasError");
 		}
 	}
 }

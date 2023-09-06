@@ -100,9 +100,7 @@ public class ChoiceExitTests extends AbstractBuildTests {
 
 		@Bean
 		public Guard<String, String> exitGuard() {
-			return (context) -> {
-				return true;
-			};
+			return context -> true;
 		}
 	}
 
@@ -124,9 +122,7 @@ public class ChoiceExitTests extends AbstractBuildTests {
 
 		@Bean
 		public Guard<String, String> exitGuard() {
-			return (context) -> {
-				return false;
-			};
+			return context -> false;
 		}
 	}
 

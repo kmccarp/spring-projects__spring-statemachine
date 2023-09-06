@@ -36,11 +36,11 @@ import org.springframework.util.Assert;
  */
 final class AutowireBeanFactoryObjectPostProcessor implements ObjectPostProcessor<Object>, DisposableBean, SmartLifecycle {
 
-	private final static Log log = LogFactory.getLog(AutowireBeanFactoryObjectPostProcessor.class);
+	private static final Log log = LogFactory.getLog(AutowireBeanFactoryObjectPostProcessor.class);
 
 	private final AutowireCapableBeanFactory autowireBeanFactory;
-	private final List<DisposableBean> disposableBeans = new ArrayList<DisposableBean>();
-	private final List<Lifecycle> lifecycleBeans = new ArrayList<Lifecycle>();
+	private final List<DisposableBean> disposableBeans = new ArrayList<>();
+	private final List<Lifecycle> lifecycleBeans = new ArrayList<>();
 
 	private boolean running;
 

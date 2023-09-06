@@ -47,7 +47,7 @@ public class MethodParameterTests {
 		Method method = ReflectionUtils.findMethod(Bean1.class, "onTransition", Map.class, ExtendedState.class, StateMachine.class,
 				Message.class, Exception.class, StateContext.class);
 		OnTransition annotation = AnnotationUtils.findAnnotation(method, OnTransition.class);
-		StateMachineHandler<OnTransition, String, String> handler = new StateMachineHandler<OnTransition, String, String>(Bean1.class,
+		StateMachineHandler<OnTransition, String, String> handler = new StateMachineHandler<>(Bean1.class,
 				bean1, method, annotation, annotation);
 
 		Message<String> message = MessageBuilder.withPayload("S").build();
@@ -62,7 +62,7 @@ public class MethodParameterTests {
 		StateMachineRuntime<String, String> runtime = new StateMachineRuntime<String, String>() {
 			@Override
 			public StateContext<String, String> getStateContext() {
-				return new DefaultStateContext<String, String>(Stage.TRANSITION, message, messageHeaders, extendedState, transition, stateMachine, source,
+				return new DefaultStateContext<>(Stage.TRANSITION, message, messageHeaders, extendedState, transition, stateMachine, source,
 						target, exception);
 			}
 		};

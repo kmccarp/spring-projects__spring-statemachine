@@ -60,7 +60,7 @@ class ResourcerResolver {
 		ArrayList<Holder> holders = new ArrayList<>();
 		if (mainLocation != null) {
 			Resource[] resources = Stream.concat(Stream.of(mainLocation), Stream.of(additionalLocations))
-				.map(location -> resourceLoader.getResource(location))
+				.map(resourceLoader::getResource)
 				.toArray(Resource[]::new);
 			return getResourceUris(resources);
 		} else if (mainResource != null) {

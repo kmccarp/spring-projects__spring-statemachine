@@ -31,9 +31,9 @@ import org.springframework.statemachine.support.LifecycleObjectSupport;
  */
 public abstract class StateMachineEnsembleObjectSupport<S, E> extends LifecycleObjectSupport implements StateMachineEnsemble<S, E> {
 
-	private final static Log log = LogFactory.getLog(StateMachineEnsembleObjectSupport.class);
+	private static final Log log = LogFactory.getLog(StateMachineEnsembleObjectSupport.class);
 
-	private final CompositeEnsembleListener<S, E> ensembleListener = new CompositeEnsembleListener<S, E>();
+	private final CompositeEnsembleListener<S, E> ensembleListener = new CompositeEnsembleListener<>();
 
 	@Override
 	public abstract void join(StateMachine<S, E> stateMachine);

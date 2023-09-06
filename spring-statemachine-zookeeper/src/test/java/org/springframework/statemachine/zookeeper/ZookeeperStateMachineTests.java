@@ -75,19 +75,19 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ensemble1.afterPropertiesSet();
 		ensemble2.afterPropertiesSet();
 		ensemble1.start();
 		ensemble2.start();
 
 		DistributedStateMachine<String, String> machine1s =
-				new DistributedStateMachine<String, String>(ensemble1, machine1);
+				new DistributedStateMachine<>(ensemble1, machine1);
 
 		DistributedStateMachine<String, String> machine2s =
-				new DistributedStateMachine<String, String>(ensemble2, machine2);
+				new DistributedStateMachine<>(ensemble2, machine2);
 
 		machine1s.afterPropertiesSet();
 		machine2s.afterPropertiesSet();
@@ -136,19 +136,19 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ensemble1.afterPropertiesSet();
 		ensemble2.afterPropertiesSet();
 		ensemble1.start();
 		ensemble2.start();
 
 		DistributedStateMachine<String, String> machine1s =
-				new DistributedStateMachine<String, String>(ensemble1, machine1);
+				new DistributedStateMachine<>(ensemble1, machine1);
 
 		DistributedStateMachine<String, String> machine2s =
-				new DistributedStateMachine<String, String>(ensemble2, machine2);
+				new DistributedStateMachine<>(ensemble2, machine2);
 
 		machine1s.afterPropertiesSet();
 		machine2s.afterPropertiesSet();
@@ -469,12 +469,12 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 				context.getBean("curatorClient", CuratorFramework.class);
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble1 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		ensemble1.afterPropertiesSet();
 		ensemble1.start();
 
 		DistributedStateMachine<String, String> machine1s =
-				new DistributedStateMachine<String, String>(ensemble1, machine1);
+				new DistributedStateMachine<>(ensemble1, machine1);
 
 
 		machine1s.afterPropertiesSet();
@@ -487,12 +487,12 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		assertThat(machine1.getState().getIds()).containsOnly("S1");
 
 		ZookeeperStateMachineEnsemble<String, String> ensemble2 =
-				new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+				new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 
 		ensemble2.afterPropertiesSet();
 		ensemble2.start();
 		DistributedStateMachine<String, String> machine2s =
-				new DistributedStateMachine<String, String>(ensemble2, machine2);
+				new DistributedStateMachine<>(ensemble2, machine2);
 		machine2s.afterPropertiesSet();
 		machine2s.start();
 		assertThat(machine2.getState().getIds()).containsOnly("S1");
@@ -667,7 +667,7 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		@Override
 		@Bean(name = "ensemble1")
 		public StateMachineEnsemble<String, String> stateMachineEnsemble() throws Exception {
-			return new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+			return new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		}
 	}
 
@@ -687,7 +687,7 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 		@Override
 		@Bean(name = "ensemble2")
 		public StateMachineEnsemble<String, String> stateMachineEnsemble() throws Exception {
-			return new ZookeeperStateMachineEnsemble<String, String>(curatorClient, "/foo");
+			return new ZookeeperStateMachineEnsemble<>(curatorClient, "/foo");
 		}
 	}
 
@@ -743,7 +743,7 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 
 		volatile CountDownLatch stateChangedLatch = new CountDownLatch(1);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
-		volatile int stateChangedCount = 0;
+		volatile int stateChangedCount;
 		volatile CountDownLatch stateMachineStartedLatch = new CountDownLatch(1);
 
 		@Override
@@ -775,7 +775,7 @@ public class ZookeeperStateMachineTests extends AbstractZookeeperTests {
 	}
 
 	private static StateMachineEnsemble<String, String> stateMachineEnsemble(CuratorFramework curatorClient) {
-		ZookeeperStateMachineEnsemble<String, String> ensemble = new ZookeeperStateMachineEnsemble<String, String>(
+		ZookeeperStateMachineEnsemble<String, String> ensemble = new ZookeeperStateMachineEnsemble<>(
 				curatorClient, "/foo");
 		ensemble.afterPropertiesSet();
 		ensemble.start();

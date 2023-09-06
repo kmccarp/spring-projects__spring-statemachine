@@ -36,8 +36,8 @@ import org.springframework.statemachine.StateMachine;
  */
 public class StateMachineTestPlanBuilder<S, E> {
 
-	private Map<Object, StateMachine<S, E>> stateMachines = new HashMap<Object, StateMachine<S, E>>();
-	private final List<StateMachineTestPlanStep<S, E>> steps = new ArrayList<StateMachineTestPlanStep<S, E>>();
+	private final Map<Object, StateMachine<S, E>> stateMachines = new HashMap<>();
+	private final List<StateMachineTestPlanStep<S, E>> steps = new ArrayList<>();
 	private Integer defaultAwaitTime;
 
 	/**
@@ -48,7 +48,7 @@ public class StateMachineTestPlanBuilder<S, E> {
 	 * @return the state machine test plan builder
 	 */
 	public static <S, E> StateMachineTestPlanBuilder<S, E> builder() {
-		return new StateMachineTestPlanBuilder<S, E>();
+		return new StateMachineTestPlanBuilder<>();
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class StateMachineTestPlanBuilder<S, E> {
 	 * @return the state machine test plan
 	 */
 	public StateMachineTestPlan<S, E> build() {
-		return new StateMachineTestPlan<S, E>(stateMachines, steps, defaultAwaitTime);
+		return new StateMachineTestPlan<>(stateMachines, steps, defaultAwaitTime);
 	}
 
 	/**
@@ -111,14 +111,14 @@ public class StateMachineTestPlanBuilder<S, E> {
 	 */
 	public class StateMachineTestPlanStepBuilder {
 
-		final List<E> sendEvent = new ArrayList<E>();
-		final List<Message<E>> sendMessage = new ArrayList<Message<E>>();
+		final List<E> sendEvent = new ArrayList<>();
+		final List<Message<E>> sendMessage = new ArrayList<>();
 		Object sendEventMachineId;
-		boolean sendEventToAll = false;
-		boolean sendEventParallel = false;
-		final Collection<S> expectStates = new ArrayList<S>();
-		final Collection<S> expectStatesEntrered = new ArrayList<S>();
-		final Collection<S> expectStatesExited = new ArrayList<S>();
+		boolean sendEventToAll;
+		boolean sendEventParallel;
+		final Collection<S> expectStates = new ArrayList<>();
+		final Collection<S> expectStatesEntrered = new ArrayList<>();
+		final Collection<S> expectStatesExited = new ArrayList<>();
 		Integer expectStateChanged;
 		Integer expectStateEntered;
 		Integer expectStateExited;
@@ -129,9 +129,9 @@ public class StateMachineTestPlanBuilder<S, E> {
 		Integer expectStateMachineStarted;
 		Integer expectStateMachineStopped;
 		Integer expectExtendedStateChanged;
-		final Collection<Object> expectVariableKeys = new ArrayList<Object>();
+		final Collection<Object> expectVariableKeys = new ArrayList<>();
 		final Collection<Matcher<Map<? extends Object, ?>>> expectVariableMatchers = new ArrayList<>();
-		final Map<Object, Object> expectVariables = new HashMap<Object, Object>();
+		final Map<Object, Object> expectVariables = new HashMap<>();
 
 		/**
 		 * Expect a state {@code S}.
@@ -483,8 +483,8 @@ public class StateMachineTestPlanBuilder<S, E> {
 		final List<E> sendEvent;
 		final List<Message<E>> sendMessage;
 		Object sendEventMachineId;
-		boolean sendEventToAll = false;
-		boolean sendEventParallel = false;
+		boolean sendEventToAll;
+		boolean sendEventParallel;
 		final Collection<S> expectStates;
 		final Collection<S> expectStatesEntrered;
 		final Collection<S> expectStatesExited;

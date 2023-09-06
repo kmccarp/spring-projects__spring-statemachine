@@ -43,12 +43,12 @@ public class DefaultConfigurationConfigurer<S, E>
 
 	private String machineId;
 	private BeanFactory beanFactory;
-	private boolean autoStart = false;
+	private boolean autoStart;
 	private TransitionConflictPolicy transitionConflightPolicy;
 	private StateDoActionPolicy stateDoActionPolicy;
 	private Long stateDoActionPolicyTimeout;
 	private RegionExecutionPolicy regionExecutionPolicy;
-	private final List<StateMachineListener<S, E>> listeners = new ArrayList<StateMachineListener<S, E>>();
+	private final List<StateMachineListener<S, E>> listeners = new ArrayList<>();
 
 	@Override
 	public void configure(StateMachineConfigurationBuilder<S, E> builder) throws Exception {

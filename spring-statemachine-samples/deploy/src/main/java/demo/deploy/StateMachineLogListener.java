@@ -24,7 +24,7 @@ import org.springframework.statemachine.listener.StateMachineListenerAdapter;
 
 public class StateMachineLogListener extends StateMachineListenerAdapter<String, String> {
 
-	private final List<String> messages = new ArrayList<String>();
+	private final List<String> messages = new ArrayList<>();
 
 	public List<String> getMessages() {
 		return messages;
@@ -38,7 +38,7 @@ public class StateMachineLogListener extends StateMachineListenerAdapter<String,
 	public void stateContext(StateContext<String, String> stateContext) {
 		if (stateContext.getStage() == Stage.STATE_ENTRY) {
 			messages.add("Enter " + stateContext.getTarget().getId());
-			if (stateContext.getTarget().getId().equals("ERROR")) {
+			if ("ERROR".equals(stateContext.getTarget().getId())) {
 				messages.add("ERROR got exception " + stateContext.getExtendedState().getVariables().get("error"));
 			}
 		} else if (stateContext.getStage() == Stage.STATE_EXIT) {

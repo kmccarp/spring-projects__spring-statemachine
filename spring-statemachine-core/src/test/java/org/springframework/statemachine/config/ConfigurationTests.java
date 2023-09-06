@@ -240,11 +240,11 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 
 		Collection<State<String, String>> states = machine.getStates();
 		for (State<String, String> s : states) {
-			if (s.getId().equals("S3")) {
+			if ("S3".equals(s.getId())) {
 				assertThat(s.getPseudoState()).isNotNull();
 				assertThat(s.getPseudoState().getKind()).isEqualTo(PseudoStateKind.END);
 			}
-			if (s.getId().equals("S2")) {
+			if ("S2".equals(s.getId())) {
 				assertThat(s.getPseudoState()).isNotNull();
 				assertThat(s.getPseudoState().getKind()).isEqualTo(PseudoStateKind.END);
 			}
@@ -377,9 +377,9 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 		@Override
 		public void configure(StateMachineStateConfigurer<TestStates, TestEvents> states) throws Exception {
 			TestEntryAction action1 = action1();
-			Collection<TestEntryAction> actions1 = new ArrayList<TestEntryAction>();
+			Collection<TestEntryAction> actions1 = new ArrayList<>();
 			actions1.add(action1);
-			Collection<Action<TestStates, TestEvents>> actions3 = new ArrayList<Action<TestStates,TestEvents>>();
+			Collection<Action<TestStates, TestEvents>> actions3 = new ArrayList<>();
 			actions3.add(action3());
 			states
 				.withStates()
@@ -622,7 +622,7 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 					.and()
 				.withConfiguration()
 					.listener(new StateMachineListenerAdapter<TestStates, TestEvents>())
-					.listener(new StateMachineListenerAdapter<TestStates, TestEvents>());
+					.listener(new StateMachineListenerAdapter<>());
 		}
 
 		@Override
@@ -686,8 +686,7 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 					.and()
 				.withExternal()
 					.source("S2").target("S1").event("E2");
-			StateMachine<String, String> stateMachine = builder.build();
-			return stateMachine;
+			return builder.build();
 		}
 
 	}
@@ -710,8 +709,7 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 					.and()
 				.withExternal()
 					.source("S2").target("S1").event("E2");
-			StateMachine<String, String> stateMachine = builder.build();
-			return stateMachine;
+			return builder.build();
 		}
 
 	}
@@ -737,8 +735,7 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 					.and()
 				.withExternal()
 					.source("S2").target("S1").event("E2");
-			StateMachine<String, String> stateMachine = builder.build();
-			return stateMachine;
+			return builder.build();
 		}
 
 	}
@@ -765,8 +762,7 @@ public class ConfigurationTests extends AbstractStateMachineTests {
 					.and()
 				.withExternal()
 					.source("S2").target("S1").event("E2");
-			StateMachine<String, String> stateMachine = builder.build();
-			return stateMachine;
+			return builder.build();
 		}
 
 	}
