@@ -93,9 +93,9 @@ public class PersistTests {
 		volatile CountDownLatch stateEnteredLatch = new CountDownLatch(1);
 		volatile CountDownLatch stateExitedLatch = new CountDownLatch(0);
 		volatile CountDownLatch transitionLatch = new CountDownLatch(0);
-		volatile List<Transition<String, String>> transitions = new ArrayList<Transition<String, String>>();
-		List<State<String, String>> statesEntered = new ArrayList<State<String, String>>();
-		List<State<String, String>> statesExited = new ArrayList<State<String, String>>();
+		volatile List<Transition<String, String>> transitions = new ArrayList<>();
+		List<State<String, String>> statesEntered = new ArrayList<>();
+		List<State<String, String>> statesExited = new ArrayList<>();
 
 		@Override
 		public void stateChanged(State<String, String> from, State<String, String> to) {

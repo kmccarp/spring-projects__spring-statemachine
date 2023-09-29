@@ -34,12 +34,12 @@ import reactor.core.publisher.Mono;
 @WithStateMachine
 public class Tasks {
 
-	private final static Log log = LogFactory.getLog(Tasks.class);
+	private static final Log log = LogFactory.getLog(Tasks.class);
 
 	@Autowired
 	private StateMachine<States, Events> stateMachine;
 
-	private final Map<String, Boolean> tasks = new HashMap<String, Boolean>();
+	private final Map<String, Boolean> tasks = new HashMap<>();
 
 	public Tasks() {
 		tasks.put("T1", true);

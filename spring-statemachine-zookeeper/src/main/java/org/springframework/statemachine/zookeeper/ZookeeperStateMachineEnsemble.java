@@ -58,13 +58,13 @@ import reactor.core.publisher.Mono;
  */
 public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObjectSupport<S, E> {
 
-	private final static Log log = LogFactory.getLog(ZookeeperStateMachineEnsemble.class);
+	private static final Log log = LogFactory.getLog(ZookeeperStateMachineEnsemble.class);
 	private final String uuid = UUID.randomUUID().toString();
-	private final static int DEFAULT_LOGSIZE = 32;
-	private final static String PATH_CURRENT = "current";
-	private final static String PATH_LOG = "log";
-	private final static String PATH_MEMBERS = "members";
-	private final static String PATH_MUTEX = "mutex";
+	private static final int DEFAULT_LOGSIZE = 32;
+	private static final String PATH_CURRENT = "current";
+	private static final String PATH_LOG = "log";
+	private static final String PATH_MEMBERS = "members";
+	private static final String PATH_MUTEX = "mutex";
 	private final CuratorFramework curatorClient;
 	private final String baseDataPath;
 	private final String statePath;
@@ -74,12 +74,12 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 	private final String mutexPath;
 	private final boolean cleanState;
 	private final StateMachinePersist<S, E, Stat> persist;
-	private final AtomicReference<StateWrapper> stateRef = new AtomicReference<StateWrapper>();
-	private final AtomicReference<StateWrapper> notifyRef = new AtomicReference<StateWrapper>();
+	private final AtomicReference<StateWrapper> stateRef = new AtomicReference<>();
+	private final AtomicReference<StateWrapper> notifyRef = new AtomicReference<>();
 	private final CuratorWatcher watcher = new StateWatcher();
 	private PersistentNode node;
-	private final Queue<StateMachine<S, E>> joinQueue = new ConcurrentLinkedQueue<StateMachine<S, E>>();
-	private final List<StateMachine<S, E>> joined = new ArrayList<StateMachine<S,E>>();
+	private final Queue<StateMachine<S, E>> joinQueue = new ConcurrentLinkedQueue<>();
+	private final List<StateMachine<S, E>> joined = new ArrayList<>();
 	private final Object joinLock = new Object();
 	private final ConnectionStateListener connectionListener = new LocalConnectionStateListener();
 
@@ -121,7 +121,7 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 
 	@Override
 	protected Mono<Void> doPreStartReactively() {
-		return Mono.fromRunnable(() -> doStart());
+		return Mono.fromRunnable(this::doStart);
 	}
 
 	protected void doStart() {
@@ -149,7 +149,7 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 
 	@Override
 	protected Mono<Void> doPreStopReactively() {
-		return Mono.fromRunnable(() -> doStop());
+		return Mono.fromRunnable(this::doStop);
 	}
 
 	protected void doStop() {
@@ -300,7 +300,7 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 
 			if (cleanState) {
 				if (curatorClient.checkExists().forPath(memberPath) != null) {
-					if (curatorClient.getChildren().forPath(memberPath).size() == 0) {
+					if (curatorClient.getChildren().forPath(memberPath).isEmpty()) {
 						log.info("Deleting from " + baseDataPath);
 						curatorClient.delete().deletingChildrenIfNeeded().forPath(baseDataPath);
 					}
@@ -393,23 +393,20 @@ public class ZookeeperStateMachineEnsemble<S, E> extends StateMachineEnsembleObj
 			if (log.isTraceEnabled()) {
 				log.trace("Process WatchedEvent: id=" + uuid + " " + event);
 			}
-			switch (event.getType()) {
-			case NodeDataChanged:
-				try {
-					// re-read once if we did read log history
-					// there might be unread change
-					if (handleDataChange()) {
-						handleDataChange();
-					}
-				} catch (Exception e) {
-					log.error("Error handling event", e);
-				}
-				registerWatcherForStatePath();
-				break;
-			default:
-				registerWatcherForStatePath();
-				break;
-			}
+            if (event.getType() == org.apache.zookeeper.Watcher$Event$EventType.NodeDataChanged) {
+                try {
+                    // re-read once if we did read log history
+                    // there might be unread change
+                    if (handleDataChange()) {
+                        handleDataChange();
+                    }
+                } catch (Exception e) {
+                    log.error("Error handling event", e);
+                }
+                registerWatcherForStatePath();
+            } else {
+                registerWatcherForStatePath();
+            }
 		}
 
 	}

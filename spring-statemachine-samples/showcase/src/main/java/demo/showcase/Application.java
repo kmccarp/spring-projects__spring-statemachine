@@ -33,7 +33,7 @@ import org.springframework.statemachine.guard.Guard;
 @Configuration
 public class Application  {
 
-	private final static Log log = LogFactory.getLog(Application.class);
+	private static final Log log = LogFactory.getLog(Application.class);
 
 	@Configuration
 	@EnableStateMachine
