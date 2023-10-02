@@ -32,8 +32,8 @@ public class LoggingListener implements ApplicationListener<StateMachineEvent> {
 
 	private static final Log log = LogFactory.getLog(LoggingListener.class);
 
-	/** Internal enums to match the log level */
-	private static enum Level {
+    /** Internal enums to match the log level */
+    private enum Level {
 		FATAL, ERROR, WARN, INFO, DEBUG, TRACE
 	}
 

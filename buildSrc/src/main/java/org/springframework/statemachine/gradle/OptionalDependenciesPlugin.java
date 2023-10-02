@@ -44,10 +44,10 @@ public class OptionalDependenciesPlugin implements Plugin<Project> {
 		Configuration optional = project.getConfigurations().create("optional");
 		optional.setCanBeConsumed(false);
 		optional.setCanBeResolved(false);
-		project.getPlugins().withType(JavaPlugin.class, (javaPlugin) -> {
+		project.getPlugins().withType(JavaPlugin.class, javaPlugin -> {
 			SourceSetContainer sourceSets = project.getExtensions().getByType(JavaPluginExtension.class)
 					.getSourceSets();
-			sourceSets.all((sourceSet) -> {
+			sourceSets.all(sourceSet -> {
 				project.getConfigurations().getByName(sourceSet.getCompileClasspathConfigurationName())
 						.extendsFrom(optional);
 				project.getConfigurations().getByName(sourceSet.getRuntimeClasspathConfigurationName())

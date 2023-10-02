@@ -51,7 +51,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	 * @param extendedState the extended state
 	 */
 	public DefaultStateMachineContext(S state, E event, Map<String, Object> eventHeaders, ExtendedState extendedState) {
-		this(new ArrayList<StateMachineContext<S, E>>(), state, event, eventHeaders, extendedState);
+		this(new ArrayList<>(), state, event, eventHeaders, extendedState);
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	 */
 	public DefaultStateMachineContext(S state, E event, Map<String, Object> eventHeaders, ExtendedState extendedState,
 			Map<S, S> historyStates) {
-		this(new ArrayList<StateMachineContext<S, E>>(), state, event, eventHeaders, extendedState, historyStates);
+		this(new ArrayList<>(), state, event, eventHeaders, extendedState, historyStates);
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	 */
 	public DefaultStateMachineContext(S state, E event, Map<String, Object> eventHeaders, ExtendedState extendedState,
 			Map<S, S> historyStates, String id) {
-		this(new ArrayList<StateMachineContext<S, E>>(), state, event, eventHeaders, extendedState, historyStates, id);
+		this(new ArrayList<>(), state, event, eventHeaders, extendedState, historyStates, id);
 	}
 
 	/**
@@ -203,14 +203,14 @@ public class DefaultStateMachineContext<S, E> implements StateMachineContext<S, 
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((childRefs == null) ? 0 : childRefs.hashCode());
-		result = prime * result + ((childs == null) ? 0 : childs.hashCode());
-		result = prime * result + ((event == null) ? 0 : event.hashCode());
-		result = prime * result + ((eventHeaders == null) ? 0 : eventHeaders.hashCode());
-		result = prime * result + ((extendedState == null) ? 0 : extendedState.hashCode());
-		result = prime * result + ((historyStates == null) ? 0 : historyStates.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + (childRefs == null ? 0 : childRefs.hashCode());
+		result = prime * result + (childs == null ? 0 : childs.hashCode());
+		result = prime * result + (event == null ? 0 : event.hashCode());
+		result = prime * result + (eventHeaders == null ? 0 : eventHeaders.hashCode());
+		result = prime * result + (extendedState == null ? 0 : extendedState.hashCode());
+		result = prime * result + (historyStates == null ? 0 : historyStates.hashCode());
+		result = prime * result + (id == null ? 0 : id.hashCode());
+		result = prime * result + (state == null ? 0 : state.hashCode());
 		return result;
 	}
 

@@ -159,7 +159,7 @@ public class StateMachineSecurityInterceptor<S, E> extends StateMachineIntercept
 	}
 
 	private Collection<ConfigAttribute> getTransitionConfigAttributes(SecurityRule rule) {
-		List<ConfigAttribute> configAttributes = new ArrayList<ConfigAttribute>();
+		List<ConfigAttribute> configAttributes = new ArrayList<>();
 		if (rule.getAttributes() != null) {
 			for (String attribute : rule.getAttributes()) {
 				configAttributes.add(new SecurityConfig(attribute));
@@ -172,7 +172,7 @@ public class StateMachineSecurityInterceptor<S, E> extends StateMachineIntercept
 	}
 
 	private Collection<ConfigAttribute> getEentConfigAttributes(SecurityRule rule) {
-		List<ConfigAttribute> configAttributes = new ArrayList<ConfigAttribute>();
+		List<ConfigAttribute> configAttributes = new ArrayList<>();
 		if (rule.getAttributes() != null) {
 			for (String attribute : rule.getAttributes()) {
 				configAttributes.add(new SecurityConfig(attribute));
@@ -199,7 +199,7 @@ public class StateMachineSecurityInterceptor<S, E> extends StateMachineIntercept
 	}
 
 	private AbstractAccessDecisionManager createDefaultTransitionManager(SecurityRule rule) {
-		List<AccessDecisionVoter<? extends Object>> voters = new ArrayList<AccessDecisionVoter<? extends Object>>();
+		List<AccessDecisionVoter<? extends Object>> voters = new ArrayList<>();
 		voters.add(new TransitionExpressionVoter());
 		voters.add(new TransitionVoter<Object, Object>());
 		voters.add(new RoleVoter());
@@ -215,7 +215,7 @@ public class StateMachineSecurityInterceptor<S, E> extends StateMachineIntercept
 	}
 
 	private AbstractAccessDecisionManager createDefaultEventManager(SecurityRule rule) {
-		List<AccessDecisionVoter<? extends Object>> voters = new ArrayList<AccessDecisionVoter<? extends Object>>();
+		List<AccessDecisionVoter<? extends Object>> voters = new ArrayList<>();
 		voters.add(new EventExpressionVoter<Object>());
 		voters.add(new EventVoter<Object>());
 		voters.add(new RoleVoter());

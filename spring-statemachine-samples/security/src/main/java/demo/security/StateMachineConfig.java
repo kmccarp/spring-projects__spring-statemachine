@@ -167,11 +167,11 @@ public class StateMachineConfig {
 	}
 
 	public enum States {
-		S0, S1, S2, S3;
+		S0, S1, S2, S3
 	}
 
 	public enum Events {
-		A, B, C, D, E, F;
+		A, B, C, D, E, F
 	}
 
 }

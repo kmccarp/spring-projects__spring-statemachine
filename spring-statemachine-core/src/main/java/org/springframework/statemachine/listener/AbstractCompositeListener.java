@@ -26,14 +26,14 @@ import java.util.List;
  */
 public class AbstractCompositeListener<T> {
 
-	/** List of ordered composite listeners */
-	private OrderedComposite<T> listeners;
+    /** List of ordered composite listeners */
+    private final OrderedComposite<T> listeners;
 
 	/**
 	 * Constructs instance with an empty listener list.
 	 */
 	public AbstractCompositeListener() {
-		listeners = new OrderedComposite<T>();
+		listeners = new OrderedComposite<>();
 	}
 
 	/**

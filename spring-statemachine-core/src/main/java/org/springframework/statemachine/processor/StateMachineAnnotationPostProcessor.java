@@ -73,26 +73,26 @@ import org.springframework.util.ReflectionUtils;
 public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, BeanFactoryAware, InitializingBean,
 		Lifecycle, ApplicationListener<ApplicationEvent> {
 
-	private final static Log log = LogFactory.getLog(StateMachineAnnotationPostProcessor.class);
+	private static final Log log = LogFactory.getLog(StateMachineAnnotationPostProcessor.class);
 
 	/** Factory from BeanFactoryAware */
 	private volatile ConfigurableListableBeanFactory beanFactory;
 
 	/** Post processors map - annotation -> method post processor */
 	private final Map<Class<? extends Annotation>, MethodAnnotationPostProcessor<?>> postProcessors =
-			new HashMap<Class<? extends Annotation>, MethodAnnotationPostProcessor<?>>();
+			new HashMap<>();
 
 	/**
 	 * Application events for post processed beans (if bean instance of ApplicationListener) will
 	 * be dispatched from here via callback in this class.
 	 */
-	private final Set<ApplicationListener<ApplicationEvent>> listeners = new HashSet<ApplicationListener<ApplicationEvent>>();
+	private final Set<ApplicationListener<ApplicationEvent>> listeners = new HashSet<>();
 
 	/**
 	 * Lifecycle callbacks for post processed bean (if bean instance of Lifecycle) will
 	 * be dispatched from here via callback in this class.
 	 */
-	private final Set<Lifecycle> lifecycles = new HashSet<Lifecycle>();
+	private final Set<Lifecycle> lifecycles = new HashSet<>();
 
 	/** Flag for Lifecycle in this class */
 	private volatile boolean running = true;
@@ -156,7 +156,7 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 				for (Class<? extends Annotation> annotationType : postProcessors.keySet()) {
 					if (AnnotatedElementUtils.isAnnotated(method, annotationType.getName())) {
 						List<Annotation> annotationChain = getAnnotationChain(method, annotationType);
-						if (annotationChain.size() > 0) {
+						if (!annotationChain.isEmpty()) {
 							annotationChains.put(annotationType, annotationChain);
 						}
 					}
@@ -262,7 +262,7 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 	 */
 	private Class<?> getBeanClass(Object bean) {
 		Class<?> targetClass = AopUtils.getTargetClass(bean);
-		return (targetClass != null) ? targetClass : bean.getClass();
+		return targetClass != null ? targetClass : bean.getClass();
 	}
 
 	private String generateBeanName(String originalBeanName, Method method, Class<? extends Annotation> annotationType) {
@@ -276,11 +276,11 @@ public class StateMachineAnnotationPostProcessor implements BeanPostProcessor, B
 	}
 
 	private List<Annotation> getAnnotationChain(Method method, Class<? extends Annotation> annotationType) {
-		List<Annotation> annotationChain = new LinkedList<Annotation>();
+		List<Annotation> annotationChain = new LinkedList<>();
 		Set<Annotation> visited = new HashSet<>();
 		for (MergedAnnotation<Annotation> mergedAnnotation : MergedAnnotations.from(method)) {
 			recursiveFindAnnotation(annotationType, mergedAnnotation.synthesize(), annotationChain, visited);
-			if (annotationChain.size() > 0) {
+			if (!annotationChain.isEmpty()) {
 				Collections.reverse(annotationChain);
 				return annotationChain;
 			}

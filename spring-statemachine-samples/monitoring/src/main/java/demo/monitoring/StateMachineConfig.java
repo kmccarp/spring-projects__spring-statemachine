@@ -35,8 +35,8 @@ public class StateMachineConfig {
 			states
 				.withStates()
 					.initial("S1")
-					.state("S2", null, (c) -> {System.out.println("hello");})
-					.state("S3", (c) -> {System.out.println("hello");}, null);
+					.state("S2", null, c -> {System.out.println("hello");})
+					.state("S3", c -> {System.out.println("hello");}, null);
 		}
 
 		@Override
@@ -45,7 +45,7 @@ public class StateMachineConfig {
 			transitions
 				.withExternal()
 					.source("S1").target("S2").event("E1")
-					.action((c) -> {System.out.println("hello");})
+					.action(c -> {System.out.println("hello");})
 					.and()
 				.withExternal()
 					.source("S2").target("S3").event("E2");

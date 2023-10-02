@@ -148,7 +148,7 @@ public class TransitionData<S, E> {
 		this.guard = guard;
 		this.kind = kind;
 		this.securityRule = securityRule;
-		this.name = (name == null) ? "" : name;
+		this.name = name == null ? "" : name;
 	}
 
 	/**

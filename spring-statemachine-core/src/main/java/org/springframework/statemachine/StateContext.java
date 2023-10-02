@@ -144,10 +144,10 @@ public interface StateContext<S, E> {
 	 */
 	Exception getException();
 
-	/**
-	 * Enumeration of possible stages context is attached.
-	 */
-	public static enum Stage {
+    /**
+     * Enumeration of possible stages context is attached.
+     */
+    public enum Stage {
 		EVENT_NOT_ACCEPTED,
 		EXTENDED_STATE_CHANGED,
 		STATE_CHANGED,
@@ -158,6 +158,6 @@ public interface StateContext<S, E> {
 		STATEMACHINE_STOP,
 		TRANSITION,
 		TRANSITION_START,
-		TRANSITION_END;
+		TRANSITION_END
 	}
 }

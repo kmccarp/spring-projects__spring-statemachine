@@ -46,7 +46,7 @@ public class DocsConfigurationSampleTests12 {
 			states
 				.withStates()
 					.initial("SI")
-					.stateEntry("S1", (context) -> {
+					.stateEntry("S1", context -> {
 						throw new RuntimeException("example error");
 					});
 		}

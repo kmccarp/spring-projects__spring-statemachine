@@ -48,7 +48,7 @@ public class SecurityRule {
 	 * @return comma parsed Collection
 	 */
 	public static Collection<String> commaDelimitedListToSecurityAttributes(String attributes) {
-		Collection<String> attrs = new HashSet<String>();
+		Collection<String> attrs = new HashSet<>();
 		for (String attribute : attributes.split(",")) {
 			attribute = attribute.trim();
 			if (!"".equals(attribute)) {
@@ -112,10 +112,10 @@ public class SecurityRule {
 		this.expression = expression;
 	}
 
-	/**
-	 * Security comparison types.
-	 */
-	public static enum ComparisonType {
+    /**
+     * Security comparison types.
+     */
+    public enum ComparisonType {
 
 		/**
 		 * Compare method where any attribute authorization allows access
@@ -130,7 +130,7 @@ public class SecurityRule {
 		/**
 		 * Compare method where majority attribute authorization allows access
 		 */
-		MAJORITY;
+		MAJORITY
 	}
 
 	@Override

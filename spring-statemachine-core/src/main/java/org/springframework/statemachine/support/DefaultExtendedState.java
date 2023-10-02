@@ -36,7 +36,7 @@ public class DefaultExtendedState implements ExtendedState {
 	 * Instantiates a new default extended state.
 	 */
 	public DefaultExtendedState() {
-		this.variables = new ObservableMap<Object, Object>(new ConcurrentHashMap<Object, Object>(),
+		this.variables = new ObservableMap<>(new ConcurrentHashMap<Object, Object>(),
 				new LocalMapChangeListener());
 	}
 
@@ -77,7 +77,7 @@ public class DefaultExtendedState implements ExtendedState {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((variables == null) ? 0 : variables.hashCode());
+		result = prime * result + (variables == null ? 0 : variables.hashCode());
 		return result;
 	}
 
